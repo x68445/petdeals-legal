@@ -1,0 +1,24 @@
+# Environment & secrets
+config/.env
+config/*.pickle
+config/youtube_token*.pickle
+config/youtube_client_secret.json
+config/token.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Generated output (too large for git)
+output/videos/
+output/audio/
+output/thumbnails/
+
+# Logs & data
+logs/
+data/
+
+# Temp
+/tmp/
