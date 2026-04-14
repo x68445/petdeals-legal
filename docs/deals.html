@@ -5,144 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘의 알리특가</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#f5f5f5; color:#333; }
-        .header { background:linear-gradient(135deg,#ff6b00,#e53935); color:white; padding:24px 16px; text-align:center; }
-        .header h1 { font-size:22px; margin-bottom:4px; }
-        .header p { font-size:13px; opacity:0.9; }
-        .deals { padding:12px; max-width:500px; margin:0 auto; }
-        .deal { display:flex; align-items:center; justify-content:space-between;
-                 background:white; border-radius:12px; padding:16px; margin-bottom:10px;
-                 text-decoration:none; color:#333; box-shadow:0 1px 4px rgba(0,0,0,0.1);
-                 transition:transform 0.1s,box-shadow 0.1s; }
-        .deal:active { transform:scale(0.98); box-shadow:0 0 0 rgba(0,0,0,0.05); }
-        .deal-info { flex:1; min-width:0; }
-        .deal-name { font-size:15px; font-weight:600; margin-bottom:4px;
-                      white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .deal-price { font-size:14px; color:#e53935; font-weight:700; }
-        .badge { background:#ff6b00; color:white; padding:2px 7px;
-                  border-radius:10px; font-size:11px; margin-left:6px;
-                  white-space:nowrap; }
-        .deal-arrow { font-size:20px; color:#ccc; margin-left:12px; flex-shrink:0; }
-        .footer { text-align:center; padding:20px; font-size:12px; color:#999; }
+        
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+           background:#f5f5f5; color:#333; }
+    .header { background:linear-gradient(135deg,#ff6b00,#e53935); color:white;
+              padding:20px 16px; text-align:center; }
+    .header h1 { font-size:22px; margin-bottom:4px; }
+    .header p  { font-size:13px; opacity:0.9; margin-top:2px; }
+    .footer { text-align:center; padding:20px 16px; font-size:11px; color:#999;
+              line-height:1.6; }
+    .footer a { color:#999; text-decoration:underline; }
+
+        .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+                 padding:16px; max-width:600px; margin:0 auto; }
+        @media(min-width:480px) { .grid { grid-template-columns:repeat(3,1fr); } }
+        @media(min-width:700px) { .grid { grid-template-columns:repeat(4,1fr); } }
+        .cat-card { background:white; border-radius:14px; padding:18px 8px;
+                    text-decoration:none; color:#333; text-align:center;
+                    box-shadow:0 1px 4px rgba(0,0,0,0.1);
+                    transition:transform 0.1s,box-shadow 0.1s;
+                    display:flex; flex-direction:column; align-items:center; gap:6px; }
+        .cat-card:active { transform:scale(0.96); }
+        .cat-emoji { font-size:32px; }
+        .cat-label { font-size:14px; font-weight:700; }
+        .cat-count { font-size:12px; color:#e53935; font-weight:600; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>🔥 오늘의 알리특가</h1>
         <p>2026년 04월 14일 업데이트</p>
+        <p>총 31개 상품</p>
     </div>
-    <div class="deals">
+    <div class="grid">
         
-        <a href="https://www.aliexpress.com/item/1005006213265432.html?aff_fcid=8571c27324e8484098c338ae7fad6488-1776177020584-00003-_c4eEAFOt&aff_fsk=_c4eEAFOt&aff_platform=api-new-link-generate&sk=_c4eEAFOt&aff_trace_key=8571c27324e8484098c338ae7fad6488-1776177020584-00003-_c4eEAFOt&terminal_id=4dd2d70aada54f4091ff8d9207f5edf2&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Coffee Cup Warmer Electric Mug Heater DC</div>
-                <div class="deal-price">₩10,894 <span class="badge">66% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_camping.html" class="cat-card">
+            <div class="cat-emoji">⛺</div>
+            <div class="cat-label">캠핑/아웃도어</div>
+            <div class="cat-count">1개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005004876240531.html?aff_fcid=7f30b66592504cc6b5268c29209bef31-1776177021914-03130-_c37DWkNb&aff_fsk=_c37DWkNb&aff_platform=api-new-link-generate&sk=_c37DWkNb&aff_trace_key=7f30b66592504cc6b5268c29209bef31-1776177021914-03130-_c37DWkNb&terminal_id=0b5b8e4384bb4886a59080f30e99fb2f&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">1 Pc Universial Car Storage Hooks Headre</div>
-                <div class="deal-price">₩27 <span class="badge">74% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_electronics.html" class="cat-card">
+            <div class="cat-emoji">💻</div>
+            <div class="cat-label">전자기기</div>
+            <div class="cat-count">7개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005006546140991.html?aff_fcid=e338030f626740afadb82df93159a428-1776177022768-02032-_c3NNTsvj&aff_fsk=_c3NNTsvj&aff_platform=api-new-link-generate&sk=_c3NNTsvj&aff_trace_key=e338030f626740afadb82df93159a428-1776177022768-02032-_c3NNTsvj&terminal_id=8b8b3916321844a0a5784479ab3a308c&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Fog Light Rocker Switch with LED 4 Pin f</div>
-                <div class="deal-price">₩310 <span class="badge">55% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_kitchen.html" class="cat-card">
+            <div class="cat-emoji">🍳</div>
+            <div class="cat-label">주방용품</div>
+            <div class="cat-count">2개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005006342365010.html?aff_fcid=9bdd2447cc79458ea2e2912c8a641c58-1776177023644-03178-_c3i9p9Ov&aff_fsk=_c3i9p9Ov&aff_platform=api-new-link-generate&sk=_c3i9p9Ov&aff_trace_key=9bdd2447cc79458ea2e2912c8a641c58-1776177023644-03178-_c3i9p9Ov&terminal_id=946aad2dcdf54f8694d30161f5f9788c&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Creative Atmosphere Night Light Moon Gal</div>
-                <div class="deal-price">₩891 <span class="badge">71% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_home.html" class="cat-card">
+            <div class="cat-emoji">🏠</div>
+            <div class="cat-label">생활용품</div>
+            <div class="cat-count">16개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005009982586465.html?aff_fcid=c6dd1fb8fd1f454d9ec1bdd713f7e807-1776177024490-07630-_c3NzLZ1R&aff_fsk=_c3NzLZ1R&aff_platform=api-new-link-generate&sk=_c3NzLZ1R&aff_trace_key=c6dd1fb8fd1f454d9ec1bdd713f7e807-1776177024490-07630-_c3NzLZ1R&terminal_id=4c12f77fcf044b36b4dc4e6c7847fe13&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Watercolor Brushes Pens Painting Letteri</div>
-                <div class="deal-price">₩4,927 <span class="badge">65% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_fashion.html" class="cat-card">
+            <div class="cat-emoji">👕</div>
+            <div class="cat-label">패션</div>
+            <div class="cat-count">3개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005007430856646.html?aff_fcid=0cd9a67dd3544e68aaa699dc84f03bdd-1776177025379-09874-_c3tMU6yD&aff_fsk=_c3tMU6yD&aff_platform=api-new-link-generate&sk=_c3tMU6yD&aff_trace_key=0cd9a67dd3544e68aaa699dc84f03bdd-1776177025379-09874-_c3tMU6yD&terminal_id=ef76c8415be440b18ab0efc3c7eb1822&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Waterproof Adult Raincoat Women Men Rain</div>
-                <div class="deal-price">₩3,077 <span class="badge">63% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_toys.html" class="cat-card">
+            <div class="cat-emoji">🎮</div>
+            <div class="cat-label">취미/장난감</div>
+            <div class="cat-count">1개 상품</div>
         </a>
-        <a href="https://www.aliexpress.com/item/1005008915177642.html?aff_fcid=fc4d3a89ccb745d296779b0e1ba2b978-1776177026235-08456-_c44Y9S1L&aff_fsk=_c44Y9S1L&aff_platform=api-new-link-generate&sk=_c44Y9S1L&aff_trace_key=fc4d3a89ccb745d296779b0e1ba2b978-1776177026235-08456-_c44Y9S1L&terminal_id=c808b37faa5d4f95a4eabf518a61341f&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Y4UA Car LED Bulb Decorating Tail Bulb D</div>
-                <div class="deal-price">₩8,734 <span class="badge">29% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005008333149305.html?aff_fcid=9327d91d06df4734847c93dce1e92888-1776177027164-00796-_c3rcLIc1&aff_fsk=_c3rcLIc1&aff_platform=api-new-link-generate&sk=_c3rcLIc1&aff_trace_key=9327d91d06df4734847c93dce1e92888-1776177027164-00796-_c3rcLIc1&terminal_id=8ef7b1152ab74b29bf1aa91c6c0e3588&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">20-80L Dustproof Backpack Rain Cover Por</div>
-                <div class="deal-price">₩391 <span class="badge">35% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005009808439858.html?aff_fcid=b750025283c04fceb1632d4d1fc80527-1776177028006-05133-_c4URkc2z&aff_fsk=_c4URkc2z&aff_platform=api-new-link-generate&sk=_c4URkc2z&aff_trace_key=b750025283c04fceb1632d4d1fc80527-1776177028006-05133-_c4URkc2z&terminal_id=dabe52a400cc40db90ee755f74aa691d&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Soft Silicone Anti Lost Hook Earphones F</div>
-                <div class="deal-price">₩2,322 <span class="badge">45% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005005066485271.html?aff_fcid=a29d5916aa644cb6a172fcf923c491dc-1776177028891-00873-_c4tGooZ7&aff_fsk=_c4tGooZ7&aff_platform=api-new-link-generate&sk=_c4tGooZ7&aff_trace_key=a29d5916aa644cb6a172fcf923c491dc-1776177028891-00873-_c4tGooZ7&terminal_id=3b26520726c54f6580bd1a79e6d20fbb&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">Bracelet for Xiaomi Mi Band 7 6 5 Braide</div>
-                <div class="deal-price">₩2,565 <span class="badge">30% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005009176683000.html?aff_fcid=3eddbd61e20d42a381f5efbf9d4288ff-1776177030007-07022-_c4WwraGh&aff_fsk=_c4WwraGh&aff_platform=api-new-link-generate&sk=_c4WwraGh&aff_trace_key=3eddbd61e20d42a381f5efbf9d4288ff-1776177030007-07022-_c4WwraGh&terminal_id=e3de91930941436688dcfbb1c7a1b954&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">45cm USB Charger Cable Xiaomi Mi Band 5 </div>
-                <div class="deal-price">₩2,767 <span class="badge">45% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005001859914466.html?aff_fcid=9530cb9de3af4772b43772621f13bdea-1776177030856-08885-_c4me6ELJ&aff_fsk=_c4me6ELJ&aff_platform=api-new-link-generate&sk=_c4me6ELJ&aff_trace_key=9530cb9de3af4772b43772621f13bdea-1776177030856-08885-_c4me6ELJ&terminal_id=2fa2246ca2864ed7b8bc72df9c50fdab&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">1080P 720p 480p HD Webcam with Mic Rotat</div>
-                <div class="deal-price">₩1,296 <span class="badge">43% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005001823280887.html?aff_fcid=699f1ba5ac79402d8c960691579be83c-1776177031788-03760-_c3muEqml&aff_fsk=_c3muEqml&aff_platform=api-new-link-generate&sk=_c3muEqml&aff_trace_key=699f1ba5ac79402d8c960691579be83c-1776177031788-03760-_c3muEqml&terminal_id=53a2ccd273c84b3cb7fea08fcdb9f43f&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">DC5V 3PIN WS2812b LED Strip for ASUS Aur</div>
-                <div class="deal-price">₩661 <span class="badge">36% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005008227479250.html?aff_fcid=61ac25e7e6164119aff7b6debdf422c4-1776177032646-04897-_c4nkqcCD&aff_fsk=_c4nkqcCD&aff_platform=api-new-link-generate&sk=_c4nkqcCD&aff_trace_key=61ac25e7e6164119aff7b6debdf422c4-1776177032646-04897-_c4nkqcCD&terminal_id=35de6dbfc02844b0b90fd15b3b5b7fef&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">5pcs Food Vacuum Bags Kitchen Vacuum Foo</div>
-                <div class="deal-price">₩513 <span class="badge">33% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
-        </a>
-        <a href="https://www.aliexpress.com/item/1005008223340328.html?aff_fcid=80f4719f72494b10a259fa1764eb5be1-1776177033586-08821-_c3xsXElb&aff_fsk=_c3xsXElb&aff_platform=api-new-link-generate&sk=_c3xsXElb&aff_trace_key=80f4719f72494b10a259fa1764eb5be1-1776177033586-08821-_c3xsXElb&terminal_id=d9cf01ee129e4602bbe22dfd675f0ca6&afSmartRedirect=y" class="deal" target="_blank" rel="noopener noreferrer">
-            <div class="deal-info">
-                <div class="deal-name">20pc NBR O Ring Seal Washer Plumbing Gas</div>
-                <div class="deal-price">₩1,282 <span class="badge">31% 할인</span></div>
-            </div>
-            <div class="deal-arrow">→</div>
+        <a href="category_car.html" class="cat-card">
+            <div class="cat-emoji">🚗</div>
+            <div class="cat-label">자동차용품</div>
+            <div class="cat-count">1개 상품</div>
         </a>
     </div>
+    
     <div class="footer">
         매일 새로운 특가가 업데이트됩니다!<br>
-        YouTube: 알리특가 쇼츠
+        제휴 마케팅 참여 안내 - 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;|&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
     </div>
+
 </body>
 </html>
