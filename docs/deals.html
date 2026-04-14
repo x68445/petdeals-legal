@@ -68,6 +68,35 @@
             padding:4px 10px; border-radius:999px; margin-top:4px;
         }
 
+        /* Special deals banner */
+        .special-banner {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #ffa552 100%);
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            box-shadow: 0 4px 20px rgba(255,71,87,.25);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .special-banner:hover  { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(255,71,87,.35); }
+        .special-banner:active { transform: scale(.98); }
+        .sb-left  { display:flex; align-items:center; gap:14px; }
+        .sb-flame { font-size:40px; animation: pulse 1.8s ease-in-out infinite; }
+        @keyframes pulse {
+            0%,100% { transform: scale(1);    filter: drop-shadow(0 0 4px rgba(255,200,0,.4)); }
+            50%      { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255,200,0,.7)); }
+        }
+        .sb-text h2  { font-size:20px; font-weight:800; color:white; line-height:1.2; }
+        .sb-text p   { font-size:13px; color:rgba(255,255,255,.85); margin-top:3px; }
+        .sb-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .sb-badge {
+            background:rgba(255,255,255,.2); color:white;
+            padding:5px 12px; border-radius:999px;
+            font-size:13px; font-weight:700; white-space:nowrap;
+        }
+        .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
+
     </style>
 </head>
 <body>
@@ -78,6 +107,20 @@
         <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,48 L0,28 Q180,4 360,28 Q540,52 720,28 Q900,4 1080,28 Q1260,52 1440,28 L1440,48 Z" fill="#fff8f0"/></svg>
     </div>
     <div class="container">
+        
+        <a href="special_deals.html" class="special-banner">
+            <div class="sb-left">
+                <div class="sb-flame">🔥</div>
+                <div class="sb-text">
+                    <h2>특가할인</h2>
+                    <p>50% 이상 할인 상품 모음</p>
+                </div>
+            </div>
+            <div class="sb-right">
+                <div class="sb-badge">2개 상품</div>
+                <div class="sb-arrow">›</div>
+            </div>
+        </a>
         <div class="cat-grid">
         <a href="category_camping.html" class="cat-card"
            style="border-top-color:#4caf82">
