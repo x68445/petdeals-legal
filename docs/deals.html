@@ -2,85 +2,138 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="오늘의 알리특가 | 알리익스프레스 최저가 특가">
+    <meta property="og:description" content="오늘의 알리특가! 총 31개 상품을 카테고리별로 모아봤어요.">
     <title>오늘의 알리특가</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
     <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
         
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-           background:#f5f5f5; color:#333; }
-    .header { background:linear-gradient(135deg,#ff6b00,#e53935); color:white;
-              padding:20px 16px; text-align:center; }
-    .header h1 { font-size:22px; margin-bottom:4px; }
-    .header p  { font-size:13px; opacity:0.9; margin-top:2px; }
-    .footer { text-align:center; padding:20px 16px; font-size:11px; color:#999;
-              line-height:1.6; }
-    .footer a { color:#999; text-decoration:underline; }
+        .site-header {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8f3f 50%, #ffa552 100%);
+            padding: 56px 24px 72px;
+            text-align: center; position: relative;
+        }
+        .site-header .flame {
+            font-size: 48px;
+            filter: drop-shadow(0 0 14px rgba(255,107,53,.55));
+            display: block; margin-bottom: 8px;
+        }
+        .site-header h1 { font-size:28px; font-weight:800; color:white; }
+        .site-header p  { font-size:14px; color:rgba(255,255,255,.8); margin-top:6px; }
+        .wave { position:absolute; bottom:-1px; left:0; right:0; width:100%; height:48px; display:block; }
 
-        .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
-                 padding:16px; max-width:600px; margin:0 auto; }
-        @media(min-width:480px) { .grid { grid-template-columns:repeat(3,1fr); } }
-        @media(min-width:700px) { .grid { grid-template-columns:repeat(4,1fr); } }
-        .cat-card { background:white; border-radius:14px; padding:18px 8px;
-                    text-decoration:none; color:#333; text-align:center;
-                    box-shadow:0 1px 4px rgba(0,0,0,0.1);
-                    transition:transform 0.1s,box-shadow 0.1s;
-                    display:flex; flex-direction:column; align-items:center; gap:6px; }
-        .cat-card:active { transform:scale(0.96); }
-        .cat-emoji { font-size:32px; }
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: -24px;
+            padding: 0 4px;
+        }
+        @media(min-width:640px) { .cat-grid { grid-template-columns: repeat(3,1fr); } }
+        @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4,1fr); } }
+
+        .cat-card {
+            background: white; border-radius: 20px; padding: 20px 12px 16px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,.04);
+            text-decoration: none; color: #1a1a1a;
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            transition: transform .2s ease, box-shadow .2s ease;
+            border-top: 4px solid transparent;
+        }
+        .cat-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.10); }
+        .cat-card:active { transform: scale(.97); }
+        .cat-emoji { font-size:40px; line-height:1; }
         .cat-label { font-size:14px; font-weight:700; }
-        .cat-count { font-size:12px; color:#e53935; font-weight:600; }
+        .cat-count {
+            font-size:12px; font-weight:600;
+            padding:4px 10px; border-radius:999px; margin-top:4px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🔥 오늘의 알리특가</h1>
-        <p>2026년 04월 14일 업데이트</p>
-        <p>총 31개 상품</p>
+    <div class="site-header">
+        <span class="flame">🔥</span>
+        <h1>오늘의 알리특가</h1>
+        <p>2026년 04월 14일 업데이트 · 총 31개 상품</p>
+        <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,48 L0,28 Q180,4 360,28 Q540,52 720,28 Q900,4 1080,28 Q1260,52 1440,28 L1440,48 Z" fill="#fff8f0"/></svg>
     </div>
-    <div class="grid">
-        
-        <a href="category_camping.html" class="cat-card">
+    <div class="container">
+        <div class="cat-grid">
+        <a href="category_camping.html" class="cat-card"
+           style="border-top-color:#4caf82">
             <div class="cat-emoji">⛺</div>
             <div class="cat-label">캠핑/아웃도어</div>
-            <div class="cat-count">1개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(76,175,130,.12);color:#4caf82">1개</div>
         </a>
-        <a href="category_electronics.html" class="cat-card">
+        <a href="category_electronics.html" class="cat-card"
+           style="border-top-color:#9c6ade">
             <div class="cat-emoji">💻</div>
             <div class="cat-label">전자기기</div>
-            <div class="cat-count">7개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(156,106,222,.12);color:#9c6ade">7개</div>
         </a>
-        <a href="category_kitchen.html" class="cat-card">
+        <a href="category_kitchen.html" class="cat-card"
+           style="border-top-color:#ff8c42">
             <div class="cat-emoji">🍳</div>
             <div class="cat-label">주방용품</div>
-            <div class="cat-count">2개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(255,140,66,.12);color:#ff8c42">2개</div>
         </a>
-        <a href="category_home.html" class="cat-card">
+        <a href="category_home.html" class="cat-card"
+           style="border-top-color:#4a90e2">
             <div class="cat-emoji">🏠</div>
             <div class="cat-label">생활용품</div>
-            <div class="cat-count">16개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(74,144,226,.12);color:#4a90e2">16개</div>
         </a>
-        <a href="category_fashion.html" class="cat-card">
+        <a href="category_fashion.html" class="cat-card"
+           style="border-top-color:#5c6bc0">
             <div class="cat-emoji">👕</div>
             <div class="cat-label">패션</div>
-            <div class="cat-count">3개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(92,107,192,.12);color:#5c6bc0">3개</div>
         </a>
-        <a href="category_toys.html" class="cat-card">
+        <a href="category_toys.html" class="cat-card"
+           style="border-top-color:#ffc93c">
             <div class="cat-emoji">🎮</div>
             <div class="cat-label">취미/장난감</div>
-            <div class="cat-count">1개 상품</div>
+            <div class="cat-count"
+                 style="background:rgba(255,201,60,.12);color:#ffc93c">1개</div>
         </a>
-        <a href="category_car.html" class="cat-card">
+        <a href="category_car.html" class="cat-card"
+           style="border-top-color:#607d8b">
             <div class="cat-emoji">🚗</div>
             <div class="cat-label">자동차용품</div>
-            <div class="cat-count">1개 상품</div>
-        </a>
+            <div class="cat-count"
+                 style="background:rgba(96,125,139,.12);color:#607d8b">1개</div>
+        </a></div>
     </div>
     
     <div class="footer">
         매일 새로운 특가가 업데이트됩니다!<br>
-        제휴 마케팅 참여 안내 - 구매 시 커미션을 받을 수 있습니다<br>
-        <a href="terms.html">이용약관</a> &nbsp;|&nbsp;
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
         <a href="privacy.html">개인정보처리방침</a>
     </div>
 
