@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ff6b35">
     <meta property="og:type"        content="website">
-    <meta property="og:title"       content="💳 만원대 (10,000-29,999원) | PawPawMeow">
-    <meta property="og:description" content="만원대 펫 특가 17개! 알리익스프레스 10,000-29,999원 상품 모음.">
+    <meta property="og:title"       content="💳 만원대 (10,000-99,999원) | PawPawMeow">
+    <meta property="og:description" content="만원대 펫 특가 22개! 알리익스프레스 10,000-99,999원 상품 모음.">
     <title>💳 만원대 - PawPawMeow</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
@@ -43,74 +43,96 @@
         .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
         .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
 
-        
-        :root { --accent:#9b59b6; --accent-rgb:155,89,182; }
+        :root { --accent:#c9a227; --accent-rgb:201,162,39; }
         .top-bar { position:sticky; top:0; z-index:10;
-            background:rgba(255,255,255,.95);
-            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-            padding:12px 16px; border-bottom:1px solid #f0f0f0; }
-        .top-bar a { color:var(--accent); font-size:14px; font-weight:500; text-decoration:none; }
+            padding:12px 16px; }
+        .top-bar a { font-size:14px; font-weight:600; text-decoration:none; }
+
         .top-bar a:hover { text-decoration:underline; }
-        .band-hero {
-            background:rgba(var(--accent-rgb),.07);
-            padding:32px 24px 28px; text-align:center; }
-        .hero-emoji { font-size:56px; line-height:1; }
-        .band-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
-        .band-hero .range { font-size:13px; color:#888; margin-top:4px; }
-        .prod-count {
-            display:inline-block; margin-top:8px; font-size:13px; font-weight:600;
-            color:var(--accent); background:rgba(var(--accent-rgb),.10);
-            padding:4px 14px; border-radius:999px; }
-        .section { margin-bottom:28px; }
-        .section-header {
-            display:flex; align-items:center; gap:8px;
-            padding:10px 0 10px 12px; border-left:4px solid currentColor;
-            margin-bottom:10px; }
-        .sec-emoji { font-size:22px; } .sec-label { font-size:16px; font-weight:700; flex:1; }
-        .sec-badge { font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
-        .deal {
-            display:flex; align-items:center; gap:14px;
-            background:white; border-radius:16px; padding:14px; margin-bottom:10px;
-            text-decoration:none; color:#1a1a1a;
-            box-shadow:0 2px 8px rgba(0,0,0,.04); border-left:4px solid var(--accent);
-            transition:transform .2s ease, box-shadow .2s ease; }
-        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .band-hero { padding:40px 24px 32px; text-align:center; }
+        .hero-emoji { font-size:64px; line-height:1; }
+        .band-hero h1 { font-size:28px; font-weight:900; margin-top:12px; letter-spacing:-.01em; }
+        .hero-sub { font-size:13px; font-weight:700; margin-top:6px; opacity:.85; }
+        .band-hero .range { font-size:13px; margin-top:6px; opacity:.65; }
+        .prod-count { display:inline-block; margin-top:10px; font-size:13px; font-weight:700;
+            padding:5px 16px; border-radius:999px; }
+        .section { margin-bottom:32px; }
+        .section-header { display:flex; align-items:center; gap:10px;
+            padding:10px 0 10px 12px; border-left:4px solid currentColor; margin-bottom:12px; }
+        .sec-emoji { font-size:22px; } .sec-label { font-size:16px; font-weight:800; flex:1; }
+        .sec-badge { font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+        .deal { display:flex; align-items:center; gap:14px; padding:16px; margin-bottom:12px;
+            text-decoration:none; border-radius:18px;
+            transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
         .deal:active { transform:scale(.98); }
-        .thumb { width:72px; height:72px; border-radius:12px; flex-shrink:0; overflow:hidden;
-            display:flex; align-items:center; justify-content:center; font-size:28px; }
-        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; }
+        .thumb { flex-shrink:0; overflow:hidden; display:flex;
+            align-items:center; justify-content:center; font-size:28px; }
+        .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
         .deal-info { flex:1; min-width:0; }
-        .deal-name { font-size:15px; font-weight:600; line-height:1.4;
+        .deal-name { font-weight:700; line-height:1.4;
             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-        .deal-desc { font-size:12px; color:#ff6b9d; font-weight:600;
-            margin-top:4px; line-height:1.3; }
+        .deal-desc { font-size:12px; font-weight:600; margin-top:4px; line-height:1.3; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347);
-            color:#5a3a00; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
-        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
-        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
-        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
         .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
             padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
-        .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
-    
+        .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
+
+        body.tier-premium { background:linear-gradient(180deg,#fff8e1 0%,#fffbe6 30%,#ffffff 100%);
+            color:#2b1f00; }
+        .tier-premium .top-bar { background:rgba(255,251,230,.95);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid #f5e6a8; }
+        .tier-premium .top-bar a { color:#b8860b; }
+        .tier-premium .band-hero {
+            background:linear-gradient(135deg,#fff4c2 0%,#ffe58a 50%,#ffd966 100%);
+            box-shadow:inset 0 -1px 0 rgba(184,134,11,.25); }
+        .tier-premium .band-hero h1 {
+            background:linear-gradient(135deg,#8b6508,#b8860b,#d4a017);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-weight:900; }
+        .tier-premium .hero-sub { color:#8b6508; }
+        .tier-premium .range { color:#8b6508; opacity:.75; }
+        .tier-premium .prod-count { color:#8b6508;
+            background:rgba(184,134,11,.18); }
+        .tier-premium .sec-label { color:#5a3a00; }
+        .tier-premium .deal {
+            background:linear-gradient(180deg,#ffffff,#fffbe6);
+            box-shadow:0 4px 16px rgba(184,134,11,.10),
+                       0 1px 3px rgba(0,0,0,.04);
+            border:1px solid #f5e6a8; border-left:4px solid #c9a227; }
+        .tier-premium .deal:hover {
+            transform:translateY(-3px);
+            box-shadow:0 10px 28px rgba(184,134,11,.18);
+            border-color:#c9a227; }
+        .tier-premium .thumb { width:92px; height:92px; border-radius:14px;
+            background:rgba(201,162,39,.10);
+            border:1px solid #f5e6a8; }
+        .tier-premium .thumb img { width:92px; height:92px; }
+        .tier-premium .deal-name { font-size:15px; color:#2b1f00; }
+        .tier-premium .deal-desc { color:#b8860b; }
+        .tier-premium .deal-price { font-size:19px; font-weight:900; color:#8b6508; }
+        .tier-premium .deal-arrow { color:#c9a227; }
+
     </style>
 </head>
-<body>
+<body class="tier-premium">
     <div class="top-bar"><a href="deals.html">← 전체 카테고리</a></div>
     <div class="band-hero">
         <div class="hero-emoji">💳</div>
         <h1>만원대</h1>
-        <div class="range">10,000-29,999원</div>
-        <div class="prod-count">17개 상품 · 2026년 04월 15일 기준</div>
+        <div class="hero-sub">✨ 프리미엄 선별</div>
+        <div class="range">10,000-99,999원</div>
+        <div class="prod-count">22개 상품 · 2026년 04월 15일 기준</div>
     </div>
     <div class="container">
+        
         
         <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
             <div class="yt-left">
@@ -129,7 +151,7 @@
                 <span class="sec-emoji">🐱</span>
                 <span class="sec-label">고양이용품</span>
                 <span class="sec-badge"
-                      style="background:rgba(255,143,171,.12);color:#ff8fab">8개</span>
+                      style="background:rgba(255,143,171,.12);color:#ff8fab">9개</span>
             </div>
             
         <a href="https://www.aliexpress.com/item/1005011859905720.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
@@ -159,6 +181,16 @@
                 <div class="deal-desc">냥이 식사, 물까지 3in1!</div>
                 <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
                 <div class="price-row"><span class="deal-price">₩14,903</span><span class="badge">66% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007592902909.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0921616f317b46aab3fdf00898a4c644t.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">벽걸이 스크래쳐 고양이 트리</div>
+                <div class="deal-desc">벽에 걸어주면 냥이 신나냥! 😻</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩47,412</span><span class="badge">66% 할인</span></div>
             </div>
             <div class="deal-arrow" style="color:#ff8fab">›</div>
         </a>
@@ -218,7 +250,7 @@
                 <span class="sec-emoji">🐶</span>
                 <span class="sec-label">강아지용품</span>
                 <span class="sec-badge"
-                      style="background:rgba(255,179,71,.12);color:#ffb347">3개</span>
+                      style="background:rgba(255,179,71,.12);color:#ffb347">4개</span>
             </div>
             
         <a href="https://www.aliexpress.com/item/1005006061894429.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
@@ -228,6 +260,16 @@
                 <div class="deal-desc">8M 자유! 밤산책도 안전해! 🐕</div>
                 <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
                 <div class="price-row"><span class="deal-price">₩25,973</span><span class="badge">66% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008534698163.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sacb89d38d60d4675844f9d546324bfc1Y.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">강아지 퀼팅 방수 차량 시트 커버</div>
+                <div class="deal-desc">댕댕이와 드라이브, 차는 소중하니까! 🐾</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩38,880</span><span class="badge">51% 할인</span></div>
             </div>
             <div class="deal-arrow" style="color:#ffb347">›</div>
         </a>
@@ -246,7 +288,7 @@
             <div class="deal-info">
                 <div class="deal-name">반려동물 소형견 투명 방수 후드 우비</div>
                 <div class="deal-desc">비 맞지 마! 투명 우비 🐶</div>
-                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
                 <div class="price-row"><span class="deal-price">₩10,152</span><span class="badge">66% 할인</span></div>
             </div>
             <div class="deal-arrow" style="color:#ffb347">›</div>
@@ -257,7 +299,7 @@
                 <span class="sec-emoji">🔥</span>
                 <span class="sec-label">인기 추천템</span>
                 <span class="sec-badge"
-                      style="background:rgba(255,107,53,.12);color:#ff6b35">6개</span>
+                      style="background:rgba(255,107,53,.12);color:#ff6b35">9개</span>
             </div>
             
         <a href="https://www.aliexpress.com/item/1005006562128010.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff6b35">
@@ -270,12 +312,32 @@
             </div>
             <div class="deal-arrow" style="color:#ff6b35">›</div>
         </a>
+        <a href="https://www.aliexpress.com/item/1005009029982268.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff6b35">
+            <div class="thumb" style="background:rgba(255,107,53,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S355ea41e8ac347bf8d67088cd88dcb0eE.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🔥</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">접이식 휴대용 미니 전기 주전자</div>
+                <div class="deal-desc">여행 갈 때 딱이네! ☕</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩36,828</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff6b35">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009041648296.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff6b35">
+            <div class="thumb" style="background:rgba(255,107,53,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0003affebb25483fb7bbed813eaf4127u.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🔥</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">무선 충전식 휴대용 차량용 청소기</div>
+                <div class="deal-desc">차 안 먼지 걱정 끝! ✨</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩37,233</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff6b35">›</div>
+        </a>
         <a href="https://www.aliexpress.com/item/1005007929572014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff6b35">
             <div class="thumb" style="background:rgba(255,107,53,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S163ee06e788a47a1a573af6a023993d16.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🔥</span>'"></div>
             <div class="deal-info">
                 <div class="deal-name">70mai A810 블랙박스 흡착 거치대</div>
                 <div class="deal-desc">댕댕이와 드라이브 안전하게!</div>
-                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span></div>
+                
                 <div class="price-row"><span class="deal-price">₩11,947</span></div>
             </div>
             <div class="deal-arrow" style="color:#ff6b35">›</div>
@@ -285,8 +347,18 @@
             <div class="deal-info">
                 <div class="deal-name">센서형 LED 프로젝터 수면등</div>
                 <div class="deal-desc">우리 멍냥이 편안한 밤을 🌙</div>
-                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span></div>
+                
                 <div class="price-row"><span class="deal-price">₩13,405</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff6b35">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009042658861.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff6b35">
+            <div class="thumb" style="background:rgba(255,107,53,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S44a39065d8b946e383b9a5c94044893cn.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🔥</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">휴대용 미니 전기 포트</div>
+                <div class="deal-desc">댕냥이 물 데우기 뚝딱!</div>
+                
+                <div class="price-row"><span class="deal-price">₩78,732</span></div>
             </div>
             <div class="deal-arrow" style="color:#ff6b35">›</div>
         </a>

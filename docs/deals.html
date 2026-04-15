@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#ff6b35">
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="🐾 PawPawMeow 오늘의 펫 특가 | 알리익스프레스 최저가">
-    <meta property="og:description" content="PawPawMeow 오늘의 펫 특가! 총 78개 상품을 모아봤어요 🐾">
+    <meta property="og:description" content="PawPawMeow 오늘의 펫 특가! 총 56개 상품을 모아봤어요 🐾">
     <title>🐾 PawPawMeow 오늘의 특가</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
@@ -149,6 +149,52 @@
             font-size:12px; font-weight:600;
             padding:3px 9px; border-radius:999px; margin-top:5px;
         }
+        .band-premium {
+            background:linear-gradient(160deg,#fffbe6 0%,#fff4c2 70%,#ffe58a 100%) !important;
+            border:1px solid #f5e6a8;
+            box-shadow:0 4px 16px rgba(184,134,11,.18) !important;
+        }
+        .band-premium .band-label { color:#8b6508; }
+        .band-premium .band-range { color:#b8860b; }
+        .band-luxury {
+            position:relative; overflow:hidden;
+            background:linear-gradient(145deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%) !important;
+            border:1px solid rgba(255,215,0,.55);
+            box-shadow:0 0 24px rgba(255,215,0,.25),
+                       0 4px 18px rgba(0,0,0,.35) !important;
+            color:#FFD700 !important;
+        }
+        .band-luxury::after {
+            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 40%,
+                       rgba(255,215,0,.18) 50%,transparent 60%);
+            animation:band-shimmer 3.5s infinite linear; pointer-events:none;
+        }
+        @keyframes band-shimmer { 0%{left:-100%} 100%{left:100%} }
+        .band-luxury .band-emoji {
+            filter:drop-shadow(0 0 14px rgba(255,215,0,.8));
+            position:relative; z-index:1;
+        }
+        .band-luxury .band-label {
+            position:relative; z-index:1;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-weight:900; letter-spacing:.02em;
+        }
+        .band-luxury .band-range {
+            position:relative; z-index:1; color:#c9a227;
+        }
+        .band-luxury .band-count {
+            position:relative; z-index:1;
+            background:linear-gradient(135deg,#ffecb3,#FFD700) !important;
+            color:#0a0a14 !important;
+            box-shadow:0 0 12px rgba(255,215,0,.5);
+        }
+        .band-luxury:hover {
+            border-color:rgba(255,215,0,.9);
+            box-shadow:0 0 36px rgba(255,215,0,.4),
+                       0 10px 28px rgba(0,0,0,.5) !important;
+        }
 
     </style>
 </head>
@@ -157,7 +203,7 @@
         <span class="flame">🐾</span>
         <h1>PawPawMeow 오늘의 특가</h1>
         <div class="brand-sub">매일 엄선한 냥이·멍멍이 특가 🐱🐶</div>
-        <p>2026년 04월 15일 업데이트 · 총 78개 상품</p>
+        <p>2026년 04월 15일 업데이트 · 총 56개 상품</p>
         <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,48 L0,28 Q180,4 360,28 Q540,52 720,28 Q900,4 1080,28 Q1260,52 1440,28 L1440,48 Z" fill="#fff8f0"/></svg>
     </div>
     <div class="container">
@@ -183,7 +229,7 @@
                 </div>
             </div>
             <div class="sb-right">
-                <div class="sb-badge">37개 상품</div>
+                <div class="sb-badge">25개 상품</div>
                 <div class="sb-arrow">›</div>
             </div>
         </a>
@@ -191,33 +237,19 @@
         <div class="section-heading"
              style="border-left-color:#ff8c42">💰 가격대별</div>
         <div class="band-grid">
-        <a href="price_1k.html" class="band-card" style="border-top-color:#26c281">
+        <a href="price_1k.html" class="band-card band-light" style="border-top-color:#26c281">
             <div class="band-emoji">💰</div>
             <div class="band-label">천원대</div>
-            <div class="band-range">1,000-4,999원</div>
+            <div class="band-range">1,000-9,999원</div>
             <div class="band-count"
-                 style="background:rgba(38,194,129,.12);color:#26c281">22개</div>
+                 style="background:rgba(38,194,129,.12);color:#26c281">34개</div>
         </a>
-        <a href="price_5k.html" class="band-card" style="border-top-color:#00aaff">
-            <div class="band-emoji">💵</div>
-            <div class="band-label">오천원대</div>
-            <div class="band-range">5,000-9,999원</div>
-            <div class="band-count"
-                 style="background:rgba(0,170,255,.12);color:#00aaff">12개</div>
-        </a>
-        <a href="price_10k.html" class="band-card" style="border-top-color:#9b59b6">
+        <a href="price_10k.html" class="band-card band-premium" style="border-top-color:#c9a227">
             <div class="band-emoji">💳</div>
             <div class="band-label">만원대</div>
-            <div class="band-range">10,000-29,999원</div>
+            <div class="band-range">10,000-99,999원</div>
             <div class="band-count"
-                 style="background:rgba(155,89,182,.12);color:#9b59b6">17개</div>
-        </a>
-        <a href="price_30k.html" class="band-card" style="border-top-color:#e74c3c">
-            <div class="band-emoji">💎</div>
-            <div class="band-label">삼만원이상</div>
-            <div class="band-range">30,000원~</div>
-            <div class="band-count"
-                 style="background:rgba(231,76,60,.12);color:#e74c3c">27개</div>
+                 style="background:rgba(201,162,39,.12);color:#c9a227">22개</div>
         </a></div>
         
         <div class="section-heading"
@@ -228,14 +260,14 @@
             <div class="cat-emoji">🐱</div>
             <div class="cat-label">고양이용품</div>
             <div class="cat-count"
-                 style="background:rgba(255,143,171,.12);color:#ff8fab">14개</div>
+                 style="background:rgba(255,143,171,.12);color:#ff8fab">12개</div>
         </a>
         <a href="category_dog.html" class="cat-card"
            style="border-top-color:#ffb347">
             <div class="cat-emoji">🐶</div>
             <div class="cat-label">강아지용품</div>
             <div class="cat-count"
-                 style="background:rgba(255,179,71,.12);color:#ffb347">7개</div>
+                 style="background:rgba(255,179,71,.12);color:#ffb347">5개</div>
         </a>
         <a href="category_pet_common.html" class="cat-card"
            style="border-top-color:#6ec5b8">
@@ -256,7 +288,7 @@
             <div class="cat-emoji">🔥</div>
             <div class="cat-label">인기 추천템</div>
             <div class="cat-count"
-                 style="background:rgba(255,107,53,.12);color:#ff6b35">55개</div>
+                 style="background:rgba(255,107,53,.12);color:#ff6b35">37개</div>
         </a></div>
     </div>
     
