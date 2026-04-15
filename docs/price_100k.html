@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="💎 십만원대 (100,000원 이상) | PawPawMeow">
+    <meta property="og:description" content="십만원대 펫 특가 36개! 알리익스프레스 100,000원 이상 상품 모음.">
+    <title>💎 십만원대 - PawPawMeow</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        :root { --accent:#ffd700; --accent-rgb:255,215,0; }
+        .top-bar { position:sticky; top:0; z-index:10;
+            padding:12px 16px; }
+        .top-bar a { font-size:14px; font-weight:600; text-decoration:none; }
+
+        .top-bar a:hover { text-decoration:underline; }
+        .band-hero { padding:40px 24px 32px; text-align:center; }
+        .hero-emoji { font-size:64px; line-height:1; }
+        .band-hero h1 { font-size:28px; font-weight:900; margin-top:12px; letter-spacing:-.01em; }
+        .hero-sub { font-size:13px; font-weight:700; margin-top:6px; opacity:.85; }
+        .band-hero .range { font-size:13px; margin-top:6px; opacity:.65; }
+        .prod-count { display:inline-block; margin-top:10px; font-size:13px; font-weight:700;
+            padding:5px 16px; border-radius:999px; }
+        .section { margin-bottom:32px; }
+        .section-header { display:flex; align-items:center; gap:10px;
+            padding:10px 0 10px 12px; border-left:4px solid currentColor; margin-bottom:12px; }
+        .sec-emoji { font-size:22px; } .sec-label { font-size:16px; font-weight:800; flex:1; }
+        .sec-badge { font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+        .deal { display:flex; align-items:center; gap:14px; padding:16px; margin-bottom:12px;
+            text-decoration:none; border-radius:18px;
+            transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+        .deal:active { transform:scale(.98); }
+        .thumb { flex-shrink:0; overflow:hidden; display:flex;
+            align-items:center; justify-content:center; font-size:28px; }
+        .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+        .deal-info { flex:1; min-width:0; }
+        .deal-name { font-weight:700; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .deal-desc { font-size:12px; font-weight:600; margin-top:4px; line-height:1.3; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
+            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
+        .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
+
+        body.tier-luxury { background:radial-gradient(ellipse at top,#1a1530 0%,#0a0a14 60%,#000 100%);
+            background-attachment:fixed; color:#f5e8c7; }
+        .tier-luxury .top-bar { background:rgba(10,10,20,.85);
+            backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(255,215,0,.25); }
+        .tier-luxury .top-bar a { color:#FFD700; }
+        .tier-luxury .band-hero {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%);
+            border-bottom:1px solid rgba(255,215,0,.3); }
+        .tier-luxury .band-hero::before {
+            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 0%,
+                       rgba(255,215,0,.12) 45%,rgba(255,215,0,.25) 50%,
+                       rgba(255,215,0,.12) 55%,transparent 100%);
+            animation:shimmer 4.5s infinite linear; pointer-events:none; }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:100%} }
+        .tier-luxury .hero-emoji { filter:drop-shadow(0 0 18px rgba(255,215,0,.6)); }
+        .tier-luxury .band-hero h1 {
+            background:linear-gradient(135deg,#fff1a8 0%,#FFD700 40%,#ffecb3 70%,#c9a227 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-size:32px; font-weight:900; letter-spacing:.02em;
+            text-shadow:0 0 30px rgba(255,215,0,.25); }
+        .tier-luxury .hero-sub { color:#FFD700; letter-spacing:.1em;
+            text-transform:uppercase; font-size:12px;
+            text-shadow:0 0 12px rgba(255,215,0,.4); }
+        .tier-luxury .range { color:#c9a227; }
+        .tier-luxury .prod-count {
+            color:#0a0a14; background:linear-gradient(135deg,#ffecb3,#FFD700);
+            box-shadow:0 0 20px rgba(255,215,0,.4); }
+        .tier-luxury .vip-banner {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#1a1530 0%,#2d1b4e 50%,#1a1530 100%);
+            border:1px solid rgba(255,215,0,.5); border-radius:20px;
+            padding:20px 22px; margin:20px 0 24px;
+            box-shadow:0 0 30px rgba(255,215,0,.15),
+                       inset 0 1px 0 rgba(255,215,0,.3); }
+        .tier-luxury .vip-shimmer {
+            position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 40%,
+                       rgba(255,215,0,.15) 50%,transparent 60%);
+            animation:shimmer 3.5s infinite linear; }
+        .tier-luxury .vip-content {
+            position:relative; display:flex; align-items:center; gap:16px; }
+        .tier-luxury .vip-crown { font-size:38px;
+            filter:drop-shadow(0 0 15px rgba(255,215,0,.7)); }
+        .tier-luxury .vip-title {
+            font-size:20px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            letter-spacing:.05em; }
+        .tier-luxury .vip-sub { font-size:12px; color:#ffecb3;
+            margin-top:2px; letter-spacing:.08em; }
+        .tier-luxury .section-header {
+            border-left-color:#FFD700 !important; }
+        .tier-luxury .sec-emoji { filter:drop-shadow(0 0 8px rgba(255,215,0,.4)); }
+        .tier-luxury .sec-label {
+            color:#FFD700; font-weight:900; letter-spacing:.03em;
+            text-shadow:0 0 10px rgba(255,215,0,.3); }
+        .tier-luxury .sec-badge {
+            background:rgba(255,215,0,.15) !important;
+            color:#FFD700 !important;
+            border:1px solid rgba(255,215,0,.4); }
+        .tier-luxury .deal {
+            background:linear-gradient(145deg,#14142a 0%,#0f0f1e 100%);
+            border:1px solid rgba(255,215,0,.35);
+            border-left:4px solid #FFD700 !important;
+            box-shadow:0 0 24px rgba(255,215,0,.10),
+                       0 2px 8px rgba(0,0,0,.5),
+                       inset 0 1px 0 rgba(255,215,0,.15); }
+        .tier-luxury .deal:hover {
+            transform:translateY(-3px);
+            border-color:rgba(255,215,0,.75);
+            box-shadow:0 0 36px rgba(255,215,0,.25),
+                       0 8px 24px rgba(0,0,0,.6),
+                       inset 0 1px 0 rgba(255,215,0,.25); }
+        .tier-luxury .thumb { width:100px; height:100px; border-radius:14px;
+            background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,215,0,.04));
+            border:2px solid rgba(255,215,0,.5);
+            box-shadow:0 0 18px rgba(255,215,0,.2),
+                       inset 0 0 10px rgba(255,215,0,.08); }
+        .tier-luxury .thumb img { width:100px; height:100px; }
+        .tier-luxury .deal-name {
+            font-size:16px; color:#fff5d1; font-weight:800; }
+        .tier-luxury .deal-desc { color:#FFD700; }
+        .tier-luxury .deal-price {
+            font-size:22px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .tier-luxury .deal-arrow { color:#FFD700; opacity:.85; }
+        .tier-luxury .vip-badge {
+            background:linear-gradient(135deg,#fff1a8,#FFD700,#c9a227);
+            color:#0a0a14; padding:3px 10px; border-radius:999px;
+            font-size:10px; font-weight:900; white-space:nowrap;
+            box-shadow:0 0 12px rgba(255,215,0,.5);
+            border:1px solid rgba(255,215,0,.8); }
+        .tier-luxury .footer { color:#c9a227; background:transparent; }
+        .tier-luxury .footer a { color:#FFD700; }
+
+    </style>
+</head>
+<body class="tier-luxury">
+    <div class="top-bar"><a href="deals.html">← 전체 카테고리</a></div>
+    <div class="band-hero">
+        <div class="hero-emoji">💎</div>
+        <h1>십만원대</h1>
+        <div class="hero-sub">🏆 최고급 엄선 상품</div>
+        <div class="range">100,000원 이상</div>
+        <div class="prod-count">36개 상품 · 2026년 04월 15일 기준</div>
+    </div>
+    <div class="container">
+        
+        <div class="vip-banner">
+            <div class="vip-shimmer"></div>
+            <div class="vip-content">
+                <div class="vip-crown">💎</div>
+                <div class="vip-text">
+                    <div class="vip-title">VIP 특가</div>
+                    <div class="vip-sub">최고급 엄선 상품</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        
+        <div class="section">
+            <div class="section-header" style="border-left-color:#ff8fab">
+                <span class="sec-emoji">🐱</span>
+                <span class="sec-label">고양이용품</span>
+                <span class="sec-badge"
+                      style="background:rgba(255,143,171,.12);color:#ff8fab">23개</span>
+            </div>
+            
+        <a href="https://ko.aliexpress.com/item/1005012029329773.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb0ea9433fecd4aed927435a22cb507584.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">대용량 스마트 자동 청소 고양이 화장실</div>
+                <div class="deal-desc">똥줍 해방! 대용량으로 편하게! 👍</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩275,562</span><span class="badge">60% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010603696431.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5e40602f16ee42f485e2bb919860227cD.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">지능형 자동 살균 고양이 화장실</div>
+                <div class="deal-desc">세균 박멸! 우리 냥이 안심! ✨</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="limit-badge">⏰ 한정 수량</span></div>
+                <div class="price-row"><span class="deal-price">₩445,202</span><span class="badge">48% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005012065480416.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S8e251ebf9cc049c7b90bd7066a7fc702i.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 자동 청소 고양이 화장실</div>
+                <div class="deal-desc">폰으로 싹! 집사님은 자유! 🤳</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩366,498</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005012022667740.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S1d7746898fcb4d8bb9de6dca996c7676N.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다묘용 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">여러 냥이도 깔끔! 냄새도 싹! 😽</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩340,497</span><span class="badge">62% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011822219791.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S3d05de91dfb24164beb5179431709093T.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">원격 제어 스마트 자동 청소 고양이 화장실</div>
+                <div class="deal-desc">외출 중에도 청소 뚝딱! 걱정 마! ✈️</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩427,423</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005012025784361.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se4f8df0fac9643cab91d0d794e6babf5d.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다묘용 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">떼냥이 집사님도 이제는 편안히! 😻</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩601,546</span><span class="badge">62% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011667349388.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb73adfac1cd14052ace7f1f4972a0325o.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">스마트하게 냄새 싹! 청소 뚝딱! 😽</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩499,122</span><span class="badge">52% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010555642901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S1a4a4cda18154fbeb7f03fcaad9b600c7.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">대용량 자동 청소 로봇 고양이 화장실</div>
+                <div class="deal-desc">우리집 로봇 비서! 똥줍은 이제 그만! 🤖</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="limit-badge">⏰ 한정 수량</span></div>
+                <div class="price-row"><span class="deal-price">₩557,914</span><span class="badge">40% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009180385706.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S83c94ec7ee8749fa87c70246a25e4c73S.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">접이식 대형 스마트 자동 고양이 화장실</div>
+                <div class="deal-desc">접이식 대형! 공간 걱정 끝! 🏠</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩654,790</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005004979511228.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sde22d303ceea452c98220d74ab3eb0ef9.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다묘용 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">냥이들 파티해도 냄새 걱정 NO! 🎉</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩598,455</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009928768606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S462ea46b88734e989f407845fd6d04c6z.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 자동 스마트 고양이 화장실</div>
+                <div class="deal-desc">스마트하게 치워줄게! 😽</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩407,389</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009024369236.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Saacc81a5642e458dafada0436745ac66K.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 대형 자동 고양이 화장실 로봇</div>
+                <div class="deal-desc">큰 냥이도 안심! 로봇 화장실</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩365,998</span><span class="badge">10% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011600750311.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S9269fdf1d5dd4aaf905094836db7d186B.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 칩 다묘 자동 급식기</div>
+                <div class="deal-desc">고양이별 맞춤 밥상! 냠냠</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩292,963</span><span class="badge">54% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010634438649.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6ac49a303e564e509eac28bb128782a5X.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">고급 스마트 무선 반려동물 급수기</div>
+                <div class="deal-desc">깨끗한 물, 코드 없이 자유롭게! 💦</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩135,661</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011696347218.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sefea4abd113b462cbfe2839288a2c41aw.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">무선 스테인리스 센서 정수기</div>
+                <div class="deal-desc">센서로 알아서! 위생적인 물!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩104,368</span><span class="badge">67% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009208499251.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sdc34757602df425fa8d2e43e0a4c6bec7.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">와이파이 카메라 간식 레이저</div>
+                <div class="deal-desc">레이저 놀이 끝엔 간식 뿅! ✨</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩266,098</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010743441334.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7260d8ade8944be3b0c98ad9d605bf66l.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">12L 와이파이 카메라 자동 급식기</div>
+                <div class="deal-desc">오래 비워도 밥은 든든히! 🍚</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩304,506</span><span class="badge">67% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010555738275.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S36babeb6645344d3bd549315c6b5cf68a.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">인터랙티브 카메라 자동 간식 장난감</div>
+                <div class="deal-desc">놀이하며 간식 먹는 행복! 😄</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩474,187</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010713120457.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S07800c36ca844e3eaf129842c462f9a67.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">2K 스마트 자동 레이저 급식기</div>
+                <div class="deal-desc">2K 화질로 레이저 사냥! 🌟</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩244,296</span><span class="badge">67% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011654980757.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S76283202d3cc4cb38c0bf56359a1d5fdH.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 스마트 카메라 자동 급식기</div>
+                <div class="deal-desc">앱으로 실시간 간식! 놓칠 수 없어! 📱</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩332,073</span><span class="badge">11% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009436276499.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S31971c25befb4c488128936fcd3115f8R.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">360도 카메라 앱 제어 자동 간식기</div>
+                <div class="deal-desc">앱으로 360도 확인, 간식 톡! 👍</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩253,921</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009530243027.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6c8b10c12c3e48fa8759d86531508733a.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 카메라 간식 자동 급식기</div>
+                <div class="deal-desc">혼자서도 잘 먹어요! 똑똑 급식!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩231,038</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009503412193.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S3498516f3649408e99ed8b359f50479cG.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">펫 카메라 간식 양방향 장난감</div>
+                <div class="deal-desc">멀리서도 함께 놀자! 간식 톡! 🐾</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩258,268</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        </div>
+        <div class="section">
+            <div class="section-header" style="border-left-color:#6ec5b8">
+                <span class="sec-emoji">🐾</span>
+                <span class="sec-label">공통 펫용품</span>
+                <span class="sec-badge"
+                      style="background:rgba(110,197,184,.12);color:#6ec5b8">3개</span>
+            </div>
+            
+        <a href="https://ko.aliexpress.com/item/1005008566413236.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#6ec5b8">
+            <div class="thumb" style="background:rgba(110,197,184,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S614bc9c5a9624133b01224a6627e4947a.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐾</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 와이파이 카메라 자동 급식기</div>
+                <div class="deal-desc">내 새끼 밥 먹는 모습 실시간!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩587,911</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#6ec5b8">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010812304918.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#6ec5b8">
+            <div class="thumb" style="background:rgba(110,197,184,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S20c8e04c052941399e3efaa645385194c.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐾</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">2K 스마트 자동 추적 카메라 급식기</div>
+                <div class="deal-desc">2K가 쫓아가는 우리 아가 밥! 🐶</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩212,638</span><span class="badge">69% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#6ec5b8">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011926562740.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#6ec5b8">
+            <div class="thumb" style="background:rgba(110,197,184,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S34041aa6070648dbbcce3b6fbf39d38fN.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐾</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">AI 펫 로봇 카메라 간식 디스펜서</div>
+                <div class="deal-desc">우리 댕냥이 로봇집사 생겼네?</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩625,576</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#6ec5b8">›</div>
+        </a>
+        </div>
+        <div class="section">
+            <div class="section-header" style="border-left-color:#ffb347">
+                <span class="sec-emoji">🐶</span>
+                <span class="sec-label">강아지용품</span>
+                <span class="sec-badge"
+                      style="background:rgba(255,179,71,.12);color:#ffb347">8개</span>
+            </div>
+            
+        <a href="https://ko.aliexpress.com/item/1005012037545777.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc648522e7bff4e79860e7b764e14ce142.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 간식 디스펜서 로봇 카메라</div>
+                <div class="deal-desc">심심할 틈 없어! 간식 로봇</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩286,200</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010679796957.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sdfa95414a6074f129f561aab7e8cb5b4F.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 앱 제어 간식 카메라</div>
+                <div class="deal-desc">간식 주고 우리 아이 보자! 🥰</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩458,446</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010135205168.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Scb62d7c175cf4bbbaf051afeac0802fbr.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">360도 카메라 스마트 자동 간식 급식기</div>
+                <div class="deal-desc">어디서든 360도 간식 톡! 🐾</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩360,517</span><span class="badge">15% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009127870906.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sf0c9ffd069e44bc9889a74d3f7fbd5db1.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">360도 카메라 로봇 간식 급식기</div>
+                <div class="deal-desc">360도 로봇 집사, 간식 팡팡! 💖</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩259,038</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011997679645.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5646a834bd7d4d7f9a92ab4fb4d07333w.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">HD 카메라 스마트 자동 간식 급식기</div>
+                <div class="deal-desc">HD로 보는 우리 아가 간식! 😻</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩213,084</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009151016016.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S81d53c844e6340de85ffd0c3dbab2b851.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">2K AI 추적 360도 카메라 간식기</div>
+                <div class="deal-desc">AI가 쫓아다니며 간식 펑펑! 🎉</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩256,297</span><span class="badge">55% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008735686865.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S27e1c38a45bd4115baac20d35ebe74cdc.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">자동 와이파이 펫 카메라 간식 급식기</div>
+                <div class="deal-desc">멀리서도 냠냠 간식 뚝딱!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩167,427</span><span class="badge">20% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010445231460.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ffb347">
+            <div class="thumb" style="background:rgba(255,179,71,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S59c9ce3737d841b0b1027fa093170f9f0.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐶</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 자동 펫 카메라 간식 급식기</div>
+                <div class="deal-desc">스마트하게 간식 타이밍! 안심!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span></div>
+                <div class="price-row"><span class="deal-price">₩266,841</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#ffb347">›</div>
+        </a>
+        </div>
+        <div class="section">
+            <div class="section-header" style="border-left-color:#7aa7ff">
+                <span class="sec-emoji">🏠</span>
+                <span class="sec-label">펫 생활용품</span>
+                <span class="sec-badge"
+                      style="background:rgba(122,167,255,.12);color:#7aa7ff">2개</span>
+            </div>
+            
+        <a href="https://ko.aliexpress.com/item/1005011955616884.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#7aa7ff">
+            <div class="thumb" style="background:rgba(122,167,255,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S05213aff78624d12a0772b4f150af303B.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 카메라 레이저 간식 디스펜서</div>
+                <div class="deal-desc">레이저 사냥 후 간식 냠냠! ✨</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩255,744</span><span class="badge">75% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#7aa7ff">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011647410214.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#7aa7ff">
+            <div class="thumb" style="background:rgba(122,167,255,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sf88d0816fe0e4924a5249853e9a27302x.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">360도 스마트 펫 카메라 간식기</div>
+                <div class="deal-desc">어디 있든 찾아 줄게! 간식 뿅!</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩446,782</span><span class="badge">61% 할인</span></div>
+            </div>
+            <div class="deal-arrow" style="color:#7aa7ff">›</div>
+        </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+</body>
+</html>
