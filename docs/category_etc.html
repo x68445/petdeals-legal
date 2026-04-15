@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="📦 기타 특가 모음 | PawPawMeow">
+    <meta property="og:description" content="기타 카테고리 특가 28개! 알리익스프레스 최저가.">
+    <title>📦 기타 - PawPawMeow</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        
+        :root { --accent:#9e9e9e; --accent-rgb:158,158,158; }
+
+        .top-bar {
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }
+        .top-bar a {
+            color:var(--accent); font-size:14px; font-weight:500;
+            text-decoration:none;
+        }
+        .top-bar a:hover { text-decoration:underline; }
+
+        .cat-hero {
+            background: rgba(var(--accent-rgb),.07);
+            padding:32px 24px 28px; text-align:center;
+        }
+        .hero-emoji { font-size:56px; line-height:1; }
+        .cat-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
+        .prod-count {
+            display:inline-block; margin-top:8px; font-size:13px;
+            font-weight:600; color:var(--accent);
+            background:rgba(var(--accent-rgb),.10);
+            padding:4px 14px; border-radius:999px;
+        }
+
+        .deals { padding-top:16px; }
+        .deal {
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:12px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid var(--accent);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .deal:active { transform:scale(.98); }
+
+        .thumb {
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden;
+            background:rgba(var(--accent-rgb),.12);
+            display:flex; align-items:center; justify-content:center;
+            font-size:28px;
+        }
+        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; }
+
+        .deal-info { flex:1; min-width:0; }
+        .deal-name {
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .deal-desc {
+            font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3;
+        }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge {
+            background:linear-gradient(135deg,#ffd166,#ffb347);
+            color:#5a3a00; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .hot-badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .price-row {
+            display:flex; align-items:center; gap:8px;
+            margin-top:8px; flex-wrap:wrap;
+        }
+        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            color:white; padding:3px 10px; border-radius:999px;
+            font-size:11px; font-weight:700; white-space:nowrap;
+        }
+        .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="cat-hero">
+        <div class="hero-emoji">📦</div>
+        <h1>기타</h1>
+        <div class="prod-count">28개 상품</div>
+    </div>
+    <div class="container">
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        <div class="deals">
+        <a href="https://www.aliexpress.com/item/1005006845745882.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sd396f08803f546418a0c2fdb7454d0e27.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">휴대용 USB 가습 선풍기</div>
+                
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩11,488</span><span class="badge">65% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005010370404430.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S26a8a758a189437b98a0b5910d85855dm.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">USB 보온 컵 워머</div>
+                
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩13,945</span><span class="badge">52% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009176683000.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0169fcdee08041989f8f7a80d04d7422T.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">미밴드 자석 충전 케이블</div>
+                
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩2,767</span><span class="badge">45% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009920185107.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S2a6f371225a34cf68b21e34809f092ddK.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">A4/A5/B5 모눈 코일 노트 80매</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩432</span><span class="badge">43% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007384016459.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc6280e2d78b245ab87a417d603ccacafK.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">A5 빈티지 스파이럴 노트 80매</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩580</span><span class="badge">43% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005001859914466.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sbb3f12bdfd324bcc8505a0a0fb81e639l.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">마이크 내장 HD 웹캠</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩1,296</span><span class="badge">43% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005001823280887.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/H7933408bb46743e1968597b8793cd5e5Z.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">메인보드 동기화 LED 스트립</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩661</span><span class="badge">36% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008227479250.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S676360ae34754b3597c2e3c254db58a5G.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">식품 진공 포장 백</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩513</span><span class="badge">33% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008223340328.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0417460ec995419e8b4c407a4c1389a5l.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">NBR 내유성 밀봉 O링</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩1,282</span><span class="badge">31% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007765577841.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S72c29df1f14046a09878c05e0c886286x.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">RFID 남성용 슬림 카드지갑</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩796</span><span class="badge">30% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005005066485271.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S4fee48fc23264d57aadcf26c8a7986f7I.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">미밴드 스포츠 실리콘 밴드</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩2,565</span><span class="badge">30% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005004639227267.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7166ee3c356d4977a67a9cd0f99b309dS.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">미밴드 3~7 NFC 호환 실리콘 스트랩</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩297</span><span class="badge">25% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008045207776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc052a714da594fed8d88e1868ad7978fY.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">HD USB 마이크 미니 웹캠</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩3,037</span><span class="badge">25% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005010199495386.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S8b2bc5e1f6f04efebf6be238abda6c27Q.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">휴대용 COB LED 미니 헤드램프</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩661</span><span class="badge">20% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005006472006317.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7a5ba1c618f84d65aaaeee6f00b83721M.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">샤오미 미밴드1 실리콘 밴드</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩2,646</span><span class="badge">20% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005006964299765.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S31b100d1ed9242758e843e2bde4b14ede.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">RFID 차단 슬림 가죽 지갑</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩3,969</span><span class="badge">20% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007929572014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S163ee06e788a47a1a573af6a023993d16.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">70mai A810 대시캠 흡착 거치대</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩11,947</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/32763598428.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Saaaedd15be8243d98f71bfa294a0eda0U.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">12V 고휘도 유연 LED 스트립</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩4,104</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/4000583211778.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb40f1fa9cbed4686a463a8ec7f248692d.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">USB 풀 스펙트럼 LED 식물등</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩2,983</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009478313230.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sa58f6b5264db472fa23ac800df0df885G.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">차량용 자석 부착 메탈 거치대</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩3,928</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007105609721.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sa97094463e1349f390675f92e0a4cd93m.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">맞춤 비즈니스 A5 가죽 다이어리 세트</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩1,228</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005005246213706.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sbdde608d2c4c4707bb8b4ee289d868d7h.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">샤오미 핸디 청소기 교체 헤파 필터</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩3,429</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007381094592.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se3ec29ff6b0641a39a7fa0fbbf262f7aa.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">라즈베리파이 C타입 스위치 케이블</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩5,629</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005003351797177.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S7cd783653fb04736898eb8f5ff666a42d.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">차량용 LED 아로마 미니 가습기</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩7,398</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009033399266.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S70d7e9692d4a42c4a531a0101c1e39590.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">간편 분리 트레이 얼음틀</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩8,289</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005001295717877.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Hba2d44a454784134997bce9dbc85bed7f.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">아동용 LED 센서 프로젝터 무드등</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩13,405</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009029982268.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S355ea41e8ac347bf8d67088cd88dcb0eE.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">여행용 접이식 전기 포트</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩36,828</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009041648296.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0003affebb25483fb7bbed813eaf4127u.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>📦</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">무선 충전식 미니 흡입/송풍 청소기</div>
+                
+                
+                <div class="price-row"><span class="deal-price">₩37,233</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a></div>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+</body>
+</html>
