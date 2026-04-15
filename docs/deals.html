@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#ff6b35">
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="🐾 PawPawMeow 오늘의 펫 특가 | 알리익스프레스 최저가">
-    <meta property="og:description" content="PawPawMeow 오늘의 펫 특가! 총 92개 상품을 모아봤어요 🐾">
+    <meta property="og:description" content="PawPawMeow 오늘의 펫 특가! 총 212개 상품을 모아봤어요 🐾">
     <title>🐾 PawPawMeow 오늘의 특가</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
@@ -62,30 +62,46 @@
 
         .cat-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin-top: -24px;
             padding: 0 4px;
+            align-items: stretch;
         }
-        @media(min-width:640px) { .cat-grid { grid-template-columns: repeat(3,1fr); } }
-        @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4,1fr); } }
+        @media(min-width:640px) { .cat-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+        @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
 
         .cat-card {
-            background: white; border-radius: 20px; padding: 20px 12px 16px;
+            background: white; border-radius: 20px;
+            padding: 18px 10px 14px;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0,0,0,.04);
             text-decoration: none; color: #1a1a1a;
-            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start; gap: 6px;
             transition: transform .2s ease, box-shadow .2s ease;
             border-top: 4px solid transparent;
+            min-width: 0;
+            height: auto;
         }
         .cat-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.10); }
         .cat-card:active { transform: scale(.97); }
-        .cat-emoji { font-size:40px; line-height:1; }
-        .cat-label { font-size:14px; font-weight:700; }
+        .cat-emoji { font-size:36px; line-height:1; }
+        .cat-label {
+            font-size: clamp(12px, 3.6vw, 14px);
+            font-weight: 700;
+            line-height: 1.25;
+            width: 100%;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-break: keep-all;
+            hyphens: auto;
+        }
+        @media(min-width:480px) { .cat-label { font-size:14px; } }
         .cat-count {
             font-size:12px; font-weight:600;
             padding:4px 10px; border-radius:999px; margin-top:4px;
+            white-space: nowrap;
         }
 
         /* Special deals banner */
@@ -203,7 +219,7 @@
         <span class="flame">🐾</span>
         <h1>PawPawMeow 오늘의 특가</h1>
         <div class="brand-sub">매일 엄선한 냥이·멍멍이 특가 🐱🐶</div>
-        <p>2026년 04월 15일 업데이트 · 총 92개 상품</p>
+        <p>2026년 04월 15일 업데이트 · 총 212개 상품</p>
         <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,48 L0,28 Q180,4 360,28 Q540,52 720,28 Q900,4 1080,28 Q1260,52 1440,28 L1440,48 Z" fill="#fff8f0"/></svg>
     </div>
     <div class="container">
@@ -229,7 +245,7 @@
                 </div>
             </div>
             <div class="sb-right">
-                <div class="sb-badge">40개 상품</div>
+                <div class="sb-badge">155개 상품</div>
                 <div class="sb-arrow">›</div>
             </div>
         </a>
@@ -242,14 +258,14 @@
             <div class="band-label">천원대</div>
             <div class="band-range">1,000-9,999원</div>
             <div class="band-count"
-                 style="background:rgba(38,194,129,.12);color:#26c281">34개</div>
+                 style="background:rgba(38,194,129,.12);color:#26c281">82개</div>
         </a>
         <a href="price_10k.html" class="band-card band-premium" style="border-top-color:#c9a227">
             <div class="band-emoji">💳</div>
             <div class="band-label">만원대</div>
             <div class="band-range">10,000-99,999원</div>
             <div class="band-count"
-                 style="background:rgba(201,162,39,.12);color:#c9a227">22개</div>
+                 style="background:rgba(201,162,39,.12);color:#c9a227">94개</div>
         </a>
         <a href="price_100k.html" class="band-card band-luxury" style="border-top-color:#ffd700">
             <div class="band-emoji">💎</div>
@@ -296,6 +312,48 @@
             <div class="cat-label">인기 추천템</div>
             <div class="cat-count"
                  style="background:rgba(255,107,53,.12);color:#ff6b35">37개</div>
+        </a>
+        <a href="category_camping.html" class="cat-card"
+           style="border-top-color:#5d8a66">
+            <div class="cat-emoji">⛺</div>
+            <div class="cat-label">캠핑용품</div>
+            <div class="cat-count"
+                 style="background:rgba(93,138,102,.12);color:#5d8a66">20개</div>
+        </a>
+        <a href="category_electronics.html" class="cat-card"
+           style="border-top-color:#4a90e2">
+            <div class="cat-emoji">💻</div>
+            <div class="cat-label">전자기기</div>
+            <div class="cat-count"
+                 style="background:rgba(74,144,226,.12);color:#4a90e2">20개</div>
+        </a>
+        <a href="category_kitchen.html" class="cat-card"
+           style="border-top-color:#e76f51">
+            <div class="cat-emoji">🍳</div>
+            <div class="cat-label">주방용품</div>
+            <div class="cat-count"
+                 style="background:rgba(231,111,81,.12);color:#e76f51">20개</div>
+        </a>
+        <a href="category_fashion.html" class="cat-card"
+           style="border-top-color:#c77dff">
+            <div class="cat-emoji">👕</div>
+            <div class="cat-label">패션</div>
+            <div class="cat-count"
+                 style="background:rgba(199,125,255,.12);color:#c77dff">20개</div>
+        </a>
+        <a href="category_car.html" class="cat-card"
+           style="border-top-color:#495867">
+            <div class="cat-emoji">🚗</div>
+            <div class="cat-label">자동차용품</div>
+            <div class="cat-count"
+                 style="background:rgba(73,88,103,.12);color:#495867">20개</div>
+        </a>
+        <a href="category_sports.html" class="cat-card"
+           style="border-top-color:#06a77d">
+            <div class="cat-emoji">🏋️</div>
+            <div class="cat-label">스포츠/건강</div>
+            <div class="cat-count"
+                 style="background:rgba(6,167,125,.12);color:#06a77d">20개</div>
         </a></div>
     </div>
     

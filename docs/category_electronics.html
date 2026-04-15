@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="💻 전자기기 특가 모음 | PawPawMeow">
+    <meta property="og:description" content="전자기기 카테고리 특가 20개! 알리익스프레스 최저가.">
+    <title>💻 전자기기 - PawPawMeow</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        
+        :root { --accent:#4a90e2; --accent-rgb:74,144,226; }
+
+        .top-bar {
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }
+        .top-bar a {
+            color:var(--accent); font-size:14px; font-weight:500;
+            text-decoration:none;
+        }
+        .top-bar a:hover { text-decoration:underline; }
+
+        .cat-hero {
+            background: rgba(var(--accent-rgb),.07);
+            padding:32px 24px 28px; text-align:center;
+        }
+        .hero-emoji { font-size:56px; line-height:1; }
+        .cat-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
+        .prod-count {
+            display:inline-block; margin-top:8px; font-size:13px;
+            font-weight:600; color:var(--accent);
+            background:rgba(var(--accent-rgb),.10);
+            padding:4px 14px; border-radius:999px;
+        }
+
+        .deals { padding-top:16px; }
+        .deal {
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:12px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid var(--accent);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .deal:active { transform:scale(.98); }
+
+        .thumb {
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden;
+            background:rgba(var(--accent-rgb),.12);
+            display:flex; align-items:center; justify-content:center;
+            font-size:28px;
+        }
+        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; }
+
+        .deal-info { flex:1; min-width:0; }
+        .deal-name {
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .deal-desc {
+            font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3;
+        }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge {
+            background:linear-gradient(135deg,#ffd166,#ffb347);
+            color:#5a3a00; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .hot-badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .limit-badge {
+            background:linear-gradient(135deg,#845ec2,#5f27cd);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .price-row {
+            display:flex; align-items:center; gap:8px;
+            margin-top:8px; flex-wrap:wrap;
+        }
+        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            color:white; padding:3px 10px; border-radius:999px;
+            font-size:11px; font-weight:700; white-space:nowrap;
+        }
+        .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="cat-hero">
+        <div class="hero-emoji">💻</div>
+        <h1>전자기기</h1>
+        <div class="prod-count">20개 상품</div>
+    </div>
+    <div class="container">
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        <div class="deals">
+        <a href="https://ko.aliexpress.com/item/1005009361746399.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S294de07263674209893f2310f06210b82.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">QCY N70 고음질 ANC 무선 이어폰</div>
+                <div class="deal-desc">우리 멍냥이 잠투정 안녕! 🤫</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩56,551</span><span class="badge">63% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006959700436.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se53e534893ca46a2971df5af7fe76935S.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">QCY 멜로버즈 Pro 고음질 ANC 이어폰</div>
+                <div class="deal-desc">댕냥이와 최고 음질 감상! 🎶</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩47,250</span><span class="badge">61% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007424613573.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6c753504f3a64f12ae238835b584229cb.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">레노버 GM2 Pro 듀얼모드 무선 헤드셋</div>
+                <div class="deal-desc">냥이 잘 때, 나만의 음악 시간! 🎧</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩19,345</span><span class="badge">58% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009084986255.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Se00f772f7cd841ca8b102d80393e2c42v.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">QCY C50 오픈형 클립온 무선 이어폰</div>
+                <div class="deal-desc">멍냥이 소리도 다 들려! 👂</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩44,185</span><span class="badge">58% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007431129955.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sa0d6d677c5a149199c2c0ef198f49eb5q.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">레노버 GM2 Pro TWS 저지연 이어셋</div>
+                <div class="deal-desc">집사님 위한 저지연 게임 🎮</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩19,156</span><span class="badge">57% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008158738225.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S389bf3e2bebb4930b6f19609e15b29baf.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">블루투스 이어훅 무선 방수 이어폰</div>
+                <div class="deal-desc">비 오는 날도 신나게! ☔</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩9,045</span><span class="badge">56% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006678116483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6651b476fb634caa95a32bac784d56afe.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">레노버 LP40 TWS 무선 노이즈캔슬링</div>
+                <div class="deal-desc">우다다도 잠시 잊게 해! 🤫</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩11,394</span><span class="badge">56% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007228440475.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S78dfabb1bf044ef48392d1a37aab8a19o.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">X15 TWS 게이밍 노이즈캔슬링 이어셋</div>
+                <div class="deal-desc">댕냥이 옆, 조용히 게임 🤫</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩8,316</span><span class="badge">55% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008414973716.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S67b5e3598c43491dbcc8b64b04584164i.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">레노버 XT53 방수 저지연 게이밍 이어셋</div>
+                <div class="deal-desc">물 튀어도 OK, 저지연 게임! 🎮</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩20,628</span><span class="badge">54% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006904672293.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S858c1aa3e1544b15ba2e8635d22f38e4y.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">TWS 무선 게이밍 저지연 헤드셋</div>
+                <div class="deal-desc">사냥 본능 깨우는 신세계! 🎮</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩8,248</span><span class="badge">53% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007961638171.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sba81d65afda34045b05d083c19f91e6f3.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">블루투스 이어훅 무선 방수 이어폰</div>
+                <div class="deal-desc">물놀이 걱정 뚝! 💧</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩12,514</span><span class="badge">53% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007038638226.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5f23fd924a694838b3bb85fd092dd6e1o.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">레노버 LP40 TWS 무선 노이즈 감소 이어폰</div>
+                <div class="deal-desc">산책 소음 뚝! 집중 산책 🐾</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩12,555</span><span class="badge">53% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006966239790.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S08682bc1e57d4b5bbfa6e2a1519032808.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">E6S 에어 프로 무선 노이즈캔슬링 이어폰</div>
+                <div class="deal-desc">조용한 육아 시간 확보! 🤫</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩7,965</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006904593410.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S340e01cfe7f4473fb5d1d65f101bd7a4P.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">신형 TWS LED 디스플레이 무선 이어폰</div>
+                <div class="deal-desc">댕냥이 옆, 배터리도 확인! 🔋</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩8,262</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007170888709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sf58b0f6029c24f77b48b2c5f19f06b9aA.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">T75 TWS 터치 컨트롤 스포츠 이어폰</div>
+                <div class="deal-desc">터치하면 반응하는 놀이! 🐾</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩8,856</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007097064460.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S8cefbe0444c44e9b9efc862134b203268.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">신형 TWS LED 핸즈프리 무선 이어폰</div>
+                <div class="deal-desc">두 손 자유롭게, 댕냥이와! 🐾</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩9,153</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006863837619.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S6f1b83cd00c5420f95cdfb5dbf8b9868D.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">무선 LED 디스플레이 스테레오 이어폰</div>
+                <div class="deal-desc">밤 산책도 반짝반짝! ✨</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩10,003</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006996575006.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S8bd5f4f9691445f995b0da6121b4676bD.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">TWS 무선 방수 저음 이어폰</div>
+                <div class="deal-desc">우리 아가 목욕 시간! 🛀</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩10,233</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005012032900733.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb60d26d93b4a4658bda6c89c7c082031X.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">M10 방수 스포츠 블루투스 이어폰</div>
+                <div class="deal-desc">빗속 산책도 문제 없어! ☔</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-price">₩13,905</span><span class="badge">50% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008870372901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sa21551e144154e10bccedd360936647fp.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>💻</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">베이서스 EP10 Pro 적응형 ANC 무선 이어폰</div>
+                <div class="deal-desc">우리 맘 알아주는 똑똑템! ✨</div>
+                <div class="badge-row"><span class="limit-badge">⏰ 한정 수량</span></div>
+                <div class="price-row"><span class="deal-price">₩36,166</span><span class="badge">33% 할인</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a></div>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+</body>
+</html>
