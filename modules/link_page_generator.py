@@ -57,15 +57,45 @@ def _hex_rgb(hex_color: str) -> str:
     return f"{int(h[0:2],16)},{int(h[2:4],16)},{int(h[4:6],16)}"
 
 
+# ── Shared card CSS (identical across cat / band / special_deals pages) ────────
+_CARD_BASE_CSS = """
+        .deal:active { transform:scale(.98); }
+        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
+        .deal-info { flex:1; min-width:0; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
+            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
+        .rec-badge { background:linear-gradient(135deg,#4fc3f7,#0288d1); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+"""
+
+
 # ── Shared <head> block ────────────────────────────────────────────────────────
-def _head(title: str, og_title: str, og_desc: str, extra_css: str = "") -> str:
+def _head(title: str, og_title: str, og_desc: str, extra_css: str = "",
+          meta_desc: str = "", meta_keywords: str = "") -> str:
+    seo_desc = meta_desc or og_desc
+    seo_kw = meta_keywords or "알리익스프레스 특가, 펫용품 할인, 고양이 장난감, 강아지 용품, 캠핑용품, 최저가"
     return f"""<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ff6b35">
+    <meta name="description"        content="{seo_desc}">
+    <meta name="keywords"           content="{seo_kw}">
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="{og_title}">
-    <meta property="og:description" content="{og_desc}">
+    <meta property="og:description" content="{seo_desc}">
+    <meta property="og:image"       content="https://x68445.github.io/petdeals-legal/og-image.png">
+    <link rel="canonical" href="https://x68445.github.io/petdeals-legal/deals.html">
     <title>{title}</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
@@ -710,9 +740,11 @@ def _main_page_html(today: str, total: int,
 
     head = _head(
         title=f"🐾 {BRAND_NAME} 오늘의 특가",
-        og_title=f"🐾 {BRAND_NAME} 오늘의 펫 특가 | 알리익스프레스 최저가",
-        og_desc=f"{BRAND_NAME} 오늘의 펫 특가! 총 {total}개 상품을 모아봤어요 🐾",
+        og_title=f"PawMeowDeals - 오늘의 알리 특가",
+        og_desc=f"매일 업데이트! 펫용품/캠핑/전자/패션 최저가 모음",
         extra_css=_MAIN_CSS + _SEARCH_CSS,
+        meta_desc="매일 업데이트되는 알리익스프레스 최저가 특가. 펫용품, 캠핑, 전자기기, 패션 할인",
+        meta_keywords="알리익스프레스 특가, 펫용품 할인, 고양이 장난감, 강아지 용품, 캠핑용품, 최저가",
     )
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -828,7 +860,6 @@ def _cat_css(accent: str) -> str:
             transition:transform .2s ease, box-shadow .2s ease;
         }}
         .deal:hover  {{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }}
-        .deal:active {{ transform:scale(.98); }}
 
         .thumb {{
             width:72px; height:72px; border-radius:12px; flex-shrink:0;
@@ -839,12 +870,7 @@ def _cat_css(accent: str) -> str:
             aspect-ratio:1/1;
         }}
         .thumb img {{ width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }}
-        .deal-orig-price {{
-            font-size:13px; color:#999; text-decoration:line-through;
-            font-weight:400;
-        }}
 
-        .deal-info {{ flex:1; min-width:0; }}
         .deal-name {{
             font-size:15px; font-weight:600; line-height:1.4;
             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
@@ -854,42 +880,9 @@ def _cat_css(accent: str) -> str:
             font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3;
         }}
-        .badge-row {{ display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }}
-        .pop-badge {{
-            background:linear-gradient(135deg,#ffd166,#ffb347);
-            color:#5a3a00; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }}
-        .hot-badge {{
-            background:linear-gradient(135deg,#ff4757,#ff6b35);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }}
-        .limit-badge {{
-            background:linear-gradient(135deg,#845ec2,#5f27cd);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }}
-        .price-row {{
-            display:flex; align-items:center; gap:8px;
-            margin-top:8px; flex-wrap:wrap;
-        }}
         .deal-price {{ font-size:18px; font-weight:800; color:#1a1a1a; }}
-        .badge {{
-            background:linear-gradient(135deg,#ff4757,#ff6b6b);
-            color:white; padding:3px 10px; border-radius:999px;
-            font-size:11px; font-weight:700; white-space:nowrap;
-        }}
         .deal-arrow {{ font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }}
-        .deal-cta {{ font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }}
-        .deal-disclaimer {{ font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }}
-        .deal-freshness {{ font-size:10px; color:#bbb; margin-top:2px; }}
-        .rec-badge {{
-            background:linear-gradient(135deg,#4fc3f7,#0288d1);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }}
-"""
+""" + _CARD_BASE_CSS
 
 
 def _category_page_html(key: str, emoji: str, label: str,
@@ -1158,35 +1151,14 @@ _SHARED_BAND_CSS = """
         .deal { display:flex; align-items:center; gap:14px; padding:16px; margin-bottom:12px;
             text-decoration:none; border-radius:18px;
             transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-        .deal:active { transform:scale(.98); }
         .thumb { flex-shrink:0; overflow:hidden; display:flex;
             align-items:center; justify-content:center; font-size:28px; aspect-ratio:1/1; }
         .thumb img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:1/1; }
-        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
-        .deal-info { flex:1; min-width:0; }
         .deal-name { font-weight:700; line-height:1.4;
             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
         .deal-desc { font-size:12px; font-weight:600; margin-top:4px; line-height:1.3; }
-        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
-        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
-        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
-        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
-        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
-            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
         .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
-        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
-        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
-        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
-        .rec-badge {
-            background:linear-gradient(135deg,#4fc3f7,#0288d1);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }
-"""
+""" + _CARD_BASE_CSS
 
 
 def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
@@ -1528,7 +1500,7 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
             padding:3px 10px; border-radius:999px;
         }
 
-        /* Product cards (same as category pages) */
+        /* Product cards */
         .deal {
             display:flex; align-items:center; gap:14px;
             background:white; border-radius:16px; padding:14px;
@@ -1538,15 +1510,12 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
             transition:transform .2s ease, box-shadow .2s ease;
         }
         .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
-        .deal:active { transform:scale(.98); }
         .thumb {
             width:72px; height:72px; border-radius:12px; flex-shrink:0;
             overflow:hidden; display:flex; align-items:center;
             justify-content:center; font-size:28px; aspect-ratio:1/1;
         }
         .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }
-        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
-        .deal-info { flex:1; min-width:0; }
         .deal-name {
             font-size:15px; font-weight:600; line-height:1.4;
             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
@@ -1554,33 +1523,9 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
         }
         .deal-desc { font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3; }
-        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347);
-            color:#5a3a00; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
-        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
-        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap; }
-        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
         .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
-        .badge {
-            background:linear-gradient(135deg,#ff4757,#ff6b6b);
-            color:white; padding:3px 10px; border-radius:999px;
-            font-size:11px; font-weight:700;
-        }
         .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
-        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
-        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
-        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
-        .rec-badge {
-            background:linear-gradient(135deg,#4fc3f7,#0288d1);
-            color:white; padding:3px 9px; border-radius:999px;
-            font-size:10px; font-weight:800; white-space:nowrap;
-        }
-    """
+    """ + _CARD_BASE_CSS
 
     head = _head(
         title=f"🔥 특가할인 - {BRAND_NAME}",
@@ -1701,6 +1646,17 @@ def update_deals_site(products: list) -> bool:
         if p.get("price_band") not in valid_band_keys:
             p["price_band"] = classify_price_band(p)
 
+    # Rebuild affiliate links with category-specific tracking
+    from modules.ali_scraper import build_affiliate_link as _build_aff
+    for p in deduped:
+        pid = str(p.get("product_id") or "")
+        cat = p.get("category_key", "")
+        if pid and cat:
+            old_link = p.get("affiliate_link", "")
+            # Only rebuild if link lacks category suffix or is a plain pawmeow link
+            if old_link and "pawmeow_" not in old_link:
+                p["affiliate_link"] = _build_aff(pid, "ko", cat)
+
     # Group by category
     grouped: dict[str, list] = {}
     for p in deduped:
@@ -1790,7 +1746,26 @@ def update_deals_site(products: list) -> bool:
             stale.unlink()
             print(f"[Deals] Removed stale: {stale.name}")
 
-    return _git_push("feat: price-band browsing + higher-price variety")
+    # Generate sitemap.xml
+    base_url = "https://x68445.github.io/petdeals-legal"
+    today_iso = datetime.now().strftime("%Y-%m-%d")
+    sitemap_urls = [f"{base_url}/deals.html"]
+    if special_total > 0:
+        sitemap_urls.append(f"{base_url}/special_deals.html")
+    for bk in written_bands:
+        sitemap_urls.append(f"{base_url}/{bk}.html")
+    for key in written_keys:
+        sitemap_urls.append(f"{base_url}/category_{key}.html")
+    sitemap_xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    sitemap_xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    for url in sitemap_urls:
+        sitemap_xml += f"  <url><loc>{url}</loc><lastmod>{today_iso}</lastmod><changefreq>daily</changefreq></url>\n"
+    sitemap_xml += "</urlset>\n"
+    with open(f"{DOCS_DIR}/sitemap.xml", "w") as f:
+        f.write(sitemap_xml)
+    print(f"[Deals] sitemap.xml ({len(sitemap_urls)} URLs)")
+
+    return _git_push("feat: SEO + category tracking + daily deals")
 
 
 def _git_push(commit_msg: str) -> bool:
@@ -1821,6 +1796,8 @@ def update_deals_page(products: list) -> bool:
 if __name__ == "__main__":
     import json, sys
     sys.path.insert(0, BASE_DIR)
-    with open(f"{BASE_DIR}/data/today_products.json", encoding="utf-8") as f:
+    src = f"{BASE_DIR}/data/products.json"
+    with open(src, encoding="utf-8") as f:
         prods = json.load(f)
+    print(f"[Deals] Loaded {len(prods)} products from {src}")
     update_deals_site(prods)
