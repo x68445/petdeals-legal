@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TikTok OAuth Callback</title>
+<style>
+body { font-family: Arial; text-align: center; padding: 50px; background: #111; color: #fff; }
+h1 { color: #FE2C55; }
+.code { background: #222; padding: 20px; margin: 20px auto; max-width: 600px; word-break: break-all; font-family: monospace; border-radius: 8px; }
+</style>
+</head>
+<body>
+<h1>🐾 PawPawMeow TikTok Auth</h1>
+<p>Authorization code received!</p>
+<p>Copy the code below and paste into your server:</p>
+<div class="code" id="code">Loading...</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const error = params.get('error');
+if (code) document.getElementById('code').textContent = code;
+else if (error) document.getElementById('code').textContent = 'Error: ' + error;
+else document.getElementById('code').textContent = 'No code received';
+</script>
+</body>
+</html>
