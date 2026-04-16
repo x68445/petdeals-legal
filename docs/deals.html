@@ -143,11 +143,15 @@
         }
         .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
 
-        /* Section headings -- no left border (clipping fix) */
+        /* Section headings -- accent bar is inline span, not border */
         .section-heading {
             font-size:18px; font-weight:800; color:#1a1a1a;
             margin-top:32px; margin-bottom:16px; padding:0;
             display:flex; align-items:center; gap:8px;
+        }
+        .accent-bar {
+            display:inline-block; width:4px; height:20px;
+            border-radius:2px; flex-shrink:0;
         }
 
         /* Price band grid (same 2/3/4 col as cat-grid) */
@@ -392,7 +396,7 @@
     <div class="container">
         <div id="search-results" style="display:none">
             <div class="section-heading">
-                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+                <span class="accent-bar" style="background:#ff6b35"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
             </div>
             <div id="results-grid" class="results-grid"></div>
         </div>
@@ -425,7 +429,7 @@
         </a>
             
         <div class="section-heading"
-             >💰 가격대별</div>
+             ><span class="accent-bar" style="background:#ff8c42"></span>💰 가격대별</div>
         <div class="band-grid">
         <a href="price_1k.html" class="band-card band-light" style="border-top-color:#26c281">
             <div class="band-emoji">💰</div>
@@ -443,7 +447,7 @@
         </a></div>
             
         <div class="section-heading"
-             >📂 카테고리별</div>
+             ><span class="accent-bar" style="background:#607d8b"></span>📂 카테고리별</div>
         <div class="cat-grid">
         <a href="category_pet_common.html" class="cat-card"
            style="border-top-color:#6ec5b8">
