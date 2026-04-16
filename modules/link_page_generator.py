@@ -1,0 +1,1796 @@
+#!/usr/bin/env python3
+"""
+Link Page Generator v3 - Bright modern multi-category site.
+Design refresh: Pretendard font, accent colors, wave header, product thumbnails.
+Logic identical to v2 -- design-only refactor.
+
+Generates:
+  docs/deals.html              -- main page (category grid)
+  docs/category_{key}.html     -- one page per non-empty category
+
+URL base: https://x68445.github.io/petdeals-legal/
+"""
+
+import os
+import subprocess
+from collections import defaultdict
+from datetime import datetime
+from pathlib import Path
+
+BASE_DIR  = "/home/ubuntu/petdeals_bot"
+DOCS_DIR  = f"{BASE_DIR}/docs"
+DEALS_URL = "https://x68445.github.io/petdeals-legal/deals.html"
+GIT_ROOT  = BASE_DIR
+
+# ── Category accent colors (PawPawMeow pet palette) ──────────────────────────
+_ACCENT = {
+    "cat":         "#ff8fab",
+    "dog":         "#ffb347",
+    "pet_common":  "#6ec5b8",
+    "pet_home":    "#7aa7ff",
+    "pet_toys":    "#ffd166",
+    "etc":         "#ff6b35",
+    "camping":     "#5d8a66",
+    "electronics": "#4a90e2",
+    "kitchen":     "#e76f51",
+    "fashion":     "#c77dff",
+    "car":         "#495867",
+    "sports":      "#06a77d",
+}
+
+# ── PawPawMeow branding constants ─────────────────────────────────────────────
+YOUTUBE_URL = "https://www.youtube.com/@MeowMeowDeals"
+BRAND_NAME  = "PawPawMeow"
+BRAND_TAGLINE = "🐾 오늘의 펫 특가"
+
+
+def _safe_float(val) -> float:
+    try:
+        return float(str(val).replace("$", "").replace(",", "").replace("%", "") or 0)
+    except Exception:
+        return 0.0
+
+
+def _hex_rgb(hex_color: str) -> str:
+    """'#ff8c42' -> '255,140,66'  (for CSS rgba() usage)"""
+    h = hex_color.lstrip("#")
+    return f"{int(h[0:2],16)},{int(h[2:4],16)},{int(h[4:6],16)}"
+
+
+# ── Shared <head> block ────────────────────────────────────────────────────────
+def _head(title: str, og_title: str, og_desc: str, extra_css: str = "") -> str:
+    return f"""<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="{og_title}">
+    <meta property="og:description" content="{og_desc}">
+    <title>{title}</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * {{ margin:0; padding:0; box-sizing:border-box; }}
+        body {{
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }}
+        .container {{ max-width:760px; margin:0 auto; padding:0 16px 40px; }}
+        .footer {{
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }}
+        .footer a {{ color:#bbb; text-decoration:none; }}
+        .footer a:hover {{ text-decoration:underline; }}
+        {_YT_CSS}
+        {extra_css}
+    </style>
+</head>"""
+
+
+_TRACKER_URL = "http://168.107.3.136:5000/api/track"
+
+_TRACKING_JS = f"""
+<script>
+(function(){{
+  var T="{_TRACKER_URL}";
+  var P=location.pathname.split("/").pop()||"index";
+  try{{fetch(T,{{method:"POST",headers:{{"Content-Type":"application/json"}},
+    body:JSON.stringify({{page:P,action:"view"}}),keepalive:true}})}}catch(e){{}}
+  document.addEventListener("click",function(e){{
+    var a=e.target.closest("a.deal");
+    if(!a)return;
+    var n=a.querySelector(".deal-name");
+    var prod=n?n.textContent.trim():"";
+    try{{fetch(T,{{method:"POST",headers:{{"Content-Type":"application/json"}},
+      body:JSON.stringify({{page:P,action:"click",product:prod}}),keepalive:true}})}}catch(e){{}}
+  }});
+}})();
+</script>
+"""
+
+_DATE_JS = """
+<script>
+(function(){
+  var el=document.getElementById("update-date");
+  if(!el)return;
+  var now=new Date();
+  var kst=new Date(now.getTime()+(9*60*60*1000)-(now.getTimezoneOffset()*60*1000));
+  var y=kst.getFullYear();
+  var m=String(kst.getMonth()+1).padStart(2,"0");
+  var d=String(kst.getDate()).padStart(2,"0");
+  el.textContent=y+"\uB144 "+m+"\uC6D4 "+d+"\uC77C";
+})();
+</script>
+"""
+
+_FOOTER = f"""
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="{YOUTUBE_URL}" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+{_TRACKING_JS}"""
+
+# YouTube promo banner shown at the top of every page (inside .container)
+_YT_BANNER = f"""
+        <a href="{YOUTUBE_URL}" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+"""
+
+# Shared CSS for the YouTube banner -- appended into every page's extra_css
+_YT_CSS = """
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+"""
+
+
+# ── Wave SVG (header bottom divider) ──────────────────────────────────────────
+_WAVE_SVG = (
+    '<svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" '
+    'xmlns="http://www.w3.org/2000/svg">'
+    '<path d="M0,48 L0,28 Q180,4 360,28 Q540,52 720,28 '
+    'Q900,4 1080,28 Q1260,52 1440,28 L1440,48 Z" fill="#fff8f0"/>'
+    '</svg>'
+)
+
+# ── Main page CSS ─────────────────────────────────────────────────────────────
+_MAIN_CSS = """
+        .site-header {
+            background: linear-gradient(135deg, #ff8fab 0%, #ffb347 50%, #ffd166 100%);
+            padding: 56px 24px 72px;
+            text-align: center; position: relative;
+        }
+        .site-header .flame {
+            font-size: 48px;
+            filter: drop-shadow(0 0 14px rgba(255,143,171,.55));
+            display: block; margin-bottom: 8px;
+        }
+        .site-header h1 { font-size:28px; font-weight:800; color:white; }
+        .site-header .brand-sub { font-size:13px; font-weight:700;
+            color:rgba(255,255,255,.92); letter-spacing:.08em; margin-top:4px; }
+        .site-header p  { font-size:14px; color:rgba(255,255,255,.85); margin-top:6px; }
+        .wave { position:absolute; bottom:-1px; left:0; right:0; width:100%; height:48px; display:block; }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: -24px;
+            padding: 0 4px;
+            align-items: stretch;
+        }
+        @media(min-width:640px) { .cat-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+        @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+        .cat-card {
+            background: white; border-radius: 20px;
+            padding: 18px 12px 16px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,.04);
+            text-decoration: none; color: #1a1a1a;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-start; gap: 6px;
+            transition: transform .2s ease, box-shadow .2s ease;
+            border-top: 4px solid transparent;
+            min-width: 0;
+            height: auto;
+            min-height: fit-content;
+        }
+        .cat-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.10); }
+        .cat-card:active { transform: scale(.97); }
+        .cat-emoji { font-size:36px; line-height:1; }
+        .cat-label {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.4;
+            width: 100%;
+            max-width: 100%;
+            min-font-size: 12px;
+            white-space: normal;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: keep-all;
+            hyphens: auto;
+            text-overflow: clip;
+            overflow: visible;
+            display: block;
+            padding: 0 2px;
+        }
+        @media(max-width:360px) { .cat-label { font-size:12px; } }
+        @media(min-width:480px) { .cat-label { font-size:15px; } }
+        .cat-count {
+            font-size:12px; font-weight:600;
+            padding:4px 10px; border-radius:999px; margin-top:4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Special deals banner */
+        .special-banner {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #ffa552 100%);
+            border-radius: 20px;
+            padding: 20px 24px;
+            margin-bottom: 16px;
+            text-decoration: none;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            box-shadow: 0 4px 20px rgba(255,71,87,.25);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .special-banner:hover  { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(255,71,87,.35); }
+        .special-banner:active { transform: scale(.98); }
+        .sb-left  { display:flex; align-items:center; gap:14px; }
+        .sb-flame { font-size:40px; animation: pulse 1.8s ease-in-out infinite; }
+        @keyframes pulse {
+            0%,100% { transform: scale(1);    filter: drop-shadow(0 0 4px rgba(255,200,0,.4)); }
+            50%      { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255,200,0,.7)); }
+        }
+        .sb-text h2  { font-size:20px; font-weight:800; color:white; line-height:1.2; }
+        .sb-text p   { font-size:13px; color:rgba(255,255,255,.85); margin-top:3px; }
+        .sb-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+        .sb-badge {
+            background:rgba(255,255,255,.2); color:white;
+            padding:5px 12px; border-radius:999px;
+            font-size:13px; font-weight:700; white-space:nowrap;
+        }
+        .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
+
+        /* Section headings */
+        .section-heading {
+            font-size:18px; font-weight:800; color:#1a1a1a;
+            margin-top:32px; margin-bottom:16px; padding-left:16px;
+            border-left:4px solid transparent;
+            display:flex; align-items:center; gap:8px;
+        }
+
+        /* Price band grid (same 2/3/4 col as cat-grid) */
+        .band-grid {
+            display:grid;
+            grid-template-columns: repeat(2,1fr);
+            gap:12px;
+        }
+        @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
+        .band-card {
+            background:white; border-radius:20px; padding:18px 12px 14px;
+            text-align:center; border-top:4px solid transparent;
+            text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 12px rgba(0,0,0,.04);
+            display:flex; flex-direction:column; align-items:center; gap:4px;
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .band-card:hover  { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.10); }
+        .band-card:active { transform:scale(.97); }
+        .band-emoji  { font-size:36px; line-height:1; }
+        .band-label  { font-size:14px; font-weight:700; margin-top:4px; }
+        .band-range  { font-size:11px; color:#888; margin-top:2px; }
+        .band-count  {
+            font-size:12px; font-weight:600;
+            padding:3px 9px; border-radius:999px; margin-top:5px;
+        }
+        .band-premium {
+            background:linear-gradient(160deg,#faf6ef 0%,#f5f0e8 100%) !important;
+            border:1px solid #333333 !important;
+            box-shadow:0 2px 12px rgba(0,0,0,.08) !important;
+        }
+        .band-premium .band-label { color:#2a2520; font-weight:800; }
+        .band-premium .band-range { color:#8b7355; }
+        .band-premium .band-count {
+            background:rgba(139,115,85,.12) !important;
+            color:#8b7355 !important;
+        }
+        .band-luxury {
+            position:relative; overflow:hidden;
+            background:linear-gradient(145deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%) !important;
+            border:1px solid rgba(255,215,0,.55);
+            box-shadow:0 0 24px rgba(255,215,0,.25),
+                       0 4px 18px rgba(0,0,0,.35) !important;
+            color:#FFD700 !important;
+        }
+        .band-luxury::after {
+            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 40%,
+                       rgba(255,215,0,.18) 50%,transparent 60%);
+            animation:band-shimmer 3.5s infinite linear; pointer-events:none;
+        }
+        @keyframes band-shimmer { 0%{left:-100%} 100%{left:100%} }
+        .band-luxury .band-emoji {
+            filter:drop-shadow(0 0 14px rgba(255,215,0,.8));
+            position:relative; z-index:1;
+        }
+        .band-luxury .band-label {
+            position:relative; z-index:1;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-weight:900; letter-spacing:.02em;
+        }
+        .band-luxury .band-range {
+            position:relative; z-index:1; color:#c9a227;
+        }
+        .band-luxury .band-count {
+            position:relative; z-index:1;
+            background:linear-gradient(135deg,#ffecb3,#FFD700) !important;
+            color:#0a0a14 !important;
+            box-shadow:0 0 12px rgba(255,215,0,.5);
+        }
+        .band-luxury:hover {
+            border-color:rgba(255,215,0,.9);
+            box-shadow:0 0 36px rgba(255,215,0,.4),
+                       0 10px 28px rgba(0,0,0,.5) !important;
+        }
+"""
+
+_SEARCH_CSS = """
+        html { scroll-behavior:smooth; }
+        .search-sticky {
+            position:sticky; top:0; z-index:20;
+            background:rgba(255,255,255,.97);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:10px 16px 8px;
+            border-bottom:1px solid #eee;
+            max-width:760px; margin:0 auto;
+        }
+        .search-wrap {
+            position:relative;
+        }
+        .search-wrap input {
+            width:100%; padding:12px 16px 12px 40px;
+            border:2px solid #eee; border-radius:14px;
+            font-size:15px; font-family:inherit;
+            background:#fafafa; outline:none;
+            transition:border-color .2s;
+            min-height:44px;
+        }
+        .search-wrap input:focus { border-color:#ff8fab; background:#fff; }
+        .search-wrap::before {
+            content:"🔍"; position:absolute; left:14px; top:50%;
+            transform:translateY(-50%); font-size:16px;
+            pointer-events:none;
+        }
+        .filter-row {
+            display:flex; flex-direction:column; gap:6px;
+            margin-top:8px; padding-bottom:2px;
+            overflow-x:auto; -webkit-overflow-scrolling:touch;
+        }
+        .filter-group {
+            display:flex; gap:6px; flex-wrap:nowrap;
+            overflow-x:auto; -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+        }
+        .filter-group::-webkit-scrollbar { display:none; }
+        .fbtn {
+            flex-shrink:0; padding:6px 14px;
+            border:1.5px solid #e0e0e0; border-radius:999px;
+            background:#fff; color:#555; font-size:13px;
+            font-weight:600; cursor:pointer;
+            min-height:36px; min-width:44px;
+            transition:all .2s; white-space:nowrap;
+            font-family:inherit;
+        }
+        .fbtn.active {
+            background:#ff8fab; color:#fff; border-color:#ff8fab;
+        }
+        .fbtn:hover:not(.active) { border-color:#ff8fab; color:#ff8fab; }
+        .results-grid {
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px; margin-top:8px;
+        }
+        @media(min-width:640px) { .results-grid { grid-template-columns:repeat(3,1fr); } }
+        .result-card {
+            background:#fff; border-radius:14px;
+            overflow:hidden; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.05);
+            transition:transform .2s, box-shadow .2s;
+            display:flex; flex-direction:column;
+        }
+        .result-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.10); }
+        .result-card:active { transform:scale(.98); }
+        .rc-img {
+            width:100%; aspect-ratio:1/1; object-fit:cover;
+            background:#f5f5f5; display:block;
+        }
+        .rc-body { padding:10px 12px 12px; flex:1; display:flex; flex-direction:column; }
+        .rc-name {
+            font-size:13px; font-weight:600; line-height:1.35;
+            display:-webkit-box; -webkit-line-clamp:2;
+            -webkit-box-orient:vertical; overflow:hidden;
+        }
+        .rc-desc { font-size:11px; color:#ff6b9d; margin-top:3px; font-weight:500; }
+        .rc-price-row { margin-top:auto; padding-top:6px; }
+        .rc-orig { font-size:11px; color:#aaa; text-decoration:line-through; }
+        .rc-price { font-size:15px; font-weight:800; color:#1a1a1a; }
+        .rc-disc {
+            display:inline-block; background:#ff4757; color:#fff;
+            font-size:10px; font-weight:700; padding:2px 6px;
+            border-radius:4px; margin-left:4px;
+        }
+        #search-results .no-results {
+            text-align:center; padding:40px 16px;
+            color:#aaa; font-size:14px;
+        }
+        .countdown-banner {
+            display:flex; align-items:center; justify-content:center; gap:10px;
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:10px 16px;
+            font-weight:700; font-size:14px;
+            max-width:760px; margin:0 auto;
+        }
+        .cb-icon { font-size:20px; }
+        .cb-timer {
+            background:rgba(0,0,0,.25); padding:4px 10px;
+            border-radius:6px; font-family:monospace;
+            font-size:15px; letter-spacing:.05em;
+        }
+        .yt-subscribe-cta {
+            display:block; text-align:center;
+            background:linear-gradient(135deg,#ff0000,#cc0000);
+            color:white; text-decoration:none;
+            padding:16px 20px; border-radius:16px;
+            margin:24px 0 8px; font-weight:700; font-size:14px;
+            box-shadow:0 4px 16px rgba(255,0,0,.2);
+            transition:transform .2s, box-shadow .2s;
+        }
+        .yt-subscribe-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,0,0,.3); }
+        @media(max-width:640px) {
+            .cat-label { font-size:13px !important; min-height:auto; }
+            .cat-card { padding:14px 8px 12px; min-height:auto; }
+            .band-card { padding:14px 8px 10px; }
+            .cat-card, .band-card { min-height:44px; }
+        }
+"""
+
+_COUNTDOWN_JS = """
+<script>
+(function(){
+  var el=document.getElementById("countdown-timer");
+  if(!el)return;
+  function tick(){
+    var now=new Date();
+    var kst=new Date(now.getTime()+(9*60*60*1000)-(now.getTimezoneOffset()*60*1000));
+    var midnight=new Date(kst);
+    midnight.setHours(24,0,0,0);
+    var diff=midnight-kst;
+    if(diff<=0){el.textContent="00:00:00";return;}
+    var h=Math.floor(diff/3600000);
+    var m=Math.floor((diff%3600000)/60000);
+    var s=Math.floor((diff%60000)/1000);
+    el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  }
+  tick();setInterval(tick,1000);
+})();
+</script>
+"""
+
+_SEARCH_JS = """
+<script>
+(function(){
+  var P=window.__PRODUCTS||[];
+  var input=document.getElementById("search-input");
+  var results=document.getElementById("search-results");
+  var grid=document.getElementById("results-grid");
+  var browse=document.getElementById("browse-sections");
+  var countEl=document.getElementById("result-count");
+  var filters={price:"",cat:"",disc:""};
+
+  // Filter buttons
+  document.querySelectorAll(".fbtn").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var f=this.dataset.filter, v=this.dataset.val;
+      filters[f]=v;
+      this.parentNode.querySelectorAll(".fbtn").forEach(function(b){b.classList.remove("active")});
+      this.classList.add("active");
+      render();
+    });
+  });
+
+  input.addEventListener("input",function(){ render(); });
+
+  function matchBand(band,f){
+    if(!f) return true;
+    if(f==="1k") return band==="price_1k"||band==="price_5k";
+    if(f==="10k") return band==="price_10k"||band==="price_30k";
+    if(f==="100k") return band==="price_100k";
+    return true;
+  }
+
+  function render(){
+    var q=(input.value||"").trim().toLowerCase();
+    var hasFilter=q||filters.price||filters.cat||filters.disc;
+    if(!hasFilter){
+      results.style.display="none";
+      browse.style.display="block";
+      return;
+    }
+    results.style.display="block";
+    browse.style.display="none";
+
+    var matched=P.filter(function(p){
+      if(q && p.n.toLowerCase().indexOf(q)===-1
+         && (p.d||"").toLowerCase().indexOf(q)===-1) return false;
+      if(filters.price && !matchBand(p.b,filters.price)) return false;
+      if(filters.cat && p.c!==filters.cat) return false;
+      if(filters.disc){
+        var minDisc=parseInt(filters.disc);
+        if(p.dc<minDisc) return false;
+      }
+      return true;
+    });
+
+    countEl.textContent="("+matched.length+"개)";
+    if(!matched.length){
+      grid.innerHTML='<div class="no-results" style="grid-column:1/-1">검색 결과가 없습니다</div>';
+      return;
+    }
+
+    var html="";
+    matched.forEach(function(p){
+      var origHtml=p.o>p.p?'<div class="rc-orig">&#8361;'+p.o.toLocaleString()+'</div>':"";
+      var discHtml=p.dc>=10?'<span class="rc-disc">'+p.dc+'%</span>':"";
+      var descHtml=p.d?'<div class="rc-desc">'+p.d+'</div>':"";
+      var imgHtml=p.i?'<img class="rc-img" src="'+p.i+'" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.display=\\'none\\'">'
+        :'<div class="rc-img" style="display:flex;align-items:center;justify-content:center;font-size:32px">📦</div>';
+      html+='<a href="'+p.l+'" class="result-card" target="_blank" rel="nofollow sponsored noopener">'
+        +imgHtml
+        +'<div class="rc-body">'
+        +'<div class="rc-name">'+p.n+'</div>'
+        +descHtml
+        +'<div class="rc-price-row">'
+        +origHtml
+        +'<span class="rc-price">&#8361;'+p.p.toLocaleString()+'</span>'
+        +discHtml
+        +'</div></div></a>';
+    });
+    grid.innerHTML=html;
+  }
+})();
+</script>
+"""
+
+
+def _main_page_html(today: str, total: int,
+                    category_counts: dict, categories: list,
+                    special_count: int = 0,
+                    band_counts: dict | None = None,
+                    all_products: list | None = None) -> str:
+    from modules.category_mapper import PRICE_BANDS
+
+    # 🔥 Special deals banner
+    banner_html = ""
+    if special_count > 0:
+        banner_html = f"""
+        <a href="special_deals.html" class="special-banner">
+            <div class="sb-left">
+                <div class="sb-flame">🔥</div>
+                <div class="sb-text">
+                    <h2>특가할인</h2>
+                    <p>50% 이상 할인 상품 모음</p>
+                </div>
+            </div>
+            <div class="sb-right">
+                <div class="sb-badge">{special_count}개 상품</div>
+                <div class="sb-arrow">›</div>
+            </div>
+        </a>"""
+
+    # 💰 Price band cards
+    band_counts = band_counts or {}
+    band_cards_html = ""
+    band_ranges = {"price_1k": "1,000-9,999원",
+                   "price_10k": "10,000-99,999원",
+                   "price_100k": "100,000원 이상"}
+    any_band = False
+    for band in PRICE_BANDS:
+        key    = band["key"]
+        count  = band_counts.get(key, 0)
+        if count == 0:
+            continue
+        any_band = True
+        emoji  = band["emoji"]
+        label  = band["label"]
+        accent = band["accent"]
+        rgb    = _hex_rgb(accent)
+        rng    = band_ranges.get(key, "")
+        tier   = band.get("tier", "light")
+        band_cards_html += f"""
+        <a href="{key}.html" class="band-card band-{tier}" style="border-top-color:{accent}">
+            <div class="band-emoji">{emoji}</div>
+            <div class="band-label">{label}</div>
+            <div class="band-range">{rng}</div>
+            <div class="band-count"
+                 style="background:rgba({rgb},.12);color:{accent}">{count}개</div>
+        </a>"""
+
+    band_section = ""
+    if any_band:
+        band_section = f"""
+        <div class="section-heading"
+             style="border-left-color:#ff8c42">💰 가격대별</div>
+        <div class="band-grid">{band_cards_html}</div>"""
+
+    # 📂 Category cards
+    cards_html = ""
+    for key, emoji, label in categories:
+        count = category_counts.get(key, 0)
+        if count == 0:
+            continue
+        accent = _ACCENT.get(key, "#9e9e9e")
+        rgb    = _hex_rgb(accent)
+        cards_html += f"""
+        <a href="category_{key}.html" class="cat-card"
+           style="border-top-color:{accent}">
+            <div class="cat-emoji">{emoji}</div>
+            <div class="cat-label">{label}</div>
+            <div class="cat-count"
+                 style="background:rgba({rgb},.12);color:{accent}">{count}개</div>
+        </a>"""
+
+    cat_section = f"""
+        <div class="section-heading"
+             style="border-left-color:#607d8b">📂 카테고리별</div>
+        <div class="cat-grid">{cards_html}</div>"""
+
+    # Build product JSON for search/filter
+    import json as _json
+    products_json = "[]"
+    if all_products:
+        slim = []
+        for p in all_products:
+            name = (p.get("name_ko") or p.get("product_title") or "")[:50]
+            if not name:
+                continue
+            krw = int(_safe_float(p.get("price", 0)) * 1350)
+            disc = int(_safe_float(p.get("discount", 0)))
+            orig_krw = 0
+            if disc > 0 and krw > 0:
+                orig_krw = int(krw / (1 - disc / 100)) if disc < 100 else 0
+            elif _safe_float(p.get("target_original_price", 0)) > 0:
+                orig_krw = int(_safe_float(p.get("target_original_price", 0)) * 1350)
+            slim.append({
+                "n": name,
+                "d": (p.get("name_desc") or "")[:25],
+                "c": p.get("category_key", "etc"),
+                "b": p.get("price_band", "price_1k"),
+                "p": krw,
+                "o": orig_krw if orig_krw > krw else 0,
+                "dc": disc,
+                "l": p.get("affiliate_link", "#"),
+                "i": p.get("image_url") or p.get("product_main_image_url", ""),
+            })
+        products_json = _json.dumps(slim, ensure_ascii=False)
+
+    head = _head(
+        title=f"🐾 {BRAND_NAME} 오늘의 특가",
+        og_title=f"🐾 {BRAND_NAME} 오늘의 펫 특가 | 알리익스프레스 최저가",
+        og_desc=f"{BRAND_NAME} 오늘의 펫 특가! 총 {total}개 상품을 모아봤어요 🐾",
+        extra_css=_MAIN_CSS + _SEARCH_CSS,
+    )
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+{head}
+<body>
+    <div class="site-header">
+        <span class="flame">🐾</span>
+        <h1>{BRAND_NAME} 오늘의 특가</h1>
+        <div class="brand-sub">매일 엄선한 냥이·멍멍이 특가 🐱🐶</div>
+        <p><span id="update-date">{today}</span> 업데이트 · 총 {total}개 상품</p>
+        {_WAVE_SVG}
+    </div>
+    <div class="search-sticky" id="search-sticky">
+        <div class="search-wrap">
+            <input type="text" id="search-input" placeholder="상품 검색..."
+                   autocomplete="off" />
+        </div>
+        <div class="filter-row" id="filter-row">
+            <div class="filter-group">
+                <button class="fbtn active" data-filter="price" data-val="">전체</button>
+                <button class="fbtn" data-filter="price" data-val="1k">천원대</button>
+                <button class="fbtn" data-filter="price" data-val="10k">만원대</button>
+                <button class="fbtn" data-filter="price" data-val="100k">십만원+</button>
+            </div>
+            <div class="filter-group">
+                <button class="fbtn active" data-filter="cat" data-val="">전체</button>
+                <button class="fbtn" data-filter="cat" data-val="cat">🐱고양이</button>
+                <button class="fbtn" data-filter="cat" data-val="dog">🐶강아지</button>
+                <button class="fbtn" data-filter="cat" data-val="camping">⛺캠핑</button>
+                <button class="fbtn" data-filter="cat" data-val="electronics">💻전자</button>
+                <button class="fbtn" data-filter="cat" data-val="kitchen">🍳주방</button>
+                <button class="fbtn" data-filter="cat" data-val="fashion">👕패션</button>
+                <button class="fbtn" data-filter="cat" data-val="car">🚗자동차</button>
+                <button class="fbtn" data-filter="cat" data-val="sports">🏋️스포츠</button>
+            </div>
+            <div class="filter-group">
+                <button class="fbtn active" data-filter="disc" data-val="">전체</button>
+                <button class="fbtn" data-filter="disc" data-val="30">30%+</button>
+                <button class="fbtn" data-filter="disc" data-val="50">50%+</button>
+                <button class="fbtn" data-filter="disc" data-val="70">70%+</button>
+            </div>
+        </div>
+    </div>
+    <div class="countdown-banner" id="countdown-banner">
+        <span class="cb-icon">🔥</span>
+        <span class="cb-text">오늘만! 자정까지 특가</span>
+        <span class="cb-timer" id="countdown-timer">00:00:00</span>
+    </div>
+    <div class="container">
+        <div id="search-results" style="display:none">
+            <div class="section-heading" style="border-left-color:#ff6b35">
+                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+            </div>
+            <div id="results-grid" class="results-grid"></div>
+        </div>
+        <div id="browse-sections">
+            {_YT_BANNER}
+            {banner_html}
+            {band_section}
+            {cat_section}
+        </div>
+        <a href="{YOUTUBE_URL}" target="_blank" rel="noopener" class="yt-subscribe-cta">
+            💌 매일 새 특가 알림 받기 → 유튜브 구독
+        </a>
+    </div>
+    {_FOOTER}
+    {_DATE_JS}
+    {_COUNTDOWN_JS}
+    <script>window.__PRODUCTS={products_json};</script>
+    {_SEARCH_JS}
+</body>
+</html>"""
+
+
+# ── Category page CSS (accent-aware) ─────────────────────────────────────────
+def _cat_css(accent: str) -> str:
+    rgb = _hex_rgb(accent)
+    return f"""
+        :root {{ --accent:{accent}; --accent-rgb:{rgb}; }}
+
+        .top-bar {{
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }}
+        .top-bar a {{
+            color:var(--accent); font-size:14px; font-weight:500;
+            text-decoration:none;
+        }}
+        .top-bar a:hover {{ text-decoration:underline; }}
+
+        .cat-hero {{
+            background: rgba(var(--accent-rgb),.07);
+            padding:32px 24px 28px; text-align:center;
+        }}
+        .hero-emoji {{ font-size:56px; line-height:1; }}
+        .cat-hero h1 {{ font-size:24px; font-weight:800; margin-top:10px; }}
+        .prod-count {{
+            display:inline-block; margin-top:8px; font-size:13px;
+            font-weight:600; color:var(--accent);
+            background:rgba(var(--accent-rgb),.10);
+            padding:4px 14px; border-radius:999px;
+        }}
+
+        .deals {{ padding-top:16px; }}
+        .deal {{
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:12px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid var(--accent);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }}
+        .deal:hover  {{ transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }}
+        .deal:active {{ transform:scale(.98); }}
+
+        .thumb {{
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden;
+            background:rgba(var(--accent-rgb),.12);
+            display:flex; align-items:center; justify-content:center;
+            font-size:28px;
+            aspect-ratio:1/1;
+        }}
+        .thumb img {{ width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }}
+        .deal-orig-price {{
+            font-size:13px; color:#999; text-decoration:line-through;
+            font-weight:400;
+        }}
+
+        .deal-info {{ flex:1; min-width:0; }}
+        .deal-name {{
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }}
+        .deal-desc {{
+            font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3;
+        }}
+        .badge-row {{ display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }}
+        .pop-badge {{
+            background:linear-gradient(135deg,#ffd166,#ffb347);
+            color:#5a3a00; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }}
+        .hot-badge {{
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }}
+        .limit-badge {{
+            background:linear-gradient(135deg,#845ec2,#5f27cd);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }}
+        .price-row {{
+            display:flex; align-items:center; gap:8px;
+            margin-top:8px; flex-wrap:wrap;
+        }}
+        .deal-price {{ font-size:18px; font-weight:800; color:#1a1a1a; }}
+        .badge {{
+            background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            color:white; padding:3px 10px; border-radius:999px;
+            font-size:11px; font-weight:700; white-space:nowrap;
+        }}
+        .deal-arrow {{ font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }}
+        .deal-cta {{ font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }}
+        .rec-badge {{
+            background:linear-gradient(135deg,#4fc3f7,#0288d1);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }}
+"""
+
+
+def _category_page_html(key: str, emoji: str, label: str,
+                         products: list, today: str) -> str:
+    accent = _ACCENT.get(key, "#9e9e9e")
+
+    sorted_prods = sorted(
+        products,
+        key=lambda p: (-_safe_float(p.get("commission_rate", "0")),
+                       -_safe_float(p.get("discount", 0)),
+                        _safe_float(p.get("price", 0)))
+    )
+
+    cards_html = ""
+    for idx, p in enumerate(sorted_prods):
+        cards_html += _render_deal_card(p, idx, fallback_emoji=emoji)
+
+    head = _head(
+        title=f"{emoji} {label} - {BRAND_NAME}",
+        og_title=f"{emoji} {label} 특가 모음 | {BRAND_NAME}",
+        og_desc=f"{label} 카테고리 특가 {len(sorted_prods)}개! 알리익스프레스 최저가.",
+        extra_css=_cat_css(accent),
+    )
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+{head}
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="cat-hero">
+        <div class="hero-emoji">{emoji}</div>
+        <h1>{label}</h1>
+        <div class="prod-count">{len(sorted_prods)}개 상품</div>
+    </div>
+    <div class="container">
+        {_YT_BANNER}
+        <div class="deals">{cards_html}</div>
+        <a href="{YOUTUBE_URL}" target="_blank" rel="noopener"
+           style="display:block;text-align:center;background:linear-gradient(135deg,#ff0000,#cc0000);color:white;text-decoration:none;padding:16px 20px;border-radius:16px;margin:24px 0 8px;font-weight:700;font-size:14px">
+            💌 매일 새 특가 알림 받기 → 유튜브 구독
+        </a>
+    </div>
+    {_FOOTER}
+</body>
+</html>"""
+
+
+def _render_deal_card(p: dict, idx: int,
+                      fallback_emoji: str = "📦",
+                      border_accent: str | None = None,
+                      thumb_bg_rgb: str | None = None,
+                      arrow_color: str | None = None,
+                      extra_badge_html: str = "") -> str:
+    """Render one <a class='deal'> card with top-3 인기 and 50%+ 한정 badges.
+
+    idx: rank within the sorted_prods list (0-based). idx<3 -> 인기 badge.
+    """
+    name  = (p.get("name_ko") or p.get("product_title") or p.get("name", ""))[:50]
+    desc  = (p.get("name_desc") or "").strip()
+    price = _safe_float(p.get("price", 0))
+    disc  = _safe_float(p.get("discount", 0))
+    krw   = int(price * 1350) or int(_safe_float(p.get("price_krw", 0)))
+    link  = p.get("affiliate_link", "#")
+    img   = p.get("image_url") or p.get("product_main_image_url", "")
+    if not name or not link or link == "#":
+        return ""
+
+    thumb_inner = (
+        f'<img src="{img}" alt="" loading="lazy" referrerpolicy="no-referrer"'
+        f' onerror="this.outerHTML=\'<span>{fallback_emoji}</span>\'">'
+        if img else fallback_emoji
+    )
+    # Calculate original price from discount
+    orig_krw = 0
+    if disc > 0 and krw > 0:
+        orig_krw = int(krw / (1 - disc / 100)) if disc < 100 else 0
+    elif _safe_float(p.get("target_original_price", 0)) > 0:
+        orig_krw = int(_safe_float(p.get("target_original_price", 0)) * 1350)
+
+    if orig_krw > krw > 0 and disc >= 10:
+        price_html = (
+            f'<span class="deal-orig-price">₩{orig_krw:,}</span>'
+            f' <span class="deal-price">₩{krw:,}</span>'
+        )
+    elif krw:
+        price_html = f'<span class="deal-price">₩{krw:,}</span>'
+    else:
+        price_html = ""
+    badge_html = f'<span class="badge">{int(disc)}% 할인</span>' if disc >= 10 else ""
+
+    commission = _safe_float(p.get("commission_rate", "0"))
+    badges = []
+    if commission > 8:
+        badges.append('<span class="rec-badge">💎 추천</span>')
+    if extra_badge_html:
+        badges.append(extra_badge_html)
+    if idx < 3:
+        badges.append('<span class="pop-badge">👆 인기 TOP3</span>')
+    if disc >= 50:
+        badges.append('<span class="hot-badge">🔥 오늘만 이 가격!</span>')
+    elif disc >= 30:
+        badges.append('<span class="limit-badge">⏰ 한정 수량</span>')
+    badge_row = (f'<div class="badge-row">{"".join(badges)}</div>'
+                 if badges else "")
+    desc_html = f'<div class="deal-desc">{desc}</div>' if desc else ""
+    cta_html = '<div class="deal-cta">👆 클릭하고 알리에서 확인!</div>'
+
+    style_bits = []
+    if border_accent:
+        style_bits.append(f"border-left-color:{border_accent}")
+    deal_style = f' style="{";".join(style_bits)}"' if style_bits else ""
+
+    thumb_style = f' style="background:rgba({thumb_bg_rgb},.12)"' if thumb_bg_rgb else ""
+    arrow_style = f' style="color:{arrow_color}"' if arrow_color else ""
+
+    return f"""
+        <a href="{link}" class="deal" target="_blank" rel="nofollow sponsored noopener"{deal_style}>
+            <div class="thumb"{thumb_style}>{thumb_inner}</div>
+            <div class="deal-info">
+                <div class="deal-name">{name}</div>
+                {desc_html}
+                {badge_row}
+                <div class="price-row">{price_html}{badge_html}</div>
+                {cta_html}
+            </div>
+            <div class="deal-arrow"{arrow_style}>›</div>
+        </a>"""
+
+
+# ── Price Band page ──────────────────────────────────────────────────────────
+def _price_band_page_html(band: dict, grouped_by_cat: dict,
+                           total: int, today: str, categories: list) -> str:
+    """Generate price_*.html -- products in a band, grouped by category."""
+    accent  = band["accent"]
+    rgb     = _hex_rgb(accent)
+    emoji   = band["emoji"]
+    label   = band["label"]
+    tier    = band.get("tier", "light")
+    cat_meta = {key: (e, lbl) for key, e, lbl in categories}
+
+    # Tier-aware badge injection
+    if tier == "luxury":
+        force_badge = '<span class="vip-badge">👑 프리미엄</span>'
+    elif tier == "premium":
+        force_badge = '<span class="rec-badge">✨ 추천</span>'
+    else:
+        force_badge = ""
+
+    sections_html = ""
+    for cat_key, prods in grouped_by_cat.items():
+        ce, cl = cat_meta.get(cat_key, ("📦", cat_key))
+        cat_accent = _ACCENT.get(cat_key, "#9e9e9e")
+        cat_rgb    = _hex_rgb(cat_accent)
+
+        cards_html = ""
+        for idx, p in enumerate(prods):
+            cards_html += _render_deal_card(
+                p, idx, fallback_emoji=ce,
+                border_accent=cat_accent, thumb_bg_rgb=cat_rgb,
+                arrow_color=cat_accent,
+                extra_badge_html=force_badge,
+            )
+
+        sections_html += f"""
+        <div class="section">
+            <div class="section-header" style="border-left-color:{cat_accent}">
+                <span class="sec-emoji">{ce}</span>
+                <span class="sec-label">{cl}</span>
+                <span class="sec-badge"
+                      style="background:rgba({cat_rgb},.12);color:{cat_accent}">{len(prods)}개</span>
+            </div>
+            {cards_html}
+        </div>"""
+
+    band_ranges = {"price_1k": "1,000-9,999원",
+                   "price_10k": "10,000-99,999원",
+                   "price_100k": "100,000원 이상"}
+    rng = band_ranges.get(band["key"], "")
+
+    extra_css = _band_tier_css(tier, accent, rgb)
+
+    head = _head(
+        title=f"{emoji} {label} - {BRAND_NAME}",
+        og_title=f"{emoji} {label} ({rng}) | {BRAND_NAME}",
+        og_desc=f"{label} 펫 특가 {total}개! 알리익스프레스 {rng} 상품 모음.",
+        extra_css=extra_css,
+    )
+
+    vip_banner = ""
+    subtitle = ""
+    if tier == "luxury":
+        vip_banner = """
+        <div class="vip-banner">
+            <div class="vip-shimmer"></div>
+            <div class="vip-content">
+                <div class="vip-crown">💎</div>
+                <div class="vip-text">
+                    <div class="vip-title">VIP 특가</div>
+                    <div class="vip-sub">최고급 엄선 상품</div>
+                </div>
+            </div>
+        </div>"""
+        subtitle = '<div class="hero-sub">🏆 최고급 엄선 상품</div>'
+    elif tier == "premium":
+        subtitle = '<div class="hero-sub">✨ 프리미엄 선별</div>'
+
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+{head}
+<body class="tier-{tier}">
+    <div class="top-bar"><a href="deals.html">← 전체 카테고리</a></div>
+    <div class="band-hero">
+        <div class="hero-emoji">{emoji}</div>
+        <h1>{label}</h1>
+        {subtitle}
+        <div class="range">{rng}</div>
+        <div class="prod-count">{total}개 상품 · {today} 기준</div>
+    </div>
+    <div class="container">
+        {vip_banner}
+        {_YT_BANNER}
+        {sections_html}
+    </div>
+    {_FOOTER}
+</body>
+</html>"""
+
+
+# ── Tier-aware CSS for price band pages ──────────────────────────────────────
+_SHARED_BAND_CSS = """
+        .top-bar a:hover { text-decoration:underline; }
+        .band-hero { padding:40px 24px 32px; text-align:center; }
+        .hero-emoji { font-size:64px; line-height:1; }
+        .band-hero h1 { font-size:28px; font-weight:900; margin-top:12px; letter-spacing:-.01em; }
+        .hero-sub { font-size:13px; font-weight:700; margin-top:6px; opacity:.85; }
+        .band-hero .range { font-size:13px; margin-top:6px; opacity:.65; }
+        .prod-count { display:inline-block; margin-top:10px; font-size:13px; font-weight:700;
+            padding:5px 16px; border-radius:999px; }
+        .section { margin-bottom:32px; }
+        .section-header { display:flex; align-items:center; gap:10px;
+            padding:10px 0 10px 12px; border-left:4px solid currentColor; margin-bottom:12px; }
+        .sec-emoji { font-size:22px; } .sec-label { font-size:16px; font-weight:800; flex:1; }
+        .sec-badge { font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+        .deal { display:flex; align-items:center; gap:14px; padding:16px; margin-bottom:12px;
+            text-decoration:none; border-radius:18px;
+            transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+        .deal:active { transform:scale(.98); }
+        .thumb { flex-shrink:0; overflow:hidden; display:flex;
+            align-items:center; justify-content:center; font-size:28px; aspect-ratio:1/1; }
+        .thumb img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:1/1; }
+        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
+        .deal-info { flex:1; min-width:0; }
+        .deal-name { font-weight:700; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .deal-desc { font-size:12px; font-weight:600; margin-top:4px; line-height:1.3; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
+            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
+        .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .rec-badge {
+            background:linear-gradient(135deg,#4fc3f7,#0288d1);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+"""
+
+
+def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
+    base = f""":root {{ --accent:{accent}; --accent-rgb:{rgb}; }}
+        .top-bar {{ position:sticky; top:0; z-index:10;
+            padding:12px 16px; }}
+        .top-bar a {{ font-size:14px; font-weight:600; text-decoration:none; }}
+""" + _SHARED_BAND_CSS
+
+    if tier == "light":
+        return base + """
+        body.tier-light { background:#ffffff; color:#333; }
+        .tier-light .top-bar { background:#ffffff;
+            border-bottom:1px solid #eee; }
+        .tier-light .top-bar a { color:#888; }
+        .tier-light .band-hero {
+            background:#fafafa;
+            border-bottom:1px solid #f0f0f0;
+            padding:32px 24px 24px; }
+        .tier-light .hero-emoji { font-size:44px; }
+        .tier-light .band-hero h1 { color:#333; font-size:22px; font-weight:700;
+            letter-spacing:0; }
+        .tier-light .hero-sub { color:#999; font-weight:400; font-size:12px; }
+        .tier-light .range { color:#aaa; font-size:12px; }
+        .tier-light .prod-count { color:#888;
+            background:#f0f0f0; font-weight:500; font-size:12px; }
+        .tier-light .section-header { border-left-color:#ddd !important; }
+        .tier-light .sec-label { color:#444; font-weight:600; font-size:15px; }
+        .tier-light .sec-badge {
+            background:#f5f5f5 !important;
+            color:#888 !important; }
+        .tier-light .deal {
+            background:#ffffff;
+            border:1px solid #e8e8e8;
+            border-radius:8px;
+            box-shadow:none;
+            padding:12px; }
+        .tier-light .deal:hover {
+            border-color:#d0d0d0;
+            box-shadow:0 1px 4px rgba(0,0,0,.04); }
+        .tier-light .thumb { width:64px; height:64px; border-radius:6px;
+            background:#f8f8f8; }
+        .tier-light .thumb img { width:64px; height:64px; }
+        .tier-light .deal-name { font-size:13px; color:#333; font-weight:600; }
+        .tier-light .deal-desc { display:none; }
+        .tier-light .badge-row { display:none; }
+        .tier-light .badge { display:none; }
+        .tier-light .deal-price { font-size:15px; font-weight:600; color:#333; }
+        .tier-light .deal-arrow { color:#ccc; font-size:16px; }
+"""
+
+
+    if tier == "premium":
+        return base + """
+        body.tier-premium {
+            background:#fdfcfa;
+            color:#2a2520; }
+        .tier-premium .top-bar {
+            background:rgba(253,252,250,.97);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid #e8e2d8; }
+        .tier-premium .top-bar a { color:#5a4a32; font-weight:600; }
+        .tier-premium .band-hero {
+            background:linear-gradient(180deg,#f5f0e8 0%,#fdfcfa 100%);
+            border-bottom:1px solid #e8e2d8;
+            padding:44px 24px 36px; }
+        .tier-premium .hero-emoji { font-size:52px; }
+        .tier-premium .band-hero h1 {
+            font-family: Georgia, 'Times New Roman', 'Nanum Myeongjo', serif;
+            color:#2a2520;
+            font-size:26px; font-weight:700;
+            letter-spacing:.02em;
+            margin-top:12px; }
+        .tier-premium .hero-sub {
+            color:#a08968;
+            font-size:11px; font-weight:500;
+            letter-spacing:.15em;
+            margin-top:10px; }
+        .tier-premium .range { color:#b0a08a; font-size:12px;
+            letter-spacing:.03em; margin-top:6px; }
+        .tier-premium .prod-count {
+            color:#5a4a32;
+            background:rgba(139,115,85,.08);
+            border:1px solid rgba(139,115,85,.15);
+            font-weight:500;
+            letter-spacing:.02em; }
+        .tier-premium .section-header {
+            border-left-color:#d4c5a9 !important;
+            padding-bottom:12px;
+            margin-bottom:14px; }
+        .tier-premium .sec-emoji { font-size:20px; }
+        .tier-premium .sec-label {
+            color:#2a2520;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-weight:600; font-size:15px;
+            letter-spacing:.01em; }
+        .tier-premium .sec-badge {
+            background:rgba(139,115,85,.08) !important;
+            color:#a08968 !important; }
+        .tier-premium .deal {
+            background:#ffffff;
+            border:1px solid #d8d0c4;
+            border-radius:6px;
+            box-shadow:0 1px 4px rgba(42,37,32,.04);
+            padding:16px;
+            gap:14px; }
+        .tier-premium .deal:hover {
+            transform:translateY(-1px);
+            box-shadow:0 2px 8px rgba(42,37,32,.08);
+            border-color:#c0b8aa; }
+        .tier-premium .thumb {
+            width:84px; height:84px; border-radius:4px;
+            background:#f8f5f0;
+            border:1px solid #e8e2d8; }
+        .tier-premium .thumb img { width:84px; height:84px; }
+        .tier-premium .deal-name {
+            font-size:14px;
+            color:#2a2520;
+            font-weight:600;
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height:1.45; }
+        .tier-premium .deal-desc { color:#a08968; font-weight:400; font-size:11px; }
+        .tier-premium .deal-price {
+            font-size:17px;
+            font-weight:700;
+            color:#2a2520;
+            font-family: Georgia, 'Times New Roman', serif; }
+        .tier-premium .deal-arrow { color:#c0b8aa; }
+        .tier-premium .badge {
+            background:transparent !important;
+            color:#a08968 !important;
+            border:1px solid #d4c5a9;
+            font-weight:600;
+            letter-spacing:.03em;
+            padding:2px 8px !important;
+            border-radius:3px !important;
+            font-size:10px !important; }
+        .tier-premium .pop-badge,
+        .tier-premium .hot-badge,
+        .tier-premium .limit-badge {
+            background:transparent !important;
+            color:#a08968 !important;
+            border:1px solid #d4c5a9;
+            box-shadow:none;
+            padding:2px 8px;
+            border-radius:3px;
+            font-weight:600;
+            font-size:10px;
+            letter-spacing:.03em; }
+        .tier-premium .rec-badge {
+            background:rgba(212,197,169,.15);
+            color:#8b7355;
+            border:1px solid #d4c5a9;
+            padding:2px 9px;
+            border-radius:3px;
+            font-size:10px;
+            font-weight:600;
+            letter-spacing:.08em;
+            white-space:nowrap; }
+"""
+
+
+    # luxury
+    return base + """
+        body.tier-luxury { background:radial-gradient(ellipse at top,#1a1530 0%,#0a0a14 60%,#000 100%);
+            background-attachment:fixed; color:#f5e8c7; }
+        .tier-luxury .top-bar { background:rgba(10,10,20,.85);
+            backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(255,215,0,.25); }
+        .tier-luxury .top-bar a { color:#FFD700; }
+        .tier-luxury .band-hero {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%);
+            border-bottom:1px solid rgba(255,215,0,.3); }
+        .tier-luxury .band-hero::before {
+            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 0%,
+                       rgba(255,215,0,.12) 45%,rgba(255,215,0,.25) 50%,
+                       rgba(255,215,0,.12) 55%,transparent 100%);
+            animation:shimmer 4.5s infinite linear; pointer-events:none; }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:100%} }
+        .tier-luxury .hero-emoji { filter:drop-shadow(0 0 18px rgba(255,215,0,.6)); }
+        .tier-luxury .band-hero h1 {
+            background:linear-gradient(135deg,#fff1a8 0%,#FFD700 40%,#ffecb3 70%,#c9a227 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-size:32px; font-weight:900; letter-spacing:.02em;
+            text-shadow:0 0 30px rgba(255,215,0,.25); }
+        .tier-luxury .hero-sub { color:#FFD700; letter-spacing:.1em;
+            text-transform:uppercase; font-size:12px;
+            text-shadow:0 0 12px rgba(255,215,0,.4); }
+        .tier-luxury .range { color:#c9a227; }
+        .tier-luxury .prod-count {
+            color:#0a0a14; background:linear-gradient(135deg,#ffecb3,#FFD700);
+            box-shadow:0 0 20px rgba(255,215,0,.4); }
+        .tier-luxury .vip-banner {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#1a1530 0%,#2d1b4e 50%,#1a1530 100%);
+            border:1px solid rgba(255,215,0,.5); border-radius:20px;
+            padding:20px 22px; margin:20px 0 24px;
+            box-shadow:0 0 30px rgba(255,215,0,.15),
+                       inset 0 1px 0 rgba(255,215,0,.3); }
+        .tier-luxury .vip-shimmer {
+            position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 40%,
+                       rgba(255,215,0,.15) 50%,transparent 60%);
+            animation:shimmer 3.5s infinite linear; }
+        .tier-luxury .vip-content {
+            position:relative; display:flex; align-items:center; gap:16px; }
+        .tier-luxury .vip-crown { font-size:38px;
+            filter:drop-shadow(0 0 15px rgba(255,215,0,.7)); }
+        .tier-luxury .vip-title {
+            font-size:20px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            letter-spacing:.05em; }
+        .tier-luxury .vip-sub { font-size:12px; color:#ffecb3;
+            margin-top:2px; letter-spacing:.08em; }
+        .tier-luxury .section-header {
+            border-left-color:#FFD700 !important; }
+        .tier-luxury .sec-emoji { filter:drop-shadow(0 0 8px rgba(255,215,0,.4)); }
+        .tier-luxury .sec-label {
+            color:#FFD700; font-weight:900; letter-spacing:.03em;
+            text-shadow:0 0 10px rgba(255,215,0,.3); }
+        .tier-luxury .sec-badge {
+            background:rgba(255,215,0,.15) !important;
+            color:#FFD700 !important;
+            border:1px solid rgba(255,215,0,.4); }
+        .tier-luxury .deal {
+            background:linear-gradient(145deg,#14142a 0%,#0f0f1e 100%);
+            border:1px solid rgba(255,215,0,.35);
+            border-left:4px solid #FFD700 !important;
+            box-shadow:0 0 24px rgba(255,215,0,.10),
+                       0 2px 8px rgba(0,0,0,.5),
+                       inset 0 1px 0 rgba(255,215,0,.15); }
+        .tier-luxury .deal:hover {
+            transform:translateY(-3px);
+            border-color:rgba(255,215,0,.75);
+            box-shadow:0 0 36px rgba(255,215,0,.25),
+                       0 8px 24px rgba(0,0,0,.6),
+                       inset 0 1px 0 rgba(255,215,0,.25); }
+        .tier-luxury .thumb { width:100px; height:100px; border-radius:14px;
+            background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,215,0,.04));
+            border:2px solid rgba(255,215,0,.5);
+            box-shadow:0 0 18px rgba(255,215,0,.2),
+                       inset 0 0 10px rgba(255,215,0,.08); }
+        .tier-luxury .thumb img { width:100px; height:100px; }
+        .tier-luxury .deal-name {
+            font-size:16px; color:#fff5d1; font-weight:800; }
+        .tier-luxury .deal-desc { color:#FFD700; }
+        .tier-luxury .deal-price {
+            font-size:22px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .tier-luxury .deal-arrow { color:#FFD700; opacity:.85; }
+        .tier-luxury .vip-badge {
+            background:linear-gradient(135deg,#fff1a8,#FFD700,#c9a227);
+            color:#0a0a14; padding:3px 10px; border-radius:999px;
+            font-size:10px; font-weight:900; white-space:nowrap;
+            box-shadow:0 0 12px rgba(255,215,0,.5);
+            border:1px solid rgba(255,215,0,.8); }
+        .tier-luxury .footer { color:#c9a227; background:transparent; }
+        .tier-luxury .footer a { color:#FFD700; }
+"""
+
+
+# ── Special Deals page ───────────────────────────────────────────────────────
+def _special_deals_page_html(grouped: dict, total: int, today: str,
+                              categories: list) -> str:
+    """Generate special_deals.html with products grouped by category.
+
+    grouped: {category_key: [products]} sorted by group size desc.
+    """
+    # Build category lookup: key -> (emoji, label)
+    cat_meta = {key: (emoji, label) for key, emoji, label in categories}
+
+    sections_html = ""
+    for key, prods in grouped.items():
+        emoji, label = cat_meta.get(key, ("📦", key))
+        accent = _ACCENT.get(key, "#9e9e9e")
+        rgb    = _hex_rgb(accent)
+
+        cards_html = ""
+        for idx, p in enumerate(prods):
+            cards_html += _render_deal_card(
+                p, idx, fallback_emoji=emoji,
+                border_accent=accent, thumb_bg_rgb=rgb,
+                arrow_color=accent,
+            )
+
+        sections_html += f"""
+        <div class="section">
+            <div class="section-header" style="border-left-color:{accent}">
+                <span class="sec-emoji">{emoji}</span>
+                <span class="sec-label">{label}</span>
+                <span class="sec-badge"
+                      style="background:rgba({rgb},.12);color:{accent}">{len(prods)}개</span>
+            </div>
+            {cards_html}
+        </div>"""
+
+    extra_css = """
+        :root { --accent: #ff4757; }
+
+        .top-bar {
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }
+        .top-bar a { color:#ff4757; font-size:14px; font-weight:500; text-decoration:none; }
+        .top-bar a:hover { text-decoration:underline; }
+
+        .sd-hero {
+            background: linear-gradient(135deg, rgba(255,71,87,.08) 0%, rgba(255,107,53,.04) 100%);
+            padding:32px 24px 28px; text-align:center;
+        }
+        .sd-hero .hero-flame {
+            font-size:56px; line-height:1;
+            animation: pulse 1.8s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%,100% { transform:scale(1);    filter:drop-shadow(0 0 4px rgba(255,200,0,.4)); }
+            50%      { transform:scale(1.15); filter:drop-shadow(0 0 10px rgba(255,200,0,.7)); }
+        }
+        .sd-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
+        .sd-hero p  { font-size:13px; color:#ff4757; font-weight:600; margin-top:8px; }
+
+        .section { margin-bottom:28px; }
+        .section-header {
+            display:flex; align-items:center; gap:8px;
+            padding:10px 0 10px 12px;
+            border-left:4px solid #ff4757;
+            margin-bottom:10px;
+        }
+        .sec-emoji { font-size:22px; }
+        .sec-label { font-size:16px; font-weight:700; flex:1; }
+        .sec-badge {
+            font-size:12px; font-weight:600;
+            padding:3px 10px; border-radius:999px;
+        }
+
+        /* Product cards (same as category pages) */
+        .deal {
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:10px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid #ff4757;
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .deal:active { transform:scale(.98); }
+        .thumb {
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden; display:flex; align-items:center;
+            justify-content:center; font-size:28px; aspect-ratio:1/1;
+        }
+        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }
+        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
+        .deal-info { flex:1; min-width:0; }
+        .deal-name {
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .deal-desc { font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347);
+            color:#5a3a00; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            color:white; padding:3px 10px; border-radius:999px;
+            font-size:11px; font-weight:700;
+        }
+        .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .rec-badge {
+            background:linear-gradient(135deg,#4fc3f7,#0288d1);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+    """
+
+    head = _head(
+        title=f"🔥 특가할인 - {BRAND_NAME}",
+        og_title=f"🔥 특가할인 | 50% 이상 할인 펫 상품 모음",
+        og_desc=f"50% 이상 할인 펫 상품 총 {total}개! 카테고리별 특가 모음.",
+        extra_css=extra_css,
+    )
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+{head}
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="sd-hero">
+        <div class="hero-flame">🔥</div>
+        <h1>특가할인</h1>
+        <p>50% 이상 할인 · 총 {total}개 상품 · {today} 기준</p>
+    </div>
+    <div class="container">
+        {_YT_BANNER}
+        {sections_html}
+    </div>
+    {_FOOTER}
+</body>
+</html>"""
+
+
+def _deduplicate_similar(products: list, max_per_cluster: int = 3) -> list:
+    """Remove similar products, keeping top N per name cluster.
+
+    Clusters by first 5 chars of name_ko. Within each cluster, keeps
+    items with highest evaluate_rate, then highest lastest_volume.
+    """
+    clusters: dict[str, list] = defaultdict(list)
+    no_name = []
+    for p in products:
+        name = (p.get("name_ko") or "").strip()
+        if len(name) < 5:
+            no_name.append(p)
+            continue
+        key = name[:5]
+        clusters[key].append(p)
+
+    kept = list(no_name)
+    total_removed = 0
+    for key, items in clusters.items():
+        if len(items) <= max_per_cluster:
+            kept.extend(items)
+            continue
+        # Sort: highest rating first, then highest volume
+        items.sort(key=lambda p: (
+            _safe_float(p.get("evaluate_rate", "0")),
+            _safe_float(p.get("lastest_volume", 0)),
+        ), reverse=True)
+        kept.extend(items[:max_per_cluster])
+        removed = len(items) - max_per_cluster
+        total_removed += removed
+        names_removed = [i.get("name_ko", "?") for i in items[max_per_cluster:]]
+        print(f"[Deals] Dedup cluster '{key}': kept {max_per_cluster}, "
+              f"removed {removed}: {names_removed}")
+
+    if total_removed:
+        print(f"[Deals] Total dedup removed: {total_removed}")
+    return kept
+
+
+# ── Public API (logic identical to v2) ───────────────────────────────────────
+def update_deals_site(products: list) -> bool:
+    """Generate deals.html + category_*.html and push to GitHub Pages."""
+    from modules.category_mapper import (
+        CATEGORIES, classify_product, classify_price_band, PRICE_BANDS
+    )
+
+    today = datetime.now().strftime("%Y년 %m월 %d일")
+    Path(DOCS_DIR).mkdir(parents=True, exist_ok=True)
+
+    # Dedupe by product_id + drop items under 1,000원
+    seen_ids: set = set()
+    deduped = []
+    dropped_cheap = 0
+    for p in products:
+        pid = p.get("product_id") or p.get("id", "")
+        if pid and pid in seen_ids:
+            continue
+        price_usd = _safe_float(p.get("price", 0))
+        if int(price_usd * 1350) < 1000:
+            dropped_cheap += 1
+            continue
+        if pid:
+            seen_ids.add(pid)
+        deduped.append(p)
+    if dropped_cheap:
+        print(f"[Deals] Dropped {dropped_cheap} products under 1,000원")
+
+    # Remove similar-name duplicates: keep top 3 per cluster
+    deduped = _deduplicate_similar(deduped)
+
+    # Remove likely out-of-stock (no volume + no rating)
+    before_oos = len(deduped)
+    deduped = [
+        p for p in deduped
+        if not (_safe_float(p.get("lastest_volume", 1)) == 0
+                and not p.get("evaluate_rate"))
+    ]
+    removed_oos = before_oos - len(deduped)
+    if removed_oos:
+        print(f"[Deals] Removed {removed_oos} likely out-of-stock products")
+
+    # Always reclassify -- the taxonomy can change between runs and stale
+    # category_key / price_band values would drop products into non-existent pages.
+    valid_keys = {k for k, _, _ in CATEGORIES}
+    valid_band_keys = {b["key"] for b in PRICE_BANDS}
+    for p in deduped:
+        current = p.get("category_key", "")
+        if current not in valid_keys:
+            p["category_key"] = classify_product(p)
+        if p.get("price_band") not in valid_band_keys:
+            p["price_band"] = classify_price_band(p)
+
+    # Group by category
+    grouped: dict[str, list] = {}
+    for p in deduped:
+        grouped.setdefault(p.get("category_key", "etc"), []).append(p)
+
+    category_counts = {k: len(v) for k, v in grouped.items()}
+
+    # Special deals
+    from modules.category_mapper import (
+        group_special_deals_by_category, PRICE_BANDS
+    )
+    special_grouped = group_special_deals_by_category(deduped, threshold=50.0)
+    special_total   = sum(len(v) for v in special_grouped.values())
+
+    # Price bands -- classify each product, group by band then by category
+    band_grouped: dict[str, dict[str, list]] = {}  # {band_key: {cat_key: [products]}}
+    for p in deduped:
+        bk = p.get("price_band") or classify_price_band(p)
+        p["price_band"] = bk
+        band_grouped.setdefault(bk, {}).setdefault(
+            p.get("category_key", "etc"), []
+        ).append(p)
+
+    band_counts: dict[str, int] = {
+        bk: sum(len(v) for v in by_cat.values())
+        for bk, by_cat in band_grouped.items()
+    }
+
+    # Write main page
+    main_html = _main_page_html(today, len(deduped), category_counts, CATEGORIES,
+                                 special_count=special_total, band_counts=band_counts,
+                                 all_products=deduped)
+    with open(f"{DOCS_DIR}/deals.html", "w", encoding="utf-8") as f:
+        f.write(main_html)
+    print(f"[Deals] deals.html ({len(main_html):,} bytes, {len(deduped)} products, "
+          f"{special_total} special, bands:{band_counts})")
+
+    # Write special_deals.html (skip if empty)
+    if special_total > 0:
+        sd_html = _special_deals_page_html(special_grouped, special_total, today, CATEGORIES)
+        with open(f"{DOCS_DIR}/special_deals.html", "w", encoding="utf-8") as f:
+            f.write(sd_html)
+        print(f"[Deals] special_deals.html ({len(sd_html):,} bytes, {special_total} products)")
+        by_cat = ", ".join(f"{k}:{len(v)}" for k, v in special_grouped.items())
+        print(f"[Deals]   breakdown: {by_cat}")
+    else:
+        stale_sd = Path(f"{DOCS_DIR}/special_deals.html")
+        if stale_sd.exists():
+            stale_sd.unlink()
+            print("[Deals] Removed stale: special_deals.html (no specials today)")
+
+    # Write price band pages
+    band_lookup = {b["key"]: b for b in PRICE_BANDS}
+    written_bands: set = set()
+    for bk, by_cat in band_grouped.items():
+        band = band_lookup.get(bk)
+        if not band:
+            continue
+        total_in_band = sum(len(v) for v in by_cat.values())
+        pb_html = _price_band_page_html(band, by_cat, total_in_band, today, CATEGORIES)
+        with open(f"{DOCS_DIR}/{bk}.html", "w", encoding="utf-8") as f:
+            f.write(pb_html)
+        print(f"[Deals] {bk}.html ({len(pb_html):,} bytes, {total_in_band} products)")
+        written_bands.add(bk)
+
+    # Remove stale price band pages
+    for stale in Path(DOCS_DIR).glob("price_*.html"):
+        if stale.stem not in written_bands:
+            stale.unlink()
+            print(f"[Deals] Removed stale: {stale.name}")
+
+    # Write category pages
+    written_keys: set = set()
+    for key, emoji, label in CATEGORIES:
+        prods = grouped.get(key, [])
+        if not prods:
+            continue
+        page_html = _category_page_html(key, emoji, label, prods, today)
+        with open(f"{DOCS_DIR}/category_{key}.html", "w", encoding="utf-8") as f:
+            f.write(page_html)
+        print(f"[Deals] category_{key}.html ({len(page_html):,} bytes, {len(prods)} products)")
+        written_keys.add(key)
+
+    # Remove stale category pages
+    for stale in Path(DOCS_DIR).glob("category_*.html"):
+        if stale.stem.replace("category_", "") not in written_keys:
+            stale.unlink()
+            print(f"[Deals] Removed stale: {stale.name}")
+
+    return _git_push("feat: price-band browsing + higher-price variety")
+
+
+def _git_push(commit_msg: str) -> bool:
+    def _run(cmd):
+        r = subprocess.run(cmd, capture_output=True, text=True, cwd=GIT_ROOT)
+        return r.returncode == 0, r.stderr.strip()
+
+    _run(["git", "pull", "origin", "main", "--rebase"])
+    _run(["git", "add", "docs/"])
+    ok, err = _run(["git", "commit", "-m", commit_msg])
+    if not ok and "nothing to commit" in err:
+        print("[Deals] No changes to push")
+        return True
+    ok, err = _run(["git", "push", "origin", "main"])
+    if ok:
+        print(f"[Deals] Pushed -> {DEALS_URL}")
+        return True
+    print(f"[Deals] Push failed: {err}")
+    return False
+
+
+# Backward-compatible alias
+def update_deals_page(products: list) -> bool:
+    """Deprecated alias for update_deals_site(). Kept for pipeline compatibility."""
+    return update_deals_site(products)
+
+
+if __name__ == "__main__":
+    import json, sys
+    sys.path.insert(0, BASE_DIR)
+    with open(f"{BASE_DIR}/data/today_products.json", encoding="utf-8") as f:
+        prods = json.load(f)
+    update_deals_site(prods)
