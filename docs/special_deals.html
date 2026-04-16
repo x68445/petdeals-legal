@@ -202,5 +202,22 @@
         <a href="privacy.html">개인정보처리방침</a>
     </div>
 
+<script>
+(function(){
+  var T="http://168.107.3.136:5000/api/track";
+  var P=location.pathname.split("/").pop()||"index";
+  try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({page:P,action:"view"}),keepalive:true})}catch(e){}
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a.deal");
+    if(!a)return;
+    var n=a.querySelector(".deal-name");
+    var prod=n?n.textContent.trim():"";
+    try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({page:P,action:"click",product:prod}),keepalive:true})}catch(e){}
+  });
+})();
+</script>
+
 </body>
 </html>
