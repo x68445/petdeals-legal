@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="🐱 고양이용품 특가 모음 | PawPawMeow">
+    <meta property="og:description" content="고양이용품 카테고리 특가 18개! 알리익스프레스 최저가.">
+    <title>🐱 고양이용품 - PawPawMeow</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        
+        :root { --accent:#ff8fab; --accent-rgb:255,143,171; }
+
+        .top-bar {
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }
+        .top-bar a {
+            color:var(--accent); font-size:14px; font-weight:500;
+            text-decoration:none;
+        }
+        .top-bar a:hover { text-decoration:underline; }
+
+        .cat-hero {
+            background: rgba(var(--accent-rgb),.07);
+            padding:32px 24px 28px; text-align:center;
+        }
+        .hero-emoji { font-size:56px; line-height:1; }
+        .cat-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
+        .prod-count {
+            display:inline-block; margin-top:8px; font-size:13px;
+            font-weight:600; color:var(--accent);
+            background:rgba(var(--accent-rgb),.10);
+            padding:4px 14px; border-radius:999px;
+        }
+
+        .deals { padding-top:16px; }
+        .deal {
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:12px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid var(--accent);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .deal:active { transform:scale(.98); }
+
+        .thumb {
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden;
+            background:rgba(var(--accent-rgb),.12);
+            display:flex; align-items:center; justify-content:center;
+            font-size:28px;
+            aspect-ratio:1/1;
+        }
+        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }
+        .deal-orig-price {
+            font-size:13px; color:#999; text-decoration:line-through;
+            font-weight:400;
+        }
+
+        .deal-info { flex:1; min-width:0; }
+        .deal-name {
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .deal-desc {
+            font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3;
+        }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge {
+            background:linear-gradient(135deg,#ffd166,#ffb347);
+            color:#5a3a00; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .hot-badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .limit-badge {
+            background:linear-gradient(135deg,#845ec2,#5f27cd);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+        .price-row {
+            display:flex; align-items:center; gap:8px;
+            margin-top:8px; flex-wrap:wrap;
+        }
+        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .badge {
+            background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            color:white; padding:3px 10px; border-radius:999px;
+            font-size:11px; font-weight:700; white-space:nowrap;
+        }
+        .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
+        .rec-badge {
+            background:linear-gradient(135deg,#4fc3f7,#0288d1);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="cat-hero">
+        <div class="hero-emoji">🐱</div>
+        <h1>고양이용품</h1>
+        <div class="prod-count">18개 상품</div>
+    </div>
+    <div class="container">
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        <div class="deals">
+        <a href="https://www.aliexpress.com/item/1005006563201224.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S273e8167f97648a4a2d8b627ec676baeP.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">골판지 고양이 스크래쳐 쿠션</div>
+                <div class="deal-desc">긁는 즐거움, 포근한 휴식까지.</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩34,979</span> <span class="deal-price">₩11,893</span><span class="badge">66% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">3일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005006832136773.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0abb4935fb18439787423a9887878687c.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">3in1 경사형 물통 고양이 밥그릇</div>
+                <div class="deal-desc">냥이 식사의 품격, 건강까지!</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩43,832</span> <span class="deal-price">₩14,903</span><span class="badge">66% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">4일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007592902909.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0921616f317b46aab3fdf00898a4c644t.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">벽걸이 스크래쳐 고양이 트리</div>
+                <div class="deal-desc">공간 활용, 냥이의 수직 활동!</div>
+                <div class="badge-row"><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩139,447</span> <span class="deal-price">₩47,412</span><span class="badge">66% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">3일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005005168685901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/H5ec7cd5458824bc5becc9a3584f1f604F.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">580ml 휴대용 실리콘 강아지 물병</div>
+                <div class="deal-desc">야외 활동, 댕댕이 수분 충전!</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩51,260</span> <span class="deal-price">₩17,941</span><span class="badge">65% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">3일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005006682861479.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc97c95add0de4bd48da6ddabe70f7fb2Y.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">푹신한 원형 반려동물 침대</div>
+                <div class="deal-desc">꿀잠 보장, 포근한 우리 아지트.</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩54,694</span> <span class="deal-price">₩19,143</span><span class="badge">65% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">3일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005011859905720.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sfd1b1c74274d4d75a0b801f975963408F.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">문걸이 자동 전기 새 고양이 장난감</div>
+                <div class="deal-desc">고양이의 즐거운 사냥 본능. 😻</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩29,558</span> <span class="deal-price">₩11,528</span><span class="badge">61% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">5일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005005809517043.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Safe6dbf0c345439a864d2817bffba6393.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">3/5m 소중형견 자동 줄감개 산책 목줄</div>
+                <div class="deal-desc">댕댕이 산책! 이 가격 실화? 🐶</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩18,420</span> <span class="deal-price">₩8,842</span><span class="badge">52% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">1일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011667349388.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb73adfac1cd14052ace7f1f4972a0325o.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">스마트 탈취 청소, 프리미엄 투자. 🌟</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩1,039,837</span> <span class="deal-price">₩499,122</span><span class="badge">52% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005005239360963.html?aff_fcid=7e7868197eeb4cb388c38616e14b6099-1776322463364-06022-_c3zTY4yz&aff_fsk=_c3zTY4yz&aff_platform=api-new-link-generate&sk=_c3zTY4yz&aff_trace_key=7e7868197eeb4cb388c38616e14b6099-1776322463364-06022-_c3zTY4yz&terminal_id=439d5d3215964ab28965819561ebe742&afSmartRedirect=y" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S94e13cec75014cc6b5d3d02a6fbc26f5K.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">고양이 모래포집 방수매트</div>
+                <div class="deal-desc">모래발자국 안녕! 깔끔 냥이네!</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩22,095</span> <span class="deal-price">₩10,827</span><span class="badge">51% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">6시간 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005007123962156.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sd3b7ae559798439bb51141f096c583e2I.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">USB 투명 저소음 고양이 자동 급수기</div>
+                <div class="deal-desc">조용히 빛나는 냥이의 샘 💖</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩41,822</span> <span class="deal-price">₩20,493</span><span class="badge">51% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">2일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008404281818.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S77f58722e2a94de99ccc23353609946aa.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">고양이 강아지 자체발열 접이식 텐트 침대</div>
+                <div class="deal-desc">반려동물, 늘 따뜻하게 😌</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩43,061</span> <span class="deal-price">₩21,100</span><span class="badge">51% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">2일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008717493881.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S0b69ec9904d540e3a109f402c41026baz.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다용도 애완동물 털 제거 브러쉬</div>
+                <div class="deal-desc">털 폭탄 이제 그만! 가성비 굿!</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩15,362</span> <span class="deal-price">₩7,681</span><span class="badge">50% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">3일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005004979511228.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sde22d303ceea452c98220d74ab3eb0ef9.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다묘용 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">다묘용 앱 청소, 전문가가 인정한 품격. ✨</div>
+                <div class="badge-row"><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩1,196,910</span> <span class="deal-price">₩598,455</span><span class="badge">50% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005011845309660.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S180217b4aa4242caaef46a2b4f278cf0L.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">원형 골판지 고양이 스크래처</div>
+                <div class="deal-desc">긁는 즐거움, 우리 냥이 필수템.</div>
+                <div class="badge-row"><span class="limit-badge">⏰ 한정 수량</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩31,817</span> <span class="deal-price">₩16,227</span><span class="badge">49% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">5일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005008557641331.html?aff_fcid=a2f5772fe7f44538b7daa2b89ac44e6d-1776322473579-07396-_c4243HhF&aff_fsk=_c4243HhF&aff_platform=api-new-link-generate&sk=_c4243HhF&aff_trace_key=a2f5772fe7f44538b7daa2b89ac44e6d-1776322473579-07396-_c4243HhF&terminal_id=49c780278ba4485eb86cb62f002ee9f5&afSmartRedirect=y" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S3f66606d591c4dd58f1fe1bbde867f72v.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">고양이 DIY 스크래쳐 기둥</div>
+                <div class="deal-desc">우리 냥이 긁긁 본능! DIY 🐾</div>
+                <div class="badge-row"><span class="limit-badge">⏰ 한정 수량</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩7,043</span> <span class="deal-price">₩3,874</span><span class="badge">45% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">6시간 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005004866114766.html?aff_fcid=61c18e2d96b94508a004f286c714fa58-1776322483427-07015-_c3hZzbbr&aff_fsk=_c3hZzbbr&aff_platform=api-new-link-generate&sk=_c3hZzbbr&aff_trace_key=61c18e2d96b94508a004f286c714fa58-1776322483427-07015-_c3hZzbbr&terminal_id=bfb39d30b0b2404fa10703a57ca71711&afSmartRedirect=y" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S11cd929c634e43dcbbaf9266256c295cu.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">고양이 스크래처 소파 보호 매트</div>
+                <div class="deal-desc">소파는 내가 지킨다냥! 😼</div>
+                
+                <div class="price-row"><span class="deal-price">₩9,409</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">6시간 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://www.aliexpress.com/item/1005009721904518.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S4484e694e32b4249ba3c85b534b31994u.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">자동 장애물 회피 고양이 장난감</div>
+                <div class="deal-desc">냥이 심심할 틈 없어! 가성비템!</div>
+                
+                <div class="price-row"><span class="deal-price">₩5,994</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">5일 전 업데이트</div>
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009928768606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S462ea46b88734e989f407845fd6d04c6z.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 자동 스마트 고양이 화장실</div>
+                <div class="deal-desc">최첨단 위생, 전문가의 선택.</div>
+                
+                <div class="price-row"><span class="deal-price">₩407,389</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a></div>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener"
+           style="display:block;text-align:center;background:linear-gradient(135deg,#ff0000,#cc0000);color:white;text-decoration:none;padding:16px 20px;border-radius:16px;margin:24px 0 8px;font-weight:700;font-size:14px">
+            💌 매일 새 특가 알림 받기 → 유튜브 구독
+        </a>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+<script>
+(function(){
+  var T="http://168.107.3.136:5000/api/track";
+  var P=location.pathname.split("/").pop()||"index";
+  try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({page:P,action:"view"}),keepalive:true})}catch(e){}
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a.deal");
+    if(!a)return;
+    var n=a.querySelector(".deal-name");
+    var prod=n?n.textContent.trim():"";
+    try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({page:P,action:"click",product:prod}),keepalive:true})}catch(e){}
+  });
+})();
+</script>
+
+</body>
+</html>

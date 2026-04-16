@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="💎 십만원대 (100,000원 이상) | PawPawMeow">
+    <meta property="og:description" content="십만원대 펫 특가 3개! 알리익스프레스 100,000원 이상 상품 모음.">
+    <title>💎 십만원대 - PawPawMeow</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        :root { --accent:#ffd700; --accent-rgb:255,215,0; }
+        .top-bar { position:sticky; top:0; z-index:10;
+            padding:12px 16px; }
+        .top-bar a { font-size:14px; font-weight:600; text-decoration:none; }
+
+        .top-bar a:hover { text-decoration:underline; }
+        .band-hero { padding:40px 24px 32px; text-align:center; }
+        .hero-emoji { font-size:64px; line-height:1; }
+        .band-hero h1 { font-size:28px; font-weight:900; margin-top:12px; letter-spacing:-.01em; }
+        .hero-sub { font-size:13px; font-weight:700; margin-top:6px; opacity:.85; }
+        .band-hero .range { font-size:13px; margin-top:6px; opacity:.65; }
+        .prod-count { display:inline-block; margin-top:10px; font-size:13px; font-weight:700;
+            padding:5px 16px; border-radius:999px; }
+        .section { margin-bottom:32px; }
+        .section-header { display:flex; align-items:center; gap:10px;
+            padding:10px 0 10px 12px; border-left:4px solid currentColor; margin-bottom:12px; }
+        .sec-emoji { font-size:22px; } .sec-label { font-size:16px; font-weight:800; flex:1; }
+        .sec-badge { font-size:12px; font-weight:700; padding:3px 10px; border-radius:999px; }
+        .deal { display:flex; align-items:center; gap:14px; padding:16px; margin-bottom:12px;
+            text-decoration:none; border-radius:18px;
+            transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+        .deal:active { transform:scale(.98); }
+        .thumb { flex-shrink:0; overflow:hidden; display:flex;
+            align-items:center; justify-content:center; font-size:28px; aspect-ratio:1/1; }
+        .thumb img { width:100%; height:100%; object-fit:cover; display:block; aspect-ratio:1/1; }
+        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
+        .deal-info { flex:1; min-width:0; }
+        .deal-name { font-weight:700; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .deal-desc { font-size:12px; font-weight:600; margin-top:4px; line-height:1.3; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
+            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
+        .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
+        .rec-badge {
+            background:linear-gradient(135deg,#4fc3f7,#0288d1);
+            color:white; padding:3px 9px; border-radius:999px;
+            font-size:10px; font-weight:800; white-space:nowrap;
+        }
+
+        body.tier-luxury { background:radial-gradient(ellipse at top,#1a1530 0%,#0a0a14 60%,#000 100%);
+            background-attachment:fixed; color:#f5e8c7; }
+        .tier-luxury .top-bar { background:rgba(10,10,20,.85);
+            backdrop-filter:blur(14px);
+            border-bottom:1px solid rgba(255,215,0,.25); }
+        .tier-luxury .top-bar a { color:#FFD700; }
+        .tier-luxury .band-hero {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%);
+            border-bottom:1px solid rgba(255,215,0,.3); }
+        .tier-luxury .band-hero::before {
+            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 0%,
+                       rgba(255,215,0,.12) 45%,rgba(255,215,0,.25) 50%,
+                       rgba(255,215,0,.12) 55%,transparent 100%);
+            animation:shimmer 4.5s infinite linear; pointer-events:none; }
+        @keyframes shimmer { 0%{left:-100%} 100%{left:100%} }
+        .tier-luxury .hero-emoji { filter:drop-shadow(0 0 18px rgba(255,215,0,.6)); }
+        .tier-luxury .band-hero h1 {
+            background:linear-gradient(135deg,#fff1a8 0%,#FFD700 40%,#ffecb3 70%,#c9a227 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-size:32px; font-weight:900; letter-spacing:.02em;
+            text-shadow:0 0 30px rgba(255,215,0,.25); }
+        .tier-luxury .hero-sub { color:#FFD700; letter-spacing:.1em;
+            text-transform:uppercase; font-size:12px;
+            text-shadow:0 0 12px rgba(255,215,0,.4); }
+        .tier-luxury .range { color:#c9a227; }
+        .tier-luxury .prod-count {
+            color:#0a0a14; background:linear-gradient(135deg,#ffecb3,#FFD700);
+            box-shadow:0 0 20px rgba(255,215,0,.4); }
+        .tier-luxury .vip-banner {
+            position:relative; overflow:hidden;
+            background:linear-gradient(135deg,#1a1530 0%,#2d1b4e 50%,#1a1530 100%);
+            border:1px solid rgba(255,215,0,.5); border-radius:20px;
+            padding:20px 22px; margin:20px 0 24px;
+            box-shadow:0 0 30px rgba(255,215,0,.15),
+                       inset 0 1px 0 rgba(255,215,0,.3); }
+        .tier-luxury .vip-shimmer {
+            position:absolute; top:0; left:-100%; width:200%; height:100%;
+            background:linear-gradient(90deg,transparent 40%,
+                       rgba(255,215,0,.15) 50%,transparent 60%);
+            animation:shimmer 3.5s infinite linear; }
+        .tier-luxury .vip-content {
+            position:relative; display:flex; align-items:center; gap:16px; }
+        .tier-luxury .vip-crown { font-size:38px;
+            filter:drop-shadow(0 0 15px rgba(255,215,0,.7)); }
+        .tier-luxury .vip-title {
+            font-size:20px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            letter-spacing:.05em; }
+        .tier-luxury .vip-sub { font-size:12px; color:#ffecb3;
+            margin-top:2px; letter-spacing:.08em; }
+        .tier-luxury .section-header {
+            border-left-color:#FFD700 !important; }
+        .tier-luxury .sec-emoji { filter:drop-shadow(0 0 8px rgba(255,215,0,.4)); }
+        .tier-luxury .sec-label {
+            color:#FFD700; font-weight:900; letter-spacing:.03em;
+            text-shadow:0 0 10px rgba(255,215,0,.3); }
+        .tier-luxury .sec-badge {
+            background:rgba(255,215,0,.15) !important;
+            color:#FFD700 !important;
+            border:1px solid rgba(255,215,0,.4); }
+        .tier-luxury .deal {
+            background:linear-gradient(145deg,#14142a 0%,#0f0f1e 100%);
+            border:1px solid rgba(255,215,0,.35);
+            border-left:4px solid #FFD700 !important;
+            box-shadow:0 0 24px rgba(255,215,0,.10),
+                       0 2px 8px rgba(0,0,0,.5),
+                       inset 0 1px 0 rgba(255,215,0,.15); }
+        .tier-luxury .deal:hover {
+            transform:translateY(-3px);
+            border-color:rgba(255,215,0,.75);
+            box-shadow:0 0 36px rgba(255,215,0,.25),
+                       0 8px 24px rgba(0,0,0,.6),
+                       inset 0 1px 0 rgba(255,215,0,.25); }
+        .tier-luxury .thumb { width:100px; height:100px; border-radius:14px;
+            background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,215,0,.04));
+            border:2px solid rgba(255,215,0,.5);
+            box-shadow:0 0 18px rgba(255,215,0,.2),
+                       inset 0 0 10px rgba(255,215,0,.08); }
+        .tier-luxury .thumb img { width:100px; height:100px; }
+        .tier-luxury .deal-name {
+            font-size:16px; color:#fff5d1; font-weight:800; }
+        .tier-luxury .deal-desc { color:#FFD700; }
+        .tier-luxury .deal-price {
+            font-size:22px; font-weight:900;
+            background:linear-gradient(135deg,#fff1a8,#FFD700);
+            -webkit-background-clip:text; background-clip:text; color:transparent; }
+        .tier-luxury .deal-arrow { color:#FFD700; opacity:.85; }
+        .tier-luxury .vip-badge {
+            background:linear-gradient(135deg,#fff1a8,#FFD700,#c9a227);
+            color:#0a0a14; padding:3px 10px; border-radius:999px;
+            font-size:10px; font-weight:900; white-space:nowrap;
+            box-shadow:0 0 12px rgba(255,215,0,.5);
+            border:1px solid rgba(255,215,0,.8); }
+        .tier-luxury .footer { color:#c9a227; background:transparent; }
+        .tier-luxury .footer a { color:#FFD700; }
+
+    </style>
+</head>
+<body class="tier-luxury">
+    <div class="top-bar"><a href="deals.html">← 전체 카테고리</a></div>
+    <div class="band-hero">
+        <div class="hero-emoji">💎</div>
+        <h1>십만원대</h1>
+        <div class="hero-sub">🏆 최고급 엄선 상품</div>
+        <div class="range">100,000원 이상</div>
+        <div class="prod-count">3개 상품 · 2026년 04월 16일 기준</div>
+    </div>
+    <div class="container">
+        
+        <div class="vip-banner">
+            <div class="vip-shimmer"></div>
+            <div class="vip-content">
+                <div class="vip-crown">💎</div>
+                <div class="vip-text">
+                    <div class="vip-title">VIP 특가</div>
+                    <div class="vip-sub">최고급 엄선 상품</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        
+        <div class="section">
+            <div class="section-header" style="border-left-color:#ff8fab">
+                <span class="sec-emoji">🐱</span>
+                <span class="sec-label">고양이용품</span>
+                <span class="sec-badge"
+                      style="background:rgba(255,143,171,.12);color:#ff8fab">3개</span>
+            </div>
+            
+        <a href="https://ko.aliexpress.com/item/1005009928768606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S462ea46b88734e989f407845fd6d04c6z.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">앱 제어 자동 스마트 고양이 화장실</div>
+                <div class="deal-desc">최첨단 위생, 전문가의 선택.</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span></div>
+                <div class="price-row"><span class="deal-price">₩407,389</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005004979511228.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sde22d303ceea452c98220d74ab3eb0ef9.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">다묘용 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">다묘용 앱 청소, 전문가가 인정한 품격. ✨</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩1,196,910</span> <span class="deal-price">₩598,455</span><span class="badge">50% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005011667349388.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener" style="border-left-color:#ff8fab">
+            <div class="thumb" style="background:rgba(255,143,171,.12)"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sb73adfac1cd14052ace7f1f4972a0325o.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🐱</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스마트 앱 자동 청소 탈취 고양이 화장실</div>
+                <div class="deal-desc">스마트 탈취 청소, 프리미엄 투자. 🌟</div>
+                <div class="badge-row"><span class="vip-badge">👑 프리미엄</span><span class="pop-badge">👆 인기 TOP3</span><span class="hot-badge">🔥 오늘만 이 가격!</span></div>
+                <div class="price-row"><span class="deal-orig-price">₩1,039,837</span> <span class="deal-price">₩499,122</span><span class="badge">52% 할인</span></div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="deal-cta">👆 클릭하고 알리에서 확인!</div>
+            </div>
+            <div class="deal-arrow" style="color:#ff8fab">›</div>
+        </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+<script>
+(function(){
+  var T="http://168.107.3.136:5000/api/track";
+  var P=location.pathname.split("/").pop()||"index";
+  try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({page:P,action:"view"}),keepalive:true})}catch(e){}
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a.deal");
+    if(!a)return;
+    var n=a.querySelector(".deal-name");
+    var prod=n?n.textContent.trim():"";
+    try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({page:P,action:"click",product:prod}),keepalive:true})}catch(e){}
+  });
+})();
+</script>
+
+</body>
+</html>
