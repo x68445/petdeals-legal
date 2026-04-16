@@ -1594,7 +1594,7 @@ def _deduplicate_similar(products: list, max_per_cluster: int = 3) -> list:
 
 
 # ── Public API (logic identical to v2) ───────────────────────────────────────
-def update_deals_site(products: list) -> bool:
+def update_deals_site(products: list, push: bool = True) -> bool:
     """Generate deals.html + category_*.html and push to GitHub Pages."""
     from modules.category_mapper import (
         CATEGORIES, classify_product, classify_price_band, PRICE_BANDS
@@ -1765,10 +1765,17 @@ def update_deals_site(products: list) -> bool:
         f.write(sitemap_xml)
     print(f"[Deals] sitemap.xml ({len(sitemap_urls)} URLs)")
 
-    return _git_push("feat: SEO + category tracking + daily deals")
+    if push:
+        return _git_push("feat: SEO + category tracking + daily deals")
+    print("[deploy] push=False, skipping git push")
+    return True
 
 
 def _git_push(commit_msg: str) -> bool:
+    if os.environ.get("PETDEALS_NO_PUSH") == "1":
+        print("[git_push] Skipped: PETDEALS_NO_PUSH=1 is set")
+        return True
+
     def _run(cmd):
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=GIT_ROOT)
         return r.returncode == 0, r.stderr.strip()
@@ -1788,16 +1795,20 @@ def _git_push(commit_msg: str) -> bool:
 
 
 # Backward-compatible alias
-def update_deals_page(products: list) -> bool:
+def update_deals_page(products: list, push: bool = True) -> bool:
     """Deprecated alias for update_deals_site(). Kept for pipeline compatibility."""
-    return update_deals_site(products)
+    return update_deals_site(products, push=push)
 
 
 if __name__ == "__main__":
-    import json, sys
+    import argparse, json, sys
     sys.path.insert(0, BASE_DIR)
+    parser = argparse.ArgumentParser(description="Generate PetDeals HTML pages")
+    parser.add_argument("--no-push", action="store_true",
+                        help="Generate HTML but don't push to GitHub")
+    args = parser.parse_args()
     src = f"{BASE_DIR}/data/products.json"
     with open(src, encoding="utf-8") as f:
         prods = json.load(f)
     print(f"[Deals] Loaded {len(prods)} products from {src}")
-    update_deals_site(prods)
+    update_deals_site(prods, push=not args.no_push)
