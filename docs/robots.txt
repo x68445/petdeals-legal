@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://x68445.github.io/petdeals-legal/sitemap.xml
