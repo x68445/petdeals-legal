@@ -282,12 +282,15 @@ _MAIN_CSS = """
         }
         .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
 
-        /* Section headings */
+        /* Section headings -- accent bar is inline span, not border */
         .section-heading {
             font-size:18px; font-weight:800; color:#1a1a1a;
-            margin-top:32px; margin-bottom:16px; padding-left:16px;
-            border-left:4px solid transparent;
+            margin-top:32px; margin-bottom:16px; padding:0;
             display:flex; align-items:center; gap:8px;
+        }
+        .accent-bar {
+            display:inline-block; width:4px; height:20px;
+            border-radius:2px; flex-shrink:0;
         }
 
         /* Price band grid (same 2/3/4 col as cat-grid) */
@@ -651,7 +654,7 @@ def _main_page_html(today: str, total: int,
     if any_band:
         band_section = f"""
         <div class="section-heading"
-             style="border-left-color:#ff8c42">💰 가격대별</div>
+             ><span class="accent-bar" style="background:#ff8c42"></span>💰 가격대별</div>
         <div class="band-grid">{band_cards_html}</div>"""
 
     # 📂 Category cards
@@ -673,7 +676,7 @@ def _main_page_html(today: str, total: int,
 
     cat_section = f"""
         <div class="section-heading"
-             style="border-left-color:#607d8b">📂 카테고리별</div>
+             ><span class="accent-bar" style="background:#607d8b"></span>📂 카테고리별</div>
         <div class="cat-grid">{cards_html}</div>"""
 
     # Build product JSON for search/filter
@@ -760,8 +763,8 @@ def _main_page_html(today: str, total: int,
     </div>
     <div class="container">
         <div id="search-results" style="display:none">
-            <div class="section-heading" style="border-left-color:#ff6b35">
-                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+            <div class="section-heading">
+                <span class="accent-bar" style="background:#ff6b35"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
             </div>
             <div id="results-grid" class="results-grid"></div>
         </div>
@@ -879,6 +882,8 @@ def _cat_css(accent: str) -> str:
         }}
         .deal-arrow {{ font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }}
         .deal-cta {{ font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }}
+        .deal-disclaimer {{ font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }}
+        .deal-freshness {{ font-size:10px; color:#bbb; margin-top:2px; }}
         .rec-badge {{
             background:linear-gradient(135deg,#4fc3f7,#0288d1);
             color:white; padding:3px 9px; border-radius:999px;
@@ -992,6 +997,25 @@ def _render_deal_card(p: dict, idx: int,
                  if badges else "")
     desc_html = f'<div class="deal-desc">{desc}</div>' if desc else ""
     cta_html = '<div class="deal-cta">👆 클릭하고 알리에서 확인!</div>'
+    disclaimer_html = '<div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>'
+
+    # Freshness indicator
+    freshness_html = ""
+    updated_at = p.get("price_updated_at") or p.get("collected_at", "")
+    if updated_at:
+        try:
+            from datetime import datetime as _dt
+            ts = _dt.fromisoformat(updated_at.replace("Z", "+00:00"))
+            hours_ago = int((_dt.now() - ts.replace(tzinfo=None)).total_seconds() / 3600)
+            if hours_ago < 1:
+                freshness_html = '<div class="deal-freshness">방금 업데이트</div>'
+            elif hours_ago < 24:
+                freshness_html = f'<div class="deal-freshness">{hours_ago}시간 전 업데이트</div>'
+            else:
+                days = hours_ago // 24
+                freshness_html = f'<div class="deal-freshness">{days}일 전 업데이트</div>'
+        except Exception:
+            pass
 
     style_bits = []
     if border_accent:
@@ -1009,6 +1033,8 @@ def _render_deal_card(p: dict, idx: int,
                 {desc_html}
                 {badge_row}
                 <div class="price-row">{price_html}{badge_html}</div>
+                {disclaimer_html}
+                {freshness_html}
                 {cta_html}
             </div>
             <div class="deal-arrow"{arrow_style}>›</div>
@@ -1153,6 +1179,8 @@ _SHARED_BAND_CSS = """
             padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; }
         .deal-arrow { font-size:20px; opacity:.5; flex-shrink:0; }
         .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
         .rec-badge {
             background:linear-gradient(135deg,#4fc3f7,#0288d1);
             color:white; padding:3px 9px; border-radius:999px;
@@ -1545,6 +1573,8 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
         }
         .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
         .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
         .rec-badge {
             background:linear-gradient(135deg,#4fc3f7,#0288d1);
             color:white; padding:3px 9px; border-radius:999px;
