@@ -314,6 +314,29 @@
             text-align:center; padding:40px 16px;
             color:#aaa; font-size:14px;
         }
+        .countdown-banner {
+            display:flex; align-items:center; justify-content:center; gap:10px;
+            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            color:white; padding:10px 16px;
+            font-weight:700; font-size:14px;
+            max-width:760px; margin:0 auto;
+        }
+        .cb-icon { font-size:20px; }
+        .cb-timer {
+            background:rgba(0,0,0,.25); padding:4px 10px;
+            border-radius:6px; font-family:monospace;
+            font-size:15px; letter-spacing:.05em;
+        }
+        .yt-subscribe-cta {
+            display:block; text-align:center;
+            background:linear-gradient(135deg,#ff0000,#cc0000);
+            color:white; text-decoration:none;
+            padding:16px 20px; border-radius:16px;
+            margin:24px 0 8px; font-weight:700; font-size:14px;
+            box-shadow:0 4px 16px rgba(255,0,0,.2);
+            transition:transform .2s, box-shadow .2s;
+        }
+        .yt-subscribe-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,0,0,.3); }
         @media(max-width:640px) {
             .cat-label { font-size:13px !important; min-height:auto; }
             .cat-card { padding:14px 8px 12px; min-height:auto; }
@@ -361,6 +384,11 @@
                 <button class="fbtn" data-filter="disc" data-val="70">70%+</button>
             </div>
         </div>
+    </div>
+    <div class="countdown-banner" id="countdown-banner">
+        <span class="cb-icon">🔥</span>
+        <span class="cb-text">오늘만! 자정까지 특가</span>
+        <span class="cb-timer" id="countdown-timer">00:00:00</span>
     </div>
     <div class="container">
         <div id="search-results" style="display:none">
@@ -503,6 +531,9 @@
                  style="background:rgba(6,167,125,.12);color:#06a77d">20개</div>
         </a></div>
         </div>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-subscribe-cta">
+            💌 매일 새 특가 알림 받기 → 유튜브 구독
+        </a>
     </div>
     
     <div class="footer">
@@ -542,6 +573,27 @@
   var m=String(kst.getMonth()+1).padStart(2,"0");
   var d=String(kst.getDate()).padStart(2,"0");
   el.textContent=y+"년 "+m+"월 "+d+"일";
+})();
+</script>
+
+    
+<script>
+(function(){
+  var el=document.getElementById("countdown-timer");
+  if(!el)return;
+  function tick(){
+    var now=new Date();
+    var kst=new Date(now.getTime()+(9*60*60*1000)-(now.getTimezoneOffset()*60*1000));
+    var midnight=new Date(kst);
+    midnight.setHours(24,0,0,0);
+    var diff=midnight-kst;
+    if(diff<=0){el.textContent="00:00:00";return;}
+    var h=Math.floor(diff/3600000);
+    var m=Math.floor((diff%3600000)/60000);
+    var s=Math.floor((diff%60000)/1000);
+    el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+  }
+  tick();setInterval(tick,1000);
 })();
 </script>
 
