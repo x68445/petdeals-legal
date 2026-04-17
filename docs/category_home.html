@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description"        content="우리집 살림 카테고리 특가 21개! 알리익스프레스 최저가.">
+    <meta name="keywords"           content="알리익스프레스 특가, 펫용품 할인, 고양이 장난감, 강아지 용품, 캠핑용품, 최저가">
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="🏠 우리집 살림 특가 모음 | 냥댕라이프">
+    <meta property="og:description" content="우리집 살림 카테고리 특가 21개! 알리익스프레스 최저가.">
+    <meta property="og:image"       content="https://x68445.github.io/petdeals-legal/og-image.png">
+    <link rel="canonical" href="https://x68445.github.io/petdeals-legal/deals.html">
+    <title>🏠 우리집 살림 - 냥댕라이프</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Pretendard Variable', Pretendard, -apple-system,
+                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
+            color: #1a1a1a; min-height: 100vh;
+        }
+        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
+        .footer {
+            text-align:center; padding:32px 16px;
+            font-size:11px; color:#888; line-height:1.8;
+        }
+        .footer a { color:#bbb; text-decoration:none; }
+        .footer a:hover { text-decoration:underline; }
+        
+        .yt-banner {
+            display:flex; align-items:center; justify-content:space-between; gap:12px;
+            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
+            color:white; text-decoration:none;
+            border-radius:20px; padding:16px 20px;
+            margin:16px 0 14px;
+            box-shadow:0 6px 22px rgba(255,0,0,.25);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
+        .yt-banner:active { transform:scale(.98); }
+        .yt-left   { display:flex; align-items:center; gap:14px; }
+        .yt-icon   { font-size:32px; line-height:1; }
+        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
+        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
+        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
+
+        
+        :root { --accent:#ffa502; --accent-rgb:255,165,2; }
+
+        .top-bar {
+            position:sticky; top:0; z-index:10;
+            background:rgba(255,255,255,.95);
+            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+        }
+        .top-bar a {
+            color:var(--accent); font-size:14px; font-weight:500;
+            text-decoration:none;
+        }
+        .top-bar a:hover { text-decoration:underline; }
+
+        .cat-hero {
+            background: rgba(var(--accent-rgb),.07);
+            padding:32px 24px 28px; text-align:center;
+        }
+        .hero-emoji { font-size:56px; line-height:1; }
+        .cat-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
+        .prod-count {
+            display:inline-block; margin-top:8px; font-size:13px;
+            font-weight:600; color:var(--accent);
+            background:rgba(var(--accent-rgb),.10);
+            padding:4px 14px; border-radius:999px;
+        }
+
+        .deals { padding-top:16px; }
+        .deal {
+            display:flex; align-items:center; gap:14px;
+            background:white; border-radius:16px; padding:14px;
+            margin-bottom:12px; text-decoration:none; color:#1a1a1a;
+            box-shadow:0 2px 8px rgba(0,0,0,.04);
+            border-left:4px solid var(--accent);
+            transition:transform .2s ease, box-shadow .2s ease;
+        }
+        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+
+        .thumb {
+            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            overflow:hidden;
+            background:rgba(var(--accent-rgb),.12);
+            display:flex; align-items:center; justify-content:center;
+            font-size:28px;
+            aspect-ratio:1/1;
+        }
+        .thumb img { width:72px; height:72px; object-fit:cover; display:block; flex-shrink:0; aspect-ratio:1/1; }
+
+        .deal-name {
+            font-size:15px; font-weight:600; line-height:1.4;
+            display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+            overflow:hidden;
+        }
+        .deal-desc {
+            font-size:12px; color:#ff6b9d; font-weight:600;
+            margin-top:4px; line-height:1.3;
+        }
+        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
+
+        .deal { position:relative; transition:transform 250ms ease-out, box-shadow 250ms ease-out; }
+        .deal:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.12); }
+        .deal:active { transform:scale(.98); }
+        .thumb img { transition:transform 300ms ease-out; }
+        .deal:hover .thumb img { transform:scale(1.05); }
+        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
+        .deal-info { flex:1; min-width:0; }
+        .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+        .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
+        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
+            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
+        .rec-badge { background:linear-gradient(135deg,#4fc3f7,#0288d1); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .top-badge { position:absolute; top:8px; left:8px; z-index:2;
+            background:linear-gradient(135deg,#ffa502,#ff6348); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
+            box-shadow:0 2px 6px rgba(255,99,72,.3); white-space:nowrap; }
+        .new-badge { position:absolute; top:8px; right:8px; z-index:2;
+            background:linear-gradient(135deg,#ff6b9d,#ff4757); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
+            animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
+        @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+        .savings-text { font-size:12px; color:#ff4757; font-weight:700; margin-top:4px; }
+        .cta-button { display:block; text-align:center; margin-top:10px;
+            background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
+            padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
+            text-decoration:none; transition:transform 200ms ease, box-shadow 200ms ease; }
+        .cta-button:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(255,107,53,.3); }
+        .cta-button .cta-arrow { display:inline-block; transition:transform 250ms ease; }
+        .deal:hover .cta-button .cta-arrow { transform:translateX(4px); }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="deals.html">← 전체 카테고리</a>
+    </div>
+    <div class="cat-hero">
+        <div class="hero-emoji">🏠</div>
+        <h1>우리집 살림</h1>
+        <div class="prod-count">21개 상품</div>
+    </div>
+    <div class="container">
+        
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener" class="yt-banner">
+            <div class="yt-left">
+                <span class="yt-icon">🎬</span>
+                <div class="yt-text">
+                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
+                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                </div>
+            </div>
+            <div class="yt-arrow">▶</div>
+        </a>
+
+        <div class="deals">
+        <a href="https://ko.aliexpress.com/item/1005007654134709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S3320cd3d27e4466caa1555f13dcca234T.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">20온스 스텐 보온/보냉 텀블러</div>
+                <div class="deal-desc">일상의 온도를 완벽하게. ✨</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩63,366</span> <span class="deal-price">₩20,911</span><span class="badge">67% 할인</span></div>
+                <div class="savings-text">💰 42,455원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006273684699.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S4de27e5e418d4c73aa76334d1a2649291.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">대용량 스텐 로프 휴대용 보온병</div>
+                <div class="deal-desc">넉넉한 온기, 어디든 함께.</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩67,375</span> <span class="deal-price">₩22,234</span><span class="badge">67% 할인</span></div>
+                <div class="savings-text">💰 45,141원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005005077847626.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/HTB1OurlXUWF3KVjSZPhq6xclXXan.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">UPORS 스텐 로프 대용량 보온병</div>
+                <div class="deal-desc">UPORS, 스마트한 당신의 선택.</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩74,248</span> <span class="deal-price">₩24,502</span><span class="badge">67% 할인</span></div>
+                <div class="savings-text">💰 49,746원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007018052502.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">손잡이 휴대용 스텐 보온 텀블러</div>
+                <div class="deal-desc">휴대가 간편한 프리미엄 보온. 🚶‍♀️</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩54,873</span> <span class="deal-price">₩18,657</span><span class="badge">66% 할인</span></div>
+                <div class="savings-text">💰 36,216원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006703893558.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc4eb2c3bc1a64a768cffefd0c2c9fa04Y.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">304 스텐 로프 대용량 보온병</div>
+                <div class="deal-desc">304 스텐, 안심하고 즐기세요.</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩76,194</span> <span class="deal-price">₩25,906</span><span class="badge">66% 할인</span></div>
+                <div class="savings-text">💰 50,288원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006955917663.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S69be4eb48095497db10b9b20b10199f62.jpeg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">실리콘 주방 내열 장갑 냄비받침 2개</div>
+                <div class="deal-desc">주방 만능템! 이 가격에 2개!</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩20,865</span> <span class="deal-price">₩7,303</span><span class="badge">65% 할인</span></div>
+                <div class="savings-text">💰 13,562원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008248128422.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S22f960fcad9e44f2b20c2d705338ec1cS.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">TYESO 스텐 차량용 보온/보냉 텀블러</div>
+                <div class="deal-desc">이동 중에도 변함없는 상쾌함. 🛣️</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩38,915</span> <span class="deal-price">₩17,901</span><span class="badge">54% 할인</span></div>
+                <div class="savings-text">💰 21,014원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010119493142.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A09abb5a64e1c436fb17e2315d535fe45P.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">재사용 실리콘 에어프라이어 컵</div>
+                <div class="deal-desc">에어프라이어 청소 끝! 핵꿀템! ✨</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩16,974</span> <span class="deal-price">₩7,978</span><span class="badge">53% 할인</span></div>
+                <div class="savings-text">💰 8,996원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010117064884.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/A66c3449c725a42e3895e807b017677d2w.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">재사용 실리콘 에어프라이어 컵</div>
+                <div class="deal-desc">돈 아끼는 에프컵! 친환경까지!</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩17,031</span> <span class="deal-price">₩8,005</span><span class="badge">53% 할인</span></div>
+                <div class="savings-text">💰 9,026원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007306686600.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S520f79c1430f43d0bbde19a6971c5389Z.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스텐 진공 보온/보냉 휴대용 텀블러</div>
+                <div class="deal-desc">진공 기술로 지켜낸 신선함. 👍</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩36,161</span> <span class="deal-price">₩16,996</span><span class="badge">53% 할인</span></div>
+                <div class="savings-text">💰 19,165원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005010439333483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            <span class="top-badge">🏆 할인률 TOP10</span>
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Saf8c0c47ba9a47c5b7f58c6e91360048y.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">대용량 316 스텐 빨대 손잡이컵</div>
+                <div class="deal-desc">316 스텐의 품격, 편리함까지. ✅</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩80,540</span> <span class="deal-price">₩37,854</span><span class="badge">53% 할인</span></div>
+                <div class="savings-text">💰 42,686원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007539727974.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sf326843f2d27461793d963a56d1042e0m.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">380ml 귀여운 보온 빨대 텀블러</div>
+                <div class="deal-desc">사랑스러운 디자인, 실용적인 선택. 💖</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩33,889</span> <span class="deal-price">₩16,267</span><span class="badge">52% 할인</span></div>
+                <div class="savings-text">💰 17,622원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006997155691.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sff0c4d85727142f7b55d5649d2f1188b4.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">대용량 스텐 보온/보냉 여행 텀블러</div>
+                <div class="deal-desc">긴 여정, 완벽한 온도를.</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩48,318</span> <span class="deal-price">₩23,193</span><span class="badge">52% 할인</span></div>
+                <div class="savings-text">💰 25,125원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007476902341.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S864373b3d6bf40e28cb5defc3e4072b5G.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">500ml 스텐 휴대용 보온/보냉컵</div>
+                <div class="deal-desc">매일의 온도, 스마트하게. ✨</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩34,328</span> <span class="deal-price">₩16,821</span><span class="badge">51% 할인</span></div>
+                <div class="savings-text">💰 17,507원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005006259524823.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            <span class="new-badge">✨ NEW</span>
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Saf9b9f8dd1594f049bab4cc9bcbdd4be2.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">진공 밀폐 식품 보관 용기 세트</div>
+                <div class="deal-desc">사료 신선함! 매일 새것처럼! 👍</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩2,564</span> <span class="deal-price">₩1,282</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 1,282원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                <div class="deal-freshness">19시간 전 업데이트</div>
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008482808042.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Saf39238406d349528cd4621f711131f3v.png" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">에어프라이어용 일회용 방수 종이호일</div>
+                <div class="deal-desc">에프 청소 끝! 가격도 착해! ✨</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩15,308</span> <span class="deal-price">₩7,654</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 7,654원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005007636042849.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">스텐 진공 보온/보냉 텀블러 손잡이형</div>
+                <div class="deal-desc">안정적인 그립, 변함없는 온도. 🤝</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩36,692</span> <span class="deal-price">₩18,346</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 18,346원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008764004435.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sbc5418bc5ac14a858331a116c22e14e7H.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">TYESO 스텐 차량용 보온/보냉 텀블러</div>
+                <div class="deal-desc">운전의 품격을 높이는 선택. 🚗</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩39,528</span> <span class="deal-price">₩19,764</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 19,764원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008988427222.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/S5727a8deaf3d4740a785bc838e763a1dX.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">591ml 스텐 보온/보냉 빨대컵</div>
+                <div class="deal-desc">빨대컵의 편리함, 온도까지 완벽. 🥤</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩53,784</span> <span class="deal-price">₩26,892</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 26,892원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005009076236644.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Sc995b3a49bb34911b5027eac3e11862fz.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">1.5L 휴대용 스텐 보온병</div>
+                <div class="deal-desc">대용량 스텐, 오래가는 신선함. 🏞️</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩65,124</span> <span class="deal-price">₩32,562</span><span class="badge">50% 할인</span></div>
+                <div class="savings-text">💰 32,562원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a>
+        <a href="https://ko.aliexpress.com/item/1005008892568250.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow" class="deal" target="_blank" rel="nofollow sponsored noopener">
+            
+            
+            <div class="thumb"><img src="https://ae-pic-a1.aliexpress-media.com/kf/Ac3b014cf457245e09d10bb5291e9ae403.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<span>🏠</span>'"></div>
+            <div class="deal-info">
+                <div class="deal-name">에어프라이어 사각 일회용 종이호일</div>
+                <div class="deal-desc">사각 에프에 찰떡! 청소도 쓱!</div>
+                
+                <div class="price-row"><span class="deal-orig-price">₩6,293</span> <span class="deal-price">₩5,224</span><span class="badge">17% 할인</span></div>
+                <div class="savings-text">💰 1,069원 절약!</div>
+                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
+                
+                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+            </div>
+            <div class="deal-arrow">›</div>
+        </a></div>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener"
+           style="display:block;text-align:center;background:linear-gradient(135deg,#ff0000,#cc0000);color:white;text-decoration:none;padding:16px 20px;border-radius:16px;margin:24px 0 8px;font-weight:700;font-size:14px">
+            💌 매일 새 특가 알림 받기 → 유튜브 구독
+        </a>
+    </div>
+    
+    <div class="footer">
+        🕐 다음 업데이트: 내일 오전<br>
+        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        <a href="https://www.youtube.com/@MeowMeowDeals" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
+        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
+        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
+        <a href="privacy.html">개인정보처리방침</a>
+    </div>
+
+<script>
+(function(){
+  var T="http://168.107.3.136:5000/api/track";
+  var P=location.pathname.split("/").pop()||"index";
+  try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({page:P,action:"view"}),keepalive:true})}catch(e){}
+  document.addEventListener("click",function(e){
+    var a=e.target.closest("a.deal");
+    if(!a)return;
+    var n=a.querySelector(".deal-name");
+    var prod=n?n.textContent.trim():"";
+    try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({page:P,action:"click",product:prod}),keepalive:true})}catch(e){}
+  });
+})();
+</script>
+
+</body>
+</html>

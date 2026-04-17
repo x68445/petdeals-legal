@@ -114,10 +114,10 @@ def generate_thumbnail(product: dict, video_path: str) -> str | None:
                                 fill=(255, 215, 0, 255))
         draw.text((55, 68), "알리특가", fill=(255, 215, 0), font=font_tag)
 
-        # -- PawPawMeow logo (top-right) --
+        # -- 냥댕라이프 logo (top-right) --
         draw.rounded_rectangle([(750, 50), (1050, 110)], radius=12,
                                 fill=(26, 26, 26, 200))
-        draw.text((770, 62), "🐾 PawPawMeow",
+        draw.text((770, 62), "🐾 냥댕라이프",
                   fill=(255, 215, 0), font=font_logo)
 
         img.save(thumb_path, "JPEG", quality=90)

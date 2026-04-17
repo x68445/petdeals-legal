@@ -22,25 +22,20 @@ DOCS_DIR  = f"{BASE_DIR}/docs"
 DEALS_URL = "https://x68445.github.io/petdeals-legal/deals.html"
 GIT_ROOT  = BASE_DIR
 
-# ── Category accent colors (PawPawMeow pet palette) ──────────────────────────
+# ── Category accent colors (냥댕라이프 palette) ──────────────────────────
 _ACCENT = {
-    "cat":         "#ff8fab",
-    "dog":         "#ffb347",
-    "pet_common":  "#6ec5b8",
-    "pet_home":    "#7aa7ff",
-    "pet_toys":    "#ffd166",
+    "pet":         "#ff6b9d",
+    "home":        "#ffa502",
+    "outdoor":     "#ff7f50",
+    "fashion":     "#ff4757",
+    "sports":      "#f368e0",
+    "electronics": "#ff9ff3",
     "etc":         "#ff6b35",
-    "camping":     "#5d8a66",
-    "electronics": "#4a90e2",
-    "kitchen":     "#e76f51",
-    "fashion":     "#c77dff",
-    "car":         "#495867",
-    "sports":      "#06a77d",
 }
 
-# ── PawPawMeow branding constants ─────────────────────────────────────────────
+# ── 냥댕라이프 branding constants ─────────────────────────────────────────────
 YOUTUBE_URL = "https://www.youtube.com/@MeowMeowDeals"
-BRAND_NAME  = "PawPawMeow"
+BRAND_NAME  = "냥댕라이프"
 BRAND_TAGLINE = "🐾 오늘의 펫 특가"
 
 
@@ -57,18 +52,52 @@ def _hex_rgb(hex_color: str) -> str:
     return f"{int(h[0:2],16)},{int(h[2:4],16)},{int(h[4:6],16)}"
 
 
+def is_new_product(product: dict, now=None) -> bool:
+    collected = product.get("collected_at", "")
+    if not collected:
+        return False
+    try:
+        ts = datetime.fromisoformat(collected.replace("Z", "+00:00")).replace(tzinfo=None)
+        ref = now or datetime.now()
+        return (ref - ts).total_seconds() < 86400
+    except Exception:
+        return False
+
+
+def compute_top_discount_ids(products: list, n: int = 10) -> set:
+    scored = []
+    for p in products:
+        pid = p.get("id") or p.get("product_id")
+        disc = _safe_float(p.get("discount", 0))
+        if pid and disc > 0:
+            scored.append((disc, pid))
+    scored.sort(reverse=True)
+    return {pid for _, pid in scored[:n]}
+
+
+def compute_savings(product: dict) -> int:
+    price = _safe_float(product.get("price", 0))
+    disc = _safe_float(product.get("discount", 0))
+    if price > 0 and 0 < disc < 100:
+        krw = int(price * 1350) or int(_safe_float(product.get("price_krw", 0)))
+        orig = int(krw / (1 - disc / 100)) if krw > 0 else 0
+        return max(orig - krw, 0)
+    orig_price = _safe_float(product.get("target_original_price", 0))
+    if orig_price > 0 and price > 0:
+        return max(int((orig_price - price) * 1350), 0)
+    return 0
+
+
 # ── Shared card CSS (identical across cat / band / special_deals pages) ────────
 _CARD_BASE_CSS = """
+        .deal { position:relative; transition:transform 250ms ease-out, box-shadow 250ms ease-out; }
+        .deal:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.12); }
         .deal:active { transform:scale(.98); }
+        .thumb img { transition:transform 300ms ease-out; }
+        .deal:hover .thumb img { transform:scale(1.05); }
         .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
         .deal-info { flex:1; min-width:0; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
-        .pop-badge { background:linear-gradient(135deg,#ffd166,#ffb347); color:#5a3a00;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
-        .hot-badge { background:linear-gradient(135deg,#ff4757,#ff6b35); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
-        .limit-badge { background:linear-gradient(135deg,#845ec2,#5f27cd); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
         .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
             padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
@@ -77,6 +106,23 @@ _CARD_BASE_CSS = """
         .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
         .rec-badge { background:linear-gradient(135deg,#4fc3f7,#0288d1); color:white;
             padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .top-badge { position:absolute; top:8px; left:8px; z-index:2;
+            background:linear-gradient(135deg,#ffa502,#ff6348); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
+            box-shadow:0 2px 6px rgba(255,99,72,.3); white-space:nowrap; }
+        .new-badge { position:absolute; top:8px; right:8px; z-index:2;
+            background:linear-gradient(135deg,#ff6b9d,#ff4757); color:white;
+            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
+            animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
+        @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
+        .savings-text { font-size:12px; color:#ff4757; font-weight:700; margin-top:4px; }
+        .cta-button { display:block; text-align:center; margin-top:10px;
+            background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
+            padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
+            text-decoration:none; transition:transform 200ms ease, box-shadow 200ms ease; }
+        .cta-button:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(255,107,53,.3); }
+        .cta-button .cta-arrow { display:inline-block; transition:transform 250ms ease; }
+        .deal:hover .cta-button .cta-arrow { transform:translateX(4px); }
 """
 
 
@@ -740,11 +786,11 @@ def _main_page_html(today: str, total: int,
 
     head = _head(
         title=f"🐾 {BRAND_NAME} 오늘의 특가",
-        og_title=f"PawMeowDeals - 오늘의 알리 특가",
-        og_desc=f"매일 업데이트! 펫용품/캠핑/전자/패션 최저가 모음",
+        og_title=f"냥댕라이프 - 오늘의 특가",
+        og_desc=f"냥댕라이프 - 우리 가족 댕냥이부터 집안 살림까지, 매일 엄선 특가",
         extra_css=_MAIN_CSS + _SEARCH_CSS,
-        meta_desc="매일 업데이트되는 알리익스프레스 최저가 특가. 펫용품, 캠핑, 전자기기, 패션 할인",
-        meta_keywords="알리익스프레스 특가, 펫용품 할인, 고양이 장난감, 강아지 용품, 캠핑용품, 최저가",
+        meta_desc="냥댕라이프 - 우리 가족 댕냥이부터 집안 살림까지, 매일 엄선 특가. 반려동물, 살림, 패션, 전자 할인",
+        meta_keywords="냥댕라이프, 반려동물 할인, 고양이 용품, 강아지 용품, 집안 살림, 캠핑, 최저가",
     )
     return f"""<!DOCTYPE html>
 <html lang="ko">
@@ -753,7 +799,7 @@ def _main_page_html(today: str, total: int,
     <div class="site-header">
         <span class="flame">🐾</span>
         <h1>{BRAND_NAME} 오늘의 특가</h1>
-        <div class="brand-sub">매일 엄선한 냥이·멍멍이 특가 🐱🐶</div>
+        <div class="brand-sub">우리집 댕냥이 & 라이프 특가 🐱🐶</div>
         <p><span id="update-date">{today}</span> 업데이트 · 총 {total}개 상품</p>
         {_WAVE_SVG}
     </div>
@@ -885,6 +931,23 @@ def _cat_css(accent: str) -> str:
 """ + _CARD_BASE_CSS
 
 
+def _redirect_html(target_filename: str, base_url: str) -> str:
+    target_url = f"{base_url}/{target_filename}"
+    return f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이동 중... - {BRAND_NAME}</title>
+<meta http-equiv="refresh" content="0; url={target_filename}">
+<link rel="canonical" href="{target_url}">
+<script>window.location.replace("{target_filename}");</script>
+</head>
+<body>
+<p>페이지가 이동되었습니다. <a href="{target_filename}">여기를 클릭</a>하세요.</p>
+</body>
+</html>"""
+
+
 def _category_page_html(key: str, emoji: str, label: str,
                          products: list, today: str) -> str:
     accent = _ACCENT.get(key, "#9e9e9e")
@@ -896,9 +959,15 @@ def _category_page_html(key: str, emoji: str, label: str,
                         _safe_float(p.get("price", 0)))
     )
 
+    top_ids = compute_top_discount_ids(sorted_prods)
+    now = datetime.now()
     cards_html = ""
     for idx, p in enumerate(sorted_prods):
-        cards_html += _render_deal_card(p, idx, fallback_emoji=emoji)
+        cards_html += _render_deal_card(
+            p, idx, fallback_emoji=emoji,
+            top_discount_ids=top_ids,
+            is_new=is_new_product(p, now),
+        )
 
     head = _head(
         title=f"{emoji} {label} - {BRAND_NAME}",
@@ -936,11 +1005,10 @@ def _render_deal_card(p: dict, idx: int,
                       border_accent: str | None = None,
                       thumb_bg_rgb: str | None = None,
                       arrow_color: str | None = None,
-                      extra_badge_html: str = "") -> str:
-    """Render one <a class='deal'> card with top-3 인기 and 50%+ 한정 badges.
-
-    idx: rank within the sorted_prods list (0-based). idx<3 -> 인기 badge.
-    """
+                      extra_badge_html: str = "",
+                      top_discount_ids: set | None = None,
+                      is_new: bool = False) -> str:
+    """Render one <a class='deal'> card with badges and CTA."""
     name  = (p.get("name_ko") or p.get("product_title") or p.get("name", ""))[:50]
     desc  = (p.get("name_desc") or "").strip()
     price = _safe_float(p.get("price", 0))
@@ -980,17 +1048,21 @@ def _render_deal_card(p: dict, idx: int,
         badges.append('<span class="rec-badge">💎 추천</span>')
     if extra_badge_html:
         badges.append(extra_badge_html)
-    if idx < 3:
-        badges.append('<span class="pop-badge">👆 인기 TOP3</span>')
-    if disc >= 50:
-        badges.append('<span class="hot-badge">🔥 오늘만 이 가격!</span>')
-    elif disc >= 30:
-        badges.append('<span class="limit-badge">⏰ 한정 수량</span>')
     badge_row = (f'<div class="badge-row">{"".join(badges)}</div>'
                  if badges else "")
     desc_html = f'<div class="deal-desc">{desc}</div>' if desc else ""
-    cta_html = '<div class="deal-cta">👆 클릭하고 알리에서 확인!</div>'
     disclaimer_html = '<div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>'
+
+    _top_ids = top_discount_ids or set()
+    pid = p.get("id") or p.get("product_id")
+    show_top = pid and pid in _top_ids
+    show_new = is_new
+    savings = compute_savings(p)
+
+    top_badge_html = '<span class="top-badge">🏆 할인률 TOP10</span>' if show_top else ""
+    new_badge_html = '<span class="new-badge">✨ NEW</span>' if show_new else ""
+    savings_html = f'<div class="savings-text">💰 {savings:,}원 절약!</div>' if savings > 0 else ""
+    cta_btn_html = f'<div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>'
 
     # Freshness indicator
     freshness_html = ""
@@ -1020,15 +1092,18 @@ def _render_deal_card(p: dict, idx: int,
 
     return f"""
         <a href="{link}" class="deal" target="_blank" rel="nofollow sponsored noopener"{deal_style}>
+            {top_badge_html}
+            {new_badge_html}
             <div class="thumb"{thumb_style}>{thumb_inner}</div>
             <div class="deal-info">
                 <div class="deal-name">{name}</div>
                 {desc_html}
                 {badge_row}
                 <div class="price-row">{price_html}{badge_html}</div>
+                {savings_html}
                 {disclaimer_html}
                 {freshness_html}
-                {cta_html}
+                {cta_btn_html}
             </div>
             <div class="deal-arrow"{arrow_style}>›</div>
         </a>"""
@@ -1053,12 +1128,14 @@ def _price_band_page_html(band: dict, grouped_by_cat: dict,
     else:
         force_badge = ""
 
+    now = datetime.now()
     sections_html = ""
     for cat_key, prods in grouped_by_cat.items():
         ce, cl = cat_meta.get(cat_key, ("📦", cat_key))
         cat_accent = _ACCENT.get(cat_key, "#9e9e9e")
         cat_rgb    = _hex_rgb(cat_accent)
 
+        top_ids = compute_top_discount_ids(prods)
         cards_html = ""
         for idx, p in enumerate(prods):
             cards_html += _render_deal_card(
@@ -1066,6 +1143,8 @@ def _price_band_page_html(band: dict, grouped_by_cat: dict,
                 border_accent=cat_accent, thumb_bg_rgb=cat_rgb,
                 arrow_color=cat_accent,
                 extra_badge_html=force_badge,
+                top_discount_ids=top_ids,
+                is_new=is_new_product(p, now),
             )
 
         sections_html += f"""
@@ -1296,18 +1375,6 @@ def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
             padding:2px 8px !important;
             border-radius:3px !important;
             font-size:10px !important; }
-        .tier-premium .pop-badge,
-        .tier-premium .hot-badge,
-        .tier-premium .limit-badge {
-            background:transparent !important;
-            color:#a08968 !important;
-            border:1px solid #d4c5a9;
-            box-shadow:none;
-            padding:2px 8px;
-            border-radius:3px;
-            font-weight:600;
-            font-size:10px;
-            letter-spacing:.03em; }
         .tier-premium .rec-badge {
             background:rgba(212,197,169,.15);
             color:#8b7355;
@@ -1434,18 +1501,22 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
     # Build category lookup: key -> (emoji, label)
     cat_meta = {key: (emoji, label) for key, emoji, label in categories}
 
+    now = datetime.now()
     sections_html = ""
     for key, prods in grouped.items():
         emoji, label = cat_meta.get(key, ("📦", key))
         accent = _ACCENT.get(key, "#9e9e9e")
         rgb    = _hex_rgb(accent)
 
+        top_ids = compute_top_discount_ids(prods)
         cards_html = ""
         for idx, p in enumerate(prods):
             cards_html += _render_deal_card(
                 p, idx, fallback_emoji=emoji,
                 border_accent=accent, thumb_bg_rgb=rgb,
                 arrow_color=accent,
+                top_discount_ids=top_ids,
+                is_new=is_new_product(p, now),
             )
 
         sections_html += f"""
@@ -1740,14 +1811,28 @@ def update_deals_site(products: list, push: bool = True) -> bool:
         print(f"[Deals] category_{key}.html ({len(page_html):,} bytes, {len(prods)} products)")
         written_keys.add(key)
 
-    # Remove stale category pages
+    # Redirect old category URLs to new merged categories
+    _CATEGORY_REDIRECTS = {
+        "cat": "pet", "dog": "pet", "pet_common": "pet", "pet_toys": "pet",
+        "pet_home": "home", "kitchen": "home",
+        "camping": "outdoor", "car": "outdoor",
+    }
+    base_url = "https://x68445.github.io/petdeals-legal"
+    for old_key, new_key in _CATEGORY_REDIRECTS.items():
+        if old_key not in written_keys:
+            redirect_html = _redirect_html(f"category_{new_key}.html", base_url)
+            with open(f"{DOCS_DIR}/category_{old_key}.html", "w", encoding="utf-8") as f:
+                f.write(redirect_html)
+
+    # Remove stale category pages (skip redirects)
+    redirect_keys = set(_CATEGORY_REDIRECTS.keys())
     for stale in Path(DOCS_DIR).glob("category_*.html"):
-        if stale.stem.replace("category_", "") not in written_keys:
+        stem_key = stale.stem.replace("category_", "")
+        if stem_key not in written_keys and stem_key not in redirect_keys:
             stale.unlink()
             print(f"[Deals] Removed stale: {stale.name}")
 
-    # Generate sitemap.xml
-    base_url = "https://x68445.github.io/petdeals-legal"
+    # Generate sitemap.xml (base_url defined above in redirect block)
     today_iso = datetime.now().strftime("%Y-%m-%d")
     sitemap_urls = [f"{base_url}/deals.html"]
     if special_total > 0:
