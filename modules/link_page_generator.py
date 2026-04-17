@@ -79,12 +79,12 @@ def compute_savings(product: dict) -> int:
     price = _safe_float(product.get("price", 0))
     disc = _safe_float(product.get("discount", 0))
     if price > 0 and 0 < disc < 100:
-        krw = int(price * 1350) or int(_safe_float(product.get("price_krw", 0)))
+        krw = int(price) or int(_safe_float(product.get("price_krw", 0)))
         orig = int(krw / (1 - disc / 100)) if krw > 0 else 0
         return max(orig - krw, 0)
     orig_price = _safe_float(product.get("target_original_price", 0))
     if orig_price > 0 and price > 0:
-        return max(int((orig_price - price) * 1350), 0)
+        return max(int(orig_price - price), 0)
     return 0
 
 
@@ -95,7 +95,6 @@ _CARD_BASE_CSS = """
         .deal:active { transform:scale(.98); }
         .thumb img { transition:transform 300ms ease-out; }
         .deal:hover .thumb img { transform:scale(1.05); }
-        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
         .deal-info { flex:1; min-width:0; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
@@ -115,7 +114,10 @@ _CARD_BASE_CSS = """
             padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
             animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
         @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-        .savings-text { font-size:12px; color:#ff4757; font-weight:700; margin-top:4px; }
+        .discount-hero { font-size:28px; font-weight:900; color:#ff4757; text-align:center;
+            margin:10px 0 4px; letter-spacing:1px;
+            background:linear-gradient(135deg,#ff4757,#ff6b6b); -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent; background-clip:text; }
         .cta-button { display:block; text-align:center; margin-top:10px;
             background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
             padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
@@ -205,7 +207,7 @@ _DATE_JS = """
 _FOOTER = f"""
     <div class="footer">
         🕐 다음 업데이트: 내일 오전<br>
-        매일 새로운 펫 특가가 업데이트됩니다!<br>
+        매일 새로운 우리집 라이프 특가가 업데이트됩니다!<br>
         <a href="{YOUTUBE_URL}" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
         제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
         <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
@@ -701,9 +703,9 @@ def _main_page_html(today: str, total: int,
     # 💰 Price band cards
     band_counts = band_counts or {}
     band_cards_html = ""
-    band_ranges = {"price_1k": "1,000-9,999원",
-                   "price_10k": "10,000-99,999원",
-                   "price_100k": "100,000원 이상"}
+    band_ranges = {"price_1k": "10-29% 할인",
+                   "price_10k": "30-49% 할인",
+                   "price_100k": "50%+ 할인"}
     any_band = False
     for band in PRICE_BANDS:
         key    = band["key"]
@@ -730,7 +732,7 @@ def _main_page_html(today: str, total: int,
     if any_band:
         band_section = f"""
         <div class="section-heading"
-             ><span class="accent-bar" style="background:#ff8c42"></span>💰 가격대별</div>
+             ><span class="accent-bar" style="background:#ff8c42"></span>🔥 할인별</div>
         <div class="band-grid">{band_cards_html}</div>"""
 
     # 📂 Category cards
@@ -764,13 +766,13 @@ def _main_page_html(today: str, total: int,
             name = (p.get("name_ko") or p.get("product_title") or "")[:50]
             if not name:
                 continue
-            krw = int(_safe_float(p.get("price", 0)) * 1350)
+            krw = int(_safe_float(p.get("price", 0)))
             disc = int(_safe_float(p.get("discount", 0)))
             orig_krw = 0
             if disc > 0 and krw > 0:
                 orig_krw = int(krw / (1 - disc / 100)) if disc < 100 else 0
             elif _safe_float(p.get("target_original_price", 0)) > 0:
-                orig_krw = int(_safe_float(p.get("target_original_price", 0)) * 1350)
+                orig_krw = int(_safe_float(p.get("target_original_price", 0)))
             slim.append({
                 "n": name,
                 "d": (p.get("name_desc") or "")[:25],
@@ -811,20 +813,19 @@ def _main_page_html(today: str, total: int,
         <div class="filter-row" id="filter-row">
             <div class="filter-group">
                 <button class="fbtn active" data-filter="price" data-val="">전체</button>
-                <button class="fbtn" data-filter="price" data-val="1k">천원대</button>
-                <button class="fbtn" data-filter="price" data-val="10k">만원대</button>
-                <button class="fbtn" data-filter="price" data-val="100k">십만원+</button>
+                <button class="fbtn" data-filter="price" data-val="1k">💰가성비</button>
+                <button class="fbtn" data-filter="price" data-val="10k">🔥핫딜</button>
+                <button class="fbtn" data-filter="price" data-val="100k">💎초특가</button>
             </div>
             <div class="filter-group">
                 <button class="fbtn active" data-filter="cat" data-val="">전체</button>
-                <button class="fbtn" data-filter="cat" data-val="cat">🐱고양이</button>
-                <button class="fbtn" data-filter="cat" data-val="dog">🐶강아지</button>
-                <button class="fbtn" data-filter="cat" data-val="camping">⛺캠핑</button>
-                <button class="fbtn" data-filter="cat" data-val="electronics">💻전자</button>
-                <button class="fbtn" data-filter="cat" data-val="kitchen">🍳주방</button>
+                <button class="fbtn" data-filter="cat" data-val="pet">🐾반려동물</button>
+                <button class="fbtn" data-filter="cat" data-val="home">🏠우리집</button>
+                <button class="fbtn" data-filter="cat" data-val="outdoor">🚗나들이</button>
                 <button class="fbtn" data-filter="cat" data-val="fashion">👕패션</button>
-                <button class="fbtn" data-filter="cat" data-val="car">🚗자동차</button>
-                <button class="fbtn" data-filter="cat" data-val="sports">🏋️스포츠</button>
+                <button class="fbtn" data-filter="cat" data-val="sports">💪건강</button>
+                <button class="fbtn" data-filter="cat" data-val="electronics">💻전자</button>
+                <button class="fbtn" data-filter="cat" data-val="etc">🔥추천템</button>
             </div>
             <div class="filter-group">
                 <button class="fbtn active" data-filter="disc" data-val="">전체</button>
@@ -926,7 +927,9 @@ def _cat_css(accent: str) -> str:
             font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3;
         }}
-        .deal-price {{ font-size:18px; font-weight:800; color:#1a1a1a; }}
+        .discount-hero {{ font-size:28px; font-weight:900; text-align:center; margin:10px 0 4px;
+            letter-spacing:1px; background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }}
         .deal-arrow {{ font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }}
 """ + _CARD_BASE_CSS
 
@@ -1013,7 +1016,7 @@ def _render_deal_card(p: dict, idx: int,
     desc  = (p.get("name_desc") or "").strip()
     price = _safe_float(p.get("price", 0))
     disc  = _safe_float(p.get("discount", 0))
-    krw   = int(price * 1350) or int(_safe_float(p.get("price_krw", 0)))
+    krw   = int(price) or int(_safe_float(p.get("price_krw", 0)))
     link  = p.get("affiliate_link", "#")
     img   = p.get("image_url") or p.get("product_main_image_url", "")
     if not name or not link or link == "#":
@@ -1024,23 +1027,11 @@ def _render_deal_card(p: dict, idx: int,
         f' onerror="this.outerHTML=\'<span>{fallback_emoji}</span>\'">'
         if img else fallback_emoji
     )
-    # Calculate original price from discount
-    orig_krw = 0
-    if disc > 0 and krw > 0:
-        orig_krw = int(krw / (1 - disc / 100)) if disc < 100 else 0
-    elif _safe_float(p.get("target_original_price", 0)) > 0:
-        orig_krw = int(_safe_float(p.get("target_original_price", 0)) * 1350)
-
-    if orig_krw > krw > 0 and disc >= 10:
-        price_html = (
-            f'<span class="deal-orig-price">₩{orig_krw:,}</span>'
-            f' <span class="deal-price">₩{krw:,}</span>'
-        )
-    elif krw:
-        price_html = f'<span class="deal-price">₩{krw:,}</span>'
+    # Discount hero (no price display -- users check on AliExpress)
+    if disc >= 10:
+        discount_hero_html = f'<div class="discount-hero">{int(disc)}% OFF</div>'
     else:
-        price_html = ""
-    badge_html = f'<span class="badge">{int(disc)}% 할인</span>' if disc >= 10 else ""
+        discount_hero_html = ""
 
     commission = _safe_float(p.get("commission_rate", "0"))
     badges = []
@@ -1051,18 +1042,15 @@ def _render_deal_card(p: dict, idx: int,
     badge_row = (f'<div class="badge-row">{"".join(badges)}</div>'
                  if badges else "")
     desc_html = f'<div class="deal-desc">{desc}</div>' if desc else ""
-    disclaimer_html = '<div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>'
+    disclaimer_html = '<div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>'
 
     _top_ids = top_discount_ids or set()
     pid = p.get("id") or p.get("product_id")
     show_top = pid and pid in _top_ids
     show_new = is_new
-    savings = compute_savings(p)
-
     top_badge_html = '<span class="top-badge">🏆 할인률 TOP10</span>' if show_top else ""
     new_badge_html = '<span class="new-badge">✨ NEW</span>' if show_new else ""
-    savings_html = f'<div class="savings-text">💰 {savings:,}원 절약!</div>' if savings > 0 else ""
-    cta_btn_html = f'<div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>'
+    cta_btn_html = '<div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>'
 
     # Freshness indicator
     freshness_html = ""
@@ -1099,8 +1087,7 @@ def _render_deal_card(p: dict, idx: int,
                 <div class="deal-name">{name}</div>
                 {desc_html}
                 {badge_row}
-                <div class="price-row">{price_html}{badge_html}</div>
-                {savings_html}
+                {discount_hero_html}
                 {disclaimer_html}
                 {freshness_html}
                 {cta_btn_html}
@@ -1158,9 +1145,9 @@ def _price_band_page_html(band: dict, grouped_by_cat: dict,
             {cards_html}
         </div>"""
 
-    band_ranges = {"price_1k": "1,000-9,999원",
-                   "price_10k": "10,000-99,999원",
-                   "price_100k": "100,000원 이상"}
+    band_ranges = {"price_1k": "10-29% 할인",
+                   "price_10k": "30-49% 할인",
+                   "price_100k": "50%+ 할인"}
     rng = band_ranges.get(band["key"], "")
 
     extra_css = _band_tier_css(tier, accent, rgb)
@@ -1285,7 +1272,7 @@ def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
         .tier-light .deal-desc { display:none; }
         .tier-light .badge-row { display:none; }
         .tier-light .badge { display:none; }
-        .tier-light .deal-price { font-size:15px; font-weight:600; color:#333; }
+        .tier-light .discount-hero { font-size:20px; -webkit-text-fill-color:#333; }
         .tier-light .deal-arrow { color:#ccc; font-size:16px; }
 """
 
@@ -1360,10 +1347,9 @@ def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
             font-family: Georgia, 'Times New Roman', serif;
             line-height:1.45; }
         .tier-premium .deal-desc { color:#a08968; font-weight:400; font-size:11px; }
-        .tier-premium .deal-price {
-            font-size:17px;
-            font-weight:700;
-            color:#2a2520;
+        .tier-premium .discount-hero {
+            font-size:24px;
+            -webkit-text-fill-color:#2a2520;
             font-family: Georgia, 'Times New Roman', serif; }
         .tier-premium .deal-arrow { color:#c0b8aa; }
         .tier-premium .badge {
@@ -1475,10 +1461,11 @@ def _band_tier_css(tier: str, accent: str, rgb: str) -> str:
         .tier-luxury .deal-name {
             font-size:16px; color:#fff5d1; font-weight:800; }
         .tier-luxury .deal-desc { color:#FFD700; }
-        .tier-luxury .deal-price {
-            font-size:22px; font-weight:900;
+        .tier-luxury .discount-hero {
+            font-size:30px;
             background:linear-gradient(135deg,#fff1a8,#FFD700);
-            -webkit-background-clip:text; background-clip:text; color:transparent; }
+            -webkit-background-clip:text; background-clip:text;
+            -webkit-text-fill-color:transparent; }
         .tier-luxury .deal-arrow { color:#FFD700; opacity:.85; }
         .tier-luxury .vip-badge {
             background:linear-gradient(135deg,#fff1a8,#FFD700,#c9a227);
@@ -1594,7 +1581,6 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
         }
         .deal-desc { font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3; }
-        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
         .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
     """ + _CARD_BASE_CSS
 
@@ -1682,8 +1668,8 @@ def update_deals_site(products: list, push: bool = True) -> bool:
         pid = p.get("product_id") or p.get("id", "")
         if pid and pid in seen_ids:
             continue
-        price_usd = _safe_float(p.get("price", 0))
-        if int(price_usd * 1350) < 1000:
+        price_krw = _safe_float(p.get("price", 0))
+        if int(price_krw) < 1000:
             dropped_cheap += 1
             continue
         if pid:

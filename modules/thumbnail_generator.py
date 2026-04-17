@@ -76,7 +76,7 @@ def generate_thumbnail(product: dict, video_path: str) -> str | None:
         discount = float(str(product.get("discount", 0)).replace("%", "") or 0)
         price = float(str(product.get("price", 0) or product.get("target_sale_price", 0))
                       .replace("$", "").replace(",", "") or 0)
-        krw = int(price * 1350)
+        krw = int(price)
 
         # -- Price badge (bottom, dark gold+black) --
         badge_y = 1600
@@ -102,7 +102,7 @@ def generate_thumbnail(product: dict, video_path: str) -> str | None:
         else:
             draw.text((80, badge_y + 20), "알리특가!",
                       fill=(255, 215, 0), font=font_big)
-        draw.text((80, badge_y + 120), f"₩{krw:,}",
+        draw.text((80, badge_y + 120), "알리에서 확인",
                   fill="white", font=font_med)
         draw.text((80, badge_y + 190), "오늘의 특가",
                   fill=(255, 215, 0, 180), font=font_sm)

@@ -105,7 +105,9 @@
             font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3;
         }
-        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .discount-hero { font-size:28px; font-weight:900; text-align:center; margin:10px 0 4px;
+            letter-spacing:1px; background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
 
         .deal { position:relative; transition:transform 250ms ease-out, box-shadow 250ms ease-out; }
@@ -113,7 +115,6 @@
         .deal:active { transform:scale(.98); }
         .thumb img { transition:transform 300ms ease-out; }
         .deal:hover .thumb img { transform:scale(1.05); }
-        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
         .deal-info { flex:1; min-width:0; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
@@ -133,7 +134,10 @@
             padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
             animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
         @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-        .savings-text { font-size:12px; color:#ff4757; font-weight:700; margin-top:4px; }
+        .discount-hero { font-size:28px; font-weight:900; color:#ff4757; text-align:center;
+            margin:10px 0 4px; letter-spacing:1px;
+            background:linear-gradient(135deg,#ff4757,#ff6b6b); -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent; background-clip:text; }
         .cta-button { display:block; text-align:center; margin-top:10px;
             background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
             padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
@@ -175,11 +179,10 @@
                 <div class="deal-name">LED 식물재배기 (육묘용)</div>
                 <div class="deal-desc">집에서 식물 키워요! 쑥쑥 잘 자라요! 🌱</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩2,001</span> <span class="deal-price">₩1,461</span><span class="badge">27% 할인</span></div>
-                <div class="savings-text">💰 540원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">27% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -191,11 +194,10 @@
                 <div class="deal-name">USB 컵 워머 전기 보온패드</div>
                 <div class="deal-desc">내 컵의 완벽한 온도 유지.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩35,014</span> <span class="deal-price">₩11,905</span><span class="badge">66% 할인</span></div>
-                <div class="savings-text">💰 23,109원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">66% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -207,11 +209,10 @@
                 <div class="deal-name">리필식 수채화 붓펜 세트</div>
                 <div class="deal-desc">리필로 맘껏! 그림 쓱싹 🎨</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩15,328</span> <span class="deal-price">₩5,365</span><span class="badge">65% 할인</span></div>
-                <div class="savings-text">💰 9,963원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">65% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -223,11 +224,10 @@
                 <div class="deal-name">아웃도어용 성인 방수 후드 우비/판초</div>
                 <div class="deal-desc">비 와도 끄떡없어! 착한 가격!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩9,378</span> <span class="deal-price">₩3,470</span><span class="badge">63% 할인</span></div>
-                <div class="savings-text">💰 5,908원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">63% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -239,11 +239,10 @@
                 <div class="deal-name">X5 1080P HD 미니 WIFI 보안 카메라</div>
                 <div class="deal-desc">초소형 CCTV! 가성비 대박! 🤩</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩19,340</span> <span class="deal-price">₩8,510</span><span class="badge">56% 할인</span></div>
-                <div class="savings-text">💰 10,830원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">56% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -255,11 +254,10 @@
                 <div class="deal-name">USB 스마트 머그컵 보온기</div>
                 <div class="deal-desc">내 음료를 늘 스마트하게.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩31,595</span> <span class="deal-price">₩15,166</span><span class="badge">52% 할인</span></div>
-                <div class="savings-text">💰 16,429원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">52% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -271,11 +269,10 @@
                 <div class="deal-name">신생아 다기능 인체공학 아기띠 슬링</div>
                 <div class="deal-desc">아기와 부모, 모두의 편안함 🌟</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩49,646</span> <span class="deal-price">₩24,327</span><span class="badge">51% 할인</span></div>
-                <div class="savings-text">💰 25,319원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">51% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -287,11 +284,10 @@
                 <div class="deal-name">OKUMA UV400 편광 변색 스포츠 선글라스</div>
                 <div class="deal-desc">변색 편광 선글라스? 이 가격에!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩19,318</span> <span class="deal-price">₩9,659</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 9,659원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -303,11 +299,10 @@
                 <div class="deal-name">휴대용 USB LED 초음파 아로마 가습기</div>
                 <div class="deal-desc">어디든 OK! 만능 가습기 이 가격?</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩19,568</span> <span class="deal-price">₩9,784</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 9,784원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -319,11 +314,10 @@
                 <div class="deal-name">로봇 청소기용 DC 미니 고속 모터</div>
                 <div class="deal-desc">로봇 청소기, 강력한 핵심 동력. ✨</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩1,905</span> <span class="deal-price">₩1,048</span><span class="badge">45% 할인</span></div>
-                <div class="savings-text">💰 857원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">45% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -335,11 +329,10 @@
                 <div class="deal-name">에어팟 분실 방지 실리콘 밴드</div>
                 <div class="deal-desc">에어팟 분실 걱정 끝! 맘껏 쓰세요! 😎</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩4,760</span> <span class="deal-price">₩2,618</span><span class="badge">45% 할인</span></div>
-                <div class="savings-text">💰 2,142원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">45% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -351,11 +344,10 @@
                 <div class="deal-name">미밴드 마그네틱 USB 충전 케이블</div>
                 <div class="deal-desc">미밴드 충전! 이 가격 실화?</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩5,672</span> <span class="deal-price">₩3,120</span><span class="badge">45% 할인</span></div>
-                <div class="savings-text">💰 2,552원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">45% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -367,11 +359,10 @@
                 <div class="deal-name">NBR 내유성 고압 O링 씰 20개</div>
                 <div class="deal-desc">튼튼 O링 20개! 넉넉하고 든든! 💪</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩2,095</span> <span class="deal-price">₩1,446</span><span class="badge">31% 할인</span></div>
-                <div class="savings-text">💰 649원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">31% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -383,11 +374,10 @@
                 <div class="deal-name">미밴드 7/6/5용 실리콘 스포츠 스트랩</div>
                 <div class="deal-desc">미밴드 새 옷! 착한 가격!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩4,130</span> <span class="deal-price">₩2,891</span><span class="badge">30% 할인</span></div>
-                <div class="savings-text">💰 1,239원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">30% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -399,11 +389,10 @@
                 <div class="deal-name">샤오미 미밴드 1용 실리콘 밴드</div>
                 <div class="deal-desc">미밴드1 새옷? 이 가격 실화! 👍</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩3,728</span> <span class="deal-price">₩2,983</span><span class="badge">20% 할인</span></div>
-                <div class="savings-text">💰 745원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">20% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -415,11 +404,10 @@
                 <div class="deal-name">ID115 플러스 실리콘 워치 밴드</div>
                 <div class="deal-desc">내 워치 밴드, 컬러별로 맘껏! ⌚</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩4,013</span> <span class="deal-price">₩3,211</span><span class="badge">20% 할인</span></div>
-                <div class="savings-text">💰 802원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">20% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -431,11 +419,10 @@
                 <div class="deal-name">슬림 RFID 차단 가죽 카드지갑</div>
                 <div class="deal-desc">정보 안전! 슬림 가죽 지갑, 멋져요! 👍</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩5,593</span> <span class="deal-price">₩4,475</span><span class="badge">20% 할인</span></div>
-                <div class="savings-text">💰 1,118원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">20% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -447,11 +434,10 @@
                 <div class="deal-name">70mai A810 블랙박스 흡착 거치대</div>
                 <div class="deal-desc">블랙박스 필수! 흔들림 없는 안정감.</div>
                 
-                <div class="price-row"><span class="deal-price">₩13,469</span></div>
-                <div class="savings-text">💰 1,171원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -463,11 +449,10 @@
                 <div class="deal-name">12V 고휘도 유연 LED 스트립 조명</div>
                 <div class="deal-desc">분위기 갑! 싸게 감성 충전! ✨</div>
                 
-                <div class="price-row"><span class="deal-price">₩4,626</span></div>
-                <div class="savings-text">💰 243원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -479,11 +464,10 @@
                 <div class="deal-name">식물 재배용 USB LED 스트립 조명</div>
                 <div class="deal-desc">식집사 필수템! 가성비 식물등 🌱</div>
                 
-                <div class="price-row"><span class="deal-price">₩3,364</span></div>
-                <div class="savings-text">💰 33원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -495,11 +479,10 @@
                 <div class="deal-name">샤오미 미지아 무선 청소기 헤파 필터</div>
                 <div class="deal-desc">미지아 필터, 이 가격에 공기청정?</div>
                 
-                <div class="price-row"><span class="deal-price">₩3,866</span></div>
                 
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -511,11 +494,10 @@
                 <div class="deal-name">USB 휴대용 미니 아로마 가습기</div>
                 <div class="deal-desc">건조함 안녕! 싸게 촉촉해! 💧</div>
                 
-                <div class="price-row"><span class="deal-price">₩8,340</span></div>
                 
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -527,11 +509,10 @@
                 <div class="deal-name">센서형 LED 프로젝터 수면등</div>
                 <div class="deal-desc">센서가 만드는 밤, 편안한 수면 환경.</div>
                 
-                <div class="price-row"><span class="deal-price">₩15,113</span></div>
                 
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -543,11 +524,10 @@
                 <div class="deal-name">휴대용 미니 전기 포트</div>
                 <div class="deal-desc">어디서든 나만의 따뜻함.</div>
                 
-                <div class="price-row"><span class="deal-price">₩85,632</span></div>
                 
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -559,11 +539,10 @@
                 <div class="deal-name">내장 마이크 회전식 HD 웹캠</div>
                 <div class="deal-desc">마이크 내장! 회전까지! 똑똑한 웹캠! 🎥</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩2,563</span> <span class="deal-price">₩1,461</span><span class="badge">43% 할인</span></div>
-                <div class="savings-text">💰 1,102원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">43% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -575,11 +554,10 @@
                 <div class="deal-name">HD 화질 마이크 내장 USB 웹캠</div>
                 <div class="deal-desc">온라인 필수! 가성비 웹캠 득템!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩4,429</span> <span class="deal-price">₩3,322</span><span class="badge">25% 할인</span></div>
-                <div class="savings-text">💰 1,107원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">25% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a></div>

@@ -232,7 +232,7 @@ def generate_seo_title(product: dict) -> str:
     category = product.get("category", "")
     discount = safe_number(product.get("discount", 0))
     price = safe_number(product.get("price", 0))
-    krw = int(price * 1350)
+    krw = int(price)
 
     discount_rule = (f"- 할인율 {int(discount)}% 포함"
                      if discount >= 10 else "- 할인 얘기 하지마 (할인 없음)")
@@ -245,7 +245,7 @@ def generate_seo_title(product: dict) -> str:
 
 상품: {name}
 {category_line}
-{"할인: " + str(int(discount)) + "%" if discount >= 10 else ""}가격: ₩{krw:,}
+{"할인: " + str(int(discount)) + "%" if discount >= 10 else "가격은 알리에서 확인"}
 
 [절대 규칙 -- 이것만 지키면 됨]
 - 반드시 100% 한국어로만 작성. 영어 단어 절대 금지.
@@ -279,13 +279,11 @@ def generate_seo_description(product: dict) -> tuple:
     discount = safe_number(product.get("discount", 0))
     price = safe_number(product.get("price", 0))
     original = safe_number(product.get("original_price", 0))
-    krw = int(price * 1350)
+    krw = int(price)
     affiliate = product.get("affiliate_link", "")
 
-    if discount >= 10 and original > price > 0:
-        price_line = f"원래 ₩{int(original * 1350):,} -> 지금 ₩{krw:,} ({int(discount)}% 할인!)"
-    elif price > 0:
-        price_line = f"가격: ₩{krw:,}"
+    if discount >= 10:
+        price_line = f"지금 {int(discount)}% 할인 중! 알리에서 확인하세요"
     else:
         price_line = ""
 
@@ -301,30 +299,49 @@ def generate_seo_description(product: dict) -> tuple:
 DEALS_URL = "https://x68445.github.io/petdeals-legal/deals.html"
 
 
+PREMIUM_URL = "https://x68445.github.io/petdeals-legal/price_100k.html"
+BUDGET_URL = "https://x68445.github.io/petdeals-legal/price_1k.html"
+
+
 def build_full_description(hook_line: str, price_line: str, affiliate_link: str,
                            product_name: str = "", category: str = "") -> str:
-    """Assemble the final YouTube description with strong CTA."""
-    parts = [
-        hook_line.strip(),
-        "",
-        "👇 아래 링크에서 지금 바로 확인하세요! 👇",
-        "",
-        f"🔥 오늘의 특가 모음 (가격 변동 있음, 빠른 확인!)",
-        DEALS_URL,
-    ]
+    """Assemble the final YouTube description with specific product + deals hub links."""
+    name_line = f"{product_name}" if product_name else ""
+
+    parts = [hook_line.strip()]
+
+    # Specific product link
+    if affiliate_link and affiliate_link != "#":
+        parts.extend([
+            "",
+            "🔥 영상 속 이 상품 바로가기!",
+        ])
+        if name_line:
+            parts.append(name_line)
+        parts.append(f"👉 {affiliate_link}")
+
     if price_line:
         parts.append("")
         parts.append(price_line)
+
+    # General deals hub
     parts.extend([
+        "",
+        "━━━━━━━━━━━━━━━━━━",
+        "💎 오늘의 모든 특가 한눈에!",
+        f"👉 {DEALS_URL}",
+        "",
+        "📌 이 영상 상품 + 더 많은 특가",
+        "📌 매일 업데이트되는 알리 최저가",
+        "📌 펫용품 / 캠핑 / 전자 / 주방 / 패션 / 자동차 / 스포츠",
+        "━━━━━━━━━━━━━━━━━━",
+        "",
+        f"💎 프리미엄 상품 → {PREMIUM_URL}",
+        f"💰 가성비 상품 → {BUDGET_URL}",
         "",
         "✅ 진짜 싼 상품만 엄선",
         "✅ 매일 새로운 특가 업데이트",
-        "✅ 실제 사용기 기반 추천",
-        "",
-        "━━━━━━━━━━━━━━━━━━",
-        "⏰ 가격은 변동될 수 있으니 빠르게 확인!",
-        "🔔 구독하고 알림 받으면 놓치지 않아요",
-        "━━━━━━━━━━━━━━━━━━",
+        "✅ 구독하면 놓치지 않아요!",
         "",
         get_category_hashtags(product_name, category),
         "",
@@ -346,7 +363,7 @@ def generate_video_metadata(product: dict, gemini_func) -> tuple:
     hook_prompt, price_line, affiliate = generate_seo_description(product)
     discount = safe_number(product.get("discount", 0))
     price = safe_number(product.get("price", 0))
-    krw = int(price * 1350)
+    krw = int(price)
 
     try:
         title = gemini_func(title_prompt).strip().strip('"').strip("'")
@@ -357,13 +374,13 @@ def generate_video_metadata(product: dict, gemini_func) -> tuple:
         title = ensure_korean_title(title)
     except Exception:
         title = (f"알리특가 {name_ko} {int(discount)}% 할인 🔥 #Shorts"
-                 if discount >= 10 else f"알리특가 {name_ko} ₩{krw:,} 🛒 #Shorts")
+                 if discount >= 10 else f"알리특가 {name_ko} 추천 🛒 #Shorts")
 
     try:
         hook_line = gemini_func(hook_prompt).strip()
     except Exception:
-        hook_line = (f"이 가격 실화? ₩{krw:,}" if discount >= 10
-                     else f"₩{krw:,}에 이 퀄리티?")
+        hook_line = (f"이거 {int(discount)}% 할인이라고?!" if discount >= 10
+                     else f"이 퀄리티 알리에서 가능?!")
 
     _cat = product.get("category", "")
     description = build_full_description(hook_line, price_line, affiliate, name_ko, _cat)
@@ -404,7 +421,7 @@ def generate_seo_metadata(product_info: dict, lang: str, affiliate_link: str = "
 
     discount = safe_number(product_info.get("discount", 0))
     price = safe_number(product_info.get("price", 0))
-    krw = int(price * 1350)
+    krw = int(price)
     _cat = product_info.get("category", "")
 
     try:
@@ -430,9 +447,9 @@ def generate_seo_metadata(product_info: dict, lang: str, affiliate_link: str = "
         print(f"[GEMINI SEO] lang={lang}: {e}")
         # Fallback -- always use Korean name_ko
         seo_title = (f"알리특가 {name_ko[:20]} {int(discount)}% 할인 🔥 #Shorts"
-                     if discount >= 10 else f"알리특가 {name_ko[:20]} ₩{krw:,} 🛒 #Shorts")
-        hook_line = (f"이 가격 실화? ₩{krw:,}" if discount >= 10
-                     else f"₩{krw:,}에 이 퀄리티?")
+                     if discount >= 10 else f"알리특가 {name_ko[:20]} 추천 🛒 #Shorts")
+        hook_line = (f"이거 {int(discount)}% 할인이라고?!" if discount >= 10
+                     else f"이 퀄리티 알리에서 가능?!")
         seo_description = build_full_description(hook_line, price_line, aff, name_ko, _cat)
         return {"title": seo_title, "description": seo_description[:5000]}
 
@@ -441,8 +458,8 @@ def generate_seo_metadata(product_info: dict, lang: str, affiliate_link: str = "
 
 HOOK_STYLES = {
     "ko": [
-        {"style": "question",  "example": "이거 진짜 3천원?"},
-        {"style": "shock",     "example": "헐 이게 이 가격이라고..."},
+        {"style": "question",  "example": "이거 진짜 반값?"},
+        {"style": "shock",     "example": "헐 이 할인율 실화..."},
         {"style": "casual",    "example": "야 이거 봐봐"},
         {"style": "fomo",      "example": "이거 품절 전에 봐"},
         {"style": "story",     "example": "우리 강아지가 미쳤음"},
@@ -486,25 +503,21 @@ def _build_prompt(product_info: dict, lang: str) -> str:
     title = product_info.get("title", "")
     category = product_info.get("category", "pet supplies")
 
-    # Currency per language
     if lang == "ko":
-        price_str = f"₩{int(price * 1350):,}"
-        orig_str = f"₩{int(orig * 1350):,}"
         lang_name = "Korean"
     elif lang == "en":
-        price_str = f"${price:.2f}"
-        orig_str = f"${orig:.2f}"
         lang_name = "English"
-    else:  # zh
-        price_str = f"NT${int(price * 31):,}"
-        orig_str = f"NT${int(orig * 31):,}"
+    else:
         lang_name = "Traditional Chinese (Taiwan)"
+
+    disc_str = f"{int(discount)}% off" if discount >= 10 else "great value"
 
     return f"""You are a viral short-video copywriter specializing in pet product affiliate content.
 
 Product: {title}
 Category: {category}
-Sale price: {price_str} (was {orig_str}, {discount}% off)
+Discount: {disc_str}
+NOTE: Do NOT mention specific prices or currency amounts. Focus on the discount percentage and product benefits.
 Target language: {lang_name}
 Required tone: {tone}
 
@@ -541,27 +554,33 @@ def generate_video_copy(product_info: dict, lang: str = "ko") -> dict:
     orig = product_info.get("original_price", 0)
 
     # Fallback values per language
+    disc = int(product_info.get("discount", 0) or 0)
+    disc_ko = f"{disc}% 할인" if disc >= 10 else "알리 특가"
+    disc_en = f"{disc}% off" if disc >= 10 else "great deal"
+    disc_zh = f"{disc}% 折扣" if disc >= 10 else "超值優惠"
+    title_str = product_info.get("title", "")
+
     fallbacks = {
         "ko": {
-            "hook": f"₩{int(price * 1350):,}으로 충분해",
+            "hook": f"이거 {disc_ko}이라고?!",
             "cta": random.choice(CTA_POOL["ko"]),
-            "description": f"{product_info.get('title', '')} ₩{int(price * 1350):,}\n프로필 링크 확인!",
+            "description": f"{title_str} {disc_ko}\n프로필 링크 확인!",
             "hashtags": ["#펫용품", "#강아지", "#고양이", "#알리익스프레스"],
-            "tts_script": f"이거 {int(price * 1350):,}원이에요. 댓글에 링크 있어요.",
+            "tts_script": f"이거 {disc_ko}이에요. 댓글에 링크 있어요.",
         },
         "en": {
-            "hook": f"Only ${price:.2f} for this!",
+            "hook": f"This is {disc_en}!",
             "cta": random.choice(CTA_POOL["en"]),
-            "description": f"{product_info.get('title', '')} Only ${price:.2f}\nLink in comments",
+            "description": f"{title_str} {disc_en}\nLink in comments",
             "hashtags": ["#petproducts", "#dogs", "#cats", "#aliexpress"],
-            "tts_script": f"This is only {price:.2f} dollars. Link in the comments.",
+            "tts_script": f"This is {disc_en}. Link in the comments.",
         },
         "zh": {
-            "hook": f"只要NT${int(price * 31):,}!",
+            "hook": f"{disc_zh}!",
             "cta": random.choice(CTA_POOL["zh"]),
-            "description": f"{product_info.get('title', '')} NT${int(price * 31):,}\n留言有連結",
+            "description": f"{title_str} {disc_zh}\n留言有連結",
             "hashtags": ["#寵物用品", "#狗狗", "#貓咪", "#淘寶"],
-            "tts_script": f"這個只要{int(price * 31)}元。留言有連結。",
+            "tts_script": f"這個{disc_zh}。留言有連結。",
         },
     }
 
@@ -618,7 +637,7 @@ def build_youtube_metadata(copy: dict, product: dict, lang: str, affiliate_link:
     price = safe_number(product.get("price", 0))
 
     if lang == "ko":
-        price_str = f"${price:.2f} (약 ₩{int(price * 1350):,})"
+        price_str = f"₩{int(price):,}"
         tags = ["#shorts", "#알리익스프레스", "#반려동물", "#고양이", "#강아지", "#펫딜", "#알리직구", "#할인"]
     elif lang == "en":
         price_str = f"${price:.2f}"
@@ -637,9 +656,9 @@ def build_youtube_metadata(copy: dict, product: dict, lang: str, affiliate_link:
         title = f"{copy['hook']} #Shorts"
         discount = safe_number(product.get("discount", 0))
         orig = safe_number(product.get("original_price", 0))
-        krw = int(price * 1350)
+        krw = int(price)
         if discount >= 10 and orig > price > 0:
-            price_line = f"원래 ₩{int(orig * 1350):,} -> 지금 ₩{krw:,} ({int(discount)}% 할인!)"
+            price_line = f"원래 ₩{int(orig):,} -> 지금 ₩{krw:,} ({int(discount)}% 할인!)"
         elif price > 0:
             price_line = f"가격: ₩{krw:,}"
         else:

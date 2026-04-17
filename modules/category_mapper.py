@@ -176,30 +176,24 @@ def classify_product(product: dict) -> str:
     return "etc"
 
 
-# ── Price bands ───────────────────────────────────────────────────────────────
+# ── Discount tiers (URLs kept as price_*.html for SEO) ───────────────────────
 
 PRICE_BANDS = [
-    {"key": "price_1k",   "emoji": "💰", "label": "천원대",   "min": 1000,   "max": 9999,      "accent": "#26c281", "tier": "light"},
-    {"key": "price_10k",  "emoji": "💳", "label": "만원대",   "min": 10000,  "max": 99999,     "accent": "#c9a227", "tier": "premium"},
-    {"key": "price_100k", "emoji": "💎", "label": "십만원대", "min": 100000, "max": 999999999, "accent": "#ffd700", "tier": "luxury"},
+    {"key": "price_1k",   "emoji": "💰", "label": "가성비 특가", "min_disc": 10, "max_disc": 29, "accent": "#26c281", "tier": "light"},
+    {"key": "price_10k",  "emoji": "🔥", "label": "핫딜",       "min_disc": 30, "max_disc": 49, "accent": "#c9a227", "tier": "premium"},
+    {"key": "price_100k", "emoji": "💎", "label": "초특가",     "min_disc": 50, "max_disc": 999, "accent": "#ffd700", "tier": "luxury"},
 ]
 
-# USD equivalent for API price-range queries (/ 1350)
-PRICE_BANDS_USD = [
-    {"key": "price_1k",   "min_usd": 0.74,  "max_usd": 7.41},
-    {"key": "price_10k",  "min_usd": 7.41,  "max_usd": 74.07},
-    {"key": "price_100k", "min_usd": 74.07, "max_usd": 9999.0},
-]
+PRICE_BANDS_USD = PRICE_BANDS
 
 
 def classify_price_band(product: dict) -> str:
-    """Return price band key. Items under 1,000won return empty string (filtered out)."""
-    price_usd = float(product.get("price") or product.get("target_sale_price") or 0)
-    krw = int(price_usd * 1350)
-    if krw < 1000:
+    """Return discount tier key. Items with <10% discount return empty string."""
+    disc = float(product.get("discount", 0) or 0)
+    if disc < 10:
         return ""
     for band in PRICE_BANDS:
-        if band["min"] <= krw <= band["max"]:
+        if band["min_disc"] <= disc <= band["max_disc"]:
             return band["key"]
     return "price_100k"
 

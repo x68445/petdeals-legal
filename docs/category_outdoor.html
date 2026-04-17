@@ -105,7 +105,9 @@
             font-size:12px; color:#ff6b9d; font-weight:600;
             margin-top:4px; line-height:1.3;
         }
-        .deal-price { font-size:18px; font-weight:800; color:#1a1a1a; }
+        .discount-hero { font-size:28px; font-weight:900; text-align:center; margin:10px 0 4px;
+            letter-spacing:1px; background:linear-gradient(135deg,#ff4757,#ff6b6b);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
         .deal-arrow { font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }
 
         .deal { position:relative; transition:transform 250ms ease-out, box-shadow 250ms ease-out; }
@@ -113,7 +115,6 @@
         .deal:active { transform:scale(.98); }
         .thumb img { transition:transform 300ms ease-out; }
         .deal:hover .thumb img { transform:scale(1.05); }
-        .deal-orig-price { font-size:13px; color:#999; text-decoration:line-through; font-weight:400; }
         .deal-info { flex:1; min-width:0; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
@@ -133,7 +134,10 @@
             padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
             animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
         @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-        .savings-text { font-size:12px; color:#ff4757; font-weight:700; margin-top:4px; }
+        .discount-hero { font-size:28px; font-weight:900; color:#ff4757; text-align:center;
+            margin:10px 0 4px; letter-spacing:1px;
+            background:linear-gradient(135deg,#ff4757,#ff6b6b); -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent; background-clip:text; }
         .cta-button { display:block; text-align:center; margin-top:10px;
             background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
             padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
@@ -175,11 +179,10 @@
                 <div class="deal-name">차량용 고속 무선 충전 미끄럼 방지 매트</div>
                 <div class="deal-desc">안전하게 고정, 빠른 무선 충전.</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩36,665</span> <span class="deal-price">₩17,233</span><span class="badge">53% 할인</span></div>
-                <div class="savings-text">💰 19,432원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">53% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -191,11 +194,10 @@
                 <div class="deal-name">100W PD C타입 고속 차량용 충전기</div>
                 <div class="deal-desc">차량용 100W PD! 가성비 끝판왕!</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩12,025</span> <span class="deal-price">₩5,772</span><span class="badge">52% 할인</span></div>
-                <div class="savings-text">💰 6,253원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">52% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -207,11 +209,10 @@
                 <div class="deal-name">투키 60W 투명 고속 차량용 충전기</div>
                 <div class="deal-desc">보여주는 60W! 이 가격에? 😲</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩17,242</span> <span class="deal-price">₩8,449</span><span class="badge">51% 할인</span></div>
-                <div class="savings-text">💰 8,793원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">51% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -223,11 +224,10 @@
                 <div class="deal-name">에사거 30W C타입 고속 차량 충전기</div>
                 <div class="deal-desc">이 가격에 30W 고속! 혜자템!</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩15,186</span> <span class="deal-price">₩7,593</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 7,593원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -239,11 +239,10 @@
                 <div class="deal-name">차량용 고속 무선 충전 패드</div>
                 <div class="deal-desc">차 안에서 누리는 초고속 충전.</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩35,288</span> <span class="deal-price">₩17,644</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 17,644원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -255,11 +254,10 @@
                 <div class="deal-name">차량용 고속 무선 충전 실리콘 패드</div>
                 <div class="deal-desc">흔들림 없이, 안정적인 고속 충전.</div>
                 <div class="badge-row"><span class="rec-badge">💎 추천</span></div>
-                <div class="price-row"><span class="deal-orig-price">₩36,266</span> <span class="deal-price">₩18,133</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 18,133원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -271,11 +269,10 @@
                 <div class="deal-name">MOSLIGHTING 휴대 충전식 LED 텐트등</div>
                 <div class="deal-desc">언제 어디서나 밝은 빛.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩80,475</span> <span class="deal-price">₩25,752</span><span class="badge">68% 할인</span></div>
-                <div class="savings-text">💰 54,723원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">68% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -287,11 +284,10 @@
                 <div class="deal-name">9900mAh 자석 충전식 캠핑등</div>
                 <div class="deal-desc">강력한 빛, 자유로운 부착.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩83,275</span> <span class="deal-price">₩26,648</span><span class="badge">68% 할인</span></div>
-                <div class="savings-text">💰 56,627원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">68% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -303,11 +299,10 @@
                 <div class="deal-name">2P LED 충전식 실내외 비상 캠핑등</div>
                 <div class="deal-desc">2개 세트! 가성비 비상 캠핑등!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩32,557</span> <span class="deal-price">₩10,744</span><span class="badge">67% 할인</span></div>
-                <div class="savings-text">💰 21,813원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">67% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -319,11 +314,10 @@
                 <div class="deal-name">고출력 USB 충전식 휴대용 캠핑 걸이등</div>
                 <div class="deal-desc">고출력 휴대, 캠핑의 기준.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩36,169</span> <span class="deal-price">₩11,936</span><span class="badge">67% 할인</span></div>
-                <div class="savings-text">💰 24,233원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">67% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -335,11 +329,10 @@
                 <div class="deal-name">LED 캠핑 텐트등: 고출력 충전 방수 휴대등</div>
                 <div class="deal-desc">고출력 방수, 캠핑 완성!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩81,024</span> <span class="deal-price">₩26,738</span><span class="badge">67% 할인</span></div>
-                <div class="savings-text">💰 54,286원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">67% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -351,11 +344,10 @@
                 <div class="deal-name">LED 충전식 휴대용 캠핑 비상 전구</div>
                 <div class="deal-desc">가성비 갑! 충전식 캠핑 전구💡</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩28,158</span> <span class="deal-price">₩9,574</span><span class="badge">66% 할인</span></div>
-                <div class="savings-text">💰 18,584원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">66% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -367,11 +359,10 @@
                 <div class="deal-name">3-in-1 다기능 방수 캠핑 우의</div>
                 <div class="deal-desc">궂은 날씨에도 완벽 대비.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩35,504</span> <span class="deal-price">₩15,267</span><span class="badge">57% 할인</span></div>
-                <div class="savings-text">💰 20,237원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">57% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -383,11 +374,10 @@
                 <div class="deal-name">다용도 방수 삼각 그늘막</div>
                 <div class="deal-desc">햇살 쨍쨍! 시원한 휴식 ⛱️</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩52,144</span> <span class="deal-price">₩22,422</span><span class="badge">57% 할인</span></div>
-                <div class="savings-text">💰 29,722원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">57% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -399,11 +389,10 @@
                 <div class="deal-name">4포트 방수 고속 차량 충전 소켓</div>
                 <div class="deal-desc">4개 동시 충전! 방수까지 갓성비!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩18,338</span> <span class="deal-price">₩8,069</span><span class="badge">56% 할인</span></div>
-                <div class="savings-text">💰 10,269원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">56% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -415,11 +404,10 @@
                 <div class="deal-name">고출력 USB 충전식 휴대용 캠핑 걸이등</div>
                 <div class="deal-desc">고출력 캠핑등! 가성비로 밤을 밝혀!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩22,728</span> <span class="deal-price">₩10,228</span><span class="badge">55% 할인</span></div>
-                <div class="savings-text">💰 12,500원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">55% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -431,11 +419,10 @@
                 <div class="deal-name">GZ 등대 캠핑등: 초장시간 LED 텐트등</div>
                 <div class="deal-desc">GZ 등대, 지치지 않는 빛.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩39,555</span> <span class="deal-price">₩17,800</span><span class="badge">55% 할인</span></div>
-                <div class="savings-text">💰 21,755원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">55% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -447,11 +434,10 @@
                 <div class="deal-name">휴대용 솔라 LED 캠핑 텐트등</div>
                 <div class="deal-desc">솔라 충전, 밤샘 조명. ✨</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩55,646</span> <span class="deal-price">₩25,041</span><span class="badge">55% 할인</span></div>
-                <div class="savings-text">💰 30,605원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">55% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -463,11 +449,10 @@
                 <div class="deal-name">66W C타입 고속 차량용 충전기</div>
                 <div class="deal-desc">66W 고속! 차에서도 풀충전 각!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩11,856</span> <span class="deal-price">₩5,454</span><span class="badge">54% 할인</span></div>
-                <div class="savings-text">💰 6,402원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">54% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -479,11 +464,10 @@
                 <div class="deal-name">83W 듀얼 USB 고속 차량 충전기</div>
                 <div class="deal-desc">차에서 듀얼 고속 충전! 꿀템!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩20,656</span> <span class="deal-price">₩9,502</span><span class="badge">54% 할인</span></div>
-                <div class="savings-text">💰 11,154원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">54% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -495,11 +479,10 @@
                 <div class="deal-name">3-in-1 다기능 방수 캠핑 우의</div>
                 <div class="deal-desc">3-in-1, 현명한 캠핑 선택.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩34,004</span> <span class="deal-price">₩15,982</span><span class="badge">53% 할인</span></div>
-                <div class="savings-text">💰 18,022원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">53% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -511,11 +494,10 @@
                 <div class="deal-name">7심 550 파라코드 야외용 끈</div>
                 <div class="deal-desc">야외 만능템! 가성비 파라코드 끈!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩10,195</span> <span class="deal-price">₩4,894</span><span class="badge">52% 할인</span></div>
-                <div class="savings-text">💰 5,301원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">52% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -527,11 +509,10 @@
                 <div class="deal-name">250W 5포트 C타입 고속 차량 충전</div>
                 <div class="deal-desc">차량용 250W 5포트! 갓성비! ✨</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩13,187</span> <span class="deal-price">₩6,330</span><span class="badge">52% 할인</span></div>
-                <div class="savings-text">💰 6,857원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">52% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -543,11 +524,10 @@
                 <div class="deal-name">휴대용 LED 충전식 캠핑 텐트등</div>
                 <div class="deal-desc">캠핑의 밤을 밝히는 빛. ✨</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩53,737</span> <span class="deal-price">₩25,794</span><span class="badge">52% 할인</span></div>
-                <div class="savings-text">💰 27,943원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">52% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -559,11 +539,10 @@
                 <div class="deal-name">100/200W 미니 C타입 고속 차량 충전기</div>
                 <div class="deal-desc">작지만 강하다! 200W 고속 충전!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩11,146</span> <span class="deal-price">₩5,462</span><span class="badge">51% 할인</span></div>
-                <div class="savings-text">💰 5,684원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">51% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -575,11 +554,10 @@
                 <div class="deal-name">PD 120W C타입 스프링 차량용 케이블</div>
                 <div class="deal-desc">선 정리 끝! 120W 갓성비 케이블</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩13,597</span> <span class="deal-price">₩6,663</span><span class="badge">51% 할인</span></div>
-                <div class="savings-text">💰 6,934원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">51% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -591,11 +569,10 @@
                 <div class="deal-name">200W USB-C 풀링 미니 차량용 고속 충전기</div>
                 <div class="deal-desc">작다고 무시마! 200W 가성비 갑!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩13,068</span> <span class="deal-price">₩6,534</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 6,534원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -607,11 +584,10 @@
                 <div class="deal-name">250W PD 6포트 고속 차량용 충전기</div>
                 <div class="deal-desc">250W 6포트! 충전 고민 끝! 😎</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩13,382</span> <span class="deal-price">₩6,691</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 6,691원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -623,11 +599,10 @@
                 <div class="deal-name">USB LED 캠핑 비상 텐트등</div>
                 <div class="deal-desc">캠핑 필수템! 가성비 비상등 🔦</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩13,574</span> <span class="deal-price">₩6,787</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 6,787원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -639,11 +614,10 @@
                 <div class="deal-name">250W 5포트 고속 시가잭 충전기</div>
                 <div class="deal-desc">온 가족 충전 끝! 250W 괴물!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩14,200</span> <span class="deal-price">₩7,100</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 7,100원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -655,11 +629,10 @@
                 <div class="deal-name">휴대용 야외 캠핑 USB 충전 LED 비상등</div>
                 <div class="deal-desc">캠핑 비상등! 이 가격에 이걸?</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩15,392</span> <span class="deal-price">₩7,696</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 7,696원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -671,11 +644,10 @@
                 <div class="deal-name">USB 충전 LED 캠핑 랜턴: 고휘도 휴대 비상등</div>
                 <div class="deal-desc">이거 하나면 어둠 끝! 🔦</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩15,544</span> <span class="deal-price">₩7,772</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 7,772원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -687,11 +659,10 @@
                 <div class="deal-name">4포트 방수 고속 차량 충전 소켓</div>
                 <div class="deal-desc">비 와도 안심! 4포트 고속 충전!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩19,232</span> <span class="deal-price">₩9,616</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 9,616원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -703,11 +674,10 @@
                 <div class="deal-name">120W 듀얼 USB PD 고속 시거잭 분배기</div>
                 <div class="deal-desc">분배도 고속! 120W 꿀템 발견!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩20,752</span> <span class="deal-price">₩10,376</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 10,376원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -719,11 +689,10 @@
                 <div class="deal-name">LED 충전식 휴대용 비상 전구</div>
                 <div class="deal-desc">늘 곁에, 빛나는 안심. 💡</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩25,702</span> <span class="deal-price">₩12,851</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 12,851원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -735,11 +704,10 @@
                 <div class="deal-name">솔라 USB 충전 LED 캠핑등</div>
                 <div class="deal-desc">태양의 힘으로 밝히는 밤.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩38,262</span> <span class="deal-price">₩19,131</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 19,131원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -751,11 +719,10 @@
                 <div class="deal-name">홈피쉬 캠핑 텐트 휴대용 비상등</div>
                 <div class="deal-desc">캠핑 밤, 안전을 밝히다.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩40,040</span> <span class="deal-price">₩20,020</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 20,020원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -767,11 +734,10 @@
                 <div class="deal-name">모스라이팅 충전식 휴대용 캠핑 비상등</div>
                 <div class="deal-desc">캠핑 비상, 스마트 충전.</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩53,430</span> <span class="deal-price">₩26,715</span><span class="badge">50% 할인</span></div>
-                <div class="savings-text">💰 26,715원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">50% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -783,11 +749,10 @@
                 <div class="deal-name">100/200W PD USB-C 고속 차량 충전기</div>
                 <div class="deal-desc">이 가격에 200W?! 갓성비!</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩12,325</span> <span class="deal-price">₩6,286</span><span class="badge">49% 할인</span></div>
-                <div class="savings-text">💰 6,039원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">49% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -799,11 +764,10 @@
                 <div class="deal-name">3in1 120W USB-C 시거잭 고속 충전기</div>
                 <div class="deal-desc">이거 하나로 끝! 120W 갓성비</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩18,243</span> <span class="deal-price">₩9,304</span><span class="badge">49% 할인</span></div>
-                <div class="savings-text">💰 8,939원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">49% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -815,11 +779,10 @@
                 <div class="deal-name">66-250W PD 고속 6포트 차량용 충전기</div>
                 <div class="deal-desc">차 안 충전! 6포트면 충분해 👍</div>
                 
-                <div class="price-row"><span class="deal-orig-price">₩12,252</span> <span class="deal-price">₩6,494</span><span class="badge">47% 할인</span></div>
-                <div class="savings-text">💰 5,758원 절약!</div>
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="discount-hero">47% OFF</div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a>
@@ -831,11 +794,10 @@
                 <div class="deal-name">레트로 방수 충전식 캠핑 랜턴</div>
                 <div class="deal-desc">밤 산책도 환하게! 💡</div>
                 
-                <div class="price-row"><span class="deal-price">₩15,204</span></div>
                 
-                <div class="deal-disclaimer">가격 변동 가능 - 링크에서 실시간 확인</div>
-                <div class="deal-freshness">방금 업데이트</div>
-                <div class="cta-button">지금 구매하기 <span class="cta-arrow">→</span></div>
+                <div class="deal-disclaimer">👉 알리에서 실시간 가격 확인</div>
+                <div class="deal-freshness">1시간 전 업데이트</div>
+                <div class="cta-button">알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>
             </div>
             <div class="deal-arrow">›</div>
         </a></div>
