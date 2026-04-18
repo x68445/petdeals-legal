@@ -165,13 +165,22 @@ def batch_descriptions(names_ko: list) -> list:
         batch = names_ko[start:start + batch_size]
         numbered = "\n".join(f"{i+1}. {n}" for i, n in enumerate(batch))
         prompt = (
-            "아래 반려동물 용품 이름을 보고 귀엽고 공감되는 한 줄 홍보 문구를 만들어줘.\n"
+            "너는 상품 자체가 되어 주인(사용자)에게 짜증 섞인 잔소리를 한다.\n"
             "규칙:\n"
-            "- 각 문구는 20자 이내, 100% 한국어\n"
-            "- 이모지 1개 허용 (선택)\n"
-            "- 예: '우리 냥이가 좋아하는 장난감!' '산책 필수템 🐾' '털 날림 걱정 끝!'\n"
+            "- '나 [상품]인데!' 또는 '내가 [상품]인데!'로 시작\n"
+            "- 35~50자, 100% 한국어, 이모지 금지\n"
+            "- 짜증 섞인 친근한 반말 + 팩폭 톤\n"
+            "- 과학적/실용적 이유 1개 포함 (세균/건강/편의)\n"
+            "- '사세요' '구매' '추천' 같은 구매 권유 금지\n"
+            "- 반려동물 상품이면 주인을 야단치는 톤\n"
+            "- 다른 상품이면 사용자를 야단치는 톤\n"
             "- 반드시 번호를 유지해서 '1. 문구' 형식으로 출력\n"
             "- 설명 없이 문구만 출력\n\n"
+            "좋은 예시:\n"
+            "- '나 경사형 밥그릇인데! 바닥에 놓고 주니까 냥이 목 꺾여!'\n"
+            "- '나 고양이 모래인데! 3일째 안 갈면 세균 공장이라고!'\n"
+            "- '나 강아지 하네스인데! 목줄만 하면 기관지 상해!'\n"
+            "- '나 자동 급수기인데! 냥이 물 안 마셔서 신장병 걸려!'\n\n"
             f"{numbered}"
         )
         try:
@@ -182,7 +191,11 @@ def batch_descriptions(names_ko: list) -> list:
                 m = _re.match(r'^(\d+)[.\)]\s*(.+)$', line)
                 if m:
                     idx = int(m.group(1)) - 1
-                    parsed[idx] = m.group(2).strip().strip('"').strip("'")[:25]
+                    text = m.group(2).strip().strip('"').strip("'")[:55]
+                    if text.startswith(("나 ", "내가 ")):
+                        parsed[idx] = text
+                    else:
+                        parsed[idx] = ""
             for i in range(len(batch)):
                 results[start + i] = parsed.get(i, "")
         except Exception as e:

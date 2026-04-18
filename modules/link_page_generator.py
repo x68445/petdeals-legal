@@ -500,9 +500,10 @@ _SEARCH_CSS = """
         .fbtn:hover:not(.active) { border-color:#ff8fab; color:#ff8fab; }
         .results-grid {
             display:grid;
-            grid-template-columns:repeat(2,1fr);
+            grid-template-columns:1fr;
             gap:10px; margin-top:8px;
         }
+        @media(min-width:420px) { .results-grid { grid-template-columns:repeat(2,1fr); } }
         @media(min-width:640px) { .results-grid { grid-template-columns:repeat(3,1fr); } }
         .result-card {
             background:#fff; border-radius:14px;
@@ -652,8 +653,7 @@ _SEARCH_JS = """
 
     var html="";
     matched.forEach(function(p){
-      var origHtml=p.o>p.p?'<div class="rc-orig">&#8361;'+p.o.toLocaleString()+'</div>':"";
-      var discHtml=p.dc>=10?'<span class="rc-disc">'+p.dc+'%</span>':"";
+      var discHeroHtml=p.dc>=10?'<div class="discount-hero" style="font-size:22px;margin:8px 0 4px">'+p.dc+'% OFF</div>':"";
       var descHtml=p.d?'<div class="rc-desc">'+p.d+'</div>':"";
       var imgHtml=p.i?'<img class="rc-img" src="'+p.i+'" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.display=\\'none\\'">'
         :'<div class="rc-img" style="display:flex;align-items:center;justify-content:center;font-size:32px">📦</div>';
@@ -662,11 +662,10 @@ _SEARCH_JS = """
         +'<div class="rc-body">'
         +'<div class="rc-name">'+p.n+'</div>'
         +descHtml
-        +'<div class="rc-price-row">'
-        +origHtml
-        +'<span class="rc-price">&#8361;'+p.p.toLocaleString()+'</span>'
-        +discHtml
-        +'</div></div></a>';
+        +discHeroHtml
+        +'<div class="cta-button" style="margin:8px 10px 10px;font-size:12px;padding:8px 0">'
+        +'알리에서 가격 확인하기 <span class="cta-arrow">\u2192</span></div>'
+        +'</div></a>';
     });
     grid.innerHTML=html;
   }
@@ -826,12 +825,6 @@ def _main_page_html(today: str, total: int,
                 <button class="fbtn" data-filter="cat" data-val="sports">💪건강</button>
                 <button class="fbtn" data-filter="cat" data-val="electronics">💻전자</button>
                 <button class="fbtn" data-filter="cat" data-val="etc">🔥추천템</button>
-            </div>
-            <div class="filter-group">
-                <button class="fbtn active" data-filter="disc" data-val="">전체</button>
-                <button class="fbtn" data-filter="disc" data-val="30">30%+</button>
-                <button class="fbtn" data-filter="disc" data-val="50">50%+</button>
-                <button class="fbtn" data-filter="disc" data-val="70">70%+</button>
             </div>
         </div>
     </div>
