@@ -50,81 +50,105 @@
         
         .mega-hero {
             position:relative;
-            padding:50px 20px 80px;
-            background:linear-gradient(135deg, #ff8fab 0%, #ffb347 50%, #ffd166 100%);
+            padding:60px 20px 90px;
+            background:linear-gradient(135deg, #ff6b8a 0%, #ff8fab 25%, #ffb347 55%, #ffd166 100%);
             text-align:center; overflow:hidden;
         }
+        .mega-hero::before {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.25) 0%, transparent 60%),
+                       radial-gradient(ellipse at 70% 80%, rgba(255,179,71,.2) 0%, transparent 50%);
+            pointer-events:none;
+        }
         .paw-decor {
-            font-size:1.8rem; letter-spacing:8px; opacity:.7;
+            font-size:2.2rem; letter-spacing:12px; opacity:.8;
             animation:pawFloat 3s ease-in-out infinite;
+            text-shadow:0 2px 8px rgba(0,0,0,.1);
         }
         @keyframes pawFloat {
-            0%,100% { transform:translateY(0); }
-            50% { transform:translateY(-8px); }
+            0%,100% { transform:translateY(0) scale(1); }
+            50% { transform:translateY(-10px) scale(1.05); }
         }
         .signboard {
-            position:relative; margin:30px auto; padding:30px 20px; display:inline-block;
+            position:relative; margin:25px auto 20px; padding:35px 30px 25px;
+            display:inline-block;
+            background:rgba(255,255,255,.08);
+            border-radius:24px;
+            border:2px solid rgba(255,255,255,.2);
+            backdrop-filter:blur(4px);
         }
         .brand-title {
-            font-size:clamp(3rem,14vw,5rem); font-weight:900; color:white;
-            letter-spacing:-.03em; line-height:1; margin:0;
-            background:linear-gradient(180deg,#FFFFFF 0%,#FFF1E5 100%);
+            font-size:clamp(3.5rem,16vw,5.5rem); font-weight:900;
+            letter-spacing:-.02em; line-height:1; margin:0;
+            background:linear-gradient(180deg,#FFFFFF 0%,#FFF5EB 40%,#FFE0C0 100%);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent;
             background-clip:text;
             animation:brandShine 3s ease-in-out infinite;
-            filter:drop-shadow(0 4px 8px rgba(232,90,122,.5));
+            filter:drop-shadow(0 4px 10px rgba(232,90,122,.6));
+            text-shadow:none;
         }
         @keyframes brandShine {
-            0%,100% { filter:drop-shadow(0 4px 8px rgba(232,90,122,.5)) brightness(1); }
-            50% { filter:drop-shadow(0 4px 16px rgba(255,255,255,.8)) brightness(1.1); }
+            0%,100% { filter:drop-shadow(0 4px 10px rgba(232,90,122,.6)) brightness(1); }
+            50% { filter:drop-shadow(0 6px 24px rgba(255,255,255,.9)) brightness(1.15); }
         }
         .brand-divider {
             display:flex; align-items:center; justify-content:center;
-            gap:12px; margin:16px auto; max-width:300px;
+            gap:14px; margin:18px auto; max-width:320px;
         }
         .divider-line {
             flex:1; height:3px;
-            background:linear-gradient(90deg,transparent,white,transparent);
+            background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
             border-radius:999px;
         }
-        .divider-icon { font-size:1.3rem; animation:pawSpin 4s linear infinite; }
+        .divider-icon { font-size:1.5rem; animation:pawSpin 4s linear infinite; }
         @keyframes pawSpin {
-            0%,100% { transform:rotate(-8deg); }
-            50% { transform:rotate(8deg); }
+            0%,100% { transform:rotate(-10deg) scale(1); }
+            50% { transform:rotate(10deg) scale(1.15); }
         }
         .sub-title {
-            font-size:clamp(1.4rem,5vw,2rem); font-weight:700; color:white;
-            letter-spacing:.2em; margin:0;
-            text-shadow:0 2px 8px rgba(232,90,122,.4);
+            font-size:clamp(1.6rem,6vw,2.4rem); font-weight:800; color:white;
+            letter-spacing:.25em; margin:0;
+            text-shadow:0 2px 10px rgba(232,90,122,.5);
+            animation:subGlow 4s ease-in-out infinite;
+        }
+        @keyframes subGlow {
+            0%,100% { text-shadow:0 2px 10px rgba(232,90,122,.5); }
+            50% { text-shadow:0 2px 20px rgba(255,255,255,.6), 0 4px 30px rgba(232,90,122,.3); }
         }
         .hero-tagline {
-            font-size:1.1rem; color:white; font-weight:600;
-            margin:24px 0 8px; text-shadow:0 1px 3px rgba(0,0,0,.2);
+            font-size:1.15rem; color:white; font-weight:700;
+            margin:28px 0 8px; text-shadow:0 1px 4px rgba(0,0,0,.2);
+            letter-spacing:.02em;
         }
         .hero-meta {
-            font-size:.85rem; color:rgba(255,255,255,.85); font-weight:500;
+            font-size:.88rem; color:rgba(255,255,255,.9); font-weight:600;
         }
         .sparkle {
-            position:absolute; font-size:1.5rem;
+            position:absolute; font-size:1.8rem;
             animation:sparkleFloat 3s ease-in-out infinite; pointer-events:none;
         }
-        .sparkle-1 { top:10%; left:5%; animation-delay:0s; }
-        .sparkle-2 { top:15%; right:10%; animation-delay:.8s; font-size:1.2rem; }
-        .sparkle-3 { bottom:20%; left:12%; animation-delay:1.5s; font-size:1.3rem; }
-        .sparkle-4 { bottom:10%; right:8%; animation-delay:2.2s; }
+        .sparkle-1 { top:8%; left:4%; animation-delay:0s; }
+        .sparkle-2 { top:12%; right:8%; animation-delay:.7s; font-size:1.4rem; }
+        .sparkle-3 { bottom:22%; left:10%; animation-delay:1.4s; font-size:1.5rem; }
+        .sparkle-4 { bottom:12%; right:6%; animation-delay:2s; }
+        .sparkle-5 { top:40%; left:2%; animation-delay:0.3s; font-size:1.2rem; }
+        .sparkle-6 { top:35%; right:3%; animation-delay:1.8s; font-size:1.3rem; }
         @keyframes sparkleFloat {
-            0%,100% { opacity:0; transform:scale(.5) rotate(0deg); }
-            50% { opacity:1; transform:scale(1.2) rotate(180deg); }
+            0%,100% { opacity:0; transform:scale(.4) rotate(0deg); }
+            20% { opacity:.6; }
+            50% { opacity:1; transform:scale(1.3) rotate(180deg); }
+            80% { opacity:.6; }
         }
         .wave-bottom {
-            position:absolute; bottom:-1px; left:0; right:0; height:40px;
-            background:var(--nyang-cream);
+            position:absolute; bottom:-1px; left:0; right:0; height:45px;
+            background:#fff8f0;
             clip-path:polygon(0 60%,25% 30%,50% 60%,75% 30%,100% 60%,100% 100%,0 100%);
         }
         .wave { position:absolute; bottom:-1px; left:0; right:0; width:100%; height:48px; display:block; }
         @media(min-width:640px) {
-            .brand-title { font-size:6rem; }
-            .mega-hero { padding:70px 20px 100px; }
+            .brand-title { font-size:7rem; }
+            .mega-hero { padding:80px 20px 110px; }
+            .signboard { padding:45px 50px 35px; }
         }
 
         .cat-grid {
@@ -340,19 +364,23 @@
         .filter-group::-webkit-scrollbar { display:none; }
         .fbtn {
             flex-shrink:0; padding:10px 18px;
-            border:2px solid var(--nyang-border); border-radius:var(--nyang-radius-full);
-            background:var(--nyang-white); color:var(--nyang-text); font-size:.95rem;
+            border:2px solid #e0c4bc; border-radius:var(--nyang-radius-full);
+            background:#fff; color:#2D2D2D; font-size:.95rem;
             font-weight:700; cursor:pointer;
             min-height:36px; min-width:44px;
             transition:all var(--nyang-transition); white-space:nowrap;
             font-family:inherit;
+            -webkit-text-fill-color:#2D2D2D;
         }
         .fbtn.active {
-            background:var(--nyang-gradient); color:#fff; border-color:transparent;
-            font-weight:800; box-shadow:var(--nyang-shadow-soft);
+            background:linear-gradient(135deg, #FF8FAB 0%, #FFB347 50%, #FFD166 100%);
+            color:#fff; border-color:transparent;
+            font-weight:800; box-shadow:0 4px 20px rgba(255,143,171,.15);
+            -webkit-text-fill-color:#fff;
         }
         .fbtn:hover:not(.active) {
-            border-color:var(--nyang-pink); color:var(--nyang-accent);
+            border-color:#FF8FAB; color:#E85A7A;
+            -webkit-text-fill-color:#E85A7A;
             transform:translateY(-1px);
         }
         .results-grid {
@@ -402,19 +430,29 @@
         }
         .countdown-banner {
             display:flex; align-items:center; justify-content:space-between; gap:16px;
-            background:linear-gradient(135deg,#E85A7A,#FF6B6B,#FF8C42);
-            color:white; padding:14px 20px;
-            font-weight:700; font-size:1rem;
+            background:linear-gradient(135deg,#D94466,#E85A7A,#FF6B6B);
+            color:#fff; padding:16px 22px;
+            font-weight:700; font-size:1.05rem;
             max-width:500px; margin:16px auto;
             border-radius:var(--nyang-radius-md);
-            box-shadow:var(--nyang-shadow-soft);
+            box-shadow:0 4px 20px rgba(232,90,122,.25);
+            animation:countdownPulse 2.5s ease-in-out infinite;
         }
-        .cb-icon { font-size:22px; }
+        @keyframes countdownPulse {
+            0%,100% { box-shadow:0 4px 20px rgba(232,90,122,.25); }
+            50% { box-shadow:0 6px 28px rgba(232,90,122,.4); }
+        }
+        .cb-icon { font-size:24px; animation:fireFlicker 1.5s ease-in-out infinite; }
+        @keyframes fireFlicker {
+            0%,100% { transform:scale(1); }
+            50% { transform:scale(1.15); }
+        }
         .cb-text {
-            text-shadow:0 1px 3px rgba(0,0,0,.15);
+            color:#fff; font-weight:700;
+            text-shadow:0 1px 4px rgba(0,0,0,.2);
         }
         .cb-timer {
-            background:rgba(255,255,255,.25); padding:6px 14px;
+            background:rgba(255,255,255,.3); padding:7px 16px;
             border-radius:var(--nyang-radius-full);
             font-family:'SF Mono',Menlo,monospace;
             font-weight:800; font-size:1.1rem; color:white;
@@ -447,6 +485,8 @@
             <div class="sparkle sparkle-2">✨</div>
             <div class="sparkle sparkle-3">⭐</div>
             <div class="sparkle sparkle-4">💫</div>
+            <div class="sparkle sparkle-5">🌟</div>
+            <div class="sparkle sparkle-6">✨</div>
             <h1 class="brand-title">냥댕라이프</h1>
             <div class="brand-divider">
                 <span class="divider-line"></span>
