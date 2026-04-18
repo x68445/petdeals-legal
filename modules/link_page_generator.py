@@ -89,40 +89,75 @@ def compute_savings(product: dict) -> int:
 
 
 # ── Shared card CSS (identical across cat / band / special_deals pages) ────────
-_CARD_BASE_CSS = """
-        .deal { position:relative; transition:transform 250ms ease-out, box-shadow 250ms ease-out; }
-        .deal:hover { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.12); }
+_NYANG_TOKENS = """
+        :root {
+          --nyang-pink: #FF8FAB;
+          --nyang-pink-soft: #FFD1DC;
+          --nyang-orange: #FFB347;
+          --nyang-yellow: #FFD166;
+          --nyang-accent: #E85A7A;
+          --nyang-cream: #FFF9F5;
+          --nyang-white: #FFFFFF;
+          --nyang-text: #2D2D2D;
+          --nyang-text-soft: #6B6B6B;
+          --nyang-border: #FFE5DC;
+          --nyang-gradient: linear-gradient(135deg, #FF8FAB 0%, #FFB347 50%, #FFD166 100%);
+          --nyang-gradient-soft: linear-gradient(135deg, #FFD1DC 0%, #FFE5DC 100%);
+          --nyang-gradient-discount: linear-gradient(135deg, #E85A7A 0%, #FF8FAB 100%);
+          --nyang-shadow-soft: 0 4px 20px rgba(255,143,171,.15);
+          --nyang-shadow-card: 0 8px 28px rgba(45,45,45,.08);
+          --nyang-shadow-hover: 0 12px 36px rgba(255,143,171,.25);
+          --nyang-radius-sm: 12px;
+          --nyang-radius-md: 20px;
+          --nyang-radius-lg: 28px;
+          --nyang-radius-full: 999px;
+          --nyang-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+"""
+
+_CARD_BASE_CSS = _NYANG_TOKENS + """
+        .deal { position:relative; transition:transform var(--nyang-transition), box-shadow var(--nyang-transition); }
+        .deal:hover { transform:translateY(-4px); box-shadow:var(--nyang-shadow-hover); }
         .deal:active { transform:scale(.98); }
         .thumb img { transition:transform 300ms ease-out; }
         .deal:hover .thumb img { transform:scale(1.05); }
         .deal-info { flex:1; min-width:0; }
         .badge-row { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
         .price-row { display:flex; align-items:center; gap:8px; margin-top:8px; flex-wrap:wrap; }
-        .badge { background:linear-gradient(135deg,#ff4757,#ff6b6b); color:white;
-            padding:3px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
-        .deal-cta { font-size:11px; color:#ff6b35; font-weight:600; margin-top:4px; }
-        .deal-disclaimer { font-size:10px; color:#aaa; margin-top:3px; line-height:1.3; }
+        .badge { background:var(--nyang-gradient-discount); color:white;
+            padding:3px 10px; border-radius:var(--nyang-radius-full); font-size:11px; font-weight:700; white-space:nowrap; }
+        .deal-cta { font-size:11px; color:var(--nyang-orange); font-weight:600; margin-top:4px; }
+        .deal-disclaimer { font-size:10px; color:var(--nyang-text-soft); margin-top:3px; line-height:1.3; }
         .deal-freshness { font-size:10px; color:#bbb; margin-top:2px; }
-        .rec-badge { background:linear-gradient(135deg,#4fc3f7,#0288d1); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800; white-space:nowrap; }
+        .deal-desc {
+            font-size:12px; color:var(--nyang-accent); font-weight:600;
+            margin-top:4px; line-height:1.3;
+            background:var(--nyang-gradient-soft); padding:6px 10px;
+            border-radius:var(--nyang-radius-sm); position:relative;
+        }
+        .deal-desc::before { content:"\\1F4AC"; margin-right:4px; }
+        .rec-badge { background:linear-gradient(135deg,var(--nyang-pink),var(--nyang-orange)); color:white;
+            padding:3px 9px; border-radius:var(--nyang-radius-full); font-size:10px; font-weight:800; white-space:nowrap; }
         .top-badge { position:absolute; top:8px; left:8px; z-index:2;
-            background:linear-gradient(135deg,#ffa502,#ff6348); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
-            box-shadow:0 2px 6px rgba(255,99,72,.3); white-space:nowrap; }
+            background:linear-gradient(135deg,var(--nyang-yellow),var(--nyang-orange)); color:white;
+            padding:3px 9px; border-radius:var(--nyang-radius-full); font-size:10px; font-weight:800;
+            box-shadow:0 2px 6px rgba(255,179,71,.3); white-space:nowrap; }
         .new-badge { position:absolute; top:8px; right:8px; z-index:2;
-            background:linear-gradient(135deg,#ff6b9d,#ff4757); color:white;
-            padding:3px 9px; border-radius:999px; font-size:10px; font-weight:800;
+            background:var(--nyang-gradient-discount); color:white;
+            padding:3px 9px; border-radius:var(--nyang-radius-full); font-size:10px; font-weight:800;
             animation:newPulse 2s ease-in-out infinite; white-space:nowrap; }
         @keyframes newPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
-        .discount-hero { font-size:28px; font-weight:900; color:#ff4757; text-align:center;
-            margin:10px 0 4px; letter-spacing:1px;
-            background:linear-gradient(135deg,#ff4757,#ff6b6b); -webkit-background-clip:text;
-            -webkit-text-fill-color:transparent; background-clip:text; }
+        .discount-hero { font-size:2.2rem; font-weight:900; text-align:center;
+            margin:10px 0 4px; letter-spacing:-0.02em; padding:12px 0;
+            background:var(--nyang-gradient-discount); -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent; background-clip:text;
+            animation:discountPulse 2s ease-in-out infinite; }
+        @keyframes discountPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.03)} }
         .cta-button { display:block; text-align:center; margin-top:10px;
-            background:linear-gradient(135deg,#ff6b9d,#ff6b35); color:white;
-            padding:10px 0; border-radius:10px; font-size:13px; font-weight:700;
-            text-decoration:none; transition:transform 200ms ease, box-shadow 200ms ease; }
-        .cta-button:hover { transform:translateY(-1px); box-shadow:0 4px 12px rgba(255,107,53,.3); }
+            background:var(--nyang-gradient); color:white;
+            padding:10px 0; border-radius:var(--nyang-radius-sm); font-size:13px; font-weight:700;
+            text-decoration:none; transition:transform var(--nyang-transition), box-shadow var(--nyang-transition); }
+        .cta-button:hover { transform:translateY(-1px); box-shadow:var(--nyang-shadow-soft); }
         .cta-button .cta-arrow { display:inline-block; transition:transform 250ms ease; }
         .deal:hover .cta-button .cta-arrow { transform:translateX(4px); }
 """
@@ -136,7 +171,7 @@ def _head(title: str, og_title: str, og_desc: str, extra_css: str = "",
     return f"""<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ff6b35">
+    <meta name="theme-color" content="#FF8FAB">
     <meta name="description"        content="{seo_desc}">
     <meta name="keywords"           content="{seo_kw}">
     <meta property="og:type"        content="website">
@@ -152,8 +187,8 @@ def _head(title: str, og_title: str, og_desc: str, extra_css: str = "",
         body {{
             font-family: 'Pretendard Variable', Pretendard, -apple-system,
                          BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #fff8f0 0%, #fff 40%);
-            color: #1a1a1a; min-height: 100vh;
+            background: linear-gradient(180deg, var(--nyang-cream) 0%, #fff 40%);
+            color: var(--nyang-text); min-height: 100vh;
         }}
         .container {{ max-width:760px; margin:0 auto; padding:0 16px 40px; }}
         .footer {{
@@ -289,20 +324,20 @@ _MAIN_CSS = """
         @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
 
         .cat-card {
-            background: white; border-radius: 20px;
+            background: var(--nyang-white); border-radius: var(--nyang-radius-md);
             padding: 18px 12px 16px;
             text-align: center;
-            box-shadow: 0 2px 12px rgba(0,0,0,.04);
-            text-decoration: none; color: #1a1a1a;
+            box-shadow: var(--nyang-shadow-card);
+            text-decoration: none; color: var(--nyang-text);
             display: flex; flex-direction: column;
             align-items: center; justify-content: flex-start; gap: 6px;
-            transition: transform .2s ease, box-shadow .2s ease;
+            transition: transform var(--nyang-transition), box-shadow var(--nyang-transition);
             border-top: 4px solid transparent;
             min-width: 0;
             height: auto;
             min-height: fit-content;
         }
-        .cat-card:hover  { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.10); }
+        .cat-card:hover  { transform: translateY(-4px); box-shadow: var(--nyang-shadow-hover); }
         .cat-card:active { transform: scale(.97); }
         .cat-emoji { font-size:36px; line-height:1; }
         .cat-label {
@@ -333,8 +368,8 @@ _MAIN_CSS = """
 
         /* Special deals banner */
         .special-banner {
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #ffa552 100%);
-            border-radius: 20px;
+            background: var(--nyang-gradient);
+            border-radius: var(--nyang-radius-md);
             padding: 20px 24px;
             margin-bottom: 16px;
             text-decoration: none;
@@ -362,13 +397,15 @@ _MAIN_CSS = """
 
         /* Section headings -- accent bar is inline span, not border */
         .section-heading {
-            font-size:18px; font-weight:800; color:#1a1a1a;
-            margin-top:32px; margin-bottom:16px; padding:0;
-            display:flex; align-items:center; gap:8px;
+            font-size:1.3rem; font-weight:800; color:var(--nyang-text);
+            margin-top:28px; margin-bottom:16px; padding:0;
+            display:flex; align-items:center; gap:10px;
         }
+        .section-heading::before { content:"🐾"; font-size:1.3rem; }
         .accent-bar {
-            display:inline-block; width:4px; height:20px;
-            border-radius:2px; flex-shrink:0;
+            display:inline-block; width:60px; height:4px;
+            background:var(--nyang-gradient);
+            border-radius:var(--nyang-radius-full); flex-shrink:0;
         }
 
         /* Price band grid (same 2/3/4 col as cat-grid) */
@@ -379,14 +416,14 @@ _MAIN_CSS = """
         }
         @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
         .band-card {
-            background:white; border-radius:20px; padding:18px 12px 14px;
+            background:var(--nyang-white); border-radius:var(--nyang-radius-md); padding:18px 12px 14px;
             text-align:center; border-top:4px solid transparent;
-            text-decoration:none; color:#1a1a1a;
-            box-shadow:0 2px 12px rgba(0,0,0,.04);
+            text-decoration:none; color:var(--nyang-text);
+            box-shadow:var(--nyang-shadow-card);
             display:flex; flex-direction:column; align-items:center; gap:4px;
-            transition:transform .2s ease, box-shadow .2s ease;
+            transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
         }
-        .band-card:hover  { transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.10); }
+        .band-card:hover  { transform:translateY(-4px); box-shadow:var(--nyang-shadow-hover); }
         .band-card:active { transform:scale(.97); }
         .band-emoji  { font-size:36px; line-height:1; }
         .band-label  { font-size:14px; font-weight:700; margin-top:4px; }
@@ -451,27 +488,30 @@ _SEARCH_CSS = """
         html { scroll-behavior:smooth; }
         .search-sticky {
             position:sticky; top:0; z-index:20;
-            background:rgba(255,255,255,.97);
+            background:rgba(255,249,245,.97);
             backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
             padding:10px 16px 8px;
-            border-bottom:1px solid #eee;
+            border-bottom:1px solid var(--nyang-border);
             max-width:760px; margin:0 auto;
         }
         .search-wrap {
             position:relative;
         }
         .search-wrap input {
-            width:100%; padding:12px 16px 12px 40px;
-            border:2px solid #eee; border-radius:14px;
+            width:100%; padding:14px 20px 14px 44px;
+            border:2px solid var(--nyang-border); border-radius:var(--nyang-radius-full);
             font-size:15px; font-family:inherit;
-            background:#fafafa; outline:none;
-            transition:border-color .2s;
+            background:var(--nyang-white); outline:none;
+            transition:border-color var(--nyang-transition), box-shadow var(--nyang-transition);
             min-height:44px;
         }
-        .search-wrap input:focus { border-color:#ff8fab; background:#fff; }
+        .search-wrap input:focus {
+            border-color:var(--nyang-pink); background:var(--nyang-white);
+            box-shadow:0 0 0 4px rgba(255,143,171,.15);
+        }
         .search-wrap::before {
-            content:"🔍"; position:absolute; left:14px; top:50%;
-            transform:translateY(-50%); font-size:16px;
+            content:"🐾"; position:absolute; left:16px; top:50%;
+            transform:translateY(-50%); font-size:18px;
             pointer-events:none;
         }
         .filter-row {
@@ -486,18 +526,22 @@ _SEARCH_CSS = """
         }
         .filter-group::-webkit-scrollbar { display:none; }
         .fbtn {
-            flex-shrink:0; padding:6px 14px;
-            border:1.5px solid #e0e0e0; border-radius:999px;
-            background:#fff; color:#555; font-size:13px;
+            flex-shrink:0; padding:10px 18px;
+            border:2px solid var(--nyang-border); border-radius:var(--nyang-radius-full);
+            background:var(--nyang-white); color:var(--nyang-text-soft); font-size:13px;
             font-weight:600; cursor:pointer;
             min-height:36px; min-width:44px;
-            transition:all .2s; white-space:nowrap;
+            transition:all var(--nyang-transition); white-space:nowrap;
             font-family:inherit;
         }
         .fbtn.active {
-            background:#ff8fab; color:#fff; border-color:#ff8fab;
+            background:var(--nyang-gradient); color:#fff; border-color:transparent;
+            box-shadow:var(--nyang-shadow-soft);
         }
-        .fbtn:hover:not(.active) { border-color:#ff8fab; color:#ff8fab; }
+        .fbtn:hover:not(.active) {
+            border-color:var(--nyang-pink); color:var(--nyang-accent);
+            transform:translateY(-1px);
+        }
         .results-grid {
             display:grid;
             grid-template-columns:1fr;
@@ -506,13 +550,13 @@ _SEARCH_CSS = """
         @media(min-width:420px) { .results-grid { grid-template-columns:repeat(2,1fr); } }
         @media(min-width:640px) { .results-grid { grid-template-columns:repeat(3,1fr); } }
         .result-card {
-            background:#fff; border-radius:14px;
-            overflow:hidden; text-decoration:none; color:#1a1a1a;
-            box-shadow:0 2px 8px rgba(0,0,0,.05);
-            transition:transform .2s, box-shadow .2s;
+            background:var(--nyang-white); border-radius:var(--nyang-radius-md);
+            overflow:hidden; text-decoration:none; color:var(--nyang-text);
+            box-shadow:var(--nyang-shadow-card);
+            transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
             display:flex; flex-direction:column;
         }
-        .result-card:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.10); }
+        .result-card:hover { transform:translateY(-2px); box-shadow:var(--nyang-shadow-hover); }
         .result-card:active { transform:scale(.98); }
         .rc-img {
             width:100%; aspect-ratio:1/1; object-fit:cover;
@@ -520,26 +564,32 @@ _SEARCH_CSS = """
         }
         .rc-body { padding:10px 12px 12px; flex:1; display:flex; flex-direction:column; }
         .rc-name {
-            font-size:13px; font-weight:600; line-height:1.35;
+            font-size:14px; font-weight:800; line-height:1.35; color:var(--nyang-text);
+            letter-spacing:-0.01em;
             display:-webkit-box; -webkit-line-clamp:2;
             -webkit-box-orient:vertical; overflow:hidden;
         }
-        .rc-desc { font-size:11px; color:#ff6b9d; margin-top:3px; font-weight:500; }
+        .rc-desc {
+            font-size:11px; color:var(--nyang-accent); margin-top:4px; font-weight:600;
+            background:var(--nyang-gradient-soft); padding:4px 8px;
+            border-radius:var(--nyang-radius-sm); line-height:1.3;
+        }
+        .rc-desc::before { content:"\\1F4AC"; margin-right:3px; }
         .rc-price-row { margin-top:auto; padding-top:6px; }
         .rc-orig { font-size:11px; color:#aaa; text-decoration:line-through; }
         .rc-price { font-size:15px; font-weight:800; color:#1a1a1a; }
         .rc-disc {
-            display:inline-block; background:#ff4757; color:#fff;
+            display:inline-block; background:var(--nyang-gradient-discount); color:#fff;
             font-size:10px; font-weight:700; padding:2px 6px;
-            border-radius:4px; margin-left:4px;
+            border-radius:var(--nyang-radius-sm); margin-left:4px;
         }
         #search-results .no-results {
             text-align:center; padding:40px 16px;
-            color:#aaa; font-size:14px;
+            color:var(--nyang-text-soft); font-size:14px;
         }
         .countdown-banner {
             display:flex; align-items:center; justify-content:center; gap:10px;
-            background:linear-gradient(135deg,#ff4757,#ff6b35);
+            background:var(--nyang-gradient);
             color:white; padding:10px 16px;
             font-weight:700; font-size:14px;
             max-width:760px; margin:0 auto;
@@ -836,7 +886,7 @@ def _main_page_html(today: str, total: int,
     <div class="container">
         <div id="search-results" style="display:none">
             <div class="section-heading">
-                <span class="accent-bar" style="background:#ff6b35"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+                <span class="accent-bar"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
             </div>
             <div id="results-grid" class="results-grid"></div>
         </div>
@@ -917,12 +967,17 @@ def _cat_css(accent: str) -> str:
             overflow:hidden;
         }}
         .deal-desc {{
-            font-size:12px; color:#ff6b9d; font-weight:600;
+            font-size:12px; color:var(--nyang-accent); font-weight:600;
             margin-top:4px; line-height:1.3;
+            background:var(--nyang-gradient-soft); padding:6px 10px;
+            border-radius:var(--nyang-radius-sm);
         }}
-        .discount-hero {{ font-size:28px; font-weight:900; text-align:center; margin:10px 0 4px;
-            letter-spacing:1px; background:linear-gradient(135deg,#ff4757,#ff6b6b);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }}
+        .deal-desc::before {{ content:"\\1F4AC"; margin-right:4px; }}
+        .discount-hero {{ font-size:2.2rem; font-weight:900; text-align:center; margin:10px 0 4px;
+            letter-spacing:-0.02em; padding:12px 0;
+            background:var(--nyang-gradient-discount);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+            animation:discountPulse 2s ease-in-out infinite; }}
         .deal-arrow {{ font-size:20px; color:var(--accent); opacity:.4; flex-shrink:0; }}
 """ + _CARD_BASE_CSS
 
@@ -1511,19 +1566,19 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
         </div>"""
 
     extra_css = """
-        :root { --accent: #ff4757; }
+        :root { --accent: #E85A7A; }
 
         .top-bar {
             position:sticky; top:0; z-index:10;
-            background:rgba(255,255,255,.95);
+            background:rgba(255,249,245,.95);
             backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-            padding:12px 16px; border-bottom:1px solid #f0f0f0;
+            padding:12px 16px; border-bottom:1px solid var(--nyang-border);
         }
-        .top-bar a { color:#ff4757; font-size:14px; font-weight:500; text-decoration:none; }
+        .top-bar a { color:var(--nyang-accent); font-size:14px; font-weight:500; text-decoration:none; }
         .top-bar a:hover { text-decoration:underline; }
 
         .sd-hero {
-            background: linear-gradient(135deg, rgba(255,71,87,.08) 0%, rgba(255,107,53,.04) 100%);
+            background: var(--nyang-gradient-soft);
             padding:32px 24px 28px; text-align:center;
         }
         .sd-hero .hero-flame {
@@ -1531,38 +1586,38 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
             animation: pulse 1.8s ease-in-out infinite;
         }
         @keyframes pulse {
-            0%,100% { transform:scale(1);    filter:drop-shadow(0 0 4px rgba(255,200,0,.4)); }
-            50%      { transform:scale(1.15); filter:drop-shadow(0 0 10px rgba(255,200,0,.7)); }
+            0%,100% { transform:scale(1);    filter:drop-shadow(0 0 4px rgba(255,143,171,.4)); }
+            50%      { transform:scale(1.15); filter:drop-shadow(0 0 10px rgba(255,143,171,.7)); }
         }
         .sd-hero h1 { font-size:24px; font-weight:800; margin-top:10px; }
-        .sd-hero p  { font-size:13px; color:#ff4757; font-weight:600; margin-top:8px; }
+        .sd-hero p  { font-size:13px; color:var(--nyang-accent); font-weight:600; margin-top:8px; }
 
         .section { margin-bottom:28px; }
         .section-header {
             display:flex; align-items:center; gap:8px;
             padding:10px 0 10px 12px;
-            border-left:4px solid #ff4757;
+            border-left:4px solid var(--nyang-pink);
             margin-bottom:10px;
         }
         .sec-emoji { font-size:22px; }
         .sec-label { font-size:16px; font-weight:700; flex:1; }
         .sec-badge {
             font-size:12px; font-weight:600;
-            padding:3px 10px; border-radius:999px;
+            padding:3px 10px; border-radius:var(--nyang-radius-full);
         }
 
         /* Product cards */
         .deal {
             display:flex; align-items:center; gap:14px;
-            background:white; border-radius:16px; padding:14px;
-            margin-bottom:10px; text-decoration:none; color:#1a1a1a;
-            box-shadow:0 2px 8px rgba(0,0,0,.04);
-            border-left:4px solid #ff4757;
-            transition:transform .2s ease, box-shadow .2s ease;
+            background:var(--nyang-white); border-radius:var(--nyang-radius-md); padding:14px;
+            margin-bottom:10px; text-decoration:none; color:var(--nyang-text);
+            box-shadow:var(--nyang-shadow-card);
+            border-left:4px solid var(--nyang-pink);
+            transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
         }
-        .deal:hover  { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+        .deal:hover  { transform:translateY(-2px); box-shadow:var(--nyang-shadow-hover); }
         .thumb {
-            width:72px; height:72px; border-radius:12px; flex-shrink:0;
+            width:72px; height:72px; border-radius:var(--nyang-radius-sm); flex-shrink:0;
             overflow:hidden; display:flex; align-items:center;
             justify-content:center; font-size:28px; aspect-ratio:1/1;
         }
@@ -1572,8 +1627,13 @@ def _special_deals_page_html(grouped: dict, total: int, today: str,
             display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
             overflow:hidden;
         }
-        .deal-desc { font-size:12px; color:#ff6b9d; font-weight:600;
-            margin-top:4px; line-height:1.3; }
+        .deal-desc {
+            font-size:12px; color:var(--nyang-accent); font-weight:600;
+            margin-top:4px; line-height:1.3;
+            background:var(--nyang-gradient-soft); padding:6px 10px;
+            border-radius:var(--nyang-radius-sm);
+        }
+        .deal-desc::before { content:"\\1F4AC"; margin-right:4px; }
         .deal-arrow { font-size:20px; opacity:.4; flex-shrink:0; }
     """ + _CARD_BASE_CSS
 
