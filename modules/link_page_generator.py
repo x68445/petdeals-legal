@@ -296,21 +296,84 @@ _WAVE_SVG = (
 
 # ── Main page CSS ─────────────────────────────────────────────────────────────
 _MAIN_CSS = """
-        .site-header {
-            background: linear-gradient(135deg, #ff8fab 0%, #ffb347 50%, #ffd166 100%);
-            padding: 56px 24px 72px;
-            text-align: center; position: relative;
+        .mega-hero {
+            position:relative;
+            padding:50px 20px 80px;
+            background:linear-gradient(135deg, #ff8fab 0%, #ffb347 50%, #ffd166 100%);
+            text-align:center; overflow:hidden;
         }
-        .site-header .flame {
-            font-size: 48px;
-            filter: drop-shadow(0 0 14px rgba(255,143,171,.55));
-            display: block; margin-bottom: 8px;
+        .paw-decor {
+            font-size:1.8rem; letter-spacing:8px; opacity:.7;
+            animation:pawFloat 3s ease-in-out infinite;
         }
-        .site-header h1 { font-size:28px; font-weight:800; color:white; }
-        .site-header .brand-sub { font-size:13px; font-weight:700;
-            color:rgba(255,255,255,.92); letter-spacing:.08em; margin-top:4px; }
-        .site-header p  { font-size:14px; color:rgba(255,255,255,.85); margin-top:6px; }
+        @keyframes pawFloat {
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-8px); }
+        }
+        .signboard {
+            position:relative; margin:30px auto; padding:30px 20px; display:inline-block;
+        }
+        .brand-title {
+            font-size:clamp(3rem,14vw,5rem); font-weight:900; color:white;
+            letter-spacing:-.03em; line-height:1; margin:0;
+            background:linear-gradient(180deg,#FFFFFF 0%,#FFF1E5 100%);
+            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            background-clip:text;
+            animation:brandShine 3s ease-in-out infinite;
+            filter:drop-shadow(0 4px 8px rgba(232,90,122,.5));
+        }
+        @keyframes brandShine {
+            0%,100% { filter:drop-shadow(0 4px 8px rgba(232,90,122,.5)) brightness(1); }
+            50% { filter:drop-shadow(0 4px 16px rgba(255,255,255,.8)) brightness(1.1); }
+        }
+        .brand-divider {
+            display:flex; align-items:center; justify-content:center;
+            gap:12px; margin:16px auto; max-width:300px;
+        }
+        .divider-line {
+            flex:1; height:3px;
+            background:linear-gradient(90deg,transparent,white,transparent);
+            border-radius:999px;
+        }
+        .divider-icon { font-size:1.3rem; animation:pawSpin 4s linear infinite; }
+        @keyframes pawSpin {
+            0%,100% { transform:rotate(-8deg); }
+            50% { transform:rotate(8deg); }
+        }
+        .sub-title {
+            font-size:clamp(1.4rem,5vw,2rem); font-weight:700; color:white;
+            letter-spacing:.2em; margin:0;
+            text-shadow:0 2px 8px rgba(232,90,122,.4);
+        }
+        .hero-tagline {
+            font-size:1.1rem; color:white; font-weight:600;
+            margin:24px 0 8px; text-shadow:0 1px 3px rgba(0,0,0,.2);
+        }
+        .hero-meta {
+            font-size:.85rem; color:rgba(255,255,255,.85); font-weight:500;
+        }
+        .sparkle {
+            position:absolute; font-size:1.5rem;
+            animation:sparkleFloat 3s ease-in-out infinite; pointer-events:none;
+        }
+        .sparkle-1 { top:10%; left:5%; animation-delay:0s; }
+        .sparkle-2 { top:15%; right:10%; animation-delay:.8s; font-size:1.2rem; }
+        .sparkle-3 { bottom:20%; left:12%; animation-delay:1.5s; font-size:1.3rem; }
+        .sparkle-4 { bottom:10%; right:8%; animation-delay:2.2s; }
+        @keyframes sparkleFloat {
+            0%,100% { opacity:0; transform:scale(.5) rotate(0deg); }
+            50% { opacity:1; transform:scale(1.2) rotate(180deg); }
+        }
+        .wave-bottom {
+            position:absolute; bottom:-1px; left:0; right:0; height:40px;
+            background:var(--nyang-cream);
+            clip-path:polygon(0 60%,25% 30%,50% 60%,75% 30%,100% 60%,100% 100%,0 100%);
+        }
         .wave { position:absolute; bottom:-1px; left:0; right:0; width:100%; height:48px; display:block; }
+        @media(min-width:640px) {
+            .brand-title { font-size:6rem; }
+            .mega-hero { padding:70px 20px 100px; }
+        }
 
         .cat-grid {
             display: grid;
@@ -528,15 +591,15 @@ _SEARCH_CSS = """
         .fbtn {
             flex-shrink:0; padding:10px 18px;
             border:2px solid var(--nyang-border); border-radius:var(--nyang-radius-full);
-            background:var(--nyang-white); color:var(--nyang-text-soft); font-size:13px;
-            font-weight:600; cursor:pointer;
+            background:var(--nyang-white); color:var(--nyang-text); font-size:.95rem;
+            font-weight:700; cursor:pointer;
             min-height:36px; min-width:44px;
             transition:all var(--nyang-transition); white-space:nowrap;
             font-family:inherit;
         }
         .fbtn.active {
             background:var(--nyang-gradient); color:#fff; border-color:transparent;
-            box-shadow:var(--nyang-shadow-soft);
+            font-weight:800; box-shadow:var(--nyang-shadow-soft);
         }
         .fbtn:hover:not(.active) {
             border-color:var(--nyang-pink); color:var(--nyang-accent);
@@ -588,17 +651,24 @@ _SEARCH_CSS = """
             color:var(--nyang-text-soft); font-size:14px;
         }
         .countdown-banner {
-            display:flex; align-items:center; justify-content:center; gap:10px;
-            background:var(--nyang-gradient);
-            color:white; padding:10px 16px;
-            font-weight:700; font-size:14px;
-            max-width:760px; margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between; gap:16px;
+            background:linear-gradient(135deg,#E85A7A,#FF6B6B,#FF8C42);
+            color:white; padding:14px 20px;
+            font-weight:700; font-size:1rem;
+            max-width:500px; margin:16px auto;
+            border-radius:var(--nyang-radius-md);
+            box-shadow:var(--nyang-shadow-soft);
         }
-        .cb-icon { font-size:20px; }
+        .cb-icon { font-size:22px; }
+        .cb-text {
+            text-shadow:0 1px 3px rgba(0,0,0,.15);
+        }
         .cb-timer {
-            background:rgba(0,0,0,.25); padding:4px 10px;
-            border-radius:6px; font-family:monospace;
-            font-size:15px; letter-spacing:.05em;
+            background:rgba(255,255,255,.25); padding:6px 14px;
+            border-radius:var(--nyang-radius-full);
+            font-family:'SF Mono',Menlo,monospace;
+            font-weight:800; font-size:1.1rem; color:white;
+            backdrop-filter:blur(8px); letter-spacing:.05em;
         }
         .yt-subscribe-cta {
             display:block; text-align:center;
@@ -847,13 +917,25 @@ def _main_page_html(today: str, total: int,
 <html lang="ko">
 {head}
 <body>
-    <div class="site-header">
-        <span class="flame">🐾</span>
-        <h1>{BRAND_NAME} 오늘의 특가</h1>
-        <div class="brand-sub">우리집 댕냥이 & 라이프 특가 🐱🐶</div>
-        <p><span id="update-date">{today}</span> 업데이트 · 총 {total}개 상품</p>
-        {_WAVE_SVG}
-    </div>
+    <header class="mega-hero">
+        <div class="paw-decor">🐾🐾🐾</div>
+        <div class="signboard">
+            <div class="sparkle sparkle-1">✨</div>
+            <div class="sparkle sparkle-2">✨</div>
+            <div class="sparkle sparkle-3">⭐</div>
+            <div class="sparkle sparkle-4">💫</div>
+            <h1 class="brand-title">{BRAND_NAME}</h1>
+            <div class="brand-divider">
+                <span class="divider-line"></span>
+                <span class="divider-icon">🐾</span>
+                <span class="divider-line"></span>
+            </div>
+            <h2 class="sub-title">오늘의 특가</h2>
+        </div>
+        <p class="hero-tagline">우리집 댕냥이 & 라이프 특가 😸🐕</p>
+        <p class="hero-meta"><span id="update-date">{today}</span> 업데이트 · 총 {total}개 상품</p>
+        <div class="wave-bottom"></div>
+    </header>
     <div class="search-sticky" id="search-sticky">
         <div class="search-wrap">
             <input type="text" id="search-input" placeholder="상품 검색..."
