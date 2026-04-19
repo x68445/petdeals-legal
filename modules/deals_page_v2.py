@@ -40,6 +40,34 @@ def _life_subcat(p: dict) -> str:
     return remap.get(cat_key, "etc")
 
 
+def _pet_subcat(p: dict) -> str:
+    title = (str(p.get("product_title", "")) + " " +
+             str(p.get("name_ko", "")) + " " +
+             str(p.get("_source_category", ""))).lower()
+    if any(w in title for w in ["food", "사료", "treat", "간식", "츄르", "chew", "snack"]):
+        return "food"
+    if any(w in title for w in ["toy", "장난감", "ball", "wand", "feather", "laser",
+                                 "puzzle", "tunnel", "kicker", "낚시"]):
+        return "toy"
+    if any(w in title for w in ["harness", "leash", "collar", "하네스", "목줄", "리드"]):
+        return "walk"
+    if any(w in title for w in ["groom", "brush", "shampoo", "nail", "샴푸", "빗", "미용"]):
+        return "groom"
+    if any(w in title for w in ["bed", "cushion", "blanket", "house", "침대", "쿠션",
+                                 "tower", "tree", "캣타워", "스크래처", "scratch"]):
+        return "house"
+    if any(w in title for w in ["feeder", "fountain", "bowl", "급식", "급수", "정수기",
+                                 "water", "dispenser"]):
+        return "feed"
+    if any(w in title for w in ["carrier", "bag", "이동", "캐리어", "가방"]):
+        return "travel"
+    if any(w in title for w in ["litter", "모래", "화장실", "toilet"]):
+        return "litter"
+    if any(w in title for w in ["cloth", "옷", "coat", "raincoat", "vest", "costume"]):
+        return "clothes"
+    return "etc"
+
+
 def _safe_float(val) -> float:
     try:
         return float(str(val).replace("$", "").replace(",", "").replace("%", "") or 0)
@@ -64,6 +92,7 @@ def generate_interactive_html(products: list, today: str = "") -> str:
         comm = _safe_float(p.get("commission_rate", 0))
         pet_type = _classify_pet_type(p)
         life_sub = _life_subcat(p) if pet_type == "life" else ""
+        pet_sub = _pet_subcat(p) if pet_type in ("dog", "cat", "pet") else ""
 
         is_new = False
         collected = p.get("collected_at", "")
@@ -82,6 +111,7 @@ def generate_interactive_html(products: list, today: str = "") -> str:
             "p": price,
             "t": pet_type,
             "s": life_sub,
+            "ps": pet_sub,
             "c": round(comm, 1),
             "w": is_new,
         })
@@ -141,7 +171,7 @@ body{{
 .tab .cnt{{font-size:11px;opacity:0.7;display:block;margin-top:2px}}
 .sub-tabs{{
   display:none;gap:6px;padding:12px 16px 4px;overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
+  -webkit-overflow-scrolling:touch;justify-content:center;flex-wrap:wrap;
 }}
 .sub-tabs.show{{display:flex}}
 .sub-tab{{
@@ -263,6 +293,29 @@ body{{
   <button class="tab" data-cat="life">✨ 라이프<span class="cnt">{counts['life']}</span></button>
 </div>
 
+<div class="sub-tabs" id="dogSubs">
+  <button class="sub-tab active" data-psub="all">전체</button>
+  <button class="sub-tab" data-psub="food">🍖 사료/간식</button>
+  <button class="sub-tab" data-psub="toy">🎾 장난감</button>
+  <button class="sub-tab" data-psub="walk">🦮 산책</button>
+  <button class="sub-tab" data-psub="feed">🥣 급식/급수</button>
+  <button class="sub-tab" data-psub="groom">✂️ 미용</button>
+  <button class="sub-tab" data-psub="house">🏠 하우스</button>
+  <button class="sub-tab" data-psub="clothes">👕 의류</button>
+  <button class="sub-tab" data-psub="travel">🧳 이동</button>
+</div>
+
+<div class="sub-tabs" id="catSubs">
+  <button class="sub-tab active" data-psub="all">전체</button>
+  <button class="sub-tab" data-psub="food">🐟 사료/간식</button>
+  <button class="sub-tab" data-psub="toy">🪶 장난감</button>
+  <button class="sub-tab" data-psub="house">🏠 캣타워/침대</button>
+  <button class="sub-tab" data-psub="litter">🚽 모래/화장실</button>
+  <button class="sub-tab" data-psub="feed">🥣 급식/급수</button>
+  <button class="sub-tab" data-psub="groom">✂️ 미용</button>
+  <button class="sub-tab" data-psub="travel">🧳 이동</button>
+</div>
+
 <div class="sub-tabs" id="lifeSubs">
   <button class="sub-tab active" data-sub="all">전체</button>
   <button class="sub-tab" data-sub="home">🏠 살림</button>
@@ -278,14 +331,6 @@ body{{
     <input type="text" id="q" placeholder="상품명 검색..." autocomplete="off">
   </div>
   <div class="filter-row">
-    <select id="fPrice">
-      <option value="all">💰 전체 가격</option>
-      <option value="0-10000">1만원 이하</option>
-      <option value="10000-30000">1~3만원</option>
-      <option value="30000-50000">3~5만원</option>
-      <option value="50000-100000">5~10만원</option>
-      <option value="100000-999999">10만원 이상</option>
-    </select>
     <select id="fDisc">
       <option value="0">🔥 전체 할인</option>
       <option value="30">30% 이상</option>
@@ -295,8 +340,6 @@ body{{
     <select id="fSort">
       <option value="rec">추천순</option>
       <option value="disc">할인율순</option>
-      <option value="priceL">가격 낮은순</option>
-      <option value="priceH">가격 높은순</option>
       <option value="new">최신순</option>
     </select>
   </div>
@@ -323,34 +366,41 @@ body{{
 
 <script>
 const P={products_json};
-let cat='all',sub='all',query='',fPrice='all',fDisc=0,fSort='rec';
+let cat='all',sub='all',psub='all',query='',fDisc=0,fSort='rec';
 
 const $=id=>document.getElementById(id);
 const grid=$('grid'),empty=$('empty'),rc=$('resultCount');
 
+function hideAllSubs(){{
+  ['dogSubs','catSubs','lifeSubs'].forEach(id=>$(id).classList.remove('show'));
+  sub='all';psub='all';
+  document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.sub-tab[data-sub=all],.sub-tab[data-psub=all]').forEach(x=>x.classList.add('active'));
+}}
 document.querySelectorAll('.tab').forEach(t=>{{
   t.onclick=()=>{{
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
     cat=t.dataset.cat;
-    const ls=$('lifeSubs');
-    ls.classList.toggle('show',cat==='life');
-    if(cat!=='life'){{sub='all';document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));document.querySelector('.sub-tab[data-sub=all]').classList.add('active')}}
+    hideAllSubs();
+    if(cat==='dog')$('dogSubs').classList.add('show');
+    else if(cat==='cat')$('catSubs').classList.add('show');
+    else if(cat==='life')$('lifeSubs').classList.add('show');
     render();
   }};
 }});
 
 document.querySelectorAll('.sub-tab').forEach(t=>{{
   t.onclick=()=>{{
-    document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));
+    t.closest('.sub-tabs').querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
-    sub=t.dataset.sub;
+    if(t.dataset.sub!==undefined){{sub=t.dataset.sub;psub='all'}}
+    if(t.dataset.psub!==undefined){{psub=t.dataset.psub;sub='all'}}
     render();
   }};
 }});
 
 $('q').oninput=e=>{{query=e.target.value.toLowerCase();render()}};
-$('fPrice').onchange=e=>{{fPrice=e.target.value;render()}};
 $('fDisc').onchange=e=>{{fDisc=parseInt(e.target.value);render()}};
 $('fSort').onchange=e=>{{fSort=e.target.value;render()}};
 
@@ -359,19 +409,14 @@ function filter(item){{
   if(cat==='cat'&&item.t!=='cat')return false;
   if(cat==='life'&&item.t!=='life')return false;
   if(cat==='life'&&sub!=='all'&&item.s!==sub)return false;
+  if((cat==='dog'||cat==='cat')&&psub!=='all'&&item.ps!==psub)return false;
   if(query&&!item.n.toLowerCase().includes(query))return false;
-  if(fPrice!=='all'){{
-    const[lo,hi]=fPrice.split('-').map(Number);
-    if(item.p<lo||item.p>hi)return false;
-  }}
   if(fDisc>0&&item.d<fDisc)return false;
   return true;
 }}
 
 function sortFn(a,b){{
   if(fSort==='disc')return b.d-a.d;
-  if(fSort==='priceL')return a.p-b.p;
-  if(fSort==='priceH')return b.p-a.p;
   if(fSort==='new')return(b.w?1:0)-(a.w?1:0);
   return(b.c-a.c)||((b.d-a.d))||((a.p-b.p));
 }}
