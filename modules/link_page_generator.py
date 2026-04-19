@@ -419,7 +419,6 @@ _MAIN_CSS = """
             display: flex; flex-direction: column;
             align-items: center; justify-content: flex-start; gap: 6px;
             transition: transform var(--nyang-transition), box-shadow var(--nyang-transition);
-            border-top: 4px solid transparent;
             min-width: 0;
             height: auto;
             min-height: fit-content;
@@ -504,7 +503,7 @@ _MAIN_CSS = """
         @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
         .band-card {
             background:var(--nyang-white); border-radius:var(--nyang-radius-md); padding:18px 12px 14px;
-            text-align:center; border-top:4px solid transparent;
+            text-align:center;
             text-decoration:none; color:var(--nyang-text);
             box-shadow:var(--nyang-shadow-card);
             display:flex; flex-direction:column; align-items:center; gap:4px;
@@ -878,7 +877,7 @@ def _main_page_html(today: str, total: int,
         rng    = band_ranges.get(key, "")
         tier   = band.get("tier", "light")
         band_cards_html += f"""
-        <a href="{key}.html" class="band-card band-{tier}" style="border-top-color:{accent}">
+        <a href="{key}.html" class="band-card band-{tier}">
             <div class="band-emoji">{emoji}</div>
             <div class="band-label">{label}</div>
             <div class="band-range">{rng}</div>
@@ -900,8 +899,7 @@ def _main_page_html(today: str, total: int,
         accent = _ACCENT.get(key, "#9e9e9e")
         rgb    = _hex_rgb(accent)
         cards_html += f"""
-        <a href="category_{key}.html" class="cat-card"
-           style="border-top-color:{accent}">
+        <a href="category_{key}.html" class="cat-card">
             <div class="cat-emoji">{emoji}</div>
             <div class="cat-label">{label}</div>
             <div class="cat-count"
@@ -1005,7 +1003,7 @@ def _main_page_html(today: str, total: int,
     <div class="container">
         <div id="search-results" style="display:none">
             <div class="section-heading">
-                <span class="accent-bar"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
             </div>
             <div id="results-grid" class="results-grid"></div>
         </div>

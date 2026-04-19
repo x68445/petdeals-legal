@@ -171,7 +171,6 @@
             display: flex; flex-direction: column;
             align-items: center; justify-content: flex-start; gap: 6px;
             transition: transform var(--nyang-transition), box-shadow var(--nyang-transition);
-            border-top: 4px solid transparent;
             min-width: 0;
             height: auto;
             min-height: fit-content;
@@ -256,7 +255,7 @@
         @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
         .band-card {
             background:var(--nyang-white); border-radius:var(--nyang-radius-md); padding:18px 12px 14px;
-            text-align:center; border-top:4px solid transparent;
+            text-align:center;
             text-decoration:none; color:var(--nyang-text);
             box-shadow:var(--nyang-shadow-card);
             display:flex; flex-direction:column; align-items:center; gap:4px;
@@ -532,7 +531,7 @@
     <div class="container">
         <div id="search-results" style="display:none">
             <div class="section-heading">
-                <span class="accent-bar"></span>🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
+                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
             </div>
             <div id="results-grid" class="results-grid"></div>
         </div>
@@ -565,21 +564,21 @@
         </a>
             
         <div class="band-grid">
-        <a href="price_1k.html" class="band-card band-light" style="border-top-color:#26c281">
+        <a href="price_1k.html" class="band-card band-light">
             <div class="band-emoji">💰</div>
             <div class="band-label">가성비 특가</div>
             <div class="band-range">10-29% 할인</div>
             <div class="band-count"
                  style="background:rgba(38,194,129,.12);color:#26c281">83개</div>
         </a>
-        <a href="price_10k.html" class="band-card band-premium" style="border-top-color:#c9a227">
+        <a href="price_10k.html" class="band-card band-premium">
             <div class="band-emoji">🔥</div>
             <div class="band-label">핫딜</div>
             <div class="band-range">30-49% 할인</div>
             <div class="band-count"
                  style="background:rgba(201,162,39,.12);color:#c9a227">94개</div>
         </a>
-        <a href="price_100k.html" class="band-card band-luxury" style="border-top-color:#ffd700">
+        <a href="price_100k.html" class="band-card band-luxury">
             <div class="band-emoji">💎</div>
             <div class="band-label">초특가</div>
             <div class="band-range">50%+ 할인</div>
@@ -588,50 +587,43 @@
         </a></div>
             
         <div class="cat-grid">
-        <a href="category_pet.html" class="cat-card"
-           style="border-top-color:#ff6b9d">
+        <a href="category_pet.html" class="cat-card">
             <div class="cat-emoji">🐾</div>
             <div class="cat-label">반려동물</div>
             <div class="cat-count"
                  style="background:rgba(255,107,157,.12);color:#ff6b9d">35개</div>
         </a>
-        <a href="category_home.html" class="cat-card"
-           style="border-top-color:#ffa502">
+        <a href="category_home.html" class="cat-card">
             <div class="cat-emoji">🏠</div>
             <div class="cat-label">우리집 살림</div>
             <div class="cat-count"
                  style="background:rgba(255,165,2,.12);color:#ffa502">21개</div>
         </a>
-        <a href="category_outdoor.html" class="cat-card"
-           style="border-top-color:#ff7f50">
+        <a href="category_outdoor.html" class="cat-card">
             <div class="cat-emoji">🚗</div>
             <div class="cat-label">우리 가족 나들이</div>
             <div class="cat-count"
                  style="background:rgba(255,127,80,.12);color:#ff7f50">42개</div>
         </a>
-        <a href="category_fashion.html" class="cat-card"
-           style="border-top-color:#ff4757">
+        <a href="category_fashion.html" class="cat-card">
             <div class="cat-emoji">👕</div>
             <div class="cat-label">우리 가족 패션</div>
             <div class="cat-count"
                  style="background:rgba(255,71,87,.12);color:#ff4757">20개</div>
         </a>
-        <a href="category_sports.html" class="cat-card"
-           style="border-top-color:#f368e0">
+        <a href="category_sports.html" class="cat-card">
             <div class="cat-emoji">💪</div>
             <div class="cat-label">우리 가족 건강</div>
             <div class="cat-count"
                  style="background:rgba(243,104,224,.12);color:#f368e0">23개</div>
         </a>
-        <a href="category_electronics.html" class="cat-card"
-           style="border-top-color:#ff9ff3">
+        <a href="category_electronics.html" class="cat-card">
             <div class="cat-emoji">💻</div>
             <div class="cat-label">전자/디지털</div>
             <div class="cat-count"
                  style="background:rgba(255,159,243,.12);color:#ff9ff3">23개</div>
         </a>
-        <a href="category_etc.html" class="cat-card"
-           style="border-top-color:#ff6b35">
+        <a href="category_etc.html" class="cat-card">
             <div class="cat-emoji">🔥</div>
             <div class="cat-label">오늘의 추천템</div>
             <div class="cat-count"
