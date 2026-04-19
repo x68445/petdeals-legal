@@ -1,768 +1,326 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#FF8FAB">
-    <meta name="description"        content="냥댕라이프 - 우리 가족 댕냥이부터 집안 살림까지, 매일 엄선 특가. 반려동물, 살림, 패션, 전자 할인">
-    <meta name="keywords"           content="냥댕라이프, 반려동물 할인, 고양이 용품, 강아지 용품, 집안 살림, 캠핑, 최저가">
-    <meta property="og:type"        content="website">
-    <meta property="og:title"       content="냥댕라이프 - 오늘의 특가">
-    <meta property="og:description" content="냥댕라이프 - 우리 가족 댕냥이부터 집안 살림까지, 매일 엄선 특가. 반려동물, 살림, 패션, 전자 할인">
-    <meta property="og:image"       content="https://x68445.github.io/petdeals-legal/og-image.png">
-    <link rel="canonical" href="https://x68445.github.io/petdeals-legal/deals.html">
-    <title>🐾 냥댕라이프 오늘의 특가</title>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet">
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Pretendard Variable', Pretendard, -apple-system,
-                         BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, var(--nyang-cream) 0%, #fff 40%);
-            color: var(--nyang-text); min-height: 100vh;
-        }
-        .container { max-width:760px; margin:0 auto; padding:0 16px 40px; }
-        .footer {
-            text-align:center; padding:32px 16px;
-            font-size:11px; color:#888; line-height:1.8;
-        }
-        .footer a { color:#bbb; text-decoration:none; }
-        .footer a:hover { text-decoration:underline; }
-        
-        .yt-banner {
-            display:flex; align-items:center; justify-content:space-between; gap:12px;
-            background: linear-gradient(135deg,#ff0000 0%,#cc0000 60%,#8b0000 100%);
-            color:white; text-decoration:none;
-            border-radius:20px; padding:16px 20px;
-            margin:16px 0 14px;
-            box-shadow:0 6px 22px rgba(255,0,0,.25);
-            transition:transform .2s ease, box-shadow .2s ease;
-        }
-        .yt-banner:hover  { transform:translateY(-3px); box-shadow:0 10px 28px rgba(255,0,0,.35); }
-        .yt-banner:active { transform:scale(.98); }
-        .yt-left   { display:flex; align-items:center; gap:14px; }
-        .yt-icon   { font-size:32px; line-height:1; }
-        .yt-title  { font-size:15px; font-weight:800; line-height:1.2; }
-        .yt-sub    { font-size:12px; opacity:.85; margin-top:3px; }
-        .yt-arrow  { font-size:18px; opacity:.85; flex-shrink:0; }
-
-        
-        .mega-hero {
-            position:relative;
-            padding:60px 20px 90px;
-            background:linear-gradient(135deg, #ff6b8a 0%, #ff8fab 25%, #ffb347 55%, #ffd166 100%);
-            text-align:center; overflow:hidden;
-        }
-        .mega-hero::before {
-            content:''; position:absolute; inset:0;
-            background:radial-gradient(ellipse at 30% 20%, rgba(255,255,255,.25) 0%, transparent 60%),
-                       radial-gradient(ellipse at 70% 80%, rgba(255,179,71,.2) 0%, transparent 50%);
-            pointer-events:none;
-        }
-        .paw-decor {
-            font-size:2.2rem; letter-spacing:12px; opacity:.8;
-            animation:pawFloat 3s ease-in-out infinite;
-            text-shadow:0 2px 8px rgba(0,0,0,.1);
-        }
-        @keyframes pawFloat {
-            0%,100% { transform:translateY(0) scale(1); }
-            50% { transform:translateY(-10px) scale(1.05); }
-        }
-        .signboard {
-            position:relative; margin:25px auto 20px; padding:35px 30px 25px;
-            display:inline-block;
-            background:rgba(255,255,255,.08);
-            border-radius:24px;
-            border:2px solid rgba(255,255,255,.2);
-            backdrop-filter:blur(4px);
-        }
-        .brand-title {
-            font-size:clamp(3.5rem,16vw,5.5rem); font-weight:900;
-            letter-spacing:-.02em; line-height:1; margin:0;
-            background:linear-gradient(180deg,#FFFFFF 0%,#FFF5EB 40%,#FFE0C0 100%);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-            background-clip:text;
-            animation:brandShine 3s ease-in-out infinite;
-            filter:drop-shadow(0 4px 10px rgba(232,90,122,.6));
-            text-shadow:none;
-        }
-        @keyframes brandShine {
-            0%,100% { filter:drop-shadow(0 4px 10px rgba(232,90,122,.6)) brightness(1); }
-            50% { filter:drop-shadow(0 6px 24px rgba(255,255,255,.9)) brightness(1.15); }
-        }
-        .brand-divider {
-            display:flex; align-items:center; justify-content:center;
-            gap:14px; margin:18px auto; max-width:320px;
-        }
-        .divider-line {
-            flex:1; height:3px;
-            background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
-            border-radius:999px;
-        }
-        .divider-icon { font-size:1.5rem; animation:pawSpin 4s linear infinite; }
-        @keyframes pawSpin {
-            0%,100% { transform:rotate(-10deg) scale(1); }
-            50% { transform:rotate(10deg) scale(1.15); }
-        }
-        .sub-title {
-            font-size:clamp(1.6rem,6vw,2.4rem); font-weight:800; color:white;
-            letter-spacing:.25em; margin:0;
-            text-shadow:0 2px 10px rgba(232,90,122,.5);
-            animation:subGlow 4s ease-in-out infinite;
-        }
-        @keyframes subGlow {
-            0%,100% { text-shadow:0 2px 10px rgba(232,90,122,.5); }
-            50% { text-shadow:0 2px 20px rgba(255,255,255,.6), 0 4px 30px rgba(232,90,122,.3); }
-        }
-        .hero-tagline {
-            font-size:1.15rem; color:white; font-weight:700;
-            margin:28px 0 8px; text-shadow:0 1px 4px rgba(0,0,0,.2);
-            letter-spacing:.02em;
-        }
-        .hero-meta {
-            font-size:.88rem; color:rgba(255,255,255,.9); font-weight:600;
-        }
-        .sparkle {
-            position:absolute; font-size:1.8rem;
-            animation:sparkleFloat 3s ease-in-out infinite; pointer-events:none;
-        }
-        .sparkle-1 { top:8%; left:4%; animation-delay:0s; }
-        .sparkle-2 { top:12%; right:8%; animation-delay:.7s; font-size:1.4rem; }
-        .sparkle-3 { bottom:22%; left:10%; animation-delay:1.4s; font-size:1.5rem; }
-        .sparkle-4 { bottom:12%; right:6%; animation-delay:2s; }
-        .sparkle-5 { top:40%; left:2%; animation-delay:0.3s; font-size:1.2rem; }
-        .sparkle-6 { top:35%; right:3%; animation-delay:1.8s; font-size:1.3rem; }
-        @keyframes sparkleFloat {
-            0%,100% { opacity:0; transform:scale(.4) rotate(0deg); }
-            20% { opacity:.6; }
-            50% { opacity:1; transform:scale(1.3) rotate(180deg); }
-            80% { opacity:.6; }
-        }
-        .wave-bottom {
-            position:absolute; bottom:-1px; left:0; right:0; height:45px;
-            background:#fff8f0;
-            clip-path:polygon(0 60%,25% 30%,50% 60%,75% 30%,100% 60%,100% 100%,0 100%);
-        }
-        .wave { position:absolute; bottom:-1px; left:0; right:0; width:100%; height:48px; display:block; }
-        @media(min-width:640px) {
-            .brand-title { font-size:7rem; }
-            .mega-hero { padding:80px 20px 110px; }
-            .signboard { padding:45px 50px 35px; }
-        }
-
-        .cat-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: -24px;
-            padding: 0 4px;
-            align-items: stretch;
-        }
-        @media(min-width:640px) { .cat-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
-        @media(min-width:900px) { .cat-grid { grid-template-columns: repeat(4, minmax(0,1fr)); } }
-
-        .cat-card {
-            background: var(--nyang-white); border-radius: var(--nyang-radius-md);
-            padding: 22px 14px 18px;
-            text-align: center;
-            box-shadow: var(--nyang-shadow-card);
-            text-decoration: none; color: var(--nyang-text);
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: flex-start; gap: 8px;
-            transition: transform var(--nyang-transition), box-shadow var(--nyang-transition);
-            min-width: 0;
-        }
-        .cat-card:hover  { transform: translateY(-4px); box-shadow: var(--nyang-shadow-hover); }
-        .cat-card:active { transform: scale(.97); }
-        .cat-icon-wrap {
-            width:64px; height:64px; border-radius:50%;
-            display:flex; align-items:center; justify-content:center;
-            font-size:2rem; line-height:1; flex-shrink:0;
-        }
-        .cat-label {
-            font-size: 15px; font-weight: 800; line-height: 1.3;
-            word-break: keep-all; overflow-wrap: break-word;
-            color: var(--nyang-text);
-        }
-        @media(max-width:360px) { .cat-label { font-size:13px; } }
-        .cat-count {
-            font-size:12px; font-weight:700;
-            padding:4px 12px; border-radius:999px; margin-top:auto;
-            white-space: nowrap; flex-shrink: 0;
-        }
-
-        /* Special deals banner */
-        .special-banner {
-            background: var(--nyang-gradient);
-            border-radius: var(--nyang-radius-md);
-            padding: 20px 24px;
-            margin-bottom: 16px;
-            text-decoration: none;
-            display: flex; align-items: center; justify-content: space-between; gap: 12px;
-            box-shadow: 0 4px 20px rgba(255,71,87,.25);
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-        .special-banner:hover  { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(255,71,87,.35); }
-        .special-banner:active { transform: scale(.98); }
-        .sb-left  { display:flex; align-items:center; gap:14px; }
-        .sb-flame { font-size:40px; animation: pulse 1.8s ease-in-out infinite; }
-        @keyframes pulse {
-            0%,100% { transform: scale(1);    filter: drop-shadow(0 0 4px rgba(255,200,0,.4)); }
-            50%      { transform: scale(1.15); filter: drop-shadow(0 0 10px rgba(255,200,0,.7)); }
-        }
-        .sb-text h2  { font-size:20px; font-weight:800; color:white; line-height:1.2; }
-        .sb-text p   { font-size:13px; color:rgba(255,255,255,.85); margin-top:3px; }
-        .sb-right { display:flex; align-items:center; gap:10px; flex-shrink:0; }
-        .sb-badge {
-            background:rgba(255,255,255,.2); color:white;
-            padding:5px 12px; border-radius:999px;
-            font-size:13px; font-weight:700; white-space:nowrap;
-        }
-        .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
-
-        .section-heading {
-            font-size:1.3rem; font-weight:800; color:var(--nyang-text);
-            margin-top:28px; margin-bottom:16px; padding:0;
-            display:flex; align-items:center; gap:10px;
-        }
-
-        /* Price band grid (same 2/3/4 col as cat-grid) */
-        .band-grid {
-            display:grid;
-            grid-template-columns: repeat(2,1fr);
-            gap:12px;
-        }
-        @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
-        .band-card {
-            background:var(--nyang-white); border-radius:var(--nyang-radius-md);
-            padding:22px 14px 18px;
-            text-align:center;
-            text-decoration:none; color:var(--nyang-text);
-            box-shadow:var(--nyang-shadow-card);
-            display:flex; flex-direction:column; align-items:center; gap:8px;
-            transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
-        }
-        .band-card:hover  { transform:translateY(-4px); box-shadow:var(--nyang-shadow-hover); }
-        .band-card:active { transform:scale(.97); }
-        .band-icon-wrap {
-            width:64px; height:64px; border-radius:50%;
-            display:flex; align-items:center; justify-content:center;
-            font-size:2rem; line-height:1; flex-shrink:0;
-        }
-        .band-label  { font-size:15px; font-weight:800; }
-        .band-range  { font-size:12px; color:#888; }
-        .band-count  {
-            font-size:12px; font-weight:700;
-            padding:4px 12px; border-radius:999px; margin-top:auto;
-        }
-        .band-premium {
-            background:linear-gradient(160deg,#faf6ef 0%,#f5f0e8 100%) !important;
-            border:1px solid #333333 !important;
-            box-shadow:0 2px 12px rgba(0,0,0,.08) !important;
-        }
-        .band-premium .band-label { color:#2a2520; font-weight:800; }
-        .band-premium .band-range { color:#8b7355; }
-        .band-premium .band-count {
-            background:rgba(139,115,85,.12) !important;
-            color:#8b7355 !important;
-        }
-        .band-luxury {
-            position:relative; overflow:hidden;
-            background:linear-gradient(145deg,#0a0a14 0%,#1a1530 50%,#0a0a14 100%) !important;
-            border:1px solid rgba(255,215,0,.55);
-            box-shadow:0 0 24px rgba(255,215,0,.25),
-                       0 4px 18px rgba(0,0,0,.35) !important;
-            color:#FFD700 !important;
-        }
-        .band-luxury::after {
-            content:""; position:absolute; top:0; left:-100%; width:200%; height:100%;
-            background:linear-gradient(90deg,transparent 40%,
-                       rgba(255,215,0,.18) 50%,transparent 60%);
-            animation:band-shimmer 3.5s infinite linear; pointer-events:none;
-        }
-        @keyframes band-shimmer { 0%{left:-100%} 100%{left:100%} }
-        .band-luxury .band-icon-wrap {
-            filter:drop-shadow(0 0 14px rgba(255,215,0,.8));
-            position:relative; z-index:1;
-        }
-        .band-luxury .band-label {
-            position:relative; z-index:1;
-            background:linear-gradient(135deg,#fff1a8,#FFD700);
-            -webkit-background-clip:text; background-clip:text; color:transparent;
-            font-weight:900; letter-spacing:.02em;
-        }
-        .band-luxury .band-range {
-            position:relative; z-index:1; color:#c9a227;
-        }
-        .band-luxury .band-count {
-            position:relative; z-index:1;
-            background:linear-gradient(135deg,#ffecb3,#FFD700) !important;
-            color:#0a0a14 !important;
-            box-shadow:0 0 12px rgba(255,215,0,.5);
-        }
-        .band-luxury:hover {
-            border-color:rgba(255,215,0,.9);
-            box-shadow:0 0 36px rgba(255,215,0,.4),
-                       0 10px 28px rgba(0,0,0,.5) !important;
-        }
-
-        html { scroll-behavior:smooth; }
-        .search-sticky {
-            position:sticky; top:0; z-index:20;
-            background:rgba(255,249,245,.97);
-            backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-            padding:10px 16px 8px;
-            border-bottom:1px solid var(--nyang-border);
-            max-width:760px; margin:0 auto;
-        }
-        .search-wrap {
-            position:relative;
-        }
-        .search-wrap input {
-            width:100%; padding:14px 20px 14px 44px;
-            border:2px solid var(--nyang-border); border-radius:var(--nyang-radius-full);
-            font-size:15px; font-family:inherit;
-            background:var(--nyang-white); outline:none;
-            transition:border-color var(--nyang-transition), box-shadow var(--nyang-transition);
-            min-height:44px;
-        }
-        .search-wrap input:focus {
-            border-color:var(--nyang-pink); background:var(--nyang-white);
-            box-shadow:0 0 0 4px rgba(255,143,171,.15);
-        }
-        .search-wrap::before {
-            content:"🐾"; position:absolute; left:16px; top:50%;
-            transform:translateY(-50%); font-size:18px;
-            pointer-events:none;
-        }
-        .filter-row {
-            display:flex; flex-direction:column; gap:6px;
-            margin-top:8px; padding-bottom:2px;
-            overflow-x:auto; -webkit-overflow-scrolling:touch;
-        }
-        .filter-group {
-            display:flex; gap:6px; flex-wrap:nowrap;
-            overflow-x:auto; -webkit-overflow-scrolling:touch;
-            scrollbar-width:none;
-        }
-        .filter-group::-webkit-scrollbar { display:none; }
-        .fbtn {
-            flex-shrink:0; padding:10px 18px;
-            border:2px solid #e0c4bc; border-radius:var(--nyang-radius-full);
-            background:#fff; color:#2D2D2D; font-size:.95rem;
-            font-weight:700; cursor:pointer;
-            min-height:36px; min-width:44px;
-            transition:all var(--nyang-transition); white-space:nowrap;
-            font-family:inherit;
-            -webkit-text-fill-color:#2D2D2D;
-        }
-        .fbtn.active {
-            background:linear-gradient(135deg, #FF8FAB 0%, #FFB347 50%, #FFD166 100%);
-            color:#fff; border-color:transparent;
-            font-weight:800; box-shadow:0 4px 20px rgba(255,143,171,.15);
-            -webkit-text-fill-color:#fff;
-        }
-        .fbtn:hover:not(.active) {
-            border-color:#FF8FAB; color:#E85A7A;
-            -webkit-text-fill-color:#E85A7A;
-            transform:translateY(-1px);
-        }
-        .results-grid {
-            display:grid;
-            grid-template-columns:1fr;
-            gap:10px; margin-top:8px;
-        }
-        @media(min-width:420px) { .results-grid { grid-template-columns:repeat(2,1fr); } }
-        @media(min-width:640px) { .results-grid { grid-template-columns:repeat(3,1fr); } }
-        .result-card {
-            background:var(--nyang-white); border-radius:var(--nyang-radius-md);
-            overflow:hidden; text-decoration:none; color:var(--nyang-text);
-            box-shadow:var(--nyang-shadow-card);
-            transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
-            display:flex; flex-direction:column;
-        }
-        .result-card:hover { transform:translateY(-2px); box-shadow:var(--nyang-shadow-hover); }
-        .result-card:active { transform:scale(.98); }
-        .rc-img {
-            width:100%; aspect-ratio:1/1; object-fit:cover;
-            background:#f5f5f5; display:block;
-        }
-        .rc-body { padding:10px 12px 12px; flex:1; display:flex; flex-direction:column; }
-        .rc-name {
-            font-size:14px; font-weight:800; line-height:1.35; color:var(--nyang-text);
-            letter-spacing:-0.01em;
-            display:-webkit-box; -webkit-line-clamp:2;
-            -webkit-box-orient:vertical; overflow:hidden;
-        }
-        .rc-desc {
-            font-size:11px; color:var(--nyang-accent); margin-top:4px; font-weight:600;
-            background:var(--nyang-gradient-soft); padding:4px 8px;
-            border-radius:var(--nyang-radius-sm); line-height:1.3;
-        }
-        .rc-desc::before { content:"\1F4AC"; margin-right:3px; }
-        .rc-price-row { margin-top:auto; padding-top:6px; }
-        .rc-orig { font-size:11px; color:#aaa; text-decoration:line-through; }
-        .rc-price { font-size:15px; font-weight:800; color:#1a1a1a; }
-        .rc-disc {
-            display:inline-block; background:var(--nyang-gradient-discount); color:#fff;
-            font-size:10px; font-weight:700; padding:2px 6px;
-            border-radius:var(--nyang-radius-sm); margin-left:4px;
-        }
-        #search-results .no-results {
-            text-align:center; padding:40px 16px;
-            color:var(--nyang-text-soft); font-size:14px;
-        }
-        .countdown-banner {
-            display:flex; align-items:center; justify-content:center; gap:20px;
-            background:linear-gradient(135deg,#D94466,#E85A7A,#FF6B6B);
-            color:#fff; padding:16px 24px;
-            font-weight:700; font-size:1.05rem;
-            max-width:600px; margin:16px auto;
-            border-radius:var(--nyang-radius-md);
-            box-shadow:0 4px 20px rgba(232,90,122,.25);
-            animation:countdownPulse 2.5s ease-in-out infinite;
-        }
-        @keyframes countdownPulse {
-            0%,100% { box-shadow:0 4px 20px rgba(232,90,122,.25); }
-            50% { box-shadow:0 6px 28px rgba(232,90,122,.4); }
-        }
-        .cb-icon { font-size:24px; animation:fireFlicker 1.5s ease-in-out infinite; }
-        @keyframes fireFlicker {
-            0%,100% { transform:scale(1); }
-            50% { transform:scale(1.15); }
-        }
-        .cb-text {
-            color:#fff; font-weight:700; font-size:1.05rem;
-            text-shadow:0 1px 4px rgba(0,0,0,.2);
-            white-space:nowrap;
-        }
-        .cb-timer {
-            background:rgba(255,255,255,.3); padding:7px 16px;
-            border-radius:var(--nyang-radius-full);
-            font-family:'SF Mono',Menlo,monospace;
-            font-weight:800; font-size:1.1rem; color:white;
-            backdrop-filter:blur(8px); letter-spacing:.05em;
-        }
-        .yt-subscribe-cta {
-            display:block; text-align:center;
-            background:linear-gradient(135deg,#ff0000,#cc0000);
-            color:white; text-decoration:none;
-            padding:16px 20px; border-radius:16px;
-            margin:24px 0 8px; font-weight:700; font-size:14px;
-            box-shadow:0 4px 16px rgba(255,0,0,.2);
-            transition:transform .2s, box-shadow .2s;
-        }
-        .yt-subscribe-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,0,0,.3); }
-        @media(max-width:640px) {
-            .cat-card, .band-card { padding:16px 10px 14px; }
-            .cat-icon-wrap, .band-icon-wrap { width:52px; height:52px; font-size:1.6rem; }
-            .cat-label { font-size:13px !important; }
-        }
-
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>냥댕라이프 | 매일 특가</title>
+<meta name="description" content="강아지, 고양이 용품 매일 특가. 알리익스프레스 최저가 모음.">
+<meta property="og:title" content="냥댕라이프 | 매일 특가">
+<meta property="og:description" content="강아지, 고양이 용품 매일 특가 모음">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+  background:#f8f8fa;color:#1a1a1a;-webkit-tap-highlight-color:transparent;
+  padding-bottom:80px;
+}
+.header{
+  background:linear-gradient(135deg,#FF8FAB 0%,#FFB347 50%,#FFD166 100%);
+  padding:28px 20px 20px;text-align:center;color:#fff;
+  position:relative;overflow:hidden;
+}
+.header::after{
+  content:'';position:absolute;bottom:-20px;left:0;right:0;height:40px;
+  background:#f8f8fa;border-radius:50% 50% 0 0;
+}
+.header h1{font-size:24px;font-weight:800;letter-spacing:-0.5px}
+.header p{font-size:13px;margin-top:4px;opacity:0.9}
+.tabs{
+  display:flex;gap:0;background:#fff;margin:0 16px;border-radius:14px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:4px;position:relative;z-index:2;
+  margin-top:-10px;
+}
+.tab{
+  flex:1;padding:12px 4px;text-align:center;font-size:13px;font-weight:600;
+  border-radius:10px;cursor:pointer;transition:all 0.2s;color:#888;
+  border:none;background:none;
+}
+.tab.active{
+  background:linear-gradient(135deg,#FF8FAB,#FFB347);color:#fff;
+  box-shadow:0 2px 8px rgba(255,143,171,0.3);
+}
+.tab .cnt{font-size:11px;opacity:0.7;display:block;margin-top:2px}
+.sub-tabs{
+  display:none;gap:6px;padding:12px 16px 4px;overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.sub-tabs.show{display:flex}
+.sub-tab{
+  flex-shrink:0;padding:6px 14px;font-size:12px;font-weight:500;
+  border-radius:20px;background:#f0f0f2;color:#666;cursor:pointer;
+  border:none;transition:all 0.2s;white-space:nowrap;
+}
+.sub-tab.active{background:#FF8FAB;color:#fff}
+.filters{padding:12px 16px}
+.search-wrap{position:relative;margin-bottom:8px}
+.search-wrap input{
+  width:100%;padding:12px 16px 12px 40px;font-size:15px;border:2px solid #eee;
+  border-radius:12px;background:#fff;outline:none;transition:border 0.2s;
+  font-family:inherit;
+}
+.search-wrap input:focus{border-color:#FF8FAB}
+.search-wrap::before{
+  content:'\1F50D';position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  font-size:16px;pointer-events:none;
+}
+.filter-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.filter-row select{
+  flex-shrink:0;padding:8px 12px;font-size:13px;border:1.5px solid #eee;
+  border-radius:10px;background:#fff;color:#444;font-family:inherit;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5l3 3 3-3' fill='none' stroke='%23999' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center;
+  padding-right:28px;cursor:pointer;
+}
+.stats{
+  padding:4px 20px 8px;font-size:13px;color:#999;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  padding:0 16px 20px;
+}
+.card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  box-shadow:0 2px 10px rgba(0,0,0,0.04);transition:transform 0.2s,box-shadow 0.2s;
+  text-decoration:none;color:inherit;display:block;position:relative;
+}
+.card:active{transform:scale(0.98)}
+.card-img{
+  width:100%;aspect-ratio:1;object-fit:cover;background:#f5f5f5;
+  display:block;
+}
+.card-img-placeholder{
+  width:100%;aspect-ratio:1;background:#f0f0f2;
+  display:flex;align-items:center;justify-content:center;font-size:40px;
+}
+.card-badge{
+  position:absolute;top:8px;left:8px;
+  background:linear-gradient(135deg,#E85A7A,#FF8FAB);
+  color:#fff;font-size:12px;font-weight:700;padding:4px 8px;
+  border-radius:8px;
+}
+.card-new{
+  position:absolute;top:8px;right:8px;
+  background:#FFD166;color:#333;font-size:11px;font-weight:600;
+  padding:3px 7px;border-radius:6px;
+}
+.card-info{padding:10px 10px 12px}
+.card-name{
+  font-size:13px;font-weight:500;line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+  overflow:hidden;color:#333;min-height:36px;
+}
+.card-cta{
+  display:block;margin-top:8px;padding:8px 0;text-align:center;
+  background:linear-gradient(135deg,#FF8FAB,#FFB347);
+  color:#fff;font-size:12px;font-weight:600;border-radius:8px;
+}
+.card-rec{
+  display:inline-block;margin-top:6px;font-size:11px;
+  color:#E85A7A;font-weight:600;
+}
+.empty{
+  text-align:center;padding:60px 20px;color:#999;font-size:14px;
+}
+.yt-banner{
+  display:block;margin:12px 16px;padding:16px 20px;
+  background:linear-gradient(135deg,#ff0000,#cc0000);
+  color:#fff;text-decoration:none;border-radius:14px;
+  text-align:center;font-weight:700;font-size:14px;
+  box-shadow:0 4px 12px rgba(255,0,0,0.2);
+}
+.footer{
+  text-align:center;padding:24px 20px;color:#bbb;font-size:12px;
+}
+.footer a{color:#FF8FAB;text-decoration:none}
+.top-btn{
+  position:fixed;bottom:20px;right:20px;width:44px;height:44px;
+  border-radius:50%;background:#FF8FAB;color:#fff;border:none;
+  font-size:20px;box-shadow:0 4px 12px rgba(255,143,171,0.4);
+  cursor:pointer;display:none;z-index:100;
+}
+@media(min-width:600px){
+  .grid{grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px;margin:0 auto;padding:0 20px 20px}
+  .tabs,.filters,.stats{max-width:720px;margin-left:auto;margin-right:auto}
+}
+@media(min-width:900px){
+  .grid{grid-template-columns:repeat(4,1fr);max-width:960px}
+  .tabs,.filters,.stats{max-width:960px}
+}
+</style>
 </head>
 <body>
-    <header class="mega-hero">
-        <div class="paw-decor">🐾🐾🐾</div>
-        <div class="signboard">
-            <div class="sparkle sparkle-1">✨</div>
-            <div class="sparkle sparkle-2">✨</div>
-            <div class="sparkle sparkle-3">⭐</div>
-            <div class="sparkle sparkle-4">💫</div>
-            <div class="sparkle sparkle-5">🌟</div>
-            <div class="sparkle sparkle-6">✨</div>
-            <h1 class="brand-title">냥댕라이프</h1>
-            <div class="brand-divider">
-                <span class="divider-line"></span>
-                <span class="divider-icon">🐾</span>
-                <span class="divider-line"></span>
-            </div>
-            <h2 class="sub-title">오늘의 특가</h2>
-        </div>
-        <p class="hero-tagline">우리집 댕냥이 & 라이프 특가 😸🐕</p>
-        <p class="hero-meta"><span id="update-date">2026년 04월 19일</span> 업데이트 · 총 190개 상품</p>
-        <div class="wave-bottom"></div>
-    </header>
-    <div class="search-sticky" id="search-sticky">
-        <div class="search-wrap">
-            <input type="text" id="search-input" placeholder="상품 검색..."
-                   autocomplete="off" />
-        </div>
-        <div class="filter-row" id="filter-row">
-            <div class="filter-group">
-                <button class="fbtn active" data-filter="price" data-val="">전체</button>
-                <button class="fbtn" data-filter="price" data-val="1k">💰가성비</button>
-                <button class="fbtn" data-filter="price" data-val="10k">🔥핫딜</button>
-                <button class="fbtn" data-filter="price" data-val="100k">💎초특가</button>
-            </div>
-            <div class="filter-group">
-                <button class="fbtn active" data-filter="cat" data-val="">전체</button>
-                <button class="fbtn" data-filter="cat" data-val="pet">🐾반려동물</button>
-                <button class="fbtn" data-filter="cat" data-val="home">🏠우리집</button>
-                <button class="fbtn" data-filter="cat" data-val="outdoor">🚗나들이</button>
-                <button class="fbtn" data-filter="cat" data-val="fashion">👕패션</button>
-                <button class="fbtn" data-filter="cat" data-val="sports">💪건강</button>
-                <button class="fbtn" data-filter="cat" data-val="electronics">💻전자</button>
-                <button class="fbtn" data-filter="cat" data-val="etc">🔥추천템</button>
-            </div>
-        </div>
-    </div>
-    <div class="countdown-banner" id="countdown-banner">
-        <span class="cb-icon">🔥</span>
-        <span class="cb-text">오늘만! 자정까지 특가</span>
-        <span class="cb-timer" id="countdown-timer">00:00:00</span>
-    </div>
-    <div class="container">
-        <div id="search-results" style="display:none">
-            <div class="section-heading">
-                🔍 검색 결과 <span id="result-count" style="font-size:13px;color:#888;font-weight:400"></span>
-            </div>
-            <div id="results-grid" class="results-grid"></div>
-        </div>
-        <div id="browse-sections">
-            
-        <a href="https://www.youtube.com/@NyangDaengLife" target="_blank" rel="noopener" class="yt-banner">
-            <div class="yt-left">
-                <span class="yt-icon">🎬</span>
-                <div class="yt-text">
-                    <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
-                    <div class="yt-sub">@NyangDaengLife · 구독하면 매일 새 특가 알림 🐾</div>
-                </div>
-            </div>
-            <div class="yt-arrow">▶</div>
-        </a>
 
-            
-        <a href="special_deals.html" class="special-banner">
-            <div class="sb-left">
-                <div class="sb-flame">🔥</div>
-                <div class="sb-text">
-                    <h2>특가할인</h2>
-                    <p>50% 이상 할인 상품 모음</p>
-                </div>
-            </div>
-            <div class="sb-right">
-                <div class="sb-badge">152개 상품</div>
-                <div class="sb-arrow">›</div>
-            </div>
-        </a>
-            
-        <div class="band-grid">
-        <a href="price_1k.html" class="band-card band-light">
-            <div class="band-icon-wrap" style="background:rgba(38,194,129,.15)">💰</div>
-            <div class="band-label">가성비 특가</div>
-            <div class="band-range">10-29% 할인</div>
-            <div class="band-count"
-                 style="background:rgba(38,194,129,.12);color:#26c281">83개</div>
-        </a>
-        <a href="price_10k.html" class="band-card band-premium">
-            <div class="band-icon-wrap" style="background:rgba(201,162,39,.15)">🔥</div>
-            <div class="band-label">핫딜</div>
-            <div class="band-range">30-49% 할인</div>
-            <div class="band-count"
-                 style="background:rgba(201,162,39,.12);color:#c9a227">94개</div>
-        </a>
-        <a href="price_100k.html" class="band-card band-luxury">
-            <div class="band-icon-wrap" style="background:rgba(255,215,0,.15)">💎</div>
-            <div class="band-label">초특가</div>
-            <div class="band-range">50%+ 할인</div>
-            <div class="band-count"
-                 style="background:rgba(255,215,0,.12);color:#ffd700">11개</div>
-        </a></div>
-            
-        <div class="cat-grid">
-        <a href="category_pet.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,107,157,.15)">🐾</div>
-            <div class="cat-label">반려동물</div>
-            <div class="cat-count"
-                 style="background:rgba(255,107,157,.12);color:#ff6b9d">35개</div>
-        </a>
-        <a href="category_home.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,165,2,.15)">🏠</div>
-            <div class="cat-label">우리집 살림</div>
-            <div class="cat-count"
-                 style="background:rgba(255,165,2,.12);color:#ffa502">21개</div>
-        </a>
-        <a href="category_outdoor.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,127,80,.15)">🚗</div>
-            <div class="cat-label">우리 가족 나들이</div>
-            <div class="cat-count"
-                 style="background:rgba(255,127,80,.12);color:#ff7f50">42개</div>
-        </a>
-        <a href="category_fashion.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,71,87,.15)">👕</div>
-            <div class="cat-label">우리 가족 패션</div>
-            <div class="cat-count"
-                 style="background:rgba(255,71,87,.12);color:#ff4757">20개</div>
-        </a>
-        <a href="category_sports.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(243,104,224,.15)">💪</div>
-            <div class="cat-label">우리 가족 건강</div>
-            <div class="cat-count"
-                 style="background:rgba(243,104,224,.12);color:#f368e0">23개</div>
-        </a>
-        <a href="category_electronics.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,159,243,.15)">💻</div>
-            <div class="cat-label">전자/디지털</div>
-            <div class="cat-count"
-                 style="background:rgba(255,159,243,.12);color:#ff9ff3">23개</div>
-        </a>
-        <a href="category_etc.html" class="cat-card">
-            <div class="cat-icon-wrap" style="background:rgba(255,107,53,.15)">🔥</div>
-            <div class="cat-label">오늘의 추천템</div>
-            <div class="cat-count"
-                 style="background:rgba(255,107,53,.12);color:#ff6b35">26개</div>
-        </a></div>
-        </div>
-        <a href="https://www.youtube.com/@NyangDaengLife" target="_blank" rel="noopener" class="yt-subscribe-cta">
-            💌 매일 새 특가 알림 받기 → 유튜브 구독
-        </a>
-    </div>
-    
-    <div class="footer">
-        🕐 다음 업데이트: 내일 오전<br>
-        매일 새로운 우리집 라이프 특가가 업데이트됩니다!<br>
-        <a href="https://www.youtube.com/@NyangDaengLife" target="_blank" rel="noopener">🎬 유튜브 채널 보러가기</a><br>
-        제휴 마케팅 참여 안내 — 구매 시 커미션을 받을 수 있습니다<br>
-        <a href="terms.html">이용약관</a> &nbsp;·&nbsp;
-        <a href="privacy.html">개인정보처리방침</a>
-    </div>
+<div class="header">
+  <h1>냥댕라이프</h1>
+  <p>우리집 댕냥이 매일 특가</p>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-cat="all">전체<span class="cnt">190</span></button>
+  <button class="tab" data-cat="dog">🐕 강아지<span class="cnt">8</span></button>
+  <button class="tab" data-cat="cat">🐈 고양이<span class="cnt">24</span></button>
+  <button class="tab" data-cat="life">✨ 라이프<span class="cnt">155</span></button>
+</div>
+
+<div class="sub-tabs" id="lifeSubs">
+  <button class="sub-tab active" data-sub="all">전체</button>
+  <button class="sub-tab" data-sub="home">🏠 살림</button>
+  <button class="sub-tab" data-sub="outdoor">🚗 나들이</button>
+  <button class="sub-tab" data-sub="fashion">👕 패션</button>
+  <button class="sub-tab" data-sub="sports">💪 건강</button>
+  <button class="sub-tab" data-sub="electronics">💻 전자</button>
+  <button class="sub-tab" data-sub="etc">🔥 추천</button>
+</div>
+
+<div class="filters">
+  <div class="search-wrap">
+    <input type="text" id="q" placeholder="상품명 검색..." autocomplete="off">
+  </div>
+  <div class="filter-row">
+    <select id="fPrice">
+      <option value="all">💰 전체 가격</option>
+      <option value="0-10000">1만원 이하</option>
+      <option value="10000-30000">1~3만원</option>
+      <option value="30000-50000">3~5만원</option>
+      <option value="50000-100000">5~10만원</option>
+      <option value="100000-999999">10만원 이상</option>
+    </select>
+    <select id="fDisc">
+      <option value="0">🔥 전체 할인</option>
+      <option value="30">30% 이상</option>
+      <option value="50">50% 이상</option>
+      <option value="70">70% 이상</option>
+    </select>
+    <select id="fSort">
+      <option value="rec">추천순</option>
+      <option value="disc">할인율순</option>
+      <option value="priceL">가격 낮은순</option>
+      <option value="priceH">가격 높은순</option>
+      <option value="new">최신순</option>
+    </select>
+  </div>
+</div>
+
+<div class="stats">
+  <span id="resultCount"></span>
+  <span>2026년 04월 19일 업데이트</span>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" style="display:none">검색 결과가 없어요 😿</div>
+
+<a href="https://www.youtube.com/@NyangDaengLife" target="_blank" rel="noopener" class="yt-banner">
+  📺 냥댕라이프 유튜브 구독하기
+</a>
+
+<div class="footer">
+  <p>냥댕라이프 | <a href="https://www.youtube.com/@NyangDaengLife">YouTube</a></p>
+  <p style="margin-top:4px">알리익스프레스 파트너스 제휴 링크 포함</p>
+</div>
+
+<button class="top-btn" id="topBtn" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-(function(){
-  var T="http://168.107.3.136:5000/api/track";
-  var P=location.pathname.split("/").pop()||"index";
-  try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({page:P,action:"view"}),keepalive:true})}catch(e){}
-  document.addEventListener("click",function(e){
-    var a=e.target.closest("a.deal");
-    if(!a)return;
-    var n=a.querySelector(".deal-name");
-    var prod=n?n.textContent.trim():"";
-    try{fetch(T,{method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({page:P,action:"click",product:prod}),keepalive:true})}catch(e){}
-  });
-})();
-</script>
+const P=[{"n":"문걸이 자동 전기 새 고양이 장난감","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sfd1b1c74274d4d75a0b801f975963408F.png","l":"https://ko.aliexpress.com/item/1005011859905720.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":15781,"t":"cat","s":"","c":7.0,"w":false},{"n":"원형 골판지 고양이 스크래처","i":"https://ae-pic-a1.aliexpress-media.com/kf/S180217b4aa4242caaef46a2b4f278cf0L.jpg","l":"https://ko.aliexpress.com/item/1005011845309660.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":17675,"t":"cat","s":"","c":7.0,"w":false},{"n":"맞춤형 반사 강아지 하네스","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbab89df01e494e2daa9263c1611be5a0s.jpg","l":"https://ko.aliexpress.com/item/1005006878597097.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":31,"p":10060,"t":"dog","s":"","c":7.0,"w":false},{"n":"3in1 경사형 물통 고양이 밥그릇","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0abb4935fb18439787423a9887878687c.jpg","l":"https://ko.aliexpress.com/item/1005006832136773.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":15764,"t":"cat","s":"","c":7.0,"w":false},{"n":"3in1 120W USB-C 시거잭 고속 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S9c460a6f07164ea787cf13898cddbf2ac.jpg","l":"https://ko.aliexpress.com/item/1005007145464159.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":49,"p":9304,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"8M 자동 반사 강아지 리드줄","i":"https://ae-pic-a1.aliexpress-media.com/kf/S110ab8f782a4496da5a46e400d29249fL.jpg","l":"https://ko.aliexpress.com/item/1005006061894429.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":28304,"t":"dog","s":"","c":7.0,"w":false},{"n":"벽걸이 스크래쳐 고양이 트리","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0921616f317b46aab3fdf00898a4c644t.jpg","l":"https://ko.aliexpress.com/item/1005007592902909.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":50755,"t":"cat","s":"","c":7.0,"w":false},{"n":"골판지 고양이 스크래쳐 쿠션","i":"https://ae-pic-a1.aliexpress-media.com/kf/S273e8167f97648a4a2d8b627ec676baeP.jpg","l":"https://ko.aliexpress.com/item/1005006563201224.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":12956,"t":"cat","s":"","c":7.0,"w":false},{"n":"580ml 휴대용 실리콘 강아지 물병","i":"https://ae-pic-a1.aliexpress-media.com/kf/H5ec7cd5458824bc5becc9a3584f1f604F.jpg","l":"https://ko.aliexpress.com/item/1005005168685901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":65,"p":19571,"t":"cat","s":"","c":7.0,"w":false},{"n":"푹신한 원형 반려동물 침대","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc97c95add0de4bd48da6ddabe70f7fb2Y.jpg","l":"https://ko.aliexpress.com/item/1005006682861479.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":65,"p":20865,"t":"cat","s":"","c":7.0,"w":false},{"n":"강아지 퀼팅 방수 차량 시트 커버","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sacb89d38d60d4675844f9d546324bfc1Y.jpg","l":"https://ko.aliexpress.com/item/1005008534698163.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":42345,"t":"dog","s":"","c":9.0,"w":false},{"n":"애견용 옥스포드 방수 차량 카시트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbb29b8d7206a4f018ac4ae260abf7bf5w.jpg","l":"https://ko.aliexpress.com/item/1005009015677318.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":15420,"t":"dog","s":"","c":9.0,"w":false},{"n":"다용도 애완동물 털 제거 브러쉬","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0b69ec9904d540e3a109f402c41026baz.jpg","l":"https://ko.aliexpress.com/item/1005008717493881.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":8427,"t":"cat","s":"","c":7.0,"w":false},{"n":"USB 투명 저소음 고양이 자동 급수기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sd3b7ae559798439bb51141f096c583e2I.jpg","l":"https://ko.aliexpress.com/item/1005007123962156.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":22357,"t":"cat","s":"","c":7.0,"w":false},{"n":"고양이 강아지 자체발열 접이식 텐트 침대","i":"https://ae-pic-a1.aliexpress-media.com/kf/S77f58722e2a94de99ccc23353609946aa.jpg","l":"https://ko.aliexpress.com/item/1005008404281818.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":23011,"t":"cat","s":"","c":7.0,"w":false},{"n":"휴대용 수동 보풀 애완동물 털 제거기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S8b8987fdaf3642d99625f0f2121c5000G.jpg","l":"https://ko.aliexpress.com/item/1005004175441565.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":3850,"t":"pet","s":"","c":7.0,"w":false},{"n":"신생아 다기능 인체공학 아기띠 슬링","i":"https://ae-pic-a1.aliexpress-media.com/kf/S562f09fe30a6437da0e8abc92abed1c7m.jpg","l":"https://ko.aliexpress.com/item/1005006562128010.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":24327,"t":"life","s":"etc","c":7.0,"w":false},{"n":"X5 1080P HD 미니 WIFI 보안 카메라","i":"https://ae-pic-a1.aliexpress-media.com/kf/S58bc07802d394ee69f791261c4391532V.jpg","l":"https://ko.aliexpress.com/item/1005011906516358.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":56,"p":8510,"t":"life","s":"etc","c":7.0,"w":false},{"n":"휴대용 USB LED 초음파 아로마 가습기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0c76bb909e7046e98316cb0dcbb05018x.jpg","l":"https://ko.aliexpress.com/item/1005009558282430.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":9784,"t":"life","s":"etc","c":7.0,"w":false},{"n":"OKUMA UV400 편광 변색 스포츠 선글라스","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc70207d02f08426f86c2bd5d3e34a48fA.jpg","l":"https://ko.aliexpress.com/item/1005006907621813.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":9659,"t":"life","s":"etc","c":7.0,"w":false},{"n":"리필식 수채화 붓펜 세트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sfeb0840065634dfbb4705b17e6a672676.jpg","l":"https://ko.aliexpress.com/item/1005009982586465.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":65,"p":5365,"t":"life","s":"etc","c":7.0,"w":false},{"n":"에어팟 분실 방지 실리콘 밴드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S60a11fa3a58143d48070ccecfaaaa5d3i.jpg","l":"https://ko.aliexpress.com/item/1005009808439858.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":45,"p":2618,"t":"life","s":"etc","c":7.0,"w":false},{"n":"내장 마이크 회전식 HD 웹캠","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbb3f12bdfd324bcc8505a0a0fb81e639l.jpg","l":"https://ko.aliexpress.com/item/1005001859914466.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":43,"p":1461,"t":"life","s":"etc","c":3.0,"w":false},{"n":"NBR 내유성 고압 O링 씰 20개","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0417460ec995419e8b4c407a4c1389a5l.jpg","l":"https://ko.aliexpress.com/item/1005008223340328.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":31,"p":1446,"t":"life","s":"etc","c":7.0,"w":false},{"n":"로봇 청소기용 DC 미니 고속 모터","i":"https://ae-pic-a1.aliexpress-media.com/kf/S585f80930fdb4334a6e807ac3f72189bR.jpg","l":"https://ko.aliexpress.com/item/1005009904044042.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":45,"p":1048,"t":"life","s":"etc","c":7.0,"w":false},{"n":"만년필 교체용 이리듐 펜촉 5개","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sa74df0b4e57045c18cc374e3d60b2294y.jpg","l":"https://ko.aliexpress.com/item/1005011619795410.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":45,"p":2314,"t":"pet","s":"","c":7.0,"w":false},{"n":"ID115 플러스 실리콘 워치 밴드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S14211321289a44f5a51208b691d2726cw.jpg","l":"https://ko.aliexpress.com/item/1005008076377590.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":20,"p":3211,"t":"life","s":"etc","c":7.0,"w":false},{"n":"LED 식물재배기 (육묘용)","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sd76d6f3b87ce42089729d0773d990516W.jpg","l":"https://ko.aliexpress.com/item/1005005000291504.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":27,"p":1461,"t":"life","s":"etc","c":9.0,"w":false},{"n":"슬림 RFID 차단 가죽 카드지갑","i":"https://ae-pic-a1.aliexpress-media.com/kf/S31b100d1ed9242758e843e2bde4b14ede.jpg","l":"https://ko.aliexpress.com/item/1005006964299765.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":20,"p":4475,"t":"life","s":"etc","c":7.0,"w":false},{"n":"70mai A810 블랙박스 흡착 거치대","i":"https://ae-pic-a1.aliexpress-media.com/kf/S163ee06e788a47a1a573af6a023993d16.jpg","l":"https://ko.aliexpress.com/item/1005007929572014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":8,"p":13469,"t":"life","s":"etc","c":7.0,"w":false},{"n":"센서형 LED 프로젝터 수면등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Hba2d44a454784134997bce9dbc85bed7f.jpg","l":"https://ko.aliexpress.com/item/1005001295717877.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":15113,"t":"life","s":"etc","c":7.0,"w":false},{"n":"12V 고휘도 유연 LED 스트립 조명","i":"https://ae-pic-a1.aliexpress-media.com/kf/Saaaedd15be8243d98f71bfa294a0eda0U.jpg","l":"https://ko.aliexpress.com/item/32763598428.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":5,"p":4626,"t":"life","s":"etc","c":7.0,"w":false},{"n":"3/5m 소중형견 자동 줄감개 산책 목줄","i":"https://ae-pic-a1.aliexpress-media.com/kf/Safe6dbf0c345439a864d2817bffba6393.jpg","l":"https://ko.aliexpress.com/item/1005005809517043.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":9618,"t":"cat","s":"","c":7.0,"w":false},{"n":"반려동물 소형견 투명 방수 후드 우비","i":"https://ae-pic-a1.aliexpress-media.com/kf/S003467ddb89447aa83a69ea30246c0f5L.jpg","l":"https://ko.aliexpress.com/item/1005006319098194.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":11090,"t":"dog","s":"","c":7.0,"w":false},{"n":"아웃도어용 성인 방수 후드 우비/판초","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4356b051e5f74447aaa4cd7bc5d4c62cT.jpg","l":"https://ko.aliexpress.com/item/1005007430856646.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":63,"p":3470,"t":"life","s":"etc","c":7.0,"w":false},{"n":"USB 휴대용 미니 아로마 가습기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7cd783653fb04736898eb8f5ff666a42d.jpg","l":"https://ko.aliexpress.com/item/1005003351797177.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":8340,"t":"life","s":"etc","c":7.0,"w":false},{"n":"미밴드 7/6/5용 실리콘 스포츠 스트랩","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4fee48fc23264d57aadcf26c8a7986f7I.jpg","l":"https://ko.aliexpress.com/item/1005005066485271.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":30,"p":2891,"t":"life","s":"etc","c":7.0,"w":false},{"n":"미밴드 마그네틱 USB 충전 케이블","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0169fcdee08041989f8f7a80d04d7422T.jpg","l":"https://ko.aliexpress.com/item/1005009176683000.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":45,"p":3120,"t":"life","s":"etc","c":7.0,"w":false},{"n":"샤오미 미밴드 1용 실리콘 밴드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7a5ba1c618f84d65aaaeee6f00b83721M.jpg","l":"https://ko.aliexpress.com/item/1005006472006317.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":20,"p":2983,"t":"life","s":"etc","c":7.0,"w":false},{"n":"샤오미 미지아 무선 청소기 헤파 필터","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbdde608d2c4c4707bb8b4ee289d868d7h.jpg","l":"https://ko.aliexpress.com/item/1005005246213706.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":3866,"t":"life","s":"etc","c":7.0,"w":false},{"n":"휴대용 미니 전기 포트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S44a39065d8b946e383b9a5c94044893cn.jpg","l":"https://ko.aliexpress.com/item/1005009042658861.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":85632,"t":"life","s":"etc","c":7.0,"w":false},{"n":"식물 재배용 USB LED 스트립 조명","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb40f1fa9cbed4686a463a8ec7f248692d.jpg","l":"https://ko.aliexpress.com/item/4000583211778.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":1,"p":3364,"t":"life","s":"etc","c":7.0,"w":false},{"n":"USB 컵 워머 전기 보온패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S1784840b49a145ab944568d67f4cf421v.jpg","l":"https://ko.aliexpress.com/item/1005006213265432.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":11905,"t":"life","s":"etc","c":7.0,"w":false},{"n":"USB 스마트 머그컵 보온기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S26a8a758a189437b98a0b5910d85855dm.jpg","l":"https://ko.aliexpress.com/item/1005010370404430.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":15166,"t":"life","s":"etc","c":7.0,"w":false},{"n":"HD 화질 마이크 내장 USB 웹캠","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc052a714da594fed8d88e1868ad7978fY.jpg","l":"https://ko.aliexpress.com/item/1005008045207776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":25,"p":3322,"t":"life","s":"etc","c":3.0,"w":false},{"n":"대용량 스텐 로프 휴대용 보온병","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4de27e5e418d4c73aa76334d1a2649291.jpg","l":"https://ko.aliexpress.com/item/1005006273684699.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":68,"p":22718,"t":"life","s":"home","c":7.0,"w":false},{"n":"대용량 스텐 보온/보냉 여행 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sff0c4d85727142f7b55d5649d2f1188b4.jpg","l":"https://ko.aliexpress.com/item/1005006997155691.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":25977,"t":"life","s":"home","c":7.0,"w":false},{"n":"앱 제어 자동 스마트 고양이 화장실","i":"https://ae-pic-a1.aliexpress-media.com/kf/S462ea46b88734e989f407845fd6d04c6z.jpg","l":"https://ko.aliexpress.com/item/1005009928768606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":443884,"t":"cat","s":"","c":7.0,"w":false},{"n":"다묘용 앱 자동 청소 탈취 고양이 화장실","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sde22d303ceea452c98220d74ab3eb0ef9.jpg","l":"https://ko.aliexpress.com/item/1005004979511228.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":652120,"t":"cat","s":"","c":7.0,"w":false},{"n":"스마트 앱 자동 청소 탈취 고양이 화장실","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb73adfac1cd14052ace7f1f4972a0325o.jpg","l":"https://ko.aliexpress.com/item/1005011667349388.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":542835,"t":"cat","s":"","c":7.0,"w":false},{"n":"인터랙티브 고양이 공 발사 훈련 장난감","i":"https://ae-pic-a1.aliexpress-media.com/kf/Saffda6c49c824b70a658b19653ee1efc6.jpg","l":"https://ko.aliexpress.com/item/1005008618231606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":5884,"t":"cat","s":"","c":7.0,"w":false},{"n":"USB LED 캠핑 비상 텐트등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S6e7831be9b6b4d8dbfed1f99d1838399C.jpg","l":"https://ko.aliexpress.com/item/1005007344867652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":6787,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"휴대용 LED 충전식 캠핑 텐트등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S89b23c78f92d48159641d94ba9734fa09.jpg","l":"https://ko.aliexpress.com/item/1005007345233283.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":25794,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"3-in-1 다기능 방수 캠핑 우의","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4e5de53cf3114ca6aa0f8b2495036e3cP.jpg","l":"https://ko.aliexpress.com/item/1005010044034977.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":53,"p":15982,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"3-in-1 다기능 방수 캠핑 우의","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4e5de53cf3114ca6aa0f8b2495036e3cP.jpg","l":"https://ko.aliexpress.com/item/1005007267109153.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":58,"p":15028,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"솔라 USB 충전 LED 캠핑등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S24ef0b774fef481c94a5ab1390285120W.jpg","l":"https://ko.aliexpress.com/item/1005007009687886.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":19131,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"9900mAh 자석 충전식 캠핑등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb243fc38baef4f9ab6b2f98890a5b6acm.jpg","l":"https://ko.aliexpress.com/item/1005007535331490.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":68,"p":26648,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"MOSLIGHTING 휴대 충전식 LED 텐트등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sa8901b7c7c6d493d9d53e7a9479e055fT.jpg","l":"https://ko.aliexpress.com/item/1005005105773652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":68,"p":25752,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"휴대용 솔라 LED 캠핑 텐트등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S698f9d3c2952436f8833bca4d5f83a9aS.jpeg","l":"https://ko.aliexpress.com/item/1005007345137299.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":55,"p":25041,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"LED 충전식 휴대용 비상 전구","i":"https://ae-pic-a1.aliexpress-media.com/kf/S2986cc1fa1df4ab6a4065c6b4688a21bU.jpg","l":"https://ko.aliexpress.com/item/1005012030902914.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":12851,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"LED 충전식 휴대용 캠핑 비상 전구","i":"https://ae-pic-a1.aliexpress-media.com/kf/S1b99e6910716446db866cc2078cb8a96d.jpg","l":"https://ko.aliexpress.com/item/1005008227769095.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":9574,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"7심 550 파라코드 야외용 끈","i":"https://ae-pic-a1.aliexpress-media.com/kf/S5e51f1dc63a04b92b244200a2a8fc2b9R.jpg","l":"https://ko.aliexpress.com/item/1005007038471633.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":4894,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"홈피쉬 캠핑 텐트 휴대용 비상등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbdd1f3b7fc804a1e99dfebcf7ff29851y.png","l":"https://ko.aliexpress.com/item/1005008406150492.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":20020,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"모스라이팅 충전식 휴대용 캠핑 비상등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sa8901b7c7c6d493d9d53e7a9479e055fT.jpg","l":"https://ko.aliexpress.com/item/1005006860789881.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":26715,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"GZ 등대 캠핑등: 초장시간 LED 텐트등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3f1d78fe1cd04e799e47020a16ad186c9.jpg","l":"https://ko.aliexpress.com/item/1005010037238701.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":55,"p":17800,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"고출력 USB 충전식 휴대용 캠핑 걸이등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S9353fcf36eac42b28434922625ed2892g.jpg","l":"https://ko.aliexpress.com/item/1005005240109626.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":11936,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"고출력 USB 충전식 휴대용 캠핑 걸이등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S9302afc191ed4d73bf70df987a3efbe1L.jpg","l":"https://ko.aliexpress.com/item/1005010089151417.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":55,"p":10228,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"휴대용 야외 캠핑 USB 충전 LED 비상등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Se6170c433fe14916ad14e629264f06e0R.jpg","l":"https://ko.aliexpress.com/item/1005009045147727.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":7696,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"LED 캠핑 텐트등: 고출력 충전 방수 휴대등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbc137d7f2d634924b7cfc72cefe5af38Y.jpg","l":"https://ko.aliexpress.com/item/1005006968952652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":26738,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"2P LED 충전식 실내외 비상 캠핑등","i":"https://ae-pic-a1.aliexpress-media.com/kf/S2e4ec28f4c054f778d97a13237ed70eaz.jpg","l":"https://ko.aliexpress.com/item/1005007360517535.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":10744,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"USB 충전 LED 캠핑 랜턴: 고휘도 휴대 비상등","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf5e7b94befe049c184ad50867b25f047n.png","l":"https://ko.aliexpress.com/item/1005009714646954.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":7772,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"레노버 GM2 Pro 듀얼모드 무선 헤드셋","i":"https://ae-pic-a1.aliexpress-media.com/kf/S6c753504f3a64f12ae238835b584229cb.jpg","l":"https://ko.aliexpress.com/item/1005007424613573.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":56,"p":22442,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"레노버 GM2 Pro TWS 저지연 이어셋","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sa0d6d677c5a149199c2c0ef198f49eb5q.jpg","l":"https://ko.aliexpress.com/item/1005007431129955.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":57,"p":20907,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"QCY C50 오픈형 클립온 무선 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Se00f772f7cd841ca8b102d80393e2c42v.jpg","l":"https://ko.aliexpress.com/item/1005009084986255.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":58,"p":49812,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"M10 방수 스포츠 블루투스 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb60d26d93b4a4658bda6c89c7c082031X.jpg","l":"https://ko.aliexpress.com/item/1005012032900733.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":15567,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"신형 TWS LED 디스플레이 무선 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S340e01cfe7f4473fb5d1d65f101bd7a4P.jpg","l":"https://ko.aliexpress.com/item/1005006904593410.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":9254,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"신형 TWS LED 핸즈프리 무선 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S8cefbe0444c44e9b9efc862134b203268.jpg","l":"https://ko.aliexpress.com/item/1005007097064460.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":10256,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"레노버 LP40 TWS 무선 노이즈캔슬링","i":"https://ae-pic-a1.aliexpress-media.com/kf/S6651b476fb634caa95a32bac784d56afe.jpg","l":"https://ko.aliexpress.com/item/1005006678116483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":53,"p":13519,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"레노버 LP40 TWS 무선 노이즈 감소 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S5f23fd924a694838b3bb85fd092dd6e1o.jpg","l":"https://ko.aliexpress.com/item/1005007038638226.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":53,"p":14066,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"레노버 XT53 방수 저지연 게이밍 이어셋","i":"https://ae-pic-a1.aliexpress-media.com/kf/S67b5e3598c43491dbcc8b64b04584164i.jpg","l":"https://ko.aliexpress.com/item/1005008414973716.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":52,"p":23902,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"X15 TWS 게이밍 노이즈캔슬링 이어셋","i":"https://ae-pic-a1.aliexpress-media.com/kf/S78dfabb1bf044ef48392d1a37aab8a19o.jpg","l":"https://ko.aliexpress.com/item/1005007228440475.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":55,"p":9082,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"QCY 멜로버즈 Pro 고음질 ANC 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Se53e534893ca46a2971df5af7fe76935S.jpg","l":"https://ko.aliexpress.com/item/1005006959700436.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":61,"p":53267,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"QCY N70 고음질 ANC 무선 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S294de07263674209893f2310f06210b82.jpg","l":"https://ko.aliexpress.com/item/1005009361746399.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":63,"p":63754,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"TWS 무선 방수 저음 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S8bd5f4f9691445f995b0da6121b4676bD.jpg","l":"https://ko.aliexpress.com/item/1005006996575006.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":11452,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"TWS 무선 게이밍 저지연 헤드셋","i":"https://ae-pic-a1.aliexpress-media.com/kf/S858c1aa3e1544b15ba2e8635d22f38e4y.jpg","l":"https://ko.aliexpress.com/item/1005006904672293.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":53,"p":9246,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"블루투스 이어훅 무선 방수 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sba81d65afda34045b05d083c19f91e6f3.jpg","l":"https://ko.aliexpress.com/item/1005007961638171.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":53,"p":13805,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"블루투스 이어훅 무선 방수 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S389bf3e2bebb4930b6f19609e15b29baf.jpg","l":"https://ko.aliexpress.com/item/1005008158738225.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":56,"p":10130,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"E6S 에어 프로 무선 노이즈캔슬링 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S08682bc1e57d4b5bbfa6e2a1519032808.jpg","l":"https://ko.aliexpress.com/item/1005006966239790.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":8943,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"베이서스 EP10 Pro 적응형 ANC 무선 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sa21551e144154e10bccedd360936647fp.jpg","l":"https://ko.aliexpress.com/item/1005008870372901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":33,"p":40773,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"T75 TWS 터치 컨트롤 스포츠 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf58b0f6029c24f77b48b2c5f19f06b9aA.jpg","l":"https://ko.aliexpress.com/item/1005007170888709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":9921,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"무선 LED 디스플레이 스테레오 이어폰","i":"https://ae-pic-a1.aliexpress-media.com/kf/S6f1b83cd00c5420f95cdfb5dbf8b9868D.jpg","l":"https://ko.aliexpress.com/item/1005006863837619.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":50,"p":10761,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"실리콘 주방 내열 장갑 냄비받침 2개","i":"https://ae-pic-a1.aliexpress-media.com/kf/S69be4eb48095497db10b9b20b10199f62.jpeg","l":"https://ko.aliexpress.com/item/1005006955917663.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":65,"p":7992,"t":"life","s":"home","c":7.0,"w":false},{"n":"재사용 실리콘 에어프라이어 컵","i":"https://ae-pic-a1.aliexpress-media.com/kf/A09abb5a64e1c436fb17e2315d535fe45P.png","l":"https://ko.aliexpress.com/item/1005010119493142.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":53,"p":8672,"t":"life","s":"home","c":7.0,"w":false},{"n":"재사용 실리콘 에어프라이어 컵","i":"https://ae-pic-a1.aliexpress-media.com/kf/A66c3449c725a42e3895e807b017677d2w.png","l":"https://ko.aliexpress.com/item/1005010117064884.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":53,"p":8699,"t":"life","s":"home","c":7.0,"w":false},{"n":"에어프라이어용 일회용 방수 종이호일","i":"https://ae-pic-a1.aliexpress-media.com/kf/Saf39238406d349528cd4621f711131f3v.png","l":"https://ko.aliexpress.com/item/1005008482808042.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":8381,"t":"life","s":"home","c":7.0,"w":false},{"n":"에어프라이어 사각 일회용 종이호일","i":"https://ae-pic-a1.aliexpress-media.com/kf/Ac3b014cf457245e09d10bb5291e9ae403.jpg","l":"https://ko.aliexpress.com/item/1005008892568250.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":17,"p":5890,"t":"life","s":"home","c":7.0,"w":false},{"n":"20온스 스텐 보온/보냉 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3320cd3d27e4466caa1555f13dcca234T.jpg","l":"https://ko.aliexpress.com/item/1005007654134709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":67,"p":22747,"t":"life","s":"home","c":7.0,"w":false},{"n":"TYESO 스텐 차량용 보온/보냉 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sbc5418bc5ac14a858331a116c22e14e7H.jpg","l":"https://ko.aliexpress.com/item/1005008764004435.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":21204,"t":"life","s":"home","c":7.0,"w":false},{"n":"TYESO 스텐 차량용 보온/보냉 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/S22f960fcad9e44f2b20c2d705338ec1cS.jpg","l":"https://ko.aliexpress.com/item/1005008248128422.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":54,"p":20057,"t":"life","s":"home","c":7.0,"w":false},{"n":"스텐 진공 보온/보냉 휴대용 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/S520f79c1430f43d0bbde19a6971c5389Z.jpg","l":"https://ko.aliexpress.com/item/1005007306686600.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":53,"p":26613,"t":"life","s":"home","c":7.0,"w":false},{"n":"스텐 진공 보온/보냉 텀블러 손잡이형","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg","l":"https://ko.aliexpress.com/item/1005007636042849.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":20554,"t":"life","s":"home","c":7.0,"w":false},{"n":"380ml 귀여운 보온 빨대 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf326843f2d27461793d963a56d1042e0m.jpg","l":"https://ko.aliexpress.com/item/1005007539727974.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":19704,"t":"life","s":"home","c":7.0,"w":false},{"n":"1.5L 휴대용 스텐 보온병","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc995b3a49bb34911b5027eac3e11862fz.jpg","l":"https://ko.aliexpress.com/item/1005009076236644.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":35872,"t":"life","s":"home","c":7.0,"w":false},{"n":"손잡이 휴대용 스텐 보온 텀블러","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg","l":"https://ko.aliexpress.com/item/1005007018052502.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":20310,"t":"life","s":"home","c":7.0,"w":false},{"n":"591ml 스텐 보온/보냉 빨대컵","i":"https://ae-pic-a1.aliexpress-media.com/kf/S5727a8deaf3d4740a785bc838e763a1dX.jpg","l":"https://ko.aliexpress.com/item/1005008988427222.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":29486,"t":"life","s":"home","c":7.0,"w":false},{"n":"대용량 316 스텐 빨대 손잡이컵","i":"https://ae-pic-a1.aliexpress-media.com/kf/Saf8c0c47ba9a47c5b7f58c6e91360048y.jpg","l":"https://ko.aliexpress.com/item/1005010439333483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":53,"p":42403,"t":"life","s":"home","c":7.0,"w":false},{"n":"500ml 스텐 휴대용 보온/보냉컵","i":"https://ae-pic-a1.aliexpress-media.com/kf/S864373b3d6bf40e28cb5defc3e4072b5G.jpg","l":"https://ko.aliexpress.com/item/1005007476902341.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":18848,"t":"life","s":"home","c":7.0,"w":false},{"n":"UPORS 스텐 로프 대용량 보온병","i":"https://ae-pic-a1.aliexpress-media.com/kf/HTB1OurlXUWF3KVjSZPhq6xclXXan.jpg","l":"https://ko.aliexpress.com/item/1005005077847626.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":28585,"t":"life","s":"home","c":7.0,"w":false},{"n":"304 스텐 로프 대용량 보온병","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc4eb2c3bc1a64a768cffefd0c2c9fa04Y.jpg","l":"https://ko.aliexpress.com/item/1005006703893558.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":66,"p":28208,"t":"life","s":"home","c":7.0,"w":false},{"n":"미니멀 퀼팅 여성 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S61a763402d52428293f94c50148fc55fn.jpg","l":"https://ko.aliexpress.com/item/1005007345535323.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":54,"p":9013,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"카툰 봉제 여성 미니 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S02d7c6916c6544ec9e126a9d9370f006e.jpg","l":"https://ko.aliexpress.com/item/1005008798355945.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":52,"p":11935,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"여성 학생 캐주얼 캔버스 숄더백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7473a4a75ffa476c97c251fa985b7fe0B.jpg","l":"https://ko.aliexpress.com/item/1005007010289305.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":52,"p":18588,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"신상 여성 미니 스트릿 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3092c6f1d55b4a6ab68e4f3d00bc8a4bV.jpg","l":"https://ko.aliexpress.com/item/1005008660153776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":10034,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"하라주쿠 JK 투명 이타 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S97d26d78c5da4d0e9856e9eabe63fb1f4.jpg","l":"https://ko.aliexpress.com/item/1005012030183507.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":50,"p":34881,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"여성용 아웃도어 스포츠 웨이스트백","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc419b454e06d4a56b361184b426d22435.jpg","l":"https://ko.aliexpress.com/item/1005006863751751.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":50,"p":8402,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"JW PEI 여성 악어무늬 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S9e1be1e8107c4bb1891100854378ae9fY.jpg","l":"https://ko.aliexpress.com/item/1005010759472649.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":52811,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"HOMEFIH 체리 펜던트 PU 여성 숄더백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0658c108c4294bb581b72c85aa410ef2r.jpg","l":"https://ko.aliexpress.com/item/1005010155226776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":55,"p":10772,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"HOMEFISH 여성 인조 모피 버킷백","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf44c5f8b63204925aab1a9d2c043a133k.jpg","l":"https://ko.aliexpress.com/item/1005008144766818.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":10953,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"남녀공용 대용량 솔리드 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S32b28cfd8ecf4f22ad2893d70c1eedbfk.jpg","l":"https://ko.aliexpress.com/item/1005010044054014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":10165,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"남녀공용 비즈 덤벨 패션 팔찌","i":"https://ae-pic-a1.aliexpress-media.com/kf/HTB1LOn7avQypeRjt_bXq6yZuXXa9.jpg","l":"https://ko.aliexpress.com/item/32916469140.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":37,"p":2222,"t":"life","s":"sports","c":7.0,"w":false},{"n":"발레걸 대용량 일본풍 이타 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7ecc2cfbe3d44d67ac325c7c2bd22ae9F.jpg","l":"https://ko.aliexpress.com/item/1005010232978622.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":57,"p":21067,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"발레걸 대용량 일본풍 이타 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7ecc2cfbe3d44d67ac325c7c2bd22ae9F.jpg","l":"https://ko.aliexpress.com/item/1005009960348301.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":23259,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"Y2K 하라주쿠 투명 이타 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S50f04af315e349daa58ceb711dda47412.jpg","l":"https://ko.aliexpress.com/item/1005009357722835.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":51,"p":9830,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"여성 스포츠 다층 아웃도어 웨이스트백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S14dfac897d0848b59e185b0bed191d6aH.jpg","l":"https://ko.aliexpress.com/item/1005006751765119.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":52,"p":9234,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"레트로 PU 가죽 솔리드 호보 숄더백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4f3ff200794b434a8823af69642af85fU.jpg","l":"https://ko.aliexpress.com/item/1005007160944700.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":58,"p":10908,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"한국풍 체크 대용량 숄더 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S22718f5fc59446139289d1ae57cc380fb.jpg","l":"https://ko.aliexpress.com/item/1005010089197363.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":9021,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"마이야르 대용량 가죽 토트 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S56c486d35d884c9aa57d63ecc0f6720bm.jpg","l":"https://ko.aliexpress.com/item/1005008084476796.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":54,"p":13261,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"신상 투명 터치 폰 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4061f5e42d744bcbb0903e5e1a0032b5e.jpg","l":"https://ko.aliexpress.com/item/1005007010240938.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":13139,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"패션 터치 폰 카드 홀더 크로스백","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sea94d78cb89b48328f270af6468881e5b.png","l":"https://ko.aliexpress.com/item/1005007170927702.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":53,"p":11873,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"83W 듀얼 USB 고속 차량 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S299649dcd58a4cabb70a8edbbf21294ct.jpg","l":"https://ko.aliexpress.com/item/1005009696054057.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":54,"p":8601,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"4포트 방수 고속 차량 충전 소켓","i":"https://ae-pic-a1.aliexpress-media.com/kf/S5af2b66872ab45c9a667f40ca15482c2n.jpg","l":"https://ko.aliexpress.com/item/1005009193721983.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":9616,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"4포트 방수 고속 차량 충전 소켓","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc49e5fed40d945d3afcee01b4366a6a6V.jpg","l":"https://ko.aliexpress.com/item/1005009417368774.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":56,"p":8069,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"100W PD C타입 고속 차량용 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S87704a44a6c34d2582d84ef1d6ec9cfcb.jpg","l":"https://ko.aliexpress.com/item/1005007792327144.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":5772,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"66W C타입 고속 차량용 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sd8c9e00fb1014b94a69b8dd8d9fc3953d.jpg","l":"https://ko.aliexpress.com/item/1005009383957834.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":54,"p":5454,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"에사거 30W C타입 고속 차량 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sef28f13d849d4aa0a440d9cd5d0de3b3m.png","l":"https://ko.aliexpress.com/item/1005006514698205.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":7593,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"차량용 고속 무선 충전 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf766ea09e8e94403b1922e8a14478774p.jpg","l":"https://ko.aliexpress.com/item/1005007170769848.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":17644,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"차량용 고속 무선 충전 실리콘 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf7158c34363146bb8d4d6c56afeab1bf1.jpg","l":"https://ko.aliexpress.com/item/1005007536128593.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":18133,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"차량용 고속 무선 충전 미끄럼 방지 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0332bb09e0464b2f9f65cc4da32db885H.jpg","l":"https://ko.aliexpress.com/item/1005010044113868.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":17599,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"100/200W 미니 C타입 고속 차량 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sebc17b05129847fa9e834016025b37dfN.jpg","l":"https://ko.aliexpress.com/item/1005006967568156.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":5462,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"100/200W PD USB-C 고속 차량 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S33b28a2e57cb4846a251bbabea57c0ed9.jpg","l":"https://ko.aliexpress.com/item/1005007609378086.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":49,"p":6286,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"250W 5포트 고속 시가잭 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3c28ff0a55384b84b5b019596e1120dfL.png","l":"https://ko.aliexpress.com/item/1005009384462068.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":7100,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"250W 5포트 C타입 고속 차량 충전","i":"https://ae-pic-a1.aliexpress-media.com/kf/Se4529ba7a23045eeb45e4991bbf272da5.jpg","l":"https://ko.aliexpress.com/item/1005007823432802.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":6330,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"250W PD 6포트 고속 차량용 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3fb22058cb9e48a591e81dbde4a08fc10.jpg","l":"https://ko.aliexpress.com/item/1005010044157524.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":6691,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"66-250W PD 고속 6포트 차량용 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/S319f897319234677b9f020071ac69ca7V.jpg","l":"https://ko.aliexpress.com/item/1005006752601429.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":47,"p":6494,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"PD 120W C타입 스프링 차량용 케이블","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4dba892455384337a9a1d8db4fa09243Y.jpg","l":"https://ko.aliexpress.com/item/1005009277207441.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":6663,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"투키 60W 투명 고속 차량용 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb523b1c9a0a843828a3361c3a29c78d1q.jpg","l":"https://ko.aliexpress.com/item/1005006110406538.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":8449,"t":"life","s":"outdoor","c":9.0,"w":false},{"n":"120W 듀얼 USB PD 고속 시거잭 분배기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc7a4350d30524498aa26ca85fa9088c90.jpg","l":"https://ko.aliexpress.com/item/1005010706796437.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":11889,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"200W USB-C 풀링 미니 차량용 고속 충전기","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sedac58b5f53e4b569834f2c1574f7c20A.jpg","l":"https://ko.aliexpress.com/item/1005011692406930.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":6534,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"실내 운동 미끄럼 방지 폼 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S2847b7549d2b45158e7f87faf11940f3l.jpg","l":"https://ko.aliexpress.com/item/1005010109568797.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":20046,"t":"life","s":"sports","c":7.0,"w":false},{"n":"PVC 폼 미끄럼 방지 고정 시트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S31291ae7d9bf496b8392eb31e6823f20O.jpg","l":"https://ko.aliexpress.com/item/1005007476845289.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":54,"p":6283,"t":"life","s":"sports","c":7.0,"w":false},{"n":"PVC 폼 미끄럼 방지 고정 시트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S31291ae7d9bf496b8392eb31e6823f20O.jpg","l":"https://ko.aliexpress.com/item/1005010553164813.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":53,"p":8461,"t":"life","s":"sports","c":7.0,"w":false},{"n":"요가 무릎/팔꿈치 보호 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S49fd7656c59f454aaade80aa2c28e140e.png","l":"https://ko.aliexpress.com/item/1005007567028619.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":51,"p":11188,"t":"life","s":"sports","c":7.0,"w":false},{"n":"4mm EVA 폼 요가/필라테스 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S02ad5c1378454f51b0fd434ea7bb08368.jpg","l":"https://ko.aliexpress.com/item/1005006828003763.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":53,"p":13977,"t":"life","s":"sports","c":7.0,"w":false},{"n":"조립식 방수 논슬립 피트니스 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7149f3aefadd4fc88ab2ffb16ed27a8aD.jpg","l":"https://ko.aliexpress.com/item/1005009529499202.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":37022,"t":"life","s":"sports","c":7.0,"w":false},{"n":"EVA 폼 16p 퍼즐형 운동 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S85003987f687489f9dd4897904188dccJ.jpg","l":"https://ko.aliexpress.com/item/1005009947310128.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":51,"p":37115,"t":"life","s":"sports","c":7.0,"w":false},{"n":"EVA 폼 홈짐 조립식 미끄럼 방지 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S17bc2aa6974d4316ae1ce67ccefac5bb5.jpg","l":"https://ko.aliexpress.com/item/1005010491235377.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":36734,"t":"life","s":"sports","c":7.0,"w":false},{"n":"EVA 폼 논슬립 퍼즐 운동 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S85003987f687489f9dd4897904188dccJ.jpg","l":"https://ko.aliexpress.com/item/1005010228837535.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":51,"p":37848,"t":"life","s":"sports","c":7.0,"w":false},{"n":"고반발 논슬립 두꺼운 폼 밸런스 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S41d698ea9ea54ca8b7d44ff961b0dbb1L.jpg","l":"https://ko.aliexpress.com/item/1005009991861477.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":10749,"t":"life","s":"sports","c":7.0,"w":false},{"n":"고반발 논슬립 코어 밸런스 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4cbd710ec53d4f73a555a058551f52b3v.png","l":"https://ko.aliexpress.com/item/1005008144967169.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":26421,"t":"life","s":"sports","c":7.0,"w":false},{"n":"두꺼운 요가/밸런스 충격 흡수 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sd6daa3e52d804c5ea9e42d0376633387q.jpg","l":"https://ko.aliexpress.com/item/1005008102222596.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":66,"p":35435,"t":"life","s":"sports","c":7.0,"w":false},{"n":"두꺼운 TPE 미끄럼 방지 무릎 보호대","i":"https://ae-pic-a1.aliexpress-media.com/kf/S468f44cbf89b42ddb3ffe2d047cbc444M.png","l":"https://ko.aliexpress.com/item/1005007170957591.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":50,"p":7265,"t":"life","s":"sports","c":7.0,"w":false},{"n":"4mm TPE 접이식 휴대용 요가 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sfdd4895c5ea847dca3bd30fbf165428d6.jpg","l":"https://ko.aliexpress.com/item/1005010114243047.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":57,"p":26429,"t":"life","s":"sports","c":7.0,"w":false},{"n":"EVA 논슬립 퍼즐 홈짐 보호 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S17bc2aa6974d4316ae1ce67ccefac5bb5.jpg","l":"https://ko.aliexpress.com/item/1005010759550315.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":50,"p":37779,"t":"life","s":"sports","c":7.0,"w":false},{"n":"3mm EVA 폼 편안한 요가 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S1a936df14611487ca4c1a7a700073cd6m.png","l":"https://ko.aliexpress.com/item/1005006995272203.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":50,"p":30762,"t":"life","s":"sports","c":7.0,"w":false},{"n":"논슬립 폼 실내 운동 바닥 보호 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S2847b7549d2b45158e7f87faf11940f3l.jpg","l":"https://ko.aliexpress.com/item/1005009401721553.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":52,"p":19658,"t":"life","s":"sports","c":7.0,"w":false},{"n":"논슬립 폼 코어 밸런스 패드","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb5eaef490e6c43e98e21e3402e5e20a33.jpg","l":"https://ko.aliexpress.com/item/1005006262151409.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":69,"p":27115,"t":"life","s":"sports","c":7.0,"w":false},{"n":"방수 논슬립 충격흡수 조립식 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S7149f3aefadd4fc88ab2ffb16ed27a8aD.jpg","l":"https://ko.aliexpress.com/item/1005009582252886.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":50,"p":37067,"t":"life","s":"sports","c":7.0,"w":false},{"n":"EVA 나뭇잎 논슬립 아기 퍼즐 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S21c32f338d194873ab2a2dc80c1274b2A.jpg","l":"https://ko.aliexpress.com/item/1005006996285747.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":50,"p":13281,"t":"life","s":"sports","c":7.0,"w":false},{"n":"다용도 방수 삼각 그늘막","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sf8a78d26e1394d15822a6ea6bdfa9948B.jpg","l":"https://ko.aliexpress.com/item/1005007337388340.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":57,"p":22422,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"방수 이중층 고양이 모래 포집 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S94e13cec75014cc6b5d3d02a6fbc26f5K.jpg","l":"https://ko.aliexpress.com/item/1005005239360963.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":51,"p":11822,"t":"cat","s":"","c":7.0,"w":false},{"n":"15cm 크리스마스 강아지 의류 DIY 열전사 스티커","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4484d32889a0417e9302a429095f03d4M.jpg","l":"https://ko.aliexpress.com/item/1005010557881666.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":57,"p":1151,"t":"dog","s":"","c":7.0,"w":false},{"n":"겨울 따뜻한 강아지 고양이 패션 스웨터","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb00f89cae76647ba8301e9542fef5bceU.jpg","l":"https://ko.aliexpress.com/item/1005005985830890.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":1157,"t":"cat","s":"","c":7.0,"w":false},{"n":"강아지 간식 퍼즐 장난감","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb98845e9c94f4d8e9c2b03b17d92dab5w.jpg","l":"https://ko.aliexpress.com/item/1005009732666005.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":54,"p":2708,"t":"dog","s":"","c":7.0,"w":false},{"n":"소동물 간식 퍼즐 급식볼","i":"https://ae-pic-a1.aliexpress-media.com/kf/S407afa31e93a4f6d9268178a448d7a45S.jpg","l":"https://ko.aliexpress.com/item/1005008419713125.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":54,"p":1979,"t":"pet","s":"","c":7.0,"w":false},{"n":"진공 밀폐 용기 펌프 세트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Saf9b9f8dd1594f049bab4cc9bcbdd4be2.jpg","l":"https://ko.aliexpress.com/item/1005006259524823.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":1396,"t":"life","s":"home","c":7.0,"w":false},{"n":"고양이 DIY 스크래쳐 기둥","i":"https://ae-pic-a1.aliexpress-media.com/kf/S3f66606d591c4dd58f1fe1bbde867f72v.jpg","l":"https://ko.aliexpress.com/item/1005008557641331.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":45,"p":4251,"t":"cat","s":"","c":7.0,"w":false},{"n":"강아지 사료 분배 퍼즐 지능 훈련 장난감","i":"https://ae-pic-a1.aliexpress-media.com/kf/S9aecf26a832940bdbd35f611c59a778ck.jpg","l":"https://ko.aliexpress.com/item/1005006268103844.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":65,"p":14979,"t":"cat","s":"","c":7.0,"w":false},{"n":"자동 발광 움직이는 강아지 공","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sb4b9288d9905404194c590574f7188728.jpg","l":"https://ko.aliexpress.com/item/1005009787196184.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":25578,"t":"dog","s":"","c":7.0,"w":false},{"n":"남자 휴대용 메탈 머니클립","i":"https://ae-pic-a1.aliexpress-media.com/kf/S930bdbcfc87e40b990c1db20643bef5do.jpg","l":"https://ko.aliexpress.com/item/1005009437528078.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion","d":35,"p":3043,"t":"life","s":"fashion","c":7.0,"w":false},{"n":"마사지건 실리콘 교체 헤드","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4b9384b0c49d43488bae09a1aa11ded1O.jpg","l":"https://ko.aliexpress.com/item/1005009043412901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":49,"p":2496,"t":"life","s":"sports","c":7.0,"w":false},{"n":"고양이 스크래처 소파 보호 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/S11cd929c634e43dcbbaf9266256c295cu.jpg","l":"https://ko.aliexpress.com/item/1005004866114766.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":4,"p":10263,"t":"cat","s":"","c":7.0,"w":false},{"n":"레트로 방수 충전식 캠핑 랜턴","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4b1889a6a4924fa489d5288ff98888abx.jpg","l":"https://ko.aliexpress.com/item/1005005355113002.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":0,"p":15204,"t":"life","s":"outdoor","c":7.0,"w":false},{"n":"Type-C 스위치 USB 충전 케이블","i":"https://ae-pic-a1.aliexpress-media.com/kf/Se3ec29ff6b0641a39a7fa0fbbf262f7aa.jpg","l":"https://ko.aliexpress.com/item/1005007381094592.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":0,"p":6346,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"DC12V COB LED 전구/스트립","i":"https://ae-pic-a1.aliexpress-media.com/kf/HTB1PD4Smb1YBuNjSszhq6AUsFXai.jpg","l":"https://ko.aliexpress.com/item/32796684546.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":1,"p":2329,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"혼합형 12V COB LED 램프 칩","i":"https://ae-pic-a1.aliexpress-media.com/kf/S0bb22a2a029d4c028d381dd2724919b0a.jpg","l":"https://ko.aliexpress.com/item/32909364330.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech","d":1,"p":2116,"t":"life","s":"electronics","c":7.0,"w":false},{"n":"커플 에너지 덤벨 펜던트 꼬임 팔찌","i":"https://ae-pic-a1.aliexpress-media.com/kf/Hd367fca707be4e6ea4b2df812db0dea9T.jpg","l":"https://ko.aliexpress.com/item/1005002926466634.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports","d":0,"p":2709,"t":"life","s":"sports","c":7.0,"w":false},{"n":"LED 야광 야간 안전 강아지 고양이 목줄","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4a846dbe0c61445ab6c6a52feed8606f2.jpg","l":"https://ko.aliexpress.com/item/1005009962574172.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":1001,"t":"cat","s":"","c":7.0,"w":false},{"n":"화려한 LED 야광 강아지 고양이 야간 목줄","i":"https://ae-pic-a1.aliexpress-media.com/kf/S2518f279a5c54e67ab28fff1d200190eo.jpg","l":"https://ko.aliexpress.com/item/1005009196030920.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":50,"p":2025,"t":"cat","s":"","c":7.0,"w":false},{"n":"따뜻하고 부드러운 강아지 고양이 담요","i":"https://ae-pic-a1.aliexpress-media.com/kf/S4d266f88335344fb9261a43a0d020670d.jpg","l":"https://ko.aliexpress.com/item/1005008113162653.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":55,"p":1476,"t":"cat","s":"","c":7.0,"w":false},{"n":"고양이 화장실 대형 방수 미끄럼 매트","i":"https://ae-pic-a1.aliexpress-media.com/kf/Sc0a1ee40fdcc49a0a83cae9b90dd6e33T.jpg","l":"https://ko.aliexpress.com/item/1005008404634121.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow","d":52,"p":9228,"t":"cat","s":"","c":7.0,"w":false}];
+let cat='all',sub='all',query='',fPrice='all',fDisc=0,fSort='rec';
 
-    
-<script>
-(function(){
-  var el=document.getElementById("update-date");
-  if(!el)return;
-  var now=new Date();
-  var kst=new Date(now.getTime()+(9*60*60*1000)-(now.getTimezoneOffset()*60*1000));
-  var y=kst.getFullYear();
-  var m=String(kst.getMonth()+1).padStart(2,"0");
-  var d=String(kst.getDate()).padStart(2,"0");
-  el.textContent=y+"년 "+m+"월 "+d+"일";
-})();
-</script>
+const $=id=>document.getElementById(id);
+const grid=$('grid'),empty=$('empty'),rc=$('resultCount');
 
-    
-<script>
-(function(){
-  var el=document.getElementById("countdown-timer");
-  if(!el)return;
-  function tick(){
-    var now=new Date();
-    var kst=new Date(now.getTime()+(9*60*60*1000)-(now.getTimezoneOffset()*60*1000));
-    var midnight=new Date(kst);
-    midnight.setHours(24,0,0,0);
-    var diff=midnight-kst;
-    if(diff<=0){el.textContent="00:00:00";return;}
-    var h=Math.floor(diff/3600000);
-    var m=Math.floor((diff%3600000)/60000);
-    var s=Math.floor((diff%60000)/1000);
-    el.textContent=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    cat=t.dataset.cat;
+    const ls=$('lifeSubs');
+    ls.classList.toggle('show',cat==='life');
+    if(cat!=='life'){sub='all';document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));document.querySelector('.sub-tab[data-sub=all]').classList.add('active')}
+    render();
+  };
+});
+
+document.querySelectorAll('.sub-tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    sub=t.dataset.sub;
+    render();
+  };
+});
+
+$('q').oninput=e=>{query=e.target.value.toLowerCase();render()};
+$('fPrice').onchange=e=>{fPrice=e.target.value;render()};
+$('fDisc').onchange=e=>{fDisc=parseInt(e.target.value);render()};
+$('fSort').onchange=e=>{fSort=e.target.value;render()};
+
+function filter(item){
+  if(cat==='dog'&&item.t!=='dog')return false;
+  if(cat==='cat'&&item.t!=='cat')return false;
+  if(cat==='life'&&item.t!=='life')return false;
+  if(cat==='life'&&sub!=='all'&&item.s!==sub)return false;
+  if(query&&!item.n.toLowerCase().includes(query))return false;
+  if(fPrice!=='all'){
+    const[lo,hi]=fPrice.split('-').map(Number);
+    if(item.p<lo||item.p>hi)return false;
   }
-  tick();setInterval(tick,1000);
-})();
-</script>
+  if(fDisc>0&&item.d<fDisc)return false;
+  return true;
+}
 
-    <script>window.__PRODUCTS=[{"n": "문걸이 자동 전기 새 고양이 장난감", "d": "나 문걸이 자동 새 장난감인데! 너는 매일 폰", "c": "pet", "b": "price_10k", "p": 15781, "o": 32206, "dc": 51, "l": "https://ko.aliexpress.com/item/1005011859905720.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sfd1b1c74274d4d75a0b801f975963408F.png"}, {"n": "원형 골판지 고양이 스크래처", "d": "나 원형 스크래처인데! 맨날 긁어서 너덜너덜한", "c": "pet", "b": "price_10k", "p": 17675, "o": 35350, "dc": 50, "l": "https://ko.aliexpress.com/item/1005011845309660.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S180217b4aa4242caaef46a2b4f278cf0L.jpg"}, {"n": "맞춤형 반사 강아지 하네스", "d": "나 반사 하네스인데! 맞춤형이면 뭐 하냐? 밤", "c": "pet", "b": "price_10k", "p": 10060, "o": 14579, "dc": 31, "l": "https://ko.aliexpress.com/item/1005006878597097.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbab89df01e494e2daa9263c1611be5a0s.jpg"}, {"n": "3in1 경사형 물통 고양이 밥그릇", "d": "나 경사형 밥그릇인데! 밥이랑 물통 며칠째 안", "c": "pet", "b": "price_10k", "p": 15764, "o": 47769, "dc": 67, "l": "https://ko.aliexpress.com/item/1005006832136773.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0abb4935fb18439787423a9887878687c.jpg"}, {"n": "3in1 120W USB-C 시거잭 고속 충전기", "d": "나 3in1 충전기인데! 온갖 거 다 꽂고 왜", "c": "outdoor", "b": "price_1k", "p": 9304, "o": 18243, "dc": 49, "l": "https://ko.aliexpress.com/item/1005007145464159.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S9c460a6f07164ea787cf13898cddbf2ac.jpg"}, {"n": "8M 자동 반사 강아지 리드줄", "d": "나 8미터 자동 리드줄인데! 그거 잡고 핸드폰", "c": "pet", "b": "price_10k", "p": 28304, "o": 83247, "dc": 66, "l": "https://ko.aliexpress.com/item/1005006061894429.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S110ab8f782a4496da5a46e400d29249fL.jpg"}, {"n": "벽걸이 스크래쳐 고양이 트리", "d": "나 고양이 트리인데! 맨날 발톱만 긁고 안 갈", "c": "pet", "b": "price_100k", "p": 50755, "o": 153803, "dc": 67, "l": "https://ko.aliexpress.com/item/1005007592902909.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0921616f317b46aab3fdf00898a4c644t.jpg"}, {"n": "골판지 고양이 스크래쳐 쿠션", "d": "나 스크래쳐 쿠션인데! 너덜너덜해질 때까지 언", "c": "pet", "b": "price_10k", "p": 12956, "o": 38105, "dc": 66, "l": "https://ko.aliexpress.com/item/1005006563201224.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S273e8167f97648a4a2d8b627ec676baeP.jpg"}, {"n": "580ml 휴대용 실리콘 강아지 물병", "d": "나 휴대용 물병인데! 산책 나갔으면 물 좀 줘", "c": "pet", "b": "price_10k", "p": 19571, "o": 55917, "dc": 65, "l": "https://ko.aliexpress.com/item/1005005168685901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/H5ec7cd5458824bc5becc9a3584f1f604F.jpg"}, {"n": "푹신한 원형 반려동물 침대", "d": "나 반려동물 침대인데! 너는 매일 이불 빨면서", "c": "pet", "b": "price_10k", "p": 20865, "o": 59614, "dc": 65, "l": "https://ko.aliexpress.com/item/1005006682861479.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc97c95add0de4bd48da6ddabe70f7fb2Y.jpg"}, {"n": "강아지 퀼팅 방수 차량 시트 커버", "d": "나 차량 시트 커버인데! 강아지 태울 때만 쓰", "c": "pet", "b": "price_100k", "p": 42345, "o": 88218, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008534698163.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sacb89d38d60d4675844f9d546324bfc1Y.jpg"}, {"n": "애견용 옥스포드 방수 차량 카시트", "d": "나 애견용 카시트인데! 너 급정거하면 개 날아", "c": "pet", "b": "price_10k", "p": 15420, "o": 31469, "dc": 51, "l": "https://ko.aliexpress.com/item/1005009015677318.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbb29b8d7206a4f018ac4ae260abf7bf5w.jpg"}, {"n": "다용도 애완동물 털 제거 브러쉬", "d": "나 털 제거 브러쉬인데! 털갈이 시기인데 엉킨", "c": "pet", "b": "price_100k", "p": 8427, "o": 16854, "dc": 50, "l": "https://ko.aliexpress.com/item/1005008717493881.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0b69ec9904d540e3a109f402c41026baz.jpg"}, {"n": "USB 투명 저소음 고양이 자동 급수기", "d": "나 고양이 자동 급수기인데! 필터 교체 안 해", "c": "pet", "b": "price_10k", "p": 22357, "o": 45626, "dc": 51, "l": "https://ko.aliexpress.com/item/1005007123962156.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sd3b7ae559798439bb51141f096c583e2I.jpg"}, {"n": "고양이 강아지 자체발열 접이식 텐트 침대", "d": "나 텐트 침대인데! 날 추운데 애들 바닥에 재", "c": "pet", "b": "price_10k", "p": 23011, "o": 46961, "dc": 51, "l": "https://ko.aliexpress.com/item/1005008404281818.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S77f58722e2a94de99ccc23353609946aa.jpg"}, {"n": "휴대용 수동 보풀 애완동물 털 제거기", "d": "나 보풀 털 제거기인데! 옷에 털 덕지덕지 달", "c": "pet", "b": "price_1k", "p": 3850, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005004175441565.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S8b8987fdaf3642d99625f0f2121c5000G.jpg"}, {"n": "신생아 다기능 인체공학 아기띠 슬링", "d": "나 아기띠 슬링인데! 올바르게 안 매면 아기 ", "c": "etc", "b": "price_10k", "p": 24327, "o": 49646, "dc": 51, "l": "https://ko.aliexpress.com/item/1005006562128010.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S562f09fe30a6437da0e8abc92abed1c7m.jpg"}, {"n": "X5 1080P HD 미니 WIFI 보안 카메라", "d": "나 보안 카메라인데! 해킹 위험 있는데 비밀번", "c": "etc", "b": "price_100k", "p": 8510, "o": 19340, "dc": 56, "l": "https://ko.aliexpress.com/item/1005011906516358.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S58bc07802d394ee69f791261c4391532V.jpg"}, {"n": "휴대용 USB LED 초음파 아로마 가습기", "d": "나 아로마 가습기인데! 가습기 청소 안 하면 ", "c": "etc", "b": "price_100k", "p": 9784, "o": 19568, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009558282430.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0c76bb909e7046e98316cb0dcbb05018x.jpg"}, {"n": "OKUMA UV400 편광 변색 스포츠 선글라스", "d": "나 스포츠 선글라스인데! 자외선 차단 안 하고", "c": "etc", "b": "price_100k", "p": 9659, "o": 19318, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006907621813.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc70207d02f08426f86c2bd5d3e34a48fA.jpg"}, {"n": "리필식 수채화 붓펜 세트", "d": "나 붓펜인데! 물통 안 채워서 쓰면 붓모 다 ", "c": "etc", "b": "price_1k", "p": 5365, "o": 15328, "dc": 65, "l": "https://ko.aliexpress.com/item/1005009982586465.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sfeb0840065634dfbb4705b17e6a672676.jpg"}, {"n": "에어팟 분실 방지 실리콘 밴드", "d": "나 에어팟 밴드인데! 운동하다가 빠뜨려놓고 왜", "c": "etc", "b": "price_1k", "p": 2618, "o": 4760, "dc": 45, "l": "https://ko.aliexpress.com/item/1005009808439858.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S60a11fa3a58143d48070ccecfaaaa5d3i.jpg"}, {"n": "내장 마이크 회전식 HD 웹캠", "d": "나 웹캠인데! 노트북 구린 화질로 회의하지 마", "c": "etc", "b": "price_1k", "p": 1461, "o": 2563, "dc": 43, "l": "https://ko.aliexpress.com/item/1005001859914466.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbb3f12bdfd324bcc8505a0a0fb81e639l.jpg"}, {"n": "NBR 내유성 고압 O링 씰 20개", "d": "나 O링인데! 낡은 거 그냥 쓰다간 기계에 오", "c": "etc", "b": "price_1k", "p": 1446, "o": 2095, "dc": 31, "l": "https://ko.aliexpress.com/item/1005008223340328.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0417460ec995419e8b4c407a4c1389a5l.jpg"}, {"n": "로봇 청소기용 DC 미니 고속 모터", "d": "나 로봇 청소기 모터인데! 청소기 빌빌거리는데", "c": "etc", "b": "price_10k", "p": 1048, "o": 1905, "dc": 45, "l": "https://ko.aliexpress.com/item/1005009904044042.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S585f80930fdb4334a6e807ac3f72189bR.jpg"}, {"n": "만년필 교체용 이리듐 펜촉 5개", "d": "나 펜촉인데! 글씨 왜 이래? 마모되면 종이 ", "c": "pet", "b": "price_1k", "p": 2314, "o": 4207, "dc": 45, "l": "https://ko.aliexpress.com/item/1005011619795410.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sa74df0b4e57045c18cc374e3d60b2294y.jpg"}, {"n": "ID115 플러스 실리콘 워치 밴드", "d": "나 워치 밴드인데! 안 닦고 차면 땀이랑 각질", "c": "etc", "b": "price_1k", "p": 3211, "o": 4013, "dc": 20, "l": "https://ko.aliexpress.com/item/1005008076377590.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S14211321289a44f5a51208b691d2726cw.jpg"}, {"n": "LED 식물재배기 (육묘용)", "d": "나 재배기인데! 맨날 안 켜두면 애들이 광합성", "c": "etc", "b": "price_1k", "p": 1461, "o": 2001, "dc": 27, "l": "https://ko.aliexpress.com/item/1005005000291504.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sd76d6f3b87ce42089729d0773d990516W.jpg"}, {"n": "슬림 RFID 차단 가죽 카드지갑", "d": "나 카드지갑인데! RFID 차단하는데 맨날 열", "c": "etc", "b": "price_1k", "p": 4475, "o": 5593, "dc": 20, "l": "https://ko.aliexpress.com/item/1005006964299765.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S31b100d1ed9242758e843e2bde4b14ede.jpg"}, {"n": "70mai A810 블랙박스 흡착 거치대", "d": "나 블랙박스 거치대인데! 떨어져서 사고 영상 ", "c": "etc", "b": "price_10k", "p": 13469, "o": 14640, "dc": 8, "l": "https://ko.aliexpress.com/item/1005007929572014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S163ee06e788a47a1a573af6a023993d16.jpg"}, {"n": "센서형 LED 프로젝터 수면등", "d": "나 수면등인데! 폰 보지 말고 이거 켜야 눈도", "c": "etc", "b": "price_10k", "p": 15113, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005001295717877.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Hba2d44a454784134997bce9dbc85bed7f.jpg"}, {"n": "12V 고휘도 유연 LED 스트립 조명", "d": "나 LED 스트립 조명인데! 대충 붙이다 떨어", "c": "etc", "b": "price_1k", "p": 4626, "o": 4869, "dc": 5, "l": "https://ko.aliexpress.com/item/32763598428.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Saaaedd15be8243d98f71bfa294a0eda0U.jpg"}, {"n": "3/5m 소중형견 자동 줄감개 산책 목줄", "d": "나 자동 줄감개인데! 목줄 길게 뒀다 튀어나가", "c": "pet", "b": "price_100k", "p": 9618, "o": 20037, "dc": 52, "l": "https://ko.aliexpress.com/item/1005005809517043.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Safe6dbf0c345439a864d2817bffba6393.jpg"}, {"n": "반려동물 소형견 투명 방수 후드 우비", "d": "나 강아지 우비인데! 비 오는데 홀딱 젖으면 ", "c": "pet", "b": "price_10k", "p": 11090, "o": 32617, "dc": 66, "l": "https://ko.aliexpress.com/item/1005006319098194.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S003467ddb89447aa83a69ea30246c0f5L.jpg"}, {"n": "아웃도어용 성인 방수 후드 우비/판초", "d": "나 판초 우비인데! 비 다 맞고 돌아다니다가 ", "c": "etc", "b": "price_1k", "p": 3470, "o": 9378, "dc": 63, "l": "https://ko.aliexpress.com/item/1005007430856646.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4356b051e5f74447aaa4cd7bc5d4c62cT.jpg"}, {"n": "USB 휴대용 미니 아로마 가습기", "d": "나 미니 가습기인데! 맨날 물만 채우고 청소 ", "c": "etc", "b": "", "p": 8340, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005003351797177.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7cd783653fb04736898eb8f5ff666a42d.jpg"}, {"n": "미밴드 7/6/5용 실리콘 스포츠 스트랩", "d": "나 미밴드 스트랩인데! 땀 묻은 채로 방치하면", "c": "etc", "b": "price_1k", "p": 2891, "o": 4130, "dc": 30, "l": "https://ko.aliexpress.com/item/1005005066485271.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4fee48fc23264d57aadcf26c8a7986f7I.jpg"}, {"n": "미밴드 마그네틱 USB 충전 케이블", "d": "나 마그네틱 충전 케이블인데! 대충 뽑다 단선", "c": "etc", "b": "price_1k", "p": 3120, "o": 5672, "dc": 45, "l": "https://ko.aliexpress.com/item/1005009176683000.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0169fcdee08041989f8f7a80d04d7422T.jpg"}, {"n": "샤오미 미밴드 1용 실리콘 밴드", "d": "나 미밴드1 밴드인데! 너 언제까지 나 깨끗하", "c": "etc", "b": "price_1k", "p": 2983, "o": 3728, "dc": 20, "l": "https://ko.aliexpress.com/item/1005006472006317.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7a5ba1c618f84d65aaaeee6f00b83721M.jpg"}, {"n": "샤오미 미지아 무선 청소기 헤파 필터", "d": "나 헤파 필터인데! 교체 안 하면 미세먼지 다", "c": "etc", "b": "price_1k", "p": 3866, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005005246213706.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbdde608d2c4c4707bb8b4ee289d868d7h.jpg"}, {"n": "휴대용 미니 전기 포트", "d": "나 미니 전기 포트인데! 물때 끼는 거 안 닦", "c": "etc", "b": "", "p": 85632, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005009042658861.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S44a39065d8b946e383b9a5c94044893cn.jpg"}, {"n": "식물 재배용 USB LED 스트립 조명", "d": "나 LED 조명인데! 햇빛 없으면 광합성 못 ", "c": "etc", "b": "price_1k", "p": 3364, "o": 3397, "dc": 1, "l": "https://ko.aliexpress.com/item/4000583211778.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb40f1fa9cbed4686a463a8ec7f248692d.jpg"}, {"n": "USB 컵 워머 전기 보온패드", "d": "나 컵 워머인데! 커피 식으면 맛없고 굳이 다", "c": "etc", "b": "price_10k", "p": 11905, "o": 35014, "dc": 66, "l": "https://ko.aliexpress.com/item/1005006213265432.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S1784840b49a145ab944568d67f4cf421v.jpg"}, {"n": "USB 스마트 머그컵 보온기", "d": "내가 스마트 보온컵인데! 식은 음료 마실 거면", "c": "etc", "b": "price_10k", "p": 15166, "o": 31595, "dc": 52, "l": "https://ko.aliexpress.com/item/1005010370404430.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S26a8a758a189437b98a0b5910d85855dm.jpg"}, {"n": "HD 화질 마이크 내장 USB 웹캠", "d": "나 HD 웹캠인데! 당신 얼굴 흐릿하고 목소리", "c": "etc", "b": "price_1k", "p": 3322, "o": 4429, "dc": 25, "l": "https://ko.aliexpress.com/item/1005008045207776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc052a714da594fed8d88e1868ad7978fY.jpg"}, {"n": "대용량 스텐 로프 휴대용 보온병", "d": "나 대용량 보온병인데! 물때 끼면 보온력 떨어", "c": "home", "b": "price_10k", "p": 22718, "o": 70993, "dc": 68, "l": "https://ko.aliexpress.com/item/1005006273684699.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4de27e5e418d4c73aa76334d1a2649291.jpg"}, {"n": "대용량 스텐 보온/보냉 여행 텀블러", "d": "내가 대용량 여행 텀블러인데! 차에 방치하면 ", "c": "home", "b": "price_10k", "p": 25977, "o": 54118, "dc": 52, "l": "https://ko.aliexpress.com/item/1005006997155691.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sff0c4d85727142f7b55d5649d2f1188b4.jpg"}, {"n": "앱 제어 자동 스마트 고양이 화장실", "d": "나 앱 제어 화장실인데! 앱만 보지 말고 냥이", "c": "pet", "b": "price_100k", "p": 443884, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005009928768606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S462ea46b88734e989f407845fd6d04c6z.jpg"}, {"n": "다묘용 앱 자동 청소 탈취 고양이 화장실", "d": "내가 다묘용 화장실인데! 아무리 자동이라도 고", "c": "pet", "b": "price_100k", "p": 652120, "o": 1304240, "dc": 50, "l": "https://ko.aliexpress.com/item/1005004979511228.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sde22d303ceea452c98220d74ab3eb0ef9.jpg"}, {"n": "스마트 앱 자동 청소 탈취 고양이 화장실", "d": "나 스마트 화장실인데! 앱만 보지 말고 냥이 ", "c": "pet", "b": "price_100k", "p": 542835, "o": 1130906, "dc": 52, "l": "https://ko.aliexpress.com/item/1005011667349388.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb73adfac1cd14052ace7f1f4972a0325o.jpg"}, {"n": "인터랙티브 고양이 공 발사 훈련 장난감", "d": "나 공 발사 장난감인데! 냥이 매일 집에만 있", "c": "pet", "b": "price_1k", "p": 5884, "o": 12258, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008618231606.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Saffda6c49c824b70a658b19653ee1efc6.jpg"}, {"n": "USB LED 캠핑 비상 텐트등", "d": "나 USB LED 텐트등인데! 비상용인데 맨날", "c": "outdoor", "b": "price_1k", "p": 6787, "o": 13574, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007344867652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S6e7831be9b6b4d8dbfed1f99d1838399C.jpg"}, {"n": "휴대용 LED 충전식 캠핑 텐트등", "d": "나 휴대용 LED 텐트등인데! 어두운데 폰 플", "c": "outdoor", "b": "price_10k", "p": 25794, "o": 53737, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007345233283.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S89b23c78f92d48159641d94ba9734fa09.jpg"}, {"n": "3-in-1 다기능 방수 캠핑 우의", "d": "나 3-in-1 캠핑 우의인데! 비 예보도 없", "c": "outdoor", "b": "price_10k", "p": 15982, "o": 34004, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010044034977.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4e5de53cf3114ca6aa0f8b2495036e3cP.jpg"}, {"n": "3-in-1 다기능 방수 캠핑 우의", "d": "나 3-in-1 우의인데! 우비로만 쓰지 말고", "c": "outdoor", "b": "price_10k", "p": 15028, "o": 35780, "dc": 58, "l": "https://ko.aliexpress.com/item/1005007267109153.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4e5de53cf3114ca6aa0f8b2495036e3cP.jpg"}, {"n": "솔라 USB 충전 LED 캠핑등", "d": "나 솔라 캠핑등인데! 햇빛 아래 안 두면 언제", "c": "outdoor", "b": "price_10k", "p": 19131, "o": 38262, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007009687886.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S24ef0b774fef481c94a5ab1390285120W.jpg"}, {"n": "9900mAh 자석 충전식 캠핑등", "d": "나 9900mAh 캠핑등인데! 완충 안 하고 ", "c": "outdoor", "b": "price_10k", "p": 26648, "o": 83275, "dc": 68, "l": "https://ko.aliexpress.com/item/1005007535331490.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb243fc38baef4f9ab6b2f98890a5b6acm.jpg"}, {"n": "MOSLIGHTING 휴대 충전식 LED 텐트등", "d": "나 MOSLIGHTING 텐트등인데! 제자리에", "c": "outdoor", "b": "price_10k", "p": 25752, "o": 80475, "dc": 68, "l": "https://ko.aliexpress.com/item/1005005105773652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sa8901b7c7c6d493d9d53e7a9479e055fT.jpg"}, {"n": "휴대용 솔라 LED 캠핑 텐트등", "d": "나 휴대용 솔라 텐트등인데! 해 안 드는 곳에", "c": "outdoor", "b": "price_10k", "p": 25041, "o": 55646, "dc": 55, "l": "https://ko.aliexpress.com/item/1005007345137299.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S698f9d3c2952436f8833bca4d5f83a9aS.jpeg"}, {"n": "LED 충전식 휴대용 비상 전구", "d": "나 LED 비상 전구인데! 비상용이라며 맨날 ", "c": "outdoor", "b": "price_10k", "p": 12851, "o": 25702, "dc": 50, "l": "https://ko.aliexpress.com/item/1005012030902914.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S2986cc1fa1df4ab6a4065c6b4688a21bU.jpg"}, {"n": "LED 충전식 휴대용 캠핑 비상 전구", "d": "나 휴대용 비상 전구인데! 충전도 안 해놓고 ", "c": "outdoor", "b": "price_1k", "p": 9574, "o": 28158, "dc": 66, "l": "https://ko.aliexpress.com/item/1005008227769095.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S1b99e6910716446db866cc2078cb8a96d.jpg"}, {"n": "7심 550 파라코드 야외용 끈", "d": "나 7심 파라코드인데! 그냥 묶는 데만 쓸 거", "c": "outdoor", "b": "price_1k", "p": 4894, "o": 10195, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007038471633.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S5e51f1dc63a04b92b244200a2a8fc2b9R.jpg"}, {"n": "홈피쉬 캠핑 텐트 휴대용 비상등", "d": "나 휴대용 비상등인데! 밤에 급하면 허둥지둥 ", "c": "outdoor", "b": "price_10k", "p": 20020, "o": 40040, "dc": 50, "l": "https://ko.aliexpress.com/item/1005008406150492.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbdd1f3b7fc804a1e99dfebcf7ff29851y.png"}, {"n": "모스라이팅 충전식 휴대용 캠핑 비상등", "d": "나 충전식 비상등인데! 방전되면 그냥 짐이야,", "c": "outdoor", "b": "price_10k", "p": 26715, "o": 53430, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006860789881.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sa8901b7c7c6d493d9d53e7a9479e055fT.jpg"}, {"n": "GZ 등대 캠핑등: 초장시간 LED 텐트등", "d": "나 초장시간 텐트등인데! 너무 믿고 방전시키면", "c": "outdoor", "b": "price_10k", "p": 17800, "o": 39555, "dc": 55, "l": "https://ko.aliexpress.com/item/1005010037238701.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3f1d78fe1cd04e799e47020a16ad186c9.jpg"}, {"n": "고출력 USB 충전식 휴대용 캠핑 걸이등", "d": "나 고출력 걸이등인데! 대충 바닥에 놓으면 그", "c": "outdoor", "b": "price_10k", "p": 11936, "o": 36169, "dc": 67, "l": "https://ko.aliexpress.com/item/1005005240109626.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S9353fcf36eac42b28434922625ed2892g.jpg"}, {"n": "고출력 USB 충전식 휴대용 캠핑 걸이등", "d": "나 고출력 걸이등인데! 너무 밝다고 막 쓰면 ", "c": "outdoor", "b": "price_1k", "p": 10228, "o": 22728, "dc": 55, "l": "https://ko.aliexpress.com/item/1005010089151417.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S9302afc191ed4d73bf70df987a3efbe1L.jpg"}, {"n": "휴대용 야외 캠핑 USB 충전 LED 비상등", "d": "나 캠핑 비상등인데! 평소에 안 챙기면 급할 ", "c": "outdoor", "b": "price_1k", "p": 7696, "o": 15392, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009045147727.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Se6170c433fe14916ad14e629264f06e0R.jpg"}, {"n": "LED 캠핑 텐트등: 고출력 충전 방수 휴대등", "d": "나 방수 텐트등인데! 비 올 때 쫄지 말고 써", "c": "outdoor", "b": "price_10k", "p": 26738, "o": 81024, "dc": 67, "l": "https://ko.aliexpress.com/item/1005006968952652.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbc137d7f2d634924b7cfc72cefe5af38Y.jpg"}, {"n": "2P LED 충전식 실내외 비상 캠핑등", "d": "나 2개 세트 비상등인데! 하나는 충전 좀 해", "c": "outdoor", "b": "price_1k", "p": 10744, "o": 32557, "dc": 67, "l": "https://ko.aliexpress.com/item/1005007360517535.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S2e4ec28f4c054f778d97a13237ed70eaz.jpg"}, {"n": "USB 충전 LED 캠핑 랜턴: 고휘도 휴대 비상등", "d": "나 고휘도 랜턴인데! 어두컴컴한데 딴짓하면 발", "c": "outdoor", "b": "price_1k", "p": 7772, "o": 15544, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009714646954.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf5e7b94befe049c184ad50867b25f047n.png"}, {"n": "레노버 GM2 Pro 듀얼모드 무선 헤드셋", "d": "내가 레노버 GM2 Pro 헤드셋인데! 충전 ", "c": "electronics", "b": "price_10k", "p": 22442, "o": 51004, "dc": 56, "l": "https://ko.aliexpress.com/item/1005007424613573.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S6c753504f3a64f12ae238835b584229cb.jpg"}, {"n": "레노버 GM2 Pro TWS 저지연 이어셋", "d": "나 GM2 Pro 저지연 이어셋인데! 게임할 ", "c": "electronics", "b": "price_10k", "p": 20907, "o": 48620, "dc": 57, "l": "https://ko.aliexpress.com/item/1005007431129955.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sa0d6d677c5a149199c2c0ef198f49eb5q.jpg"}, {"n": "QCY C50 오픈형 클립온 무선 이어폰", "d": "나 QCY C50 클립온 이어폰인데! 귀에 대", "c": "electronics", "b": "price_10k", "p": 49812, "o": 118599, "dc": 58, "l": "https://ko.aliexpress.com/item/1005009084986255.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Se00f772f7cd841ca8b102d80393e2c42v.jpg"}, {"n": "M10 방수 스포츠 블루투스 이어폰", "d": "나 M10 방수 스포츠 이어폰인데! 땀 흘리고", "c": "electronics", "b": "price_10k", "p": 15567, "o": 31134, "dc": 50, "l": "https://ko.aliexpress.com/item/1005012032900733.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb60d26d93b4a4658bda6c89c7c082031X.jpg"}, {"n": "신형 TWS LED 디스플레이 무선 이어폰", "d": "나 TWS LED 이어폰인데! 디스플레이로 배", "c": "electronics", "b": "price_1k", "p": 9254, "o": 18508, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006904593410.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S340e01cfe7f4473fb5d1d65f101bd7a4P.jpg"}, {"n": "신형 TWS LED 핸즈프리 무선 이어폰", "d": "나 TWS 핸즈프리 이어폰인데! 통화할 때 내", "c": "electronics", "b": "price_1k", "p": 10256, "o": 20512, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007097064460.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S8cefbe0444c44e9b9efc862134b203268.jpg"}, {"n": "레노버 LP40 TWS 무선 노이즈캔슬링", "d": "나 레노버 LP40 노캔인데! 시끄러운 데서 ", "c": "electronics", "b": "price_10k", "p": 13519, "o": 28763, "dc": 53, "l": "https://ko.aliexpress.com/item/1005006678116483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S6651b476fb634caa95a32bac784d56afe.jpg"}, {"n": "레노버 LP40 TWS 무선 노이즈 감소 이어폰", "d": "내가 무선 이어폰인데! 귀 청소도 안 하고 끼", "c": "electronics", "b": "price_10k", "p": 14066, "o": 29927, "dc": 53, "l": "https://ko.aliexpress.com/item/1005007038638226.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S5f23fd924a694838b3bb85fd092dd6e1o.jpg"}, {"n": "레노버 XT53 방수 저지연 게이밍 이어셋", "d": "나 XT53 방수 게이밍 이어셋인데! 게임할 ", "c": "electronics", "b": "price_10k", "p": 23902, "o": 49795, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008414973716.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S67b5e3598c43491dbcc8b64b04584164i.jpg"}, {"n": "X15 TWS 게이밍 노이즈캔슬링 이어셋", "d": "나 X15 게이밍 노캔인데! 게임할 때 주변 ", "c": "electronics", "b": "price_1k", "p": 9082, "o": 20182, "dc": 55, "l": "https://ko.aliexpress.com/item/1005007228440475.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S78dfabb1bf044ef48392d1a37aab8a19o.jpg"}, {"n": "QCY 멜로버즈 Pro 고음질 ANC 이어폰", "d": "나 멜로버즈 Pro ANC인데! 고음질 음원 ", "c": "electronics", "b": "price_10k", "p": 53267, "o": 136582, "dc": 61, "l": "https://ko.aliexpress.com/item/1005006959700436.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Se53e534893ca46a2971df5af7fe76935S.jpg"}, {"n": "QCY N70 고음질 ANC 무선 이어폰", "d": "나 고음질 이어폰인데! 시끄럽게만 듣고 다니면", "c": "electronics", "b": "price_10k", "p": 63754, "o": 172308, "dc": 63, "l": "https://ko.aliexpress.com/item/1005009361746399.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S294de07263674209893f2310f06210b82.jpg"}, {"n": "TWS 무선 방수 저음 이어폰", "d": "나 방수 이어폰인데! 맨날 땀에 절여 쓰면 안", "c": "electronics", "b": "price_10k", "p": 11452, "o": 22904, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006996575006.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S8bd5f4f9691445f995b0da6121b4676bD.jpg"}, {"n": "TWS 무선 게이밍 저지연 헤드셋", "d": "나 게이밍 이어폰인데! 지연 모드도 안 쓰고 ", "c": "electronics", "b": "price_1k", "p": 9246, "o": 19672, "dc": 53, "l": "https://ko.aliexpress.com/item/1005006904672293.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S858c1aa3e1544b15ba2e8635d22f38e4y.jpg"}, {"n": "블루투스 이어훅 무선 방수 이어폰", "d": "나 이어훅 이어폰인데! 운동할 때 대충 끼다 ", "c": "electronics", "b": "price_10k", "p": 13805, "o": 29372, "dc": 53, "l": "https://ko.aliexpress.com/item/1005007961638171.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sba81d65afda34045b05d083c19f91e6f3.jpg"}, {"n": "블루투스 이어훅 무선 방수 이어폰", "d": "내가 이어훅 방수 이어폰인데! 귀에 박고 안 ", "c": "electronics", "b": "price_1k", "p": 10130, "o": 23022, "dc": 56, "l": "https://ko.aliexpress.com/item/1005008158738225.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S389bf3e2bebb4930b6f19609e15b29baf.jpg"}, {"n": "E6S 에어 프로 무선 노이즈캔슬링 이어폰", "d": "내가 노캔 이어폰인데! 시끄러운데서 볼륨만 올", "c": "electronics", "b": "price_1k", "p": 8943, "o": 17886, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006966239790.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S08682bc1e57d4b5bbfa6e2a1519032808.jpg"}, {"n": "베이서스 EP10 Pro 적응형 ANC 무선 이어폰", "d": "나 적응형 노캔 이어폰인데! 맨날 충전 안 해", "c": "electronics", "b": "price_10k", "p": 40773, "o": 60855, "dc": 33, "l": "https://ko.aliexpress.com/item/1005008870372901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sa21551e144154e10bccedd360936647fp.jpg"}, {"n": "T75 TWS 터치 컨트롤 스포츠 이어폰", "d": "나 스포츠 이어폰인데! 운동하고 땀 닦는 것처", "c": "electronics", "b": "price_1k", "p": 9921, "o": 19842, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007170888709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf58b0f6029c24f77b48b2c5f19f06b9aA.jpg"}, {"n": "무선 LED 디스플레이 스테레오 이어폰", "d": "내가 LED 이어폰인데! 배터리 잔량 맨날 확", "c": "electronics", "b": "price_10k", "p": 10761, "o": 21522, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006863837619.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S6f1b83cd00c5420f95cdfb5dbf8b9868D.jpg"}, {"n": "실리콘 주방 내열 장갑 냄비받침 2개", "d": "나 실리콘 장갑 냄비받침인데! 뜨거운 냄비 그", "c": "home", "b": "price_1k", "p": 7992, "o": 22834, "dc": 65, "l": "https://ko.aliexpress.com/item/1005006955917663.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S69be4eb48095497db10b9b20b10199f62.jpeg"}, {"n": "재사용 실리콘 에어프라이어 컵", "d": "내가 재사용 에어프라이어 컵인데! 귀찮다고 일", "c": "home", "b": "price_1k", "p": 8672, "o": 18451, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010119493142.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/A09abb5a64e1c436fb17e2315d535fe45P.png"}, {"n": "재사용 실리콘 에어프라이어 컵", "d": "나 재사용 실리콘 컵인데! 설거지 대충 하면 ", "c": "home", "b": "price_1k", "p": 8699, "o": 18508, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010117064884.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/A66c3449c725a42e3895e807b017677d2w.png"}, {"n": "에어프라이어용 일회용 방수 종이호일", "d": "나 일회용 방수 종이호일인데! 너무 채우면 기", "c": "home", "b": "price_1k", "p": 8381, "o": 16762, "dc": 50, "l": "https://ko.aliexpress.com/item/1005008482808042.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Saf39238406d349528cd4621f711131f3v.png"}, {"n": "에어프라이어 사각 일회용 종이호일", "d": "내가 사각 종이호일인데! 쓰지도 않고 쌓아두면", "c": "home", "b": "price_1k", "p": 5890, "o": 7096, "dc": 17, "l": "https://ko.aliexpress.com/item/1005008892568250.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Ac3b014cf457245e09d10bb5291e9ae403.jpg"}, {"n": "20온스 스텐 보온/보냉 텀블러", "d": "나 20온스 텀블러인데! 어제 마신 커피 그대", "c": "home", "b": "price_10k", "p": 22747, "o": 68930, "dc": 67, "l": "https://ko.aliexpress.com/item/1005007654134709.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3320cd3d27e4466caa1555f13dcca234T.jpg"}, {"n": "TYESO 스텐 차량용 보온/보냉 텀블러", "d": "내가 차량용 텀블러인데! 마시고 안 씻고 방치", "c": "home", "b": "price_10k", "p": 21204, "o": 43273, "dc": 51, "l": "https://ko.aliexpress.com/item/1005008764004435.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sbc5418bc5ac14a858331a116c22e14e7H.jpg"}, {"n": "TYESO 스텐 차량용 보온/보냉 텀블러", "d": "나 차량용 텀블러인데! 운전 중에 뚜껑 안 닫", "c": "home", "b": "price_10k", "p": 20057, "o": 43602, "dc": 54, "l": "https://ko.aliexpress.com/item/1005008248128422.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S22f960fcad9e44f2b20c2d705338ec1cS.jpg"}, {"n": "스텐 진공 보온/보냉 휴대용 텀블러", "d": "나 휴대용 텀블러인데! 굳이 비싼 생수 사 마", "c": "home", "b": "price_10k", "p": 26613, "o": 56623, "dc": 53, "l": "https://ko.aliexpress.com/item/1005007306686600.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S520f79c1430f43d0bbde19a6971c5389Z.jpg"}, {"n": "스텐 진공 보온/보냉 텀블러 손잡이형", "d": "나 손잡이형 텀블러인데! 굳이 낑낑대지 말고 ", "c": "home", "b": "price_10k", "p": 20554, "o": 41108, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007636042849.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg"}, {"n": "380ml 귀여운 보온 빨대 텀블러", "d": "나 380ml 빨대 텀블러인데! 빨대 솔로 안", "c": "home", "b": "price_10k", "p": 19704, "o": 41050, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007539727974.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf326843f2d27461793d963a56d1042e0m.jpg"}, {"n": "1.5L 휴대용 스텐 보온병", "d": "내가 1.5L 보온병인데! 내용물 오래 두면 ", "c": "home", "b": "price_10k", "p": 35872, "o": 71744, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009076236644.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc995b3a49bb34911b5027eac3e11862fz.jpg"}, {"n": "손잡이 휴대용 스텐 보온 텀블러", "d": "나 손잡이 텀블러인데! 뚜껑 고무패킹 안 빼면", "c": "home", "b": "price_10k", "p": 20310, "o": 59735, "dc": 66, "l": "https://ko.aliexpress.com/item/1005007018052502.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sec2d1a6942ee426b88917540af927ac0r.jpg"}, {"n": "591ml 스텐 보온/보냉 빨대컵", "d": "나 591ml 빨대컵인데! 빨대 매일 안 씻으", "c": "home", "b": "price_10k", "p": 29486, "o": 58972, "dc": 50, "l": "https://ko.aliexpress.com/item/1005008988427222.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S5727a8deaf3d4740a785bc838e763a1dX.jpg"}, {"n": "대용량 316 스텐 빨대 손잡이컵", "d": "내가 대용량 스텐컵인데! 달콤한 음료 오래 두", "c": "home", "b": "price_10k", "p": 42403, "o": 90219, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010439333483.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Saf8c0c47ba9a47c5b7f58c6e91360048y.jpg"}, {"n": "500ml 스텐 휴대용 보온/보냉컵", "d": "나 500ml 보냉컵인데! 내용물 마시고 바로", "c": "home", "b": "price_10k", "p": 18848, "o": 38465, "dc": 51, "l": "https://ko.aliexpress.com/item/1005007476902341.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S864373b3d6bf40e28cb5defc3e4072b5G.jpg"}, {"n": "UPORS 스텐 로프 대용량 보온병", "d": "나 UPORS 보온병인데! 뚜껑 제대로 안 닦", "c": "home", "b": "price_10k", "p": 28585, "o": 84073, "dc": 66, "l": "https://ko.aliexpress.com/item/1005005077847626.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/HTB1OurlXUWF3KVjSZPhq6xclXXan.jpg"}, {"n": "304 스텐 로프 대용량 보온병", "d": "나 304 스텐 보온병인데! 잔여물 방치하면 ", "c": "home", "b": "price_10k", "p": 28208, "o": 82964, "dc": 66, "l": "https://ko.aliexpress.com/item/1005006703893558.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc4eb2c3bc1a64a768cffefd0c2c9fa04Y.jpg"}, {"n": "미니멀 퀼팅 여성 크로스백", "d": "나 미니멀 퀼팅 크로스백인데! 작은데 짐 다 ", "c": "fashion", "b": "price_1k", "p": 9013, "o": 19593, "dc": 54, "l": "https://ko.aliexpress.com/item/1005007345535323.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S61a763402d52428293f94c50148fc55fn.jpg"}, {"n": "카툰 봉제 여성 미니 크로스백", "d": "나 카툰 봉제 미니 크로스백인데! 그 망할 인", "c": "fashion", "b": "price_10k", "p": 11935, "o": 24864, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008798355945.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S02d7c6916c6544ec9e126a9d9370f006e.jpg"}, {"n": "여성 학생 캐주얼 캔버스 숄더백", "d": "나 학생 캔버스 숄더백인데! 무거운 전공책 다", "c": "fashion", "b": "price_10k", "p": 18588, "o": 38725, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007010289305.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7473a4a75ffa476c97c251fa985b7fe0B.jpg"}, {"n": "신상 여성 미니 스트릿 크로스백", "d": "나 신상 미니 스트릿 크로스백인데! 미니백에 ", "c": "fashion", "b": "price_1k", "p": 10034, "o": 21348, "dc": 53, "l": "https://ko.aliexpress.com/item/1005008660153776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3092c6f1d55b4a6ab68e4f3d00bc8a4bV.jpg"}, {"n": "하라주쿠 JK 투명 이타 크로스백", "d": "나 하라주쿠 이타백인데! 그 지저분한 내용물 ", "c": "fashion", "b": "price_10k", "p": 34881, "o": 69762, "dc": 50, "l": "https://ko.aliexpress.com/item/1005012030183507.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S97d26d78c5da4d0e9856e9eabe63fb1f4.jpg"}, {"n": "여성용 아웃도어 스포츠 웨이스트백", "d": "나 스포츠 웨이스트백인데! 맨날 운동 안 하면", "c": "fashion", "b": "price_1k", "p": 8402, "o": 16804, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006863751751.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc419b454e06d4a56b361184b426d22435.jpg"}, {"n": "JW PEI 여성 악어무늬 크로스백", "d": "나 악어무늬 크로스백인데! 인조가죽이라고 막 ", "c": "fashion", "b": "price_10k", "p": 52811, "o": 112363, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010759472649.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S9e1be1e8107c4bb1891100854378ae9fY.jpg"}, {"n": "HOMEFIH 체리 펜던트 PU 여성 숄더백", "d": "나 체리 펜던트 숄더백인데! 그 체리 펜던트 ", "c": "fashion", "b": "price_1k", "p": 10772, "o": 23937, "dc": 55, "l": "https://ko.aliexpress.com/item/1005010155226776.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0658c108c4294bb581b72c85aa410ef2r.jpg"}, {"n": "HOMEFISH 여성 인조 모피 버킷백", "d": "나 인조 모피 버킷백인데! 털에 먼지 다 달라", "c": "fashion", "b": "price_1k", "p": 10953, "o": 23304, "dc": 53, "l": "https://ko.aliexpress.com/item/1005008144766818.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf44c5f8b63204925aab1a9d2c043a133k.jpg"}, {"n": "남녀공용 대용량 솔리드 크로스백", "d": "나 대용량 크로스백인데! 용량 크다고 맨날 다", "c": "fashion", "b": "price_10k", "p": 10165, "o": 21627, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010044054014.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S32b28cfd8ecf4f22ad2893d70c1eedbfk.jpg"}, {"n": "남녀공용 비즈 덤벨 패션 팔찌", "d": "나 덤벨 팔찌인데! 땀 흘리고 안 닦으면 변색", "c": "sports", "b": "price_1k", "p": 2222, "o": 3526, "dc": 37, "l": "https://ko.aliexpress.com/item/32916469140.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/HTB1LOn7avQypeRjt_bXq6yZuXXa9.jpg"}, {"n": "발레걸 대용량 일본풍 이타 크로스백", "d": "나 발레걸 이타백인데! 너무 다 넣으면 어깨랑", "c": "fashion", "b": "price_10k", "p": 21067, "o": 48993, "dc": 57, "l": "https://ko.aliexpress.com/item/1005010232978622.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7ecc2cfbe3d44d67ac325c7c2bd22ae9F.jpg"}, {"n": "발레걸 대용량 일본풍 이타 크로스백", "d": "나 발레걸 이타백인데! 핀도 정리 안 하고 막", "c": "fashion", "b": "price_10k", "p": 23259, "o": 49487, "dc": 53, "l": "https://ko.aliexpress.com/item/1005009960348301.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7ecc2cfbe3d44d67ac325c7c2bd22ae9F.jpg"}, {"n": "Y2K 하라주쿠 투명 이타 크로스백", "d": "나 투명 이타백인데! 속이 다 보이는데 왜 정", "c": "fashion", "b": "price_1k", "p": 9830, "o": 20061, "dc": 51, "l": "https://ko.aliexpress.com/item/1005009357722835.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S50f04af315e349daa58ceb711dda47412.jpg"}, {"n": "여성 스포츠 다층 아웃도어 웨이스트백", "d": "나 스포츠 웨이스트백인데! 막 넣으면 뛰다가 ", "c": "fashion", "b": "price_1k", "p": 9234, "o": 19237, "dc": 52, "l": "https://ko.aliexpress.com/item/1005006751765119.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S14dfac897d0848b59e185b0bed191d6aH.jpg"}, {"n": "레트로 PU 가죽 솔리드 호보 숄더백", "d": "나 레트로 호보백인데! 아무렇게나 막 구겨 놓", "c": "fashion", "b": "price_10k", "p": 10908, "o": 25971, "dc": 58, "l": "https://ko.aliexpress.com/item/1005007160944700.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4f3ff200794b434a8823af69642af85fU.jpg"}, {"n": "한국풍 체크 대용량 숄더 크로스백", "d": "나 한국풍 체크백인데! 뭘 그렇게 다 넣어? ", "c": "fashion", "b": "price_1k", "p": 9021, "o": 19193, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010089197363.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S22718f5fc59446139289d1ae57cc380fb.jpg"}, {"n": "마이야르 대용량 가죽 토트 크로스백", "d": "나 마이야르 가죽백인데! 가죽은 물 맞으면 상", "c": "fashion", "b": "price_10k", "p": 13261, "o": 28828, "dc": 54, "l": "https://ko.aliexpress.com/item/1005008084476796.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S56c486d35d884c9aa57d63ecc0f6720bm.jpg"}, {"n": "신상 투명 터치 폰 크로스백", "d": "나 투명 터치폰백인데! 화면 안 닦으면 지문 ", "c": "fashion", "b": "price_10k", "p": 13139, "o": 27955, "dc": 53, "l": "https://ko.aliexpress.com/item/1005007010240938.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4061f5e42d744bcbb0903e5e1a0032b5e.jpg"}, {"n": "패션 터치 폰 카드 홀더 크로스백", "d": "나 터치폰 카드백인데! 카드 너무 넣으면 다 ", "c": "fashion", "b": "price_10k", "p": 11873, "o": 25261, "dc": 53, "l": "https://ko.aliexpress.com/item/1005007170927702.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sea94d78cb89b48328f270af6468881e5b.png"}, {"n": "83W 듀얼 USB 고속 차량 충전기", "d": "나 차량 충전기인데! 불량 케이블 쓰면 과열로", "c": "outdoor", "b": "price_1k", "p": 8601, "o": 18697, "dc": 54, "l": "https://ko.aliexpress.com/item/1005009696054057.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S299649dcd58a4cabb70a8edbbf21294ct.jpg"}, {"n": "4포트 방수 고속 차량 충전 소켓", "d": "나 4포트 방수 고속 충전 소켓인데! 맨날 한", "c": "outdoor", "b": "price_1k", "p": 9616, "o": 19232, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009193721983.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S5af2b66872ab45c9a667f40ca15482c2n.jpg"}, {"n": "4포트 방수 고속 차량 충전 소켓", "d": "나 4포트 방수 고속 충전 소켓인데! 가족들 ", "c": "outdoor", "b": "price_1k", "p": 8069, "o": 18338, "dc": 56, "l": "https://ko.aliexpress.com/item/1005009417368774.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc49e5fed40d945d3afcee01b4366a6a6V.jpg"}, {"n": "100W PD C타입 고속 차량용 충전기", "d": "내가 100W PD C타입 충전기인데! 그 저", "c": "outdoor", "b": "price_1k", "p": 5772, "o": 12025, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007792327144.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S87704a44a6c34d2582d84ef1d6ec9cfcb.jpg"}, {"n": "66W C타입 고속 차량용 충전기", "d": "나 66W C타입 고속 충전기인데! 겨우 내비", "c": "outdoor", "b": "price_1k", "p": 5454, "o": 11856, "dc": 54, "l": "https://ko.aliexpress.com/item/1005009383957834.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sd8c9e00fb1014b94a69b8dd8d9fc3953d.jpg"}, {"n": "에사거 30W C타입 고속 차량 충전기", "d": "내가 에사거 30W 충전기인데! 그 저속 케이", "c": "outdoor", "b": "price_1k", "p": 7593, "o": 15186, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006514698205.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sef28f13d849d4aa0a440d9cd5d0de3b3m.png"}, {"n": "차량용 고속 무선 충전 패드", "d": "나 차량용 고속 무선 충전 패드인데! 케이스 ", "c": "outdoor", "b": "price_10k", "p": 17644, "o": 35288, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007170769848.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf766ea09e8e94403b1922e8a14478774p.jpg"}, {"n": "차량용 고속 무선 충전 실리콘 패드", "d": "나 무선 충전 패드인데! 열받으면 효율 떨어지", "c": "outdoor", "b": "price_10k", "p": 18133, "o": 36266, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007536128593.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf7158c34363146bb8d4d6c56afeab1bf1.jpg"}, {"n": "차량용 고속 무선 충전 미끄럼 방지 매트", "d": "나 미끄럼 방지 매트인데! 먼지 덕지덕지 붙으", "c": "outdoor", "b": "price_10k", "p": 17599, "o": 36664, "dc": 52, "l": "https://ko.aliexpress.com/item/1005010044113868.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0332bb09e0464b2f9f65cc4da32db885H.jpg"}, {"n": "100/200W 미니 C타입 고속 차량 충전기", "d": "내가 100/200W 미니 충전기인데! 작다고", "c": "outdoor", "b": "price_1k", "p": 5462, "o": 11146, "dc": 51, "l": "https://ko.aliexpress.com/item/1005006967568156.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sebc17b05129847fa9e834016025b37dfN.jpg"}, {"n": "100/200W PD USB-C 고속 차량 충전기", "d": "나 100/200W PD USB-C 충전기인데", "c": "outdoor", "b": "price_1k", "p": 6286, "o": 12325, "dc": 49, "l": "https://ko.aliexpress.com/item/1005007609378086.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S33b28a2e57cb4846a251bbabea57c0ed9.jpg"}, {"n": "250W 5포트 고속 시가잭 충전기", "d": "나 250W 5포트 시가잭 충전기인데! 차박할", "c": "outdoor", "b": "price_1k", "p": 7100, "o": 14200, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009384462068.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3c28ff0a55384b84b5b019596e1120dfL.png"}, {"n": "250W 5포트 C타입 고속 차량 충전", "d": "내가 250W 5포트 C타입 충전인데! 왜 옛", "c": "outdoor", "b": "price_1k", "p": 6330, "o": 13187, "dc": 52, "l": "https://ko.aliexpress.com/item/1005007823432802.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Se4529ba7a23045eeb45e4991bbf272da5.jpg"}, {"n": "250W PD 6포트 고속 차량용 충전기", "d": "나 6포트 충전기인데! 여러 개 꽂고 왜 고속", "c": "outdoor", "b": "price_1k", "p": 6691, "o": 13382, "dc": 50, "l": "https://ko.aliexpress.com/item/1005010044157524.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3fb22058cb9e48a591e81dbde4a08fc10.jpg"}, {"n": "66-250W PD 고속 6포트 차량용 충전기", "d": "나 6포트 충전기인데! 여러 개 꽂고 느리다고", "c": "outdoor", "b": "price_1k", "p": 6494, "o": 12252, "dc": 47, "l": "https://ko.aliexpress.com/item/1005006752601429.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S319f897319234677b9f020071ac69ca7V.jpg"}, {"n": "PD 120W C타입 스프링 차량용 케이블", "d": "나 스프링 케이블인데! 막 잡아당기지 마! 스", "c": "outdoor", "b": "price_1k", "p": 6663, "o": 13597, "dc": 51, "l": "https://ko.aliexpress.com/item/1005009277207441.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4dba892455384337a9a1d8db4fa09243Y.jpg"}, {"n": "투키 60W 투명 고속 차량용 충전기", "d": "나 투명 충전기인데! 고속 충전 중 열나면 배", "c": "outdoor", "b": "price_1k", "p": 8449, "o": 17242, "dc": 51, "l": "https://ko.aliexpress.com/item/1005006110406538.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb523b1c9a0a843828a3361c3a29c78d1q.jpg"}, {"n": "120W 듀얼 USB PD 고속 시거잭 분배기", "d": "나 시거잭 분배기인데! 문어발식으로 꽂으면 과", "c": "outdoor", "b": "price_1k", "p": 11889, "o": 23778, "dc": 50, "l": "https://ko.aliexpress.com/item/1005010706796437.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc7a4350d30524498aa26ca85fa9088c90.jpg"}, {"n": "200W USB-C 풀링 미니 차량용 고속 충전기", "d": "나 풀링 충전기인데! 줄 너무 세게 잡아당기면", "c": "outdoor", "b": "price_1k", "p": 6534, "o": 13068, "dc": 50, "l": "https://ko.aliexpress.com/item/1005011692406930.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sedac58b5f53e4b569834f2c1574f7c20A.jpg"}, {"n": "실내 운동 미끄럼 방지 폼 매트", "d": "나 폼 매트인데! 맨바닥에서 운동하면 관절 나", "c": "sports", "b": "price_10k", "p": 20046, "o": 41762, "dc": 52, "l": "https://ko.aliexpress.com/item/1005010109568797.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S2847b7549d2b45158e7f87faf11940f3l.jpg"}, {"n": "PVC 폼 미끄럼 방지 고정 시트", "d": "나 고정 시트인데! 썼다 벗겼다 안 하면 먼지", "c": "sports", "b": "price_1k", "p": 6283, "o": 13658, "dc": 54, "l": "https://ko.aliexpress.com/item/1005007476845289.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S31291ae7d9bf496b8392eb31e6823f20O.jpg"}, {"n": "PVC 폼 미끄럼 방지 고정 시트", "d": "내가 고정 시트인데! 바닥에서 카펫 미끄러지면", "c": "sports", "b": "price_1k", "p": 8461, "o": 18002, "dc": 53, "l": "https://ko.aliexpress.com/item/1005010553164813.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S31291ae7d9bf496b8392eb31e6823f20O.jpg"}, {"n": "요가 무릎/팔꿈치 보호 패드", "d": "나 무릎 패드인데! 맨바닥에 바로 하면 무릎 ", "c": "sports", "b": "price_10k", "p": 11188, "o": 22832, "dc": 51, "l": "https://ko.aliexpress.com/item/1005007567028619.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S49fd7656c59f454aaade80aa2c28e140e.png"}, {"n": "4mm EVA 폼 요가/필라테스 매트", "d": "내가 얇은 매트인데! 운동하고 안 닦으면 땀이", "c": "sports", "b": "price_10k", "p": 13977, "o": 29738, "dc": 53, "l": "https://ko.aliexpress.com/item/1005006828003763.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S02ad5c1378454f51b0fd434ea7bb08368.jpg"}, {"n": "조립식 방수 논슬립 피트니스 매트", "d": "나 조립식 매트인데! 틈새에 먼지랑 땀 끼면 ", "c": "sports", "b": "price_10k", "p": 37022, "o": 77129, "dc": 52, "l": "https://ko.aliexpress.com/item/1005009529499202.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7149f3aefadd4fc88ab2ffb16ed27a8aD.jpg"}, {"n": "EVA 폼 16p 퍼즐형 운동 매트", "d": "나 퍼즐 매트인데! 조립만 하고 안 닦으면 틈", "c": "sports", "b": "price_10k", "p": 37115, "o": 75744, "dc": 51, "l": "https://ko.aliexpress.com/item/1005009947310128.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S85003987f687489f9dd4897904188dccJ.jpg"}, {"n": "EVA 폼 홈짐 조립식 미끄럼 방지 매트", "d": "나 홈짐 매트인데! 깔고 나서 운동기구 삐걱대", "c": "sports", "b": "price_10k", "p": 36734, "o": 76529, "dc": 52, "l": "https://ko.aliexpress.com/item/1005010491235377.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S17bc2aa6974d4316ae1ce67ccefac5bb5.jpg"}, {"n": "EVA 폼 논슬립 퍼즐 운동 매트", "d": "나 운동 매트인데! 맨바닥에서 뛰면 발목이랑 ", "c": "sports", "b": "price_10k", "p": 37848, "o": 77240, "dc": 51, "l": "https://ko.aliexpress.com/item/1005010228837535.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S85003987f687489f9dd4897904188dccJ.jpg"}, {"n": "고반발 논슬립 두꺼운 폼 밸런스 패드", "d": "나 밸런스 패드인데! 이거 위에 서서 코어 운", "c": "sports", "b": "price_1k", "p": 10749, "o": 22393, "dc": 52, "l": "https://ko.aliexpress.com/item/1005009991861477.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S41d698ea9ea54ca8b7d44ff961b0dbb1L.jpg"}, {"n": "고반발 논슬립 코어 밸런스 패드", "d": "나 밸런스 패드인데! 코어 운동 안 하면 허리", "c": "sports", "b": "price_10k", "p": 26421, "o": 55043, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008144967169.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4cbd710ec53d4f73a555a058551f52b3v.png"}, {"n": "두꺼운 요가/밸런스 충격 흡수 매트", "d": "나 두꺼운 매트인데! 맨바닥에서 뛰면 무릎 연", "c": "sports", "b": "price_10k", "p": 35435, "o": 104220, "dc": 66, "l": "https://ko.aliexpress.com/item/1005008102222596.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sd6daa3e52d804c5ea9e42d0376633387q.jpg"}, {"n": "두꺼운 TPE 미끄럼 방지 무릎 보호대", "d": "나 두꺼운 무릎 보호대인데! 딱딱한 바닥에 그", "c": "sports", "b": "price_1k", "p": 7265, "o": 14530, "dc": 50, "l": "https://ko.aliexpress.com/item/1005007170957591.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S468f44cbf89b42ddb3ffe2d047cbc444M.png"}, {"n": "4mm TPE 접이식 휴대용 요가 매트", "d": "나 4mm 요가 매트인데! 땀 흘리고 냅두면 ", "c": "sports", "b": "price_10k", "p": 26429, "o": 61462, "dc": 57, "l": "https://ko.aliexpress.com/item/1005010114243047.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sfdd4895c5ea847dca3bd30fbf165428d6.jpg"}, {"n": "EVA 논슬립 퍼즐 홈짐 보호 매트", "d": "나 홈짐 매트인데! 바닥에 쾅쾅 찍으면 아랫집", "c": "sports", "b": "price_10k", "p": 37779, "o": 75558, "dc": 50, "l": "https://ko.aliexpress.com/item/1005010759550315.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S17bc2aa6974d4316ae1ce67ccefac5bb5.jpg"}, {"n": "3mm EVA 폼 편안한 요가 매트", "d": "나 3mm 요가 매트인데! 땀에 쩔어 굳으면 ", "c": "sports", "b": "price_10k", "p": 30762, "o": 61524, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006995272203.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S1a936df14611487ca4c1a7a700073cd6m.png"}, {"n": "논슬립 폼 실내 운동 바닥 보호 매트", "d": "나 바닥 보호 매트인데! 무릎 연골 다 닳고 ", "c": "sports", "b": "price_10k", "p": 19658, "o": 40954, "dc": 52, "l": "https://ko.aliexpress.com/item/1005009401721553.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S2847b7549d2b45158e7f87faf11940f3l.jpg"}, {"n": "논슬립 폼 코어 밸런스 패드", "d": "나 코어 패드인데! 중심 못 잡으면 몸의 균형", "c": "sports", "b": "price_10k", "p": 27115, "o": 87467, "dc": 69, "l": "https://ko.aliexpress.com/item/1005006262151409.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb5eaef490e6c43e98e21e3402e5e20a33.jpg"}, {"n": "방수 논슬립 충격흡수 조립식 매트", "d": "나 조립식 매트인데! 틈새로 이물질 들어가면 ", "c": "sports", "b": "price_10k", "p": 37067, "o": 74134, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009582252886.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S7149f3aefadd4fc88ab2ffb16ed27a8aD.jpg"}, {"n": "EVA 나뭇잎 논슬립 아기 퍼즐 매트", "d": "나 아기 매트인데! 아기가 침 흘리고 놀면 바", "c": "sports", "b": "price_10k", "p": 13281, "o": 26562, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006996285747.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S21c32f338d194873ab2a2dc80c1274b2A.jpg"}, {"n": "다용도 방수 삼각 그늘막", "d": "나 그늘막인데! 자외선 막으라고 있는 건데 쨍", "c": "outdoor", "b": "price_10k", "p": 22422, "o": 52144, "dc": 57, "l": "https://ko.aliexpress.com/item/1005007337388340.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sf8a78d26e1394d15822a6ea6bdfa9948B.jpg"}, {"n": "방수 이중층 고양이 모래 포집 매트", "d": "나 방수 이중층 고양이 모래 포집 매트인데! ", "c": "pet", "b": "price_10k", "p": 11822, "o": 24126, "dc": 51, "l": "https://ko.aliexpress.com/item/1005005239360963.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S94e13cec75014cc6b5d3d02a6fbc26f5K.jpg"}, {"n": "15cm 크리스마스 강아지 의류 DIY 열전사 스티커", "d": "나 강아지 옷 DIY 스티커인데! 열 조절 실", "c": "pet", "b": "price_1k", "p": 1151, "o": 2676, "dc": 57, "l": "https://ko.aliexpress.com/item/1005010557881666.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4484d32889a0417e9302a429095f03d4M.jpg"}, {"n": "겨울 따뜻한 강아지 고양이 패션 스웨터", "d": "나 겨울 스웨터인데! 강아지도 저체온증 오면 ", "c": "pet", "b": "price_1k", "p": 1157, "o": 2410, "dc": 52, "l": "https://ko.aliexpress.com/item/1005005985830890.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb00f89cae76647ba8301e9542fef5bceU.jpg"}, {"n": "강아지 간식 퍼즐 장난감", "d": "나 간식 퍼즐 장난감인데! 맨날 간식만 주면 ", "c": "pet", "b": "price_1k", "p": 2708, "o": 5886, "dc": 54, "l": "https://ko.aliexpress.com/item/1005009732666005.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb98845e9c94f4d8e9c2b03b17d92dab5w.jpg"}, {"n": "소동물 간식 퍼즐 급식볼", "d": "나 간식 급식볼인데! 간식 한 번에 다 주면 ", "c": "pet", "b": "price_1k", "p": 1979, "o": 4302, "dc": 54, "l": "https://ko.aliexpress.com/item/1005008419713125.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S407afa31e93a4f6d9268178a448d7a45S.jpg"}, {"n": "진공 밀폐 용기 펌프 세트", "d": "나 진공 밀폐 용기인데! 음식 그냥 두면 산화", "c": "home", "b": "price_1k", "p": 1396, "o": 2792, "dc": 50, "l": "https://ko.aliexpress.com/item/1005006259524823.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Saf9b9f8dd1594f049bab4cc9bcbdd4be2.jpg"}, {"n": "고양이 DIY 스크래쳐 기둥", "d": "나 스크래쳐 기둥인데! 냥이 발톱 관리 안 해", "c": "pet", "b": "price_1k", "p": 4251, "o": 7729, "dc": 45, "l": "https://ko.aliexpress.com/item/1005008557641331.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S3f66606d591c4dd58f1fe1bbde867f72v.jpg"}, {"n": "강아지 사료 분배 퍼즐 지능 훈련 장난감", "d": "나 사료 퍼즐 장난감인데! 사용 안 하면 댕댕", "c": "pet", "b": "price_10k", "p": 14979, "o": 42797, "dc": 65, "l": "https://ko.aliexpress.com/item/1005006268103844.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S9aecf26a832940bdbd35f611c59a778ck.jpg"}, {"n": "자동 발광 움직이는 강아지 공", "d": "나 자동 발광 공인데! 나랑 안 놀아주면 댕댕", "c": "pet", "b": "price_10k", "p": 25578, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005009787196184.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sb4b9288d9905404194c590574f7188728.jpg"}, {"n": "남자 휴대용 메탈 머니클립", "d": "나 메탈 머니클립인데! 주머니에 쑤셔 넣으면 ", "c": "fashion", "b": "price_1k", "p": 3043, "o": 4681, "dc": 35, "l": "https://ko.aliexpress.com/item/1005009437528078.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_fashion", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S930bdbcfc87e40b990c1db20643bef5do.jpg"}, {"n": "마사지건 실리콘 교체 헤드", "d": "나 마사지건 헤드인데! 땀에 젖은 거 그대로 ", "c": "sports", "b": "price_1k", "p": 2496, "o": 4894, "dc": 49, "l": "https://ko.aliexpress.com/item/1005009043412901.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4b9384b0c49d43488bae09a1aa11ded1O.jpg"}, {"n": "고양이 스크래처 소파 보호 매트", "d": "나 스크래처 매트인데! 매일 안 쓰게 하면 냥", "c": "pet", "b": "price_1k", "p": 10263, "o": 10690, "dc": 4, "l": "https://ko.aliexpress.com/item/1005004866114766.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S11cd929c634e43dcbbaf9266256c295cu.jpg"}, {"n": "레트로 방수 충전식 캠핑 랜턴", "d": "나 캠핑 랜턴인데! 충전도 안 해놓고 밤에 어", "c": "outdoor", "b": "price_10k", "p": 15204, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005005355113002.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4b1889a6a4924fa489d5288ff98888abx.jpg"}, {"n": "Type-C 스위치 USB 충전 케이블", "d": "나 Type-C 케이블인데! 함부로 꺾으면 단", "c": "electronics", "b": "price_1k", "p": 6346, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005007381094592.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Se3ec29ff6b0641a39a7fa0fbbf262f7aa.jpg"}, {"n": "DC12V COB LED 전구/스트립", "d": "나 DC12V COB LED인데! 정격전압 안", "c": "electronics", "b": "price_1k", "p": 2329, "o": 2352, "dc": 1, "l": "https://ko.aliexpress.com/item/32796684546.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/HTB1PD4Smb1YBuNjSszhq6AUsFXai.jpg"}, {"n": "혼합형 12V COB LED 램프 칩", "d": "내가 12V COB 램프 칩인데! 방열판 안 ", "c": "electronics", "b": "price_1k", "p": 2116, "o": 2137, "dc": 1, "l": "https://ko.aliexpress.com/item/32909364330.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_tech", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S0bb22a2a029d4c028d381dd2724919b0a.jpg"}, {"n": "커플 에너지 덤벨 펜던트 꼬임 팔찌", "d": "나 덤벨 펜던트 팔찌인데! 아무 데나 던져두면", "c": "sports", "b": "price_1k", "p": 2709, "o": 0, "dc": 0, "l": "https://ko.aliexpress.com/item/1005002926466634.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow_sports", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Hd367fca707be4e6ea4b2df812db0dea9T.jpg"}, {"n": "LED 야광 야간 안전 강아지 고양이 목줄", "d": "나 야광 목줄인데! 밤에 산책할 때 안 켜면 ", "c": "pet", "b": "price_1k", "p": 1001, "o": 2002, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009962574172.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4a846dbe0c61445ab6c6a52feed8606f2.jpg"}, {"n": "화려한 LED 야광 강아지 고양이 야간 목줄", "d": "내가 LED 야광 목줄인데! 배터리 제때 안 ", "c": "pet", "b": "price_1k", "p": 2025, "o": 4050, "dc": 50, "l": "https://ko.aliexpress.com/item/1005009196030920.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S2518f279a5c54e67ab28fff1d200190eo.jpg"}, {"n": "따뜻하고 부드러운 강아지 고양이 담요", "d": "나 따뜻한 담요인데! 매일 안 빨면 털뭉치에 ", "c": "pet", "b": "price_1k", "p": 1476, "o": 3280, "dc": 55, "l": "https://ko.aliexpress.com/item/1005008113162653.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/S4d266f88335344fb9261a43a0d020670d.jpg"}, {"n": "고양이 화장실 대형 방수 미끄럼 매트", "d": "나 고양이 화장실 대형 매트인데! 발에 모래 ", "c": "pet", "b": "price_100k", "p": 9228, "o": 19225, "dc": 52, "l": "https://ko.aliexpress.com/item/1005008404634121.html?aff_platform=api-new-link-generate&aff_trace_key=pawmeow", "i": "https://ae-pic-a1.aliexpress-media.com/kf/Sc0a1ee40fdcc49a0a83cae9b90dd6e33T.jpg"}];</script>
-    
-<script>
-(function(){
-  var P=window.__PRODUCTS||[];
-  var input=document.getElementById("search-input");
-  var results=document.getElementById("search-results");
-  var grid=document.getElementById("results-grid");
-  var browse=document.getElementById("browse-sections");
-  var countEl=document.getElementById("result-count");
-  var filters={price:"",cat:"",disc:""};
+function sortFn(a,b){
+  if(fSort==='disc')return b.d-a.d;
+  if(fSort==='priceL')return a.p-b.p;
+  if(fSort==='priceH')return b.p-a.p;
+  if(fSort==='new')return(b.w?1:0)-(a.w?1:0);
+  return(b.c-a.c)||((b.d-a.d))||((a.p-b.p));
+}
 
-  // Filter buttons
-  document.querySelectorAll(".fbtn").forEach(function(btn){
-    btn.addEventListener("click",function(){
-      var f=this.dataset.filter, v=this.dataset.val;
-      filters[f]=v;
-      this.parentNode.querySelectorAll(".fbtn").forEach(function(b){b.classList.remove("active")});
-      this.classList.add("active");
-      render();
-    });
-  });
+function cardHTML(item){
+  const img=item.i
+    ?`<img class="card-img" src="${item.i}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.outerHTML='<div class=card-img-placeholder>📦</div>'">`
+    :'<div class="card-img-placeholder">📦</div>';
+  const badge=item.d>=10?`<div class="card-badge">${item.d}% OFF</div>`:'';
+  const newB=item.w?'<div class="card-new">NEW</div>':'';
+  const rec=item.c>8?'<div class="card-rec">💎 추천</div>':'';
+  return`<a href="${item.l}" class="card" target="_blank" rel="nofollow sponsored noopener">
+    ${badge}${newB}${img}
+    <div class="card-info">
+      <div class="card-name">${item.n}</div>
+      ${rec}
+      <div class="card-cta">가격 확인하기 →</div>
+    </div></a>`;
+}
 
-  input.addEventListener("input",function(){ render(); });
-
-  function matchBand(band,f){
-    if(!f) return true;
-    if(f==="1k") return band==="price_1k"||band==="price_5k";
-    if(f==="10k") return band==="price_10k"||band==="price_30k";
-    if(f==="100k") return band==="price_100k";
-    return true;
+function render(){
+  const filtered=P.filter(filter).sort(sortFn);
+  rc.textContent=`${filtered.length}개 상품`;
+  if(filtered.length===0){
+    grid.innerHTML='';empty.style.display='';return;
   }
+  empty.style.display='none';
+  grid.innerHTML=filtered.map(cardHTML).join('');
+}
 
-  function render(){
-    var q=(input.value||"").trim().toLowerCase();
-    var hasFilter=q||filters.price||filters.cat||filters.disc;
-    if(!hasFilter){
-      results.style.display="none";
-      browse.style.display="block";
-      return;
-    }
-    results.style.display="block";
-    browse.style.display="none";
+window.onscroll=()=>{
+  $('topBtn').style.display=window.scrollY>600?'block':'none';
+};
 
-    var matched=P.filter(function(p){
-      if(q && p.n.toLowerCase().indexOf(q)===-1
-         && (p.d||"").toLowerCase().indexOf(q)===-1) return false;
-      if(filters.price && !matchBand(p.b,filters.price)) return false;
-      if(filters.cat && p.c!==filters.cat) return false;
-      if(filters.disc){
-        var minDisc=parseInt(filters.disc);
-        if(p.dc<minDisc) return false;
-      }
-      return true;
-    });
-
-    countEl.textContent="("+matched.length+"개)";
-    if(!matched.length){
-      grid.innerHTML='<div class="no-results" style="grid-column:1/-1">검색 결과가 없습니다</div>';
-      return;
-    }
-
-    var html="";
-    matched.forEach(function(p){
-      var discHeroHtml=p.dc>=10?'<div class="discount-hero" style="font-size:22px;margin:8px 0 4px">'+p.dc+'% OFF</div>':"";
-      var descHtml=p.d?'<div class="rc-desc">'+p.d+'</div>':"";
-      var imgHtml=p.i?'<img class="rc-img" src="'+p.i+'" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.style.display=\'none\'">'
-        :'<div class="rc-img" style="display:flex;align-items:center;justify-content:center;font-size:32px">📦</div>';
-      html+='<a href="'+p.l+'" class="result-card" target="_blank" rel="nofollow sponsored noopener">'
-        +imgHtml
-        +'<div class="rc-body">'
-        +'<div class="rc-name">'+p.n+'</div>'
-        +descHtml
-        +discHeroHtml
-        +'<div class="cta-button" style="margin:8px 10px 10px;font-size:12px;padding:8px 0">'
-        +'알리에서 가격 확인하기 <span class="cta-arrow">→</span></div>'
-        +'</div></a>';
-    });
-    grid.innerHTML=html;
+// Hash routing
+function applyHash(){
+  const h=location.hash.replace('#','');
+  if(['dog','cat','life'].includes(h)){
+    document.querySelector(`.tab[data-cat=${h}]`).click();
   }
-})();
-</script>
+}
+window.onhashchange=applyHash;
+applyHash();
 
+render();
+</script>
 </body>
 </html>

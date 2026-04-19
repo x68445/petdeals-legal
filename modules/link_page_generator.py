@@ -1897,14 +1897,12 @@ def update_deals_site(products: list, push: bool = True) -> bool:
         for bk, by_cat in band_grouped.items()
     }
 
-    # Write main page
-    main_html = _main_page_html(today, len(deduped), category_counts, CATEGORIES,
-                                 special_count=special_total, band_counts=band_counts,
-                                 all_products=deduped)
+    # Write main page (interactive v2)
+    from modules.deals_page_v2 import generate_interactive_html
+    main_html = generate_interactive_html(deduped, today)
     with open(f"{DOCS_DIR}/deals.html", "w", encoding="utf-8") as f:
         f.write(main_html)
-    print(f"[Deals] deals.html ({len(main_html):,} bytes, {len(deduped)} products, "
-          f"{special_total} special, bands:{band_counts})")
+    print(f"[Deals] deals.html v2 ({len(main_html):,} bytes, {len(deduped)} products)")
 
     # Write special_deals.html (skip if empty)
     if special_total > 0:
