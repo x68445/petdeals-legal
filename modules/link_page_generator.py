@@ -34,7 +34,7 @@ _ACCENT = {
 }
 
 # ── 냥댕라이프 branding constants ─────────────────────────────────────────────
-YOUTUBE_URL = "https://www.youtube.com/@MeowMeowDeals"
+YOUTUBE_URL = "https://www.youtube.com/@NyangDaengLife"
 BRAND_NAME  = "냥댕라이프"
 BRAND_TAGLINE = "🐾 오늘의 펫 특가"
 
@@ -257,7 +257,7 @@ _YT_BANNER = f"""
                 <span class="yt-icon">🎬</span>
                 <div class="yt-text">
                     <div class="yt-title">유튜브에서 제품 리뷰 영상 보기!</div>
-                    <div class="yt-sub">@MeowMeowDeals · 구독하면 매일 새 특가 알림 🐾</div>
+                    <div class="yt-sub">@NyangDaengLife · 구독하면 매일 새 특가 알림 🐾</div>
                 </div>
             </div>
             <div class="yt-arrow">▶</div>

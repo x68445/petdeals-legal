@@ -179,9 +179,9 @@ def classify_product(product: dict) -> str:
 # ── Discount tiers (URLs kept as price_*.html for SEO) ───────────────────────
 
 PRICE_BANDS = [
-    {"key": "price_1k",   "emoji": "💰", "label": "가성비 특가", "min_disc": 10, "max_disc": 29, "accent": "#26c281", "tier": "light"},
-    {"key": "price_10k",  "emoji": "🔥", "label": "핫딜",       "min_disc": 30, "max_disc": 49, "accent": "#c9a227", "tier": "premium"},
-    {"key": "price_100k", "emoji": "💎", "label": "초특가",     "min_disc": 50, "max_disc": 999, "accent": "#ffd700", "tier": "luxury"},
+    {"key": "price_1k",   "emoji": "💰", "label": "가성비 특가", "min_disc": 10, "max_disc": 29, "min_usd": 0.5, "max_usd": 8.0,    "accent": "#26c281", "tier": "light"},
+    {"key": "price_10k",  "emoji": "🔥", "label": "핫딜",       "min_disc": 30, "max_disc": 49, "min_usd": 8.0, "max_usd": 50.0,   "accent": "#c9a227", "tier": "premium"},
+    {"key": "price_100k", "emoji": "💎", "label": "초특가",     "min_disc": 50, "max_disc": 999, "min_usd": 50.0, "max_usd": 1000.0, "accent": "#ffd700", "tier": "luxury"},
 ]
 
 PRICE_BANDS_USD = PRICE_BANDS
