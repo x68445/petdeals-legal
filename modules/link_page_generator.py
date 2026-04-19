@@ -488,7 +488,7 @@ _MAIN_CSS = """
             margin-top:28px; margin-bottom:16px; padding:0;
             display:flex; align-items:center; gap:10px;
         }
-        .section-heading::before { content:"🐾"; font-size:1.3rem; }
+        #browse-sections .section-heading::before { content:"🐾"; font-size:1.3rem; }
         .accent-bar {
             display:inline-block; width:60px; height:4px;
             background:var(--nyang-gradient);
@@ -679,11 +679,11 @@ _SEARCH_CSS = """
             color:var(--nyang-text-soft); font-size:14px;
         }
         .countdown-banner {
-            display:flex; align-items:center; justify-content:space-between; gap:16px;
+            display:flex; align-items:center; justify-content:center; gap:20px;
             background:linear-gradient(135deg,#D94466,#E85A7A,#FF6B6B);
-            color:#fff; padding:16px 22px;
+            color:#fff; padding:16px 24px;
             font-weight:700; font-size:1.05rem;
-            max-width:500px; margin:16px auto;
+            max-width:600px; margin:16px auto;
             border-radius:var(--nyang-radius-md);
             box-shadow:0 4px 20px rgba(232,90,122,.25);
             animation:countdownPulse 2.5s ease-in-out infinite;
@@ -698,8 +698,9 @@ _SEARCH_CSS = """
             50% { transform:scale(1.15); }
         }
         .cb-text {
-            color:#fff; font-weight:700;
+            color:#fff; font-weight:700; font-size:1.05rem;
             text-shadow:0 1px 4px rgba(0,0,0,.2);
+            white-space:nowrap;
         }
         .cb-timer {
             background:rgba(255,255,255,.3); padding:7px 16px;
@@ -888,8 +889,6 @@ def _main_page_html(today: str, total: int,
     band_section = ""
     if any_band:
         band_section = f"""
-        <div class="section-heading"
-             ><span class="accent-bar" style="background:#ff8c42"></span>🔥 할인별</div>
         <div class="band-grid">{band_cards_html}</div>"""
 
     # 📂 Category cards
@@ -910,8 +909,6 @@ def _main_page_html(today: str, total: int,
         </a>"""
 
     cat_section = f"""
-        <div class="section-heading"
-             ><span class="accent-bar" style="background:#607d8b"></span>📂 카테고리별</div>
         <div class="cat-grid">{cards_html}</div>"""
 
     # Build product JSON for search/filter
