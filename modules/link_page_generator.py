@@ -412,44 +412,32 @@ _MAIN_CSS = """
 
         .cat-card {
             background: var(--nyang-white); border-radius: var(--nyang-radius-md);
-            padding: 18px 12px 16px;
+            padding: 22px 14px 18px;
             text-align: center;
             box-shadow: var(--nyang-shadow-card);
             text-decoration: none; color: var(--nyang-text);
             display: flex; flex-direction: column;
-            align-items: center; justify-content: flex-start; gap: 6px;
+            align-items: center; justify-content: flex-start; gap: 8px;
             transition: transform var(--nyang-transition), box-shadow var(--nyang-transition);
             min-width: 0;
-            height: auto;
-            min-height: fit-content;
         }
         .cat-card:hover  { transform: translateY(-4px); box-shadow: var(--nyang-shadow-hover); }
         .cat-card:active { transform: scale(.97); }
-        .cat-emoji { font-size:36px; line-height:1; }
-        .cat-label {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1.4;
-            width: 100%;
-            max-width: 100%;
-            min-font-size: 12px;
-            white-space: normal;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: keep-all;
-            hyphens: auto;
-            text-overflow: clip;
-            overflow: visible;
-            display: block;
-            padding: 0 2px;
+        .cat-icon-wrap {
+            width:64px; height:64px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:2rem; line-height:1; flex-shrink:0;
         }
-        @media(max-width:360px) { .cat-label { font-size:12px; } }
-        @media(min-width:480px) { .cat-label { font-size:15px; } }
+        .cat-label {
+            font-size: 15px; font-weight: 800; line-height: 1.3;
+            word-break: keep-all; overflow-wrap: break-word;
+            color: var(--nyang-text);
+        }
+        @media(max-width:360px) { .cat-label { font-size:13px; } }
         .cat-count {
-            font-size:12px; font-weight:600;
-            padding:4px 10px; border-radius:999px; margin-top:4px;
-            white-space: nowrap;
-            flex-shrink: 0;
+            font-size:12px; font-weight:700;
+            padding:4px 12px; border-radius:999px; margin-top:auto;
+            white-space: nowrap; flex-shrink: 0;
         }
 
         /* Special deals banner */
@@ -481,17 +469,10 @@ _MAIN_CSS = """
         }
         .sb-arrow { font-size:22px; color:rgba(255,255,255,.8); }
 
-        /* Section headings -- accent bar is inline span, not border */
         .section-heading {
             font-size:1.3rem; font-weight:800; color:var(--nyang-text);
             margin-top:28px; margin-bottom:16px; padding:0;
             display:flex; align-items:center; gap:10px;
-        }
-        #browse-sections .section-heading::before { content:"🐾"; font-size:1.3rem; }
-        .accent-bar {
-            display:inline-block; width:60px; height:4px;
-            background:var(--nyang-gradient);
-            border-radius:var(--nyang-radius-full); flex-shrink:0;
         }
 
         /* Price band grid (same 2/3/4 col as cat-grid) */
@@ -502,21 +483,26 @@ _MAIN_CSS = """
         }
         @media(min-width:640px) { .band-grid { grid-template-columns:repeat(4,1fr); } }
         .band-card {
-            background:var(--nyang-white); border-radius:var(--nyang-radius-md); padding:18px 12px 14px;
+            background:var(--nyang-white); border-radius:var(--nyang-radius-md);
+            padding:22px 14px 18px;
             text-align:center;
             text-decoration:none; color:var(--nyang-text);
             box-shadow:var(--nyang-shadow-card);
-            display:flex; flex-direction:column; align-items:center; gap:4px;
+            display:flex; flex-direction:column; align-items:center; gap:8px;
             transition:transform var(--nyang-transition), box-shadow var(--nyang-transition);
         }
         .band-card:hover  { transform:translateY(-4px); box-shadow:var(--nyang-shadow-hover); }
         .band-card:active { transform:scale(.97); }
-        .band-emoji  { font-size:36px; line-height:1; }
-        .band-label  { font-size:14px; font-weight:700; margin-top:4px; }
-        .band-range  { font-size:11px; color:#888; margin-top:2px; }
+        .band-icon-wrap {
+            width:64px; height:64px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            font-size:2rem; line-height:1; flex-shrink:0;
+        }
+        .band-label  { font-size:15px; font-weight:800; }
+        .band-range  { font-size:12px; color:#888; }
         .band-count  {
-            font-size:12px; font-weight:600;
-            padding:3px 9px; border-radius:999px; margin-top:5px;
+            font-size:12px; font-weight:700;
+            padding:4px 12px; border-radius:999px; margin-top:auto;
         }
         .band-premium {
             background:linear-gradient(160deg,#faf6ef 0%,#f5f0e8 100%) !important;
@@ -544,7 +530,7 @@ _MAIN_CSS = """
             animation:band-shimmer 3.5s infinite linear; pointer-events:none;
         }
         @keyframes band-shimmer { 0%{left:-100%} 100%{left:100%} }
-        .band-luxury .band-emoji {
+        .band-luxury .band-icon-wrap {
             filter:drop-shadow(0 0 14px rgba(255,215,0,.8));
             position:relative; z-index:1;
         }
@@ -719,10 +705,9 @@ _SEARCH_CSS = """
         }
         .yt-subscribe-cta:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(255,0,0,.3); }
         @media(max-width:640px) {
-            .cat-label { font-size:13px !important; min-height:auto; }
-            .cat-card { padding:14px 8px 12px; min-height:auto; }
-            .band-card { padding:14px 8px 10px; }
-            .cat-card, .band-card { min-height:44px; }
+            .cat-card, .band-card { padding:16px 10px 14px; }
+            .cat-icon-wrap, .band-icon-wrap { width:52px; height:52px; font-size:1.6rem; }
+            .cat-label { font-size:13px !important; }
         }
 """
 
@@ -878,7 +863,7 @@ def _main_page_html(today: str, total: int,
         tier   = band.get("tier", "light")
         band_cards_html += f"""
         <a href="{key}.html" class="band-card band-{tier}">
-            <div class="band-emoji">{emoji}</div>
+            <div class="band-icon-wrap" style="background:rgba({rgb},.15)">{emoji}</div>
             <div class="band-label">{label}</div>
             <div class="band-range">{rng}</div>
             <div class="band-count"
@@ -900,7 +885,7 @@ def _main_page_html(today: str, total: int,
         rgb    = _hex_rgb(accent)
         cards_html += f"""
         <a href="category_{key}.html" class="cat-card">
-            <div class="cat-emoji">{emoji}</div>
+            <div class="cat-icon-wrap" style="background:rgba({rgb},.15)">{emoji}</div>
             <div class="cat-label">{label}</div>
             <div class="cat-count"
                  style="background:rgba({rgb},.12);color:{accent}">{count}개</div>
