@@ -221,7 +221,7 @@ body{
 
 <div class="stats">
   <span id="resultCount"></span>
-  <span>2026년 04월 23일 업데이트</span>
+  <span>2026년 04월 24일 업데이트</span>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -279,8 +279,8 @@ $('fDisc').onchange=e=>{fDisc=parseInt(e.target.value);render()};
 $('fSort').onchange=e=>{fSort=e.target.value;render()};
 
 function filter(item){
-  if(cat==='dog'&&item.t!=='dog')return false;
-  if(cat==='cat'&&item.t!=='cat')return false;
+  if(cat==='dog'&&item.t!=='dog'&&item.t!=='pet')return false;
+  if(cat==='cat'&&item.t!=='cat'&&item.t!=='pet')return false;
   if(cat==='life'&&item.t!=='life')return false;
   if(cat==='life'&&sub!=='all'&&item.s!==sub)return false;
   if((cat==='dog'||cat==='cat')&&psub!=='all'&&item.ps!==psub)return false;
@@ -329,7 +329,8 @@ window.onscroll=()=>{
 function applyHash(){
   const h=location.hash.replace('#','');
   if(['dog','cat','life'].includes(h)){
-    document.querySelector(`.tab[data-cat=${h}]`).click();
+    const el=document.querySelector(`.tab[data-cat=${h}]`);
+    if(el)el.click();
   }
 }
 window.onhashchange=applyHash;
